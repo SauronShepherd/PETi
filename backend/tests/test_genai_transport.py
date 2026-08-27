@@ -2,7 +2,6 @@ import json
 from types import SimpleNamespace
 
 import pytest
-
 from app.ai.providers.gemini import GeminiApiKeyTransport, ProviderError, VertexGenAITransport
 
 
