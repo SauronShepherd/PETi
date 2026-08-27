@@ -178,6 +178,19 @@ def test_fake_storage_private_read_is_bounded_and_returns_bytes():
         s.storage.read_object("local-media", "private/object", max_bytes=2)
 
 
+def test_resolve_ai_media_rechecks_finalized_object_mime_before_provider_use():
+    s = service()
+    asset, session = s.create_session(
+        "u1", "pet-1", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
+        "image/png", 3, RetentionClass.TRANSIENT_ANALYSIS, "ai-mime-recheck",
+    )
+    s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
+    s.finalize("u1", asset.id, session.id)
+    s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_UNAVAILABLE"):
+        s.resolve_ai_media("u1", [asset.id], "pet-1")
+
+
 @pytest.mark.parametrize("mutation, error", [
     (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "deleted_at", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
