@@ -45,3 +45,23 @@ def test_logging_redacts_all_registered_sensitive_field_types():
     for key in ("fcm_token", "device_token", "firebase_token", "signed_url"):
         assert data[key] == "[REDACTED_SENSITIVE_FIELD]"
     assert all(secret not in line for secret in ("fcm-secret", "device-secret", "firebase-secret"))
+
+
+def test_logging_keeps_only_safe_media_metadata():
+    stream = io.StringIO()
+    handler = logging.StreamHandler(stream)
+    handler.setFormatter(JsonFormatter())
+    logger = logging.getLogger("media-redaction")
+    logger.handlers = [handler]
+    logger.propagate = False
+    logger.warning(
+        "Authorization: Bearer secret-api-key bytes=YWJj",
+        extra={"peti_fields": {
+            "media_asset_id": "asset-1", "modality": "IMAGE", "media_size_bytes": 3,
+            "media_sha256": "abc", "authorization": "Bearer secret",
+            "inline_data": "YWJj",
+        }},
+    )
+    line = stream.getvalue()
+    assert "secret-api-key" not in line and "YWJj" not in line
+    assert "asset-1" in line and "IMAGE" in line and "media_size_bytes" in line

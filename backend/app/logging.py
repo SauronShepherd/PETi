@@ -17,6 +17,7 @@ class JsonFormatter(logging.Formatter):
         message = re.sub(api_key_pattern, "[REDACTED_KEY]", message)
         message = re.sub(r"-----BEGIN [^-]+ PRIVATE KEY-----.*?-----END [^-]+ PRIVATE KEY-----", "[REDACTED_KEY]", message, flags=re.DOTALL)
         message = re.sub(r"eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+", "[REDACTED_TOKEN]", message)
+        message = re.sub(r"(?i)(authorization|x-api-key|api[-_ ]?key|token)\s*[:=]\s*[^\s,]+", r"\1=[REDACTED_SECRET]", message)
         message = re.sub(r"https?://[^\s]+[?&](?:X-Goog-Signature|GoogleAccessId|Signature)=[^\s&]+[^\s]*", "[REDACTED_SIGNED_URL]", message)
         if message.lstrip().startswith(("{", "[")):
             message = "[REDACTED_STRUCTURED_PAYLOAD]"
@@ -53,6 +54,10 @@ def safe_fields(**fields: Any) -> dict[str, Any]:
         "duration_ms",
         "analysis_id",
         "media_id",
+        "media_asset_id",
+        "modality",
+        "media_size_bytes",
+        "media_sha256",
         "operation_type",
         "purchase_token",
         "fcm_token",
@@ -64,7 +69,7 @@ def safe_fields(**fields: Any) -> dict[str, Any]:
 
 
 def _redact_field(key: str, value: Any) -> Any:
-    if key.lower() in {"purchase_token", "fcm_token", "device_token", "firebase_token", "signed_url"}:
+    if key.lower() in {"purchase_token", "fcm_token", "device_token", "firebase_token", "signed_url", "authorization", "api_key", "token", "inline_data", "bytes", "base64"}:
         return "[REDACTED_SENSITIVE_FIELD]"
     return value
 
