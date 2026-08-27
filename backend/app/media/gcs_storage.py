@@ -29,6 +29,16 @@ class GcsObjectStorage:
         blob.reload()
         return blob
 
+    def read_object(self, bucket, name, max_bytes=10 * 1024 * 1024):
+        blob = self.client.bucket(bucket or self.bucket_name).blob(name)
+        try:
+            blob.reload()
+        except Exception:  # noqa: BLE001
+            return None
+        if blob.size is not None and blob.size > max_bytes:
+            raise ValueError("MEDIA_OBJECT_TOO_LARGE")
+        return blob.download_as_bytes()
+
     @staticmethod
     def checksum_object(blob):
         """Compute the declared SHA-256 over the canonical GCS bytes."""

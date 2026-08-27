@@ -32,6 +32,14 @@ class FakeObjectStorage:
     def stat_object(self, bucket, name):
         return self.objects.get((bucket, name))
 
+    def read_object(self, bucket, name, max_bytes=10 * 1024 * 1024):
+        obj = self.stat_object(bucket, name)
+        if obj is None:
+            return None
+        if len(obj.content) > max_bytes:
+            raise ValueError("MEDIA_OBJECT_TOO_LARGE")
+        return obj.content
+
     def delete_object(self, bucket, name):
         self.objects.pop((bucket, name), None)
 

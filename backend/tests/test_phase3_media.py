@@ -170,6 +170,14 @@ def test_resolve_ai_media_returns_only_validated_storage_references():
     assert resolved[0]["reference"] != asset.id
 
 
+def test_fake_storage_private_read_is_bounded_and_returns_bytes():
+    s = service()
+    s.storage.put("local-media", "private/object", b"abc", "image/png")
+    assert s.storage.read_object("local-media", "private/object") == b"abc"
+    with pytest.raises(ValueError, match="MEDIA_OBJECT_TOO_LARGE"):
+        s.storage.read_object("local-media", "private/object", max_bytes=2)
+
+
 @pytest.mark.parametrize("mutation, error", [
     (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "deleted_at", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
