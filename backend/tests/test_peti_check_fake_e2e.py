@@ -116,6 +116,26 @@ def test_generic_analysis_applies_semantic_guardrails():
         service.process(job.id)
 
 
+def test_media_failure_before_provider_releases_reserved_credit():
+    pets = PetService(InMemoryAnimalRepository(), InMemorySpeciesRepository())
+    pet = pets.create("u", "Milo", "DOG", "pet-key-release-media")
+    media = MediaService(pets)
+    asset, session = media.create_session(
+        "u", pet.id, MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
+        "image/jpeg", 10, RetentionClass.TRANSIENT_ANALYSIS, "release-media",
+    )
+    media.storage.put(asset.storage_bucket, asset.storage_object, b"image", "image/jpeg")
+    media.finalize("u", asset.id, session.id)
+    asset.status = MediaStatus.DELETED
+    credits = CreditService()
+    reservation = credits.reserve("u", "PETI_CHECK", "request-release", "funding-release")
+    service = AnalysisService(pets, media, credits, provider=FakeAIProvider())
+    job = service.create("u", pet.id, "PETI_CHECK", [asset.id], None, reservation.id, "submit-release")
+    with pytest.raises(AnalysisError, match="MEDIA_AI_SOURCE_UNAVAILABLE"):
+        service.process(job.id)
+    assert credits.reservations[reservation.id].status.value == "RELEASED"
+
+
 def test_peti_check_pipeline_rejects_specialist_shaped_payload():
     pets = PetService(InMemoryAnimalRepository(), InMemorySpeciesRepository())
     pet = pets.create("u", "Milo", "DOG", "pet-key-specialist-leak")
