@@ -144,7 +144,22 @@ class GeminiApiKeyTransport:
         self.timeout_seconds, self.endpoint = timeout_seconds, endpoint.rstrip("/")
 
     def __call__(self, request: dict[str, Any], api_key: str) -> dict[str, Any]:
-        body = {"contents": [{"parts": [{"text": request["prompt"]}]}], "generationConfig": {"responseMimeType": "application/json"}}
+        parts: list[dict[str, Any]] = []
+        for item in request.get("media", []):
+            mime_type = item.get("mime_type")
+            if not isinstance(mime_type, str) or "/" not in mime_type:
+                raise ProviderError("PROVIDER_MEDIA_MIME_INVALID", False)
+            inline_data = item.get("inline_data")
+            if isinstance(inline_data, bytes):
+                inline_data = base64.b64encode(inline_data).decode("ascii")
+            if isinstance(inline_data, str) and inline_data:
+                parts.append({"inline_data": {"mime_type": mime_type, "data": inline_data}})
+                continue
+            raise ProviderError("PROVIDER_MEDIA_SOURCE_UNSUPPORTED", False)
+        parts.append({"text": request["prompt"]})
+        if request.get("context"):
+            parts.append({"text": f"Owner context: {request['context']}"})
+        body = {"contents": [{"parts": parts}], "generationConfig": {"responseMimeType": "application/json"}}
         url = f"{self.endpoint}/{request['model']}:generateContent?key={api_key}"
         http = Request(url, data=json.dumps(body).encode(), headers={"Content-Type": "application/json"}, method="POST")
         with urlopen(http, timeout=self.timeout_seconds) as response:
