@@ -55,7 +55,7 @@ def test_logging_keeps_only_safe_media_metadata():
     logger.handlers = [handler]
     logger.propagate = False
     logger.warning(
-        "Authorization: Bearer secret-api-key bytes=YWJj",
+        "Authorization: Bearer secret-token API-Key: secret-api-key bytes=YWJj",
         extra={"peti_fields": {
             "media_asset_id": "asset-1", "modality": "IMAGE", "media_size_bytes": 3,
             "media_sha256": "abc", "authorization": "Bearer secret",
