@@ -34,7 +34,9 @@ class GeminiProvider:
         self.api_keys = api_keys
         self.max_attempts = max(1, max_attempts)
         self.backoff_seconds = max(0.0, backoff_seconds)
-        self.capabilities = ProviderCapabilities(frozenset({"IMAGE", "VIDEO", "AUDIO"}))
+        self.capabilities = ProviderCapabilities(
+            frozenset(getattr(transport, "media_types", frozenset()))
+        )
 
     def analyze(
         self, media: PreparedMediaPackage, prompt: str, user_context: str | None = None
@@ -140,6 +142,10 @@ class GeminiApiKeyPool:
 class GeminiApiKeyTransport:
     """Google AI Studio REST transport; callers must supply a key pool at runtime."""
 
+    # AI Studio is intentionally fail-closed for the application's GCS-based
+    # preparation contract; it supports inline sources only.
+    media_types = frozenset()
+
     def __init__(self, timeout_seconds: int = 90, endpoint: str = "https://generativelanguage.googleapis.com/v1beta/models"):
         self.timeout_seconds, self.endpoint = timeout_seconds, endpoint.rstrip("/")
 
@@ -170,6 +176,8 @@ class GeminiApiKeyTransport:
 
 class VertexGeminiTransport:
     """Minimal Vertex AI transport; credentials are supplied by the runtime."""
+
+    media_types = frozenset({"IMAGE", "VIDEO", "AUDIO"})
 
     def __init__(self, project_id: str, location: str, token_provider, timeout_seconds: int = 90):
         self.endpoint = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{location}/publishers/google/models"
@@ -223,6 +231,8 @@ class VertexGenAITransport:
     The SDK is imported lazily so LOCAL/fake environments remain zero-cost and
     do not need cloud credentials. A client may be injected for contract tests.
     """
+
+    media_types = frozenset({"IMAGE", "VIDEO", "AUDIO"})
 
     def __init__(self, project_id: str, location: str, *, client=None, timeout_seconds: int = 90):
         self.project_id, self.location, self.client, self.timeout_seconds = project_id, location, client, timeout_seconds

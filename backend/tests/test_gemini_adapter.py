@@ -2,7 +2,7 @@ from urllib.error import HTTPError
 
 from app.ai.preparation.core import MediaPreparer
 from app.ai.providers.base import ProviderError
-from app.ai.providers.gemini import GeminiApiKeyPool, GeminiProvider
+from app.ai.providers.gemini import GeminiApiKeyPool, GeminiProvider, VertexGeminiTransport
 
 
 def test_gemini_adapter_normalizes_structured_response_and_usage():
@@ -18,6 +18,13 @@ def test_gemini_adapter_normalizes_structured_response_and_usage():
     assert result.provider == "GEMINI"
     assert result.usage.input_tokens == 10
     assert seen["response_mime_type"] == "application/json"
+
+
+def test_gemini_capabilities_are_inherited_from_transport():
+    provider = GeminiProvider("gemini-test", VertexGeminiTransport("p", "loc", lambda: "token"))
+    assert provider.capabilities.media_types == frozenset({"IMAGE", "VIDEO", "AUDIO"})
+    provider = GeminiProvider("gemini-test", GeminiApiKeyPool)  # unknown transport is fail-closed
+    assert provider.capabilities.media_types == frozenset()
 
 
 def test_gemini_adapter_normalizes_vertex_usage_metadata_names():
