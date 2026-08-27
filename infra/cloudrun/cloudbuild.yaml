@@ -1,0 +1,15 @@
+substitutions:
+  _IMAGE_PREFIX: "gcr.io/$PROJECT_ID/peti"
+  _ENVIRONMENT: "dev"
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "infra/cloudrun/Dockerfile", "-t", "${_IMAGE_PREFIX}-api:${_ENVIRONMENT}", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "infra/cloudrun/Dockerfile.worker", "-t", "${_IMAGE_PREFIX}-worker:${_ENVIRONMENT}", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "${_IMAGE_PREFIX}-api:${_ENVIRONMENT}"]
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "${_IMAGE_PREFIX}-worker:${_ENVIRONMENT}"]
+images:
+  - "${_IMAGE_PREFIX}-api:${_ENVIRONMENT}"
+  - "${_IMAGE_PREFIX}-worker:${_ENVIRONMENT}"

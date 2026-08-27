@@ -1,0 +1,1 @@
+{"suite":"dog_body_check","split":"regression","schema_version":"1.0.0","cases":[{"id":"standardized-comparison","required_steps":["SIDE_STANDING","TOP_STANDING"]},{"id":"ai-weight-default","expected_ai_weight_enabled":false},{"id":"non-dog","expected_error":"BODY_CHECK_NOT_AVAILABLE_FOR_SPECIES"}]}

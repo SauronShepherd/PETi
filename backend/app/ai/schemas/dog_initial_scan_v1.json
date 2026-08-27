@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DogInitialScanResultV1",
+  "type": "object",
+  "required": ["result_version", "evidence_quality", "quality_reasons", "profile_candidates", "visible_distinguishing_features", "limitations", "recapture_suggestions"],
+  "properties": {
+    "result_version": {"const": "1.0.0"},
+    "evidence_quality": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT"]},
+    "quality_reasons": {"type": "array", "items": {"type": "string"}},
+    "profile_candidates": {"type": "array", "items": {"$ref": "#/definitions/candidate"}},
+    "visible_distinguishing_features": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "recapture_suggestions": {"type": "array", "items": {"type": "string"}}
+  },
+  "definitions": {
+    "candidate": {
+      "type": "object",
+      "required": ["field_type", "candidate_value"],
+      "properties": {
+        "field_type": {"type": "string"},
+        "candidate_value": {"type": "string"},
+        "display_value": {"type": "string"},
+        "confidence": {"type": "string"},
+        "source_media_ids": {"type": "array", "items": {"type": "string"}},
+        "evidence_notes": {"type": "array", "items": {"type": "string"}},
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

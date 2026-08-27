@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RewardIntent",
+  "type": "object",
+  "required": ["id", "nonce", "expected_credit_amount", "provider", "status"],
+  "properties": {
+    "id": {"type": "string"},
+    "nonce": {"type": "string"},
+    "expected_credit_amount": {"type": "integer", "minimum": 0},
+    "provider": {"type": "string"},
+    "status": {"type": "string"}
+  }
+}

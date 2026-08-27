@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FecesCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "capture_quality", "consistency", "visible_appearance", "visible_findings", "observations", "uncertainties", "areas_not_assessable", "visual_risk", "red_flags", "recommended_actions", "limitations", "safety", "provenance"],
+  "properties": {
+    "result_version": {"const": "1.0.0"},
+    "capture_quality": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT", "UNSPECIFIED"]},
+    "consistency": {"enum": ["HARD_DRY", "FORMED", "SOFT_FORMED", "UNFORMED", "WATERY", "UNCERTAIN"]},
+    "visible_appearance": {"type": "string"},
+    "visible_findings": {"type": "array", "items": {"type": "object"}},
+    "observations": {"type": "array", "items": {"type": "string"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "areas_not_assessable": {"type": "array", "items": {"type": "string"}},
+    "visual_risk": {"enum": ["LOW_VISIBLE_CONCERN", "MILD", "MODERATE", "HIGH", "INSUFFICIENT_EVIDENCE"]},
+    "red_flags": {"type": "array", "items": {"type": "string"}},
+    "recommended_actions": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "safety": {"type": "string"},
+    "provenance": {"type": "object"}
+  },
+  "additionalProperties": false
+}

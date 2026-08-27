@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "document_metadata_candidates": {"type": "array"},
+    "fact_candidates": {"type": "array"},
+    "extraction_limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "required": ["document_metadata_candidates", "fact_candidates", "extraction_limitations"]
+}

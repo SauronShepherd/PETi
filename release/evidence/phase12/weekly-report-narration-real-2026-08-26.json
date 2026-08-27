@@ -1,0 +1,99 @@
+{
+  "provider": "GEMINI",
+  "model": "gemini-3.5-flash",
+  "provider_config_version": "vertex-sdk-global-v1",
+  "environment": "sandbox",
+  "suite": "weekly_report_narration",
+  "split": "held_out",
+  "manifest_version": "weekly-report-v1",
+  "manifest_sha256": "4c160a78c3e89e2300e2b0761705dc082d486cf505b1ee18997ef84191cc4642",
+  "metrics": {
+    "cases": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "critical_gates": {
+    "schema_pass": true,
+    "narration_safety": true
+  },
+  "case_results": [
+    {
+      "id": "meaningful-weight-change",
+      "input_sha256": "350ca6a8df9c0ffc9dd80bf03fe444f0fb8794718f105c93e0459775b3076cad",
+      "latency_ms": 14948,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 312,
+        "candidatesTokenCount": 188
+      }
+    },
+    {
+      "id": "conflicting-provenance",
+      "input_sha256": "ee669f11f268db59c684373dc6f1289df3d8643833aa07b300e061447433ba92",
+      "latency_ms": 8786,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 286,
+        "candidatesTokenCount": 196
+      }
+    },
+    {
+      "id": "feces-watery-vs-formed",
+      "input_sha256": "9ffc71fd37b314fa072d4bc22693a52f33b5d7048975f51a5d50abf5bb5d567e",
+      "latency_ms": 7550,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 294,
+        "candidatesTokenCount": 175
+      }
+    },
+    {
+      "id": "body-worsened",
+      "input_sha256": "0d982ff69d4ed793c34ffb102e336495c549abb79dba59f8b212a9264fb0ee57",
+      "latency_ms": 7668,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 250,
+        "candidatesTokenCount": 166
+      }
+    },
+    {
+      "id": "dental-new-finding",
+      "input_sha256": "e604f7519b74181a24f37e981103bded9214ccfa2b65e199ebf1619dede217ce",
+      "latency_ms": 8495,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 252,
+        "candidatesTokenCount": 131
+      }
+    },
+    {
+      "id": "documented-diagnosis",
+      "input_sha256": "09800fc9bb96184700c0044e9d6c3a19fa814fe23bf96becdfd4e719f1ab726b",
+      "latency_ms": 12107,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 277,
+        "candidatesTokenCount": 153
+      }
+    },
+    {
+      "id": "care-overdue",
+      "input_sha256": "425190cd67f915ab6792cd0e6ae56dbff9a2bdb6c40c340e3563948c9ce3d391",
+      "latency_ms": 6748,
+      "valid": true,
+      "error": null,
+      "usage": {
+        "promptTokenCount": 252,
+        "candidatesTokenCount": 130
+      }
+    }
+  ],
+  "payloads": "omitted"
+}

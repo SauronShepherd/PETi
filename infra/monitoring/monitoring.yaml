@@ -1,0 +1,62 @@
+version: "1.0.0"
+project: peti
+metric_policy:
+  payload_free: true
+  max_cardinality_labels: [environment, service, operation, outcome]
+  forbidden_labels: [user_id, pet_id, animal_id, media_id, job_id, prompt_input, raw_content, purchase_token]
+dashboards:
+  - id: executive-health
+    title: Executive Health
+    widgets: [request_rate, error_rate, p95_latency, availability_slo]
+  - id: customer-journeys
+    title: Customer Journeys
+    widgets: [auth_success_rate, pet_create_success_rate, media_finalize_success_rate, check_completion_rate]
+  - id: ai-operations
+    title: AI Operations
+    widgets: [analysis_queue_age, provider_error_rate, safety_abstention_rate, provider_cost]
+  - id: media-storage
+    title: Media and Storage
+    widgets: [upload_failure_rate, finalize_latency, orphan_cleanup_count, storage_bytes]
+  - id: economics
+    title: Economics
+    widgets: [credits_reserved, credits_consumed, variable_cost, budget_remaining]
+  - id: billing-rewards
+    title: Billing and Rewards
+    widgets: [premium_reconciliation_errors, reward_ssv_failures, duplicate_reward_events]
+  - id: reports-notifications
+    title: Reports and Notifications
+    widgets: [report_generation_rate, report_source_traceability_failures, notification_delivery_rate]
+  - id: privacy-deletion
+    title: Privacy and Deletion
+    widgets: [deletion_jobs, residual_verification_failures, export_failures]
+  - id: specialist-capabilities
+    title: Specialist Capabilities
+    widgets: [initial_scan_rate, dental_rate, feces_rate, body_check_rate, abstention_rate]
+alerts:
+  - id: api-error-rate-critical
+    metric: error_rate
+    condition: "> 0.05 for 10m"
+    severity: critical
+  - id: analysis-backlog-warning
+    metric: analysis_queue_age_seconds
+    condition: "> 900 for 10m"
+    severity: warning
+  - id: residual-verification-critical
+    metric: deletion_residual_verification_failures
+    condition: "> 0"
+    severity: critical
+  - id: provider-cost-critical
+    metric: variable_cost_daily
+    condition: "> budget.daily_critical"
+    severity: critical
+budgets:
+  daily_warning: 10.0
+  daily_critical: 25.0
+  monthly_warning: 100.0
+  monthly_critical: 250.0
+  currency: USD
+kill_switches:
+  variable_cost_intake_enabled:
+    default: false
+    disables: [new_gemini_analysis, premium_narration, document_extraction]
+    preserves: [existing_results, deletion, export, ordinary_metadata]

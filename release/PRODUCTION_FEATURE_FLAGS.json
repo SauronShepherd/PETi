@@ -1,0 +1,1 @@
+{"schema_version":"1.0.0","environment":"PRODUCTION","global_ai_enabled":false,"specialists":{},"assistant":{"enabled":false,"public_enabled":false},"note":"Enable only through audited server configuration."}

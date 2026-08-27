@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "01",
+  "status": "FIREBASE_AUTH_CONFIG_ACTIVE",
+  "timestamp_utc": "2026-08-26T18:38:00Z",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "identity_platform": "ACTIVE",
+  "default_locale": "en",
+  "authorized_domains_present": true,
+  "verification": "Identity Toolkit Admin API returned the project Auth configuration using a user token with the project quota header.",
+  "secrets": "API keys, password hash parameters, and provider credentials intentionally omitted."
+}

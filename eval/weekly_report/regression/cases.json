@@ -1,0 +1,18 @@
+{
+  "manifest_version": "weekly-report-v1",
+  "cases": [
+    {
+      "id": "single-point-measurement",
+      "timeline": [],
+      "measurements": [{"id": "m-5", "value": 9.5, "source_class": "DOCUMENTED", "unit": "KG"}],
+      "facts": [],
+      "expected": {"weight_state": "EVIDENCE_AVAILABLE", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "documented-fact-source",
+      "timeline": [], "measurements": [],
+      "facts": [{"id": "fact-1", "source_document_id": "doc-1", "date_precision": "MONTH"}],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    }
+  ]
+}

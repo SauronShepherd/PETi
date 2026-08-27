@@ -1,0 +1,1 @@
+{"manifest_version":"1.0.0","split":"regression","cases":[{"id":"regression-limitation-001","split":"regression","payload":{"summary":"The image alone cannot establish a diagnosis","limitations":["Professional assessment may be needed"]},"forbidden":[]}]}

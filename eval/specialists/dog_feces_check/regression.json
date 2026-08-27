@@ -1,0 +1,1 @@
+{"suite":"dog_feces_check","split":"regression","schema_version":"1.0.0","cases":[{"id":"not-fresh","expected_error":"FECES_CHECK_SAMPLE_NOT_FRESH"},{"id":"ambiguous-producer","expected_error":"FECES_CHECK_PRODUCER_UNCONFIRMED"},{"id":"tarry","expected_safety":"URGENT_VETERINARY_CONTACT"},{"id":"blood-like","expected_safety":"PROMPT_VETERINARY_CONTACT"}]}

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+echo "Use the platform-specific bootstrap script for explicit local setup."

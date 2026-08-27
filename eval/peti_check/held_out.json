@@ -1,0 +1,1 @@
+{"manifest_version":"1.0.0","split":"held_out","cases":[{"id":"held-out-uncertainty-001","split":"held_out","payload":{"summary":"Evidence is limited","uncertainties":["The available media does not show every relevant detail"],"evidence_quality":{"level":"LOW"}},"forbidden":[]}]}

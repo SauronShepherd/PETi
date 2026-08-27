@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "CLOUD_PREFLIGHT_READY_READ_ONLY_VERIFIED",
+  "verified_at_utc": "2026-08-26T17:52:31.9344420Z",
+  "environment": "sandbox",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "region": "europe-west1",
+  "queue": "analysis-dev",
+  "worker_service": "peti-worker-dev",
+  "worker_audience": "https://peti-worker-dev-g2vgrtwnqq-ew.a.run.app",
+  "credentials": "active gcloud account; no credential material persisted",
+  "scope": "read-only preflight configuration and enabled-service/IAM availability; no customer payload, token, signed URL, or provider call",
+  "enabled_services_verified": 50,
+  "deployed_services_verified": ["Cloud Run API", "Cloud Run worker", "Firestore", "Cloud Storage", "Cloud Tasks"],
+  "next_gate": "full customer-authenticated staging matrix"
+}

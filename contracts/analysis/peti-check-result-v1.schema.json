@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PetiCheckResultV1",
+  "type": "object",
+  "required": ["summary", "observations", "uncertainties", "possible_interpretations", "red_flags", "recommended_actions", "limitations", "evidence_quality", "safety_state", "source_media_ids"],
+  "properties": {
+    "summary": {"type": "string"},
+    "observations": {"type": "array", "items": {"type": "object"}},
+    "uncertainties": {"type": "array", "items": {"type": "object"}},
+    "possible_interpretations": {"type": "array", "items": {"type": "object"}},
+    "red_flags": {"type": "array", "items": {"type": "object"}},
+    "recommended_actions": {"type": "array", "items": {"type": "object"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "evidence_quality": {"type": "object"},
+    "safety_state": {"enum": ["CLEAR", "REVIEW", "URGENT", "INSUFFICIENT_EVIDENCE"]},
+    "source_media_ids": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

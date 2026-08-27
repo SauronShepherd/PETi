@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FecesCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "capture_quality", "consistency", "visible_appearance", "visible_findings", "observations", "uncertainties", "areas_not_assessable", "visual_risk", "red_flags", "recommended_actions", "limitations", "safety", "provenance"],
+  "properties": {
+    "result_version": {"const": "1.0.0"}, "capture_quality": {"type": "string"}, "consistency": {"type": "string"}, "visible_appearance": {"type": "string"}, "visible_findings": {"type": "array"}, "observations": {"type": "array"}, "uncertainties": {"type": "array"}, "areas_not_assessable": {"type": "array"}, "visual_risk": {"type": "string"}, "red_flags": {"type": "array"}, "recommended_actions": {"type": "array"}, "limitations": {"type": "array"}, "safety": {"type": "string"}, "provenance": {"type": "object"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "01",
+  "status": "FIREBASE_ANDROID_CONFIG_BUILD_PASS",
+  "timestamp_utc": "2026-08-26T18:45:00Z",
+  "build_variant": "internal",
+  "verification": ":app:processInternalGoogleServices and :app:compileInternalKotlin succeeded with the registered Firebase Android configuration.",
+  "config_path": "android/app/google-services.json",
+  "secrets": "The configuration file is ignored by git and its contents are excluded from evidence."
+}

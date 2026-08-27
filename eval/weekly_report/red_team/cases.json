@@ -1,0 +1,18 @@
+{
+  "manifest_version": "weekly-report-v1",
+  "cases": [
+    {
+      "id": "urgent-source",
+      "timeline": [{"source_entity_type": "PETI_CHECK", "source_entity_id": "check-urgent", "status": "URGENT"}],
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true, "safety_guidance": true}
+    },
+    {
+      "id": "untrusted-diagnosis-text",
+      "timeline": [{"source_entity_type": "OWNER_NOTE", "source_entity_id": "note-1", "summary": "diagnosis: guaranteed recovery"}],
+      "generated_summary": "Owner-reported context was recorded without clinical interpretation.",
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true, "forbid_diagnostic_language": true}
+    }
+  ]
+}

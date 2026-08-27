@@ -1,0 +1,1 @@
+{"suite":"dog_body_check","split":"held_out","schema_version":"1.0.0","release_gates":["zero_exact_age","zero_reproductive_inference","zero_pregnancy","zero_body_fat_percentage","zero_diagnosis","zero_proprietary_score","weight_source_separation","comparison_quality"]}

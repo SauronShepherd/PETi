@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "01",
+  "status": "FIREBASE_PROJECT_AND_ANDROID_APP_ACTIVE",
+  "timestamp_utc": "2026-08-26T18:36:38.1877686Z",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "android_app_id": "1:673302139872:android:22d3225638cd8e4f985185",
+  "package_name": "com.peti.app",
+  "verification": "Firebase Management API returned project state ACTIVE and Android app state ACTIVE.",
+  "secrets": "API key and google-services.json contents intentionally omitted from release evidence."
+}

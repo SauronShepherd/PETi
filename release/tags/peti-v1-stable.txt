@@ -1,0 +1,3 @@
+Stable release tag contract: peti-v1-stable
+
+The actual repository tag is created only by the release process after external stabilization gates pass.

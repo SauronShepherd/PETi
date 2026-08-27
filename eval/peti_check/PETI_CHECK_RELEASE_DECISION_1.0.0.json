@@ -1,0 +1,32 @@
+{
+  "decision_version": "1.0.0",
+  "generated_at": "2026-08-26T17:16:22.035852+00:00",
+  "git_revision": "UNAVAILABLE",
+  "capability_pack_version": "DOG-v1",
+  "prompt": {
+    "id": "peti_check",
+    "version": "1.0.0",
+    "sha256": "396f10d71b6c63c6a1d33e792efcdabb9ffc4b1906cae7f76d944399166f3d6d"
+  },
+  "schema": {
+    "id": "peti_check",
+    "version": "1.0.0",
+    "sha256": "275e78cbd23e141b6266b15b2b80846e89d5693fd47472f7965c18bb9dca2a72"
+  },
+  "guardrail_version": "PETI_CHECK-GUARDRAILS-v1",
+  "safety_policy_version": "PETI_CHECK-SAFETY-v1",
+  "media_preparation_version": "1.0.0",
+  "provider": "GEMINI",
+  "model": "gemini-3.5-flash",
+  "provider_config_version": "vertex-sdk-global-v1",
+  "critical_gates": {
+    "dangerous_under_triage": true,
+    "diagnosis_language": true,
+    "fabricated_measurement": true,
+    "medication_guidance": true,
+    "false_reassurance": true,
+    "schema_pass": true
+  },
+  "missing_or_failed_gates": [],
+  "go_no_go": "GO"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "CLOUD_SYNTHETIC_SPECIALIST_VERTICAL_SLICE_PASSED",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "region": "europe-west1",
+  "api_revision": "peti-api-dev-00013-sqz",
+  "worker_revision": "peti-worker-dev-00012-m5x",
+  "task": {"queue": "analysis-dev", "delivery": "OIDC Cloud Tasks to private worker", "result": "acknowledged and task removed after successful completion"},
+  "analysis": {"status": "COMPLETED", "result_keys": ["areas_not_assessed", "evidence_quality", "evidence_quality_reasons", "limitations", "recommended_actions", "red_flags", "result_version", "safety", "visible_findings"], "provider": "GEMINI", "model": "gemini-3.5-flash", "payload": "omitted"},
+  "cleanup": "synthetic Firestore analysis deleted after verification; task residual false; no customer fixture used",
+  "release_decision": "specialist execution path verified; held-out evaluation, device, and public-release certification remain pending"
+}

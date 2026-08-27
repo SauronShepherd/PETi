@@ -1,0 +1,36 @@
+# Cloud Build context is intentionally limited to the production container inputs.
+# Never upload local caches, test fixtures, build outputs, or user-created artifacts.
+*
+!.gcloudignore
+!backend/
+!backend/pyproject.toml
+!backend/app/
+!backend/app/**
+!infra/
+!infra/cloudrun/
+!infra/cloudrun/cloudbuild.yaml
+!infra/cloudrun/Dockerfile
+!infra/cloudrun/Dockerfile.worker
+
+# Explicitly exclude local and potentially sensitive workspace state.
+backend/tests/
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.ruff_cache/
+/.git/
+/.gradle-home/
+/.mypy_cache/
+/.pytest_cache/
+/.ruff_cache/
+/android/
+/artifacts/
+/eval/
+/docs/
+/contracts/
+/economics/
+/product/
+/release/
+/ops/
+**/build/
+**/__pycache__/
+**/*.pyc

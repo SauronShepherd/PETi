@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BodyCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "evidence_quality", "evidence_quality_reasons", "body_observations", "body_condition_category", "uncertainties", "areas_not_assessable", "recommended_actions", "limitations", "safety", "provenance"],
+  "properties": {
+    "result_version": {"const": "1.0.0"},
+    "evidence_quality": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT", "UNSPECIFIED"]},
+    "evidence_quality_reasons": {"type": "array", "items": {"type": "string", "enum": ["BLUR", "LOW_LIGHT", "BODY_CROPPED", "POSE_NOT_STANDING", "PERSPECTIVE_DISTORTION", "VIEW_MISSING", "COAT_OBSCURES_CONTOUR", "DISTANCE_TOO_CLOSE", "DISTANCE_TOO_FAR", "TARGET_AMBIGUOUS", "OTHER"]}},
+    "body_observations": {"type": "array", "items": {"$ref": "#/$defs/body_observation"}},
+    "observations": {"type": "array", "items": {"$ref": "#/$defs/body_observation"}},
+    "waist_definition": {"type": "string"},
+    "abdominal_tuck": {"type": "string"},
+    "rib_outline": {"type": "string"},
+    "body_condition_category": {"enum": ["LEAN_APPEARANCE", "BALANCED_APPEARANCE", "ROUNDED_APPEARANCE", "UNCERTAIN"]},
+    "areas_not_assessable": {"type": "array", "items": {"type": "string"}},
+    "posture_notes": {"type": "array", "items": {"type": "string"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "recommended_actions": {"type": "array", "items": {"type": "string"}},
+    "safety": {"type": "object"},
+    "provenance": {"type": "object"},
+    "ai_weight_estimate": {"type": ["object", "null"]},
+    "longitudinal_comparison": {"type": ["object", "null"]}
+  },
+  "$defs": {"body_observation": {"type": "object", "required": ["id", "observation_type", "statement", "confidence", "source_media_ids"], "properties": {"id": {"type": "string"}, "observation_type": {"enum": ["WAIST_DEFINITION_VISIBLE", "ABDOMINAL_TUCK_VISIBLE", "RIB_OUTLINE_VISIBLE", "SPINAL_OUTLINE_VISIBLE", "HIP_BONE_OUTLINE_VISIBLE", "GENERAL_BODY_CONTOUR", "LEFT_RIGHT_ASYMMETRY_VISIBLE", "POSTURE_NOTE", "OTHER_VISIBLE_BODY_OBSERVATION"]}, "statement": {"type": "string"}, "confidence": {"type": "string"}, "source_media_ids": {"type": "array", "items": {"type": "string"}}, "source_regions": {"type": ["array", "null"], "items": {"type": "object"}}}, "additionalProperties": false}},
+  "additionalProperties": false
+}

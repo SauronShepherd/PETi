@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-27T11:56:14.859384+00:00",
+  "status": "MANIFESTS_VALID_EXTERNAL_EXECUTION_PENDING",
+  "provider_runs": "NOT_EXECUTED",
+  "capabilities": {
+    "dog_body_check": {
+      "manifests": {
+        "dev": {
+          "path": "eval/specialists/dog_body_check/dev.json",
+          "sha256": "b534be7da4cd80e39503ae4f2d21fba07850537b9ad223b507ab6be628595d30",
+          "schema_version": "1.0.0"
+        },
+        "held_out": {
+          "path": "eval/specialists/dog_body_check/held_out.json",
+          "sha256": "5d490609f9731b190fd6490fb322d9b7a1f25f3c39fc514ca1eabc0a02190efb",
+          "schema_version": "1.0.0"
+        },
+        "red_team": {
+          "path": "eval/specialists/dog_body_check/red_team.json",
+          "sha256": "d50b347eb468eb3d9b8b27b46e5bc29fbc4219f0cca2371e962b1e0986eb428c",
+          "schema_version": "1.0.0"
+        },
+        "regression": {
+          "path": "eval/specialists/dog_body_check/regression.json",
+          "sha256": "f4b5ea4146e6a8f2540a59e7132c4f99367c38971f4bd26a338c51241e88cb9d",
+          "schema_version": "1.0.0"
+        }
+      },
+      "execution": "PENDING_EXTERNAL_GEMINI"
+    },
+    "dog_dental_check": {
+      "manifests": {
+        "dev": {
+          "path": "eval/specialists/dog_dental_check/dev.json",
+          "sha256": "e702fbf7fcf107bd8433f236c8e42477f37b4c486f0b9b1f8f311680963e737b",
+          "schema_version": "1.0.0"
+        },
+        "held_out": {
+          "path": "eval/specialists/dog_dental_check/held_out.json",
+          "sha256": "5c0afe19937b5e1cd9c1cb10bab0975deec9e21bcdb7bc83b54158018f9e0604",
+          "schema_version": "1.0.0"
+        },
+        "red_team": {
+          "path": "eval/specialists/dog_dental_check/red_team.json",
+          "sha256": "9a4ade4a0e1afbb58b3bd6f1d02a53a8b641c635c567fe78e3e7437b07bbe73e",
+          "schema_version": "1.0.0"
+        },
+        "regression": {
+          "path": "eval/specialists/dog_dental_check/regression.json",
+          "sha256": "0e063b623f63175e74336e4239931fe7a708f7f86295619ee40fa2d95b74a09a",
+          "schema_version": "1.0.0"
+        }
+      },
+      "execution": "PENDING_EXTERNAL_GEMINI"
+    },
+    "dog_feces_check": {
+      "manifests": {
+        "dev": {
+          "path": "eval/specialists/dog_feces_check/dev.json",
+          "sha256": "586d6dc07ab40e93a17a8d9c59e5b649c3629c6ba1a32f535bed9931f7b4753b",
+          "schema_version": "1.0.0"
+        },
+        "held_out": {
+          "path": "eval/specialists/dog_feces_check/held_out.json",
+          "sha256": "363fbb6908b144f89dc304d2019ad27182f4b1dcf1f1fb569facca65c6b0030c",
+          "schema_version": "1.0.0"
+        },
+        "red_team": {
+          "path": "eval/specialists/dog_feces_check/red_team.json",
+          "sha256": "097ac2fa0d0905ec0ceb2e7b13506a20c646f8069451c8954a67136c4877ee6c",
+          "schema_version": "1.0.0"
+        },
+        "regression": {
+          "path": "eval/specialists/dog_feces_check/regression.json",
+          "sha256": "701680e1986c7f2e530f53ef4cc6a1b83556e06ba157aa014ff288b648d517b7",
+          "schema_version": "1.0.0"
+        }
+      },
+      "execution": "PENDING_EXTERNAL_GEMINI"
+    },
+    "dog_initial_scan": {
+      "manifests": {
+        "dev": {
+          "path": "eval/specialists/dog_initial_scan/dev.json",
+          "sha256": "26e8cf795ad46c4dd65923560511c81dead14278ee40aac47a3576d8544c9576",
+          "schema_version": "1.0.0"
+        },
+        "held_out": {
+          "path": "eval/specialists/dog_initial_scan/held_out.json",
+          "sha256": "0c058db7ed26984e219382d6f2299869cc892eb7e48147f59c6852adc141c0b9",
+          "schema_version": "1.0.0"
+        },
+        "red_team": {
+          "path": "eval/specialists/dog_initial_scan/red_team.json",
+          "sha256": "0f3961021b1b6dc62097d233e5c666a89b82c2859b680f4d5e808ef48d75bbf2",
+          "schema_version": "1.0.0"
+        },
+        "regression": {
+          "path": "eval/specialists/dog_initial_scan/regression.json",
+          "sha256": "acb44bc8ecc3f72775522132d2b98abd9d043f6e6fc9a9aee8cf8e0e1c426b4c",
+          "schema_version": "1.0.0"
+        }
+      },
+      "execution": "PENDING_EXTERNAL_GEMINI"
+    }
+  },
+  "errors": []
+}

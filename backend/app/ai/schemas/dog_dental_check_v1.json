@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DentalCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "evidence_quality", "evidence_quality_reasons", "visible_findings", "areas_not_assessed", "red_flags", "recommended_actions", "limitations", "safety"],
+  "properties": {
+    "result_version": {"const": "1.0.0"},
+    "evidence_quality": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT"]},
+    "evidence_quality_reasons": {"type": "array", "items": {"type": "string"}},
+    "visible_findings": {"type": "array", "items": {"$ref": "#/definitions/finding"}},
+    "areas_not_assessed": {"type": "array", "items": {"type": "string"}},
+    "red_flags": {"type": "array", "items": {"type": "string"}},
+    "recommended_actions": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "safety": {"enum": ["NORMAL_INFORMATION", "MONITOR", "PROFESSIONAL_REVIEW_RECOMMENDED", "PROMPT_VETERINARY_CONTACT", "URGENT_VETERINARY_CONTACT"]}
+  },
+  "definitions": {
+    "finding": {
+      "type": "object",
+      "required": ["id", "finding_type", "statement", "confidence", "source_media_ids"],
+      "properties": {
+        "id": {"type": "string"},
+        "finding_type": {"enum": ["CALCULUS_LIKE_DEPOSIT", "GINGIVAL_REDNESS", "GINGIVAL_SWELLING", "VISIBLE_BLEEDING", "RECESSION_LIKE_APPEARANCE", "VISIBLE_TOOTH_DAMAGE", "VISIBLE_TOOTH_DISCOLORATION", "MISSING_TOOTH_LIKE_APPEARANCE", "LESION_LIKE_AREA", "FOREIGN_MATERIAL_LIKE_AREA", "OTHER_VISIBLE_ORAL_FINDING"]},
+        "statement": {"type": "string"},
+        "severity_descriptor": {"type": ["string", "null"]},
+        "confidence": {"type": "string"},
+        "source_media_ids": {"type": "array", "items": {"type": "string"}},
+        "source_regions": {"type": "array", "items": {"type": "string"}},
+        "location_descriptor": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

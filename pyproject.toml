@@ -1,0 +1,16 @@
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+# E701/E702 are temporarily ignored for legacy compact domain modules; the
+# remaining lint rules still gate correctness issues and unused imports.
+lint.ignore = ["B008", "E701", "E702"]
+[tool.mypy]
+python_version = "3.13"
+strict = false
+packages = ["backend.app"]
+[[tool.mypy.overrides]]
+module = ["firebase_admin", "firebase_admin.*", "google.cloud", "google.cloud.*"]
+ignore_missing_imports = true
+[tool.pytest.ini_options]
+pythonpath = ["backend", "."]
+testpaths = ["backend/tests"]

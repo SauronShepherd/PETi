@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "decision": "PENDING_EXTERNAL_CERTIFICATION",
+  "deterministic_core": "SOURCE_AND_FIXTURES_PRESENT",
+  "provider": "GEMINI_HELD_OUT_7_OF_7_PASS_SANDBOX",
+  "scheduler": "UNVERIFIED",
+  "delivery": "UNVERIFIED",
+  "android_vertical_slice": "UNVERIFIED",
+  "tests_executed": true,
+  "provider_evidence": "release/evidence/phase12/weekly-report-narration-real-2026-08-26.json",
+  "caveat": "Frozen-RC binding, scheduler, delivery, Android deep-link and device evidence remain pending."
+}

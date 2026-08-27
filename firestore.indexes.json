@@ -1,0 +1,50 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "measurements",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "animal_id", "order": "ASCENDING" },
+        { "fieldPath": "measured_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "care_occurrences",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "animal_id", "order": "ASCENDING" },
+        { "fieldPath": "due_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notification_deliveries",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "occurrence_id", "order": "ASCENDING" },
+        { "fieldPath": "device_registration_id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "analysis_jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "animal_id", "order": "ASCENDING" },
+        { "fieldPath": "created_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "specialist_analyses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "animal_id", "order": "ASCENDING" },
+        { "fieldPath": "analysis_type", "order": "ASCENDING" },
+        { "fieldPath": "created_at", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

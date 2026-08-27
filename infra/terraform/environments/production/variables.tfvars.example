@@ -1,0 +1,8 @@
+project_id   = "peti-production-project"
+region       = "europe-west1"
+api_image    = "europe-west1-docker.pkg.dev/peti-production-project/peti/api:production"
+worker_image = "europe-west1-docker.pkg.dev/peti-production-project/peti/worker:production"
+billing_account_id = null
+budget_amount = 1000
+google_oauth_client_id = null
+google_oauth_client_secret = null

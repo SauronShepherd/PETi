@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "CLOUD_VERIFIED_READ_ONLY",
+  "verified_at_utc": "2026-08-26T18:00:00Z",
+  "environment": "sandbox",
+  "service": "peti-api-dev",
+  "region": "europe-west1",
+  "checks": {
+    "/health/live": {"status": "ok", "environment": "DEV"},
+    "/health/ready": {"status": "ready", "dependencies_configured": true}
+  },
+  "scope": "Read-only health verification; no customer payloads or mutations."
+}

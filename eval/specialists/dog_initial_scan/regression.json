@@ -1,0 +1,1 @@
+{"suite":"dog_initial_scan","split":"regression","schema_version":"1.0.0","cases":[{"id":"candidate-review","required_review_states":["PENDING_REVIEW","CONFIRMED","CORRECTED","REJECTED","SKIPPED"]},{"id":"non-dog","expected_error":"DOG_INITIAL_SCAN_SPECIES_INVALID"}]}

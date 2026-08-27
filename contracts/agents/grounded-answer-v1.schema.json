@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PETi Grounded Assistant Answer v1",
+  "type": "object",
+  "required": ["schema_version", "answer_type", "text", "citations", "grounding_status"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "answer_type": {"enum": ["GROUNDED_SUMMARY", "INSUFFICIENT_EVIDENCE", "SAFETY_REDIRECT"]},
+    "text": {"type": "string", "maxLength": 4000},
+    "claims": {"type": "array"},
+    "citations": {"type": "array"},
+    "grounding_status": {"enum": ["GROUNDED", "NO_SOURCE"]}
+  },
+  "additionalProperties": false
+}

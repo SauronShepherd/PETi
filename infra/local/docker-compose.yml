@@ -1,0 +1,12 @@
+services:
+  floci-gcp:
+    image: floci/floci-gcp:latest
+    container_name: peti-floci-gcp
+    ports:
+      - "4588:4588"
+    volumes:
+      - floci-data:/data
+    restart: unless-stopped
+
+volumes:
+  floci-data:

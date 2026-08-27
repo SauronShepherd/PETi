@@ -1,0 +1,9 @@
+queue:
+  name: ${PETI_ANALYSIS_QUEUE_NAME}
+  max_attempts: 5
+  max_concurrent_dispatches: 10
+  max_dispatches_per_second: 2
+  dispatch_deadline_seconds: 300
+  oidc:
+    service_account: ${PETI_ANALYSIS_TASK_SERVICE_ACCOUNT}
+    audience: ${PETI_ANALYSIS_TASK_AUDIENCE}

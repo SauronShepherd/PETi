@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "PROVIDER_ENABLED_FEATURE_DISABLED",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "region": "europe-west1",
+  "api": {
+    "service": "peti-api-dev",
+    "revision": "peti-api-dev-00009-xch",
+    "traffic_percent": 100,
+    "health_live": 200,
+    "health_ready": 200
+  },
+  "worker": {
+    "service": "peti-worker-dev",
+    "revision": "peti-worker-dev-00008-6g6",
+    "traffic_percent": 100,
+    "unauthenticated_health_probe": 404,
+    "ingress": "private"
+  },
+  "build": {
+    "id": "a80f46f6-4603-4d73-bd11-538113be2163",
+    "status": "SUCCESS",
+    "images": "regional Artifact Registry API and worker images"
+  },
+  "ai": {
+    "enabled": true,
+    "provider_enabled": true,
+    "model_enabled": true,
+    "feature_flag": "PETI_CHECK_ENABLED=false",
+    "model": "gemini-3.5-flash",
+    "location": "global",
+    "gemini_call": "SYNTHETIC_AGENT_TASK_COMPLETED"
+  },
+  "scope": "sandbox deployment and liveness/readiness only; no customer payload or production resource"
+}

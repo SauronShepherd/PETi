@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "status": "TEMPLATE_NOT_EVIDENCE",
+  "scenarios": {
+    "funded_check": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    },
+    "rewarded_funding": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    },
+    "abstention": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    },
+    "urgent_safety": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    },
+    "reopen_process_death": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    },
+    "account_isolation": {
+      "job_id": "REPLACE_AFTER_RUN",
+      "result_id": "REPLACE_AFTER_RUN",
+      "reservation_ledger": {"status": "REPLACE_AFTER_RUN"},
+      "provider_request_id": "REPLACE_AFTER_RUN",
+      "analytics_events": []
+    }
+  }
+}

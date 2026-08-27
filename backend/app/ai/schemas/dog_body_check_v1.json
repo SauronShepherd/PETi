@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BodyCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "evidence_quality", "observations", "body_condition_category", "uncertainties", "limitations", "provenance"],
+  "properties": {
+    "result_version": {"const": "1.0.0"}, "evidence_quality": {"type": "string"}, "observations": {"type": "array"}, "body_condition_category": {"type": "string"}, "uncertainties": {"type": "array"}, "limitations": {"type": "array"}, "provenance": {"type": "object"}, "ai_weight_estimate": {"type": ["object", "null"]}, "longitudinal_comparison": {"type": ["object", "null"]}
+  },
+  "additionalProperties": false
+}

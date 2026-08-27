@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "01",
+  "status": "GOOGLE_PROVIDER_ACTIVE",
+  "timestamp_utc": "2026-08-26T19:10:00Z",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "provider": "google.com",
+  "enabled": true,
+  "client_id": "673302139872-g8nu436gcimulb0g8okbneodig4i5uns.apps.googleusercontent.com",
+  "verification": "Identity Platform defaultSupportedIdpConfigs/google.com returned enabled=true and the expected client ID.",
+  "secrets": "Client secret intentionally omitted from evidence and repository."
+}

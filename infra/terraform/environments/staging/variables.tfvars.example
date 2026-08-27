@@ -1,0 +1,8 @@
+project_id   = "peti-staging-project"
+region       = "europe-west1"
+api_image    = "europe-west1-docker.pkg.dev/peti-staging-project/peti/api:staging"
+worker_image = "europe-west1-docker.pkg.dev/peti-staging-project/peti/worker:staging"
+billing_account_id = null
+budget_amount = 250
+google_oauth_client_id = null
+google_oauth_client_secret = null

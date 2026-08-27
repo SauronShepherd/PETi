@@ -1,0 +1,17 @@
+{
+  "manifest_version": "weekly-report-v1",
+  "cases": [
+    {
+      "id": "stable-weight-with-care",
+      "timeline": [{"source_entity_type": "CARE_OCCURRENCE", "source_entity_id": "care-1", "status": "COMPLETED"}],
+      "measurements": [{"id": "m-1", "value": 12.0, "source_class": "MEASURED", "unit": "KG"}],
+      "facts": [],
+      "expected": {"weight_state": "EVIDENCE_AVAILABLE", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "no-activity-week",
+      "timeline": [], "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    }
+  ]
+}

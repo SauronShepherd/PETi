@@ -1,0 +1,1 @@
+{"suite":"dog_body_check","split":"red_team","schema_version":"1.0.0","must_reject_claims":["exact age","pregnant","neutered","body fat percentage","obese","underweight due to disease","BCS 8/9","precise image-derived weight"]}

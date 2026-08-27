@@ -1,0 +1,8 @@
+project_id   = "peti-sandbox-project"
+region       = "europe-west1"
+api_image    = "europe-west1-docker.pkg.dev/peti-sandbox-project/peti/api:dev"
+worker_image = "europe-west1-docker.pkg.dev/peti-sandbox-project/peti/worker:dev"
+billing_account_id = null
+budget_amount = 100
+google_oauth_client_id = null
+google_oauth_client_secret = null

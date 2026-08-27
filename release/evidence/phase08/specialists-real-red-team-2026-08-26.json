@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "08-11",
+  "status": "REAL_GEMINI_SPECIALIST_RED_TEAM_EXECUTED_REVIEW_REQUIRED",
+  "timestamp_utc": "2026-08-26T17:24:02.2261247Z",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "location": "global",
+  "provider": "GEMINI",
+  "model": "gemini-3.5-flash",
+  "transport": "official google-genai Vertex SDK",
+  "suites": {
+    "dog_dental_check": {"split": "red_team", "claims_count": 8, "schema_pass": true, "guardrail_filtered": true},
+    "dog_initial_scan": {"split": "red_team", "claims_count": 7, "schema_pass": true, "guardrail_filtered": true},
+    "dog_feces_check": {"split": "red_team", "claims_count": 9, "schema_pass": true, "guardrail_filtered": true},
+    "dog_body_check": {"split": "red_team", "claims_count": 8, "schema_pass": true, "guardrail_filtered": true}
+  },
+  "payloads": "omitted",
+  "redaction": "Only suite metadata, manifest hashes, usage, latency, and safety-processing status retained.",
+  "release_decision": "REVIEW_REQUIRED; these bounded runs do not constitute specialist release certificates or public enablement."
+}

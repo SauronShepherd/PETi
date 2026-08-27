@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "GEMINI_3_5_FLASH_REAL_CALL_SUCCEEDED",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "region": "europe-west1",
+  "model_location": "global",
+  "transport": "google-genai Vertex SDK",
+  "required_model_attempt": {
+    "model": "gemini-3.5-flash",
+    "status": "NOT_FOUND",
+    "reason": "Publisher model unavailable or project lacks regional access"
+  },
+  "fallback_probe": {
+    "model": "gemini-2.5-flash",
+    "provider_request": "accepted",
+    "structured_text": "EMPTY",
+    "input_tokens": 19,
+    "output_tokens": null,
+    "release_decision": "DO_NOT_CERTIFY"
+  },
+  "successful_probe": {
+    "model": "gemini-3.5-flash",
+    "provider_request": "accepted",
+    "structured_text": "{}",
+    "input_tokens": 11,
+    "output_tokens": 1,
+    "finish_reason": "STOP",
+    "release_decision": "PROVIDER_SMOKE_PASS; PRODUCT_CERTIFICATION_PENDING"
+  },
+  "input": "synthetic text only; prompt and customer payload omitted",
+  "cost_control": "single request, max_output_tokens=32, no deployed AI enablement"
+}

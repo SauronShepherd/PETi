@@ -1,0 +1,1 @@
+{"suite":"dog_feces_check","split":"dev","schema_version":"1.0.0","consistency":["HARD_DRY","FORMED","SOFT_FORMED","UNFORMED","WATERY","UNCERTAIN"],"allowed_findings":["MUCUS_LIKE","FRESH_RED_BLOOD_LIKE","DARK_BLACK_TAR_LIKE","FOREIGN_MATERIAL_LIKE","WORM_SEGMENT_LIKE","OTHER_VISIBLE_FINDING"]}

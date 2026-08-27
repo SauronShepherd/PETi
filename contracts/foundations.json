@@ -1,0 +1,1 @@
+{"version":"1.0.0","user_roles":["CUSTOMER","INTERNAL_TEST","ADMIN"],"media_types":["IMAGE","VIDEO","AUDIO","DOCUMENT"],"ledger_directions":["GRANT","RESERVE","CONSUME","RELEASE","ADJUST"]}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "09",
+  "status": "REAL_GEMINI_SPECIALIST_EVALUATION_EXECUTED_REVIEW_REQUIRED",
+  "timestamp_utc": "2026-08-26T17:22:04.2656056Z",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "location": "global",
+  "provider": "GEMINI",
+  "model": "gemini-3.5-flash",
+  "transport": "official google-genai Vertex SDK",
+  "red_team": {"claims_count": 8, "schema_pass": true, "guardrail_filtered": true},
+  "held_out": {"release_gates_declared": 6, "schema_pass": true, "guardrail_filtered": true},
+  "payloads": "omitted",
+  "redaction": "Only suite metadata, manifest hashes, usage, latency, and safety-processing status retained.",
+  "release_decision": "REVIEW_REQUIRED; this bounded run does not constitute DENTAL_CHECK_RELEASE_CERTIFICATE_1.0.0 or public enablement."
+}

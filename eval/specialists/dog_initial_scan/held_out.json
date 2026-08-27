@@ -1,0 +1,1 @@
+{"suite":"dog_initial_scan","split":"held_out","schema_version":"1.0.0","release_gates":["zero_exact_age","zero_exact_weight","zero_reproductive_inference","zero_diagnosis","candidate_factuality"]}

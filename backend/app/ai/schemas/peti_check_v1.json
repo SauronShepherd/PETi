@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "required": ["summary", "observations", "uncertainties", "possible_interpretations", "red_flags", "recommended_actions", "limitations", "evidence_quality", "safety_state", "source_media_ids"],
+  "properties": {
+    "summary": {"type": "string"},
+    "observations": {"type": "array"},
+    "uncertainties": {"type": "array"},
+    "possible_interpretations": {"type": "array"},
+    "red_flags": {"type": "array"},
+    "recommended_actions": {"type": "array"},
+    "limitations": {"type": "array"},
+    "evidence_quality": {"type": "object", "required": ["level"], "properties": {"level": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT"]}}},
+    "safety_state": {"enum": ["CLEAR", "REVIEW", "URGENT", "INSUFFICIENT_EVIDENCE"]},
+    "source_media_ids": {"type": "array", "items": {"type": "string"}}
+  }
+}

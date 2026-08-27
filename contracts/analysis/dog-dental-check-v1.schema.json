@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DentalCheckResultV1",
+  "type": "object",
+  "required": ["result_version", "evidence_quality", "evidence_quality_reasons", "visible_findings", "areas_not_assessed", "red_flags", "recommended_actions", "limitations", "safety"],
+  "properties": {
+    "result_version": {"const": "1.0.0"},
+    "evidence_quality": {"enum": ["GOOD", "PARTIAL", "INSUFFICIENT", "UNSPECIFIED"]},
+    "evidence_quality_reasons": {"type": "array", "items": {"type": "string"}},
+    "visible_findings": {"type": "array", "items": {"type": "object"}},
+    "areas_not_assessed": {"type": "array", "items": {"type": "string"}},
+    "red_flags": {"type": "array", "items": {"type": "string"}},
+    "recommended_actions": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "safety": {"type": "string"}
+  },
+  "additionalProperties": false
+}

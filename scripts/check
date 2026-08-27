@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$root"
+if command -v python.exe >/dev/null 2>&1; then
+  PYTHON=(python.exe)
+elif command -v python >/dev/null 2>&1; then
+  PYTHON=(python)
+elif command -v python3 >/dev/null 2>&1; then
+  PYTHON=(python3)
+elif command -v py >/dev/null 2>&1; then
+  PYTHON=(py -3)
+else
+  echo "No Python 3 launcher found (python, python3, or py -3)." >&2
+  exit 127
+fi
+"${PYTHON[@]}" -m ruff check backend
+"${PYTHON[@]}" -m mypy backend/app
+"${PYTHON[@]}" -m pytest
+"${PYTHON[@]}" scripts/architecture_check.py
+"${PYTHON[@]}" -c "import json; json.load(open('contracts/foundations.json'))"
+chmod +x android/gradlew
+(cd android && ./gradlew test lint assembleDebug)
+if [[ -n "${PETI_ADMOB_APP_ID:-}" && -n "${PETI_ADMOB_REWARDED_AD_UNIT_ID:-}" ]]; then
+  (cd android && ./gradlew assembleRelease)
+else
+  echo "Skipping assembleRelease: AdMob release inputs are external."
+fi
+"${PYTHON[@]}" scripts/phase1_security_check.py
+"${PYTHON[@]}" eval/weekly_report/run.py --split dev --output "${TMPDIR:-/tmp}/peti-weekly-dev.json"
+"${PYTHON[@]}" eval/weekly_report/run.py --split held_out --output "${TMPDIR:-/tmp}/peti-weekly-held-out.json"
+"${PYTHON[@]}" eval/weekly_report/run.py --split red_team --output "${TMPDIR:-/tmp}/peti-weekly-red-team.json"
+"${PYTHON[@]}" eval/weekly_report/run.py --split regression --output "${TMPDIR:-/tmp}/peti-weekly-regression.json"
+"${PYTHON[@]}" scripts/build_specialist_evidence_inventory.py
+"${PYTHON[@]}" scripts/build_release_evidence.py
+"${PYTHON[@]}" scripts/release_gate_check.py
+"${PYTHON[@]}" scripts/check_adr_index.py
+"${PYTHON[@]}" scripts/check_traceability.py
+"${PYTHON[@]}" scripts/check_privacy_export_contract.py
+"${PYTHON[@]}" scripts/check_logging_contract.py
+"${PYTHON[@]}" scripts/check_billing_security.py
+"${PYTHON[@]}" scripts/check_production_config.py
+"${PYTHON[@]}" scripts/check_release_manifests.py
+"${PYTHON[@]}" scripts/check_metric_cardinality.py
+"${PYTHON[@]}" scripts/inspect_release_artifact.py
+if command -v terraform >/dev/null 2>&1; then
+  terraform -chdir=infra/terraform/modules/peti-platform fmt -check
+fi

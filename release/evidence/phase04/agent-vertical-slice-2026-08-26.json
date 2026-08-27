@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "phase": "04",
+  "status": "CLOUD_SYNTHETIC_VERTICAL_SLICE_PASSED",
+  "project_id": "project-10727829-3ad9-4fa2-b85",
+  "region": "europe-west1",
+  "api_revision": "peti-api-dev-00011-ptx",
+  "worker_revision": "peti-worker-dev-00010-t2h",
+  "task": {
+    "queue": "analysis-dev",
+    "delivery": "OIDC Cloud Tasks to private worker",
+    "result": "acknowledged and task removed after successful completion"
+  },
+  "run": {
+    "state": "COMPLETED",
+    "persisted_step_count": 4,
+    "handoff_steps": ["PETI_CHECK", "SAFETY_REVIEW", "CARE_REPORT"],
+    "evidence_count": 1,
+    "final_result_present": true
+  },
+  "provider": {
+    "transport": "official google-genai Vertex SDK",
+    "model": "gemini-3.5-flash",
+    "location": "global",
+    "input": "synthetic image reference only",
+    "output_payload": "omitted",
+    "safety": "review state persisted"
+  },
+  "cleanup": "synthetic Firestore run deleted after verification; no customer fixture used"
+}

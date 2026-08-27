@@ -1,0 +1,59 @@
+{
+  "manifest_version": "weekly-report-v1",
+  "cases": [
+    {
+      "id": "meaningful-weight-change",
+      "timeline": [{"source_entity_type": "MEASUREMENT", "source_entity_id": "m-2"}],
+      "measurements": [
+        {"id": "m-1", "value": 10.0, "source_class": "MEASURED", "unit": "KG"},
+        {"id": "m-2", "value": 11.5, "source_class": "MEASURED", "unit": "KG"}
+      ],
+      "facts": [],
+      "expected": {"weight_state": "EVIDENCE_AVAILABLE", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "conflicting-provenance",
+      "timeline": [],
+      "measurements": [
+        {"id": "m-3", "value": 10.0, "source_class": "MEASURED", "unit": "KG"},
+        {"id": "m-4", "value": 22.0, "source_class": "OWNER_REPORTED", "unit": "LB"}
+      ],
+      "facts": [],
+      "expected": {"weight_state": "EVIDENCE_AVAILABLE", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "feces-watery-vs-formed",
+      "timeline": [
+        {"source_entity_type": "FECES_CHECK", "source_entity_id": "feces-1", "consistency": "WATERY"},
+        {"source_entity_type": "FECES_CHECK", "source_entity_id": "feces-2", "consistency": "FORMED"}
+      ],
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "body-worsened",
+      "timeline": [{"source_entity_type": "BODY_CHECK", "source_entity_id": "body-1", "comparison": "WORSENED"}],
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "dental-new-finding",
+      "timeline": [{"source_entity_type": "DENTAL_CHECK", "source_entity_id": "dental-1", "finding": "GINGIVAL_REDNESS"}],
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "documented-diagnosis",
+      "timeline": [{"source_entity_type": "DOCUMENTED_FACT", "source_entity_id": "fact-diagnosis", "source_document_id": "doc-1"}],
+      "measurements": [],
+      "facts": [{"id": "fact-diagnosis", "source_document_id": "doc-1"}],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    },
+    {
+      "id": "care-overdue",
+      "timeline": [{"source_entity_type": "CARE_OCCURRENCE", "source_entity_id": "care-overdue", "status": "OVERDUE"}],
+      "measurements": [], "facts": [],
+      "expected": {"weight_state": "NOT_ENOUGH_DATA", "material_claims_traceable": true, "provenance_preserved": true}
+    }
+  ]
+}

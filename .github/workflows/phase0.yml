@@ -1,0 +1,76 @@
+name: Phase 0 quality
+on: [push, pull_request]
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_CONFIGURED: ${{ secrets.PETI_ADMOB_APP_ID != '' && secrets.PETI_ADMOB_REWARDED_AD_UNIT_ID != '' && secrets.PETI_RELEASE_API_BASE_URL != '' && secrets.PETI_GOOGLE_WEB_CLIENT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - run: pip install -e 'backend[dev]'
+      - run: python -m pytest --collect-only -q
+      - run: python -m pytest
+      - run: python -m ruff check backend
+      - run: python -m mypy backend/app
+      - run: python scripts/architecture_check.py
+      - run: python scripts/check_scope_guard.py
+      - uses: actions/setup-java@v4
+        with: { distribution: 'temurin', java-version: '21' }
+      - uses: android-actions/setup-android@v3
+      - name: Android quality
+        working-directory: android
+        run: ./gradlew test lint assembleDebug
+      - name: Android release build when production AdMob inputs exist
+        if: ${{ env.RELEASE_CONFIGURED == 'true' }}
+        working-directory: android
+        env:
+          PETI_ADMOB_APP_ID: ${{ secrets.PETI_ADMOB_APP_ID }}
+          PETI_ADMOB_REWARDED_AD_UNIT_ID: ${{ secrets.PETI_ADMOB_REWARDED_AD_UNIT_ID }}
+          PETI_RELEASE_API_BASE_URL: ${{ secrets.PETI_RELEASE_API_BASE_URL }}
+          PETI_GOOGLE_WEB_CLIENT_ID: ${{ secrets.PETI_GOOGLE_WEB_CLIENT_ID }}
+        run: ./gradlew assembleRelease
+      - name: Release build external-input notice
+        if: ${{ env.RELEASE_CONFIGURED != 'true' }}
+        run: echo "Skipping assembleRelease; production release inputs are external release gates."
+      - run: python scripts/phase1_security_check.py
+      - name: Weekly Report deterministic evaluation
+        run: |
+          python eval/weekly_report/run.py --split dev --output "$RUNNER_TEMP/weekly-dev.json"
+          python eval/weekly_report/run.py --split held_out --output "$RUNNER_TEMP/weekly-held-out.json"
+          python eval/weekly_report/run.py --split red_team --output "$RUNNER_TEMP/weekly-red-team.json"
+          python eval/weekly_report/run.py --split regression --output "$RUNNER_TEMP/weekly-regression.json"
+      - name: Specialist manifest inventory
+        run: python scripts/build_specialist_evidence_inventory.py
+      - name: Specialist manifest structural validation
+        run: python scripts/validate_specialist_manifests.py
+      - name: Generate source release evidence
+        run: python scripts/build_release_evidence.py
+      - name: Static release gate
+        run: python scripts/release_gate_check.py
+      - name: Play worksheet consistency
+        run: python scripts/check_play_worksheets.py
+      - name: ADR index check
+        run: python scripts/check_adr_index.py
+      - name: Signed Android artifact inspection
+        run: python scripts/inspect_release_artifact.py --debug android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Terraform source validation
+        working-directory: infra/terraform/modules/peti-platform
+        run: |
+          terraform init -backend=false -input=false
+          terraform fmt -check
+          terraform validate
+  emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: 'temurin', java-version: '21' }
+      - uses: android-actions/setup-android@v3
+      - name: Instrumentation E2E
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          script: cd android && ./gradlew connectedDebugAndroidTest
