@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-27T14:22:57.202383+00:00",
-  "git_revision": "f69fa73f17aca953d661f2f1c11e5e8292dad79f",
+  "generated_at": "2026-08-27T14:30:32.512913+00:00",
+  "git_revision": "0931a11ada31238d024a82d37161ef6adea75540",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
