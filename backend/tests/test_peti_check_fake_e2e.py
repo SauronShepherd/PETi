@@ -126,7 +126,7 @@ def test_media_failure_before_provider_releases_reserved_credit():
     )
     media.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
     media.finalize("u", asset.id, session.id)
-    asset.status = MediaStatus.DELETED
+    media.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
     credits = CreditService()
     reservation = credits.reserve("u", "PETI_CHECK", "request-release", "funding-release")
     service = AnalysisService(pets, media, credits, provider=FakeAIProvider())
