@@ -18,12 +18,12 @@ external accounts, credentials, devices, or submission authority.
 | Phase 13: free-product disposition | Billing isolated and fail-closed; free release excludes billing | `backend/app/billing/`, `release/PLAY_SUBMISSION_CHECKLIST.md` |
 | Phase 14: privacy/deletion | Dependency resolver, tombstones, export, freeze, and residual-verification primitives implemented | `backend/app/privacy/`, privacy tests |
 | Phase 15: operations | Logging redaction, bounded metrics, kill switches, reconciliation, and runbooks implemented | `backend/app/operations/`, `backend/app/logging.py`, gate scripts |
-| Phase 16: testing/security | 451 backend tests, Android instrumentation 9/9, static/security/Terraform gates pass | `release/evidence/phase16/`, `scripts/check.ps1` |
+| Phase 16: testing/security | 462 backend tests, Android instrumentation 9/9, static/security/Terraform gates pass | `release/evidence/phase16/`, `scripts/check.ps1` |
 | Phase 17: release engineering | Internal AAB/APK built and inspected; submission package prepared | `release/evidence/phase17/`, `release/DEVPOST_DRAFT.md` |
 
 ## Verification snapshot
 
-- Backend: 451 tests passed in the current workspace verification run. Historical
+- Backend: 462 tests passed in the current workspace verification run. Historical
   phase evidence may contain older counts; it is not silently rewritten when its
   artifact hashes are frozen.
 - Ruff and mypy passed.

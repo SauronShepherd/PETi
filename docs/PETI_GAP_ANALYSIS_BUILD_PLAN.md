@@ -13,7 +13,7 @@ The repository is **far along in raw volume** (18 backend domains, ~55+ pytest f
 
 ### Top 10 critical findings (fix before anything else)
 
-1. **The local backend/architecture checks are currently green** — the latest independent run reports 451 backend tests, Ruff, Mypy, architecture checks, Android Gradle, Android tests/lint/build, and local evaluation gates passing. Sandbox Terraform also passes initialization/validation; GCP apply, IAM, and runtime execution remain external. → [Phase 0](#phase-0)
+1. **The local backend/architecture checks are currently green** — the latest independent run reports 462 backend tests, Ruff, Mypy, architecture checks, Android Gradle, Android tests/lint/build, and local evaluation gates passing. Sandbox Terraform also passes initialization/validation; GCP apply, IAM, and runtime execution remain external. → [Phase 0](#phase-0)
 2. ✅ **Premium billing entitlement is fail-closed locally.** Non-LOCAL startup leaves the verifier unset and `PremiumService` rejects client-supplied trust flags; configured package names are now required exactly. The remaining gap is external: wire and exercise the real Google Play Publisher verifier before production. → [Phase 13](#phase-13)
 3. ✅ **RTDN is a trigger for canonical re-fetch.** `PremiumService.reconcile_rtdn` requires an injected canonical verifier and rejects missing/mismatched owner state. The remaining gap is external execution against real Pub/Sub/Google Play delivery. → [Phase 13](#phase-13)
 4. 🔴 **Dental Check's runtime release is fail-closed until its certificate is promoted.** Dental output passes `_guardrail_result()` and natural-language forbidden variants are tested; real provider/device red-team evidence remains external. → [Phase 9](#phase-9)

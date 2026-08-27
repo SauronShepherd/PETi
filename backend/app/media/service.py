@@ -203,6 +203,56 @@ class MediaService:
             else None
         )
 
+    def resolve_ai_media(self, owner_user_id, media_asset_ids, animal_id=None):
+        """Resolve owned, finalized media into provider-safe storage descriptors.
+
+        Callers may submit identifiers only.  An identifier is never treated as
+        a URI, a filename, or inline media content; the provider reference is
+        constructed solely from the validated asset storage coordinates.
+        """
+        if not media_asset_ids:
+            raise MediaError("MEDIA_REQUIRED")
+        descriptors = []
+        seen = set()
+        now = self.clock()
+        for media_asset_id in media_asset_ids:
+            if (
+                not isinstance(media_asset_id, str)
+                or not media_asset_id.strip()
+                or media_asset_id in seen
+                or "://" in media_asset_id
+                or media_asset_id.startswith("/")
+            ):
+                raise MediaError("MEDIA_AI_SOURCE_INVALID")
+            seen.add(media_asset_id)
+            asset = self.get_owned(owner_user_id, media_asset_id)
+            if (
+                not asset
+                or asset.status != MediaStatus.READY
+                or asset.deleted_at is not None
+                or (asset.delete_after is not None and asset.delete_after <= now)
+            ):
+                raise MediaError("MEDIA_AI_SOURCE_UNAVAILABLE")
+            if animal_id is not None and asset.animal_id != animal_id:
+                raise MediaError("MEDIA_AI_SOURCE_ANIMAL_MISMATCH")
+            if asset.media_type not in MIME or asset.mime_type_declared not in MIME[asset.media_type]:
+                raise MediaError("MEDIA_AI_SOURCE_UNSUPPORTED")
+            bucket = asset.storage_bucket.strip() if isinstance(asset.storage_bucket, str) else ""
+            storage_object = asset.storage_object.strip() if isinstance(asset.storage_object, str) else ""
+            if not bucket or not storage_object or "://" in storage_object or storage_object.startswith("/"):
+                raise MediaError("MEDIA_AI_SOURCE_STORAGE_INVALID")
+            stored = self.storage.stat_object(bucket, storage_object)
+            if not stored or stored.content_type != asset.mime_type_declared:
+                raise MediaError("MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE")
+            descriptors.append({
+                "id": asset.id,
+                "asset_id": asset.id,
+                "kind": asset.media_type.value,
+                "mime_type": asset.mime_type_declared,
+                "reference": f"gs://{bucket}/{storage_object}",
+            })
+        return descriptors
+
     def list_owned(self, user_id):
         return [
             a

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-27T12:47:43.906610+00:00",
-  "git_revision": "UNCOMMITTED_OR_UNAVAILABLE",
+  "generated_at": "2026-08-27T14:19:14.872670+00:00",
+  "git_revision": "490fd9ab7a1f5974b8a370ceb1f01b9ca800a81e",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -119,7 +119,7 @@
     },
     {
       "path": "release/COMPLETION_AUDIT.md",
-      "sha256": "b636c85263115fd8bf5a954fcef826a4551759d4b26de29a9e361f940a492070"
+      "sha256": "1f3b5cdee2218a8b851ad894c29c90441366f8b54d4a3f6157b59bf7b8befe6f"
     },
     {
       "path": "release/PRODUCTION_CONFIG_SNAPSHOT.json",

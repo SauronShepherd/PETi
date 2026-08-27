@@ -1,4 +1,5 @@
 from hashlib import sha256
+from datetime import UTC, datetime
 
 import pytest
 from app.media.domain import (
@@ -150,3 +151,62 @@ def test_webp_is_explicitly_rejected_until_all_paths_are_validated():
             "u1", None, MediaType.IMAGE, MediaPurpose.PROFILE, "image/webp", 3,
             RetentionClass.PROFILE_MEDIA, "webp-disabled",
         )
+
+
+def test_resolve_ai_media_returns_only_validated_storage_references():
+    s = service()
+    asset, session = s.create_session(
+        "u1", "pet-1", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
+        "image/png", 3, RetentionClass.TRANSIENT_ANALYSIS, "ai-source",
+    )
+    s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
+    s.finalize("u1", asset.id, session.id)
+    resolved = s.resolve_ai_media("u1", [asset.id], "pet-1")
+    assert resolved == [{
+        "id": asset.id, "asset_id": asset.id, "kind": "IMAGE", "mime_type": "image/png",
+        "reference": f"gs://{asset.storage_bucket}/{asset.storage_object}",
+    }]
+    assert resolved[0]["reference"].startswith("gs://")
+    assert resolved[0]["reference"] != asset.id
+
+
+@pytest.mark.parametrize("mutation, error", [
+    (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "deleted_at", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "delete_after", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "mime_type_declared", "image/webp"), "MEDIA_AI_SOURCE_UNSUPPORTED"),
+    (lambda a: setattr(a, "storage_bucket", ""), "MEDIA_AI_SOURCE_STORAGE_INVALID"),
+    (lambda a: setattr(a, "storage_object", "asset-id"), "MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE"),
+])
+def test_resolve_ai_media_fails_closed_for_unusable_assets(mutation, error):
+    s = service()
+    asset, session = s.create_session(
+        "u1", "pet-1", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
+        "image/png", 3, RetentionClass.TRANSIENT_ANALYSIS, "ai-invalid",
+    )
+    s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
+    s.finalize("u1", asset.id, session.id)
+    mutation(asset)
+    with pytest.raises(MediaError, match=error):
+        s.resolve_ai_media("u1", [asset.id], "pet-1")
+
+
+def test_resolve_ai_media_rejects_cross_user_and_wrong_animal():
+    s = service()
+    asset, session = s.create_session(
+        "u1", "pet-1", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
+        "image/png", 3, RetentionClass.TRANSIENT_ANALYSIS, "ai-owner",
+    )
+    s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
+    s.finalize("u1", asset.id, session.id)
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_UNAVAILABLE"):
+        s.resolve_ai_media("u2", [asset.id])
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_ANIMAL_MISMATCH"):
+        s.resolve_ai_media("u1", [asset.id], "other-pet")
+
+
+@pytest.mark.parametrize("identifier", ["gs://bucket/object", "/tmp/media", "https://example.test/media"])
+def test_resolve_ai_media_never_interprets_identifier_as_media_reference(identifier):
+    s = service()
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_INVALID"):
+        s.resolve_ai_media("u1", [identifier])

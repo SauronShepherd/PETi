@@ -27,7 +27,7 @@ The externally referenced planning documents listed in the request were not avai
 
 - Backend implementation, contracts, Android shell, infrastructure definitions, evaluation harnesses, release scripts and evidence manifests exist.
 - Static release status is explicitly `PASS_STATIC_ONLY`.
-- The current workspace now reports **451 backend tests passed**; older release evidence artifacts retain historical counts and are not silently rewritten because their hashes are part of the frozen source-artifact manifests.
+- The current workspace now reports **462 backend tests passed**; older release evidence artifacts retain historical counts and are not silently rewritten because their hashes are part of the frozen source-artifact manifests.
 - Android internal artifact, Android unit/lint checks, and API-35 emulator instrumentation evidence exist.
 - Bounded sandbox evidence exists for Cloud Tasks/OIDC worker paths, Gemini PETi Check, specialist red-team smoke, and Weekly Report narration.
 - Local test/evidence gates cover ownership, credits, media state, safety, billing abuse contracts, privacy primitives, logging, operations, and release-manifest integrity.
@@ -93,7 +93,7 @@ No gate may be marked complete because code exists, a unit test passes, a source
 - Run `pytest --collect-only -q`, then the full backend suite.
 - Record Python version, dependency lock state, command, count and result in a new evidence artifact.
 
-**Result:** `pytest -q backend/tests` completes with **451 passed**; the import path is covered by `backend/tests/test_provision_user_role.py` and release-manifest/media-retention/reward-integrity is covered by the corresponding regression suites.
+**Result:** `pytest -q backend/tests` completes with **462 passed**; the import path is covered by `backend/tests/test_provision_user_role.py` and release-manifest/media-retention/reward-integrity is covered by the corresponding regression suites.
 
 ### P0.2 Reconcile test-count drift — **complete**
 
@@ -107,7 +107,7 @@ No gate may be marked complete because code exists, a unit test passes, a source
 
 - `python -m ruff check backend`: passed.
 - `python -m mypy backend/app`: passed for 135 source files.
-- `python -m pytest -q backend/tests`: **451 passed**.
+- `python -m pytest -q backend/tests`: **462 passed**.
 - `scripts/check.ps1`: **passed end-to-end locally** after hardening JDK selection. This included backend/static gates, Android `test lint assembleDebug`, security/evaluation checks, release evidence checks, and Terraform initialization/validation. `assembleRelease` remains intentionally skipped because AdMob release inputs are external.
 - `scripts/release_gate_check.py`: `PASS_STATIC_ONLY`.
 - `scripts/check_traceability.py`: `PASS_SOURCE_LEVEL`.
@@ -356,8 +356,8 @@ Until then, the correct status remains **not fully qualified; implementation sub
 
 | ID | Priority | Task | Owner | Depends on | Evidence / exit |
 |---|---:|---|---|---|---|
-| P0-001 | P0 | Fix `scripts.provision_user_role` test import and restore collection | Engineering | — | **Complete:** full pytest collection/pass; current suite 451 passed |
-| P0-002 | P0 | Reconcile current vs historical test counts | QA | P0-001 | **Complete for local baseline:** canonical root run passes 451 tests; frozen historical evidence remains unchanged |
+| P0-001 | P0 | Fix `scripts.provision_user_role` test import and restore collection | Engineering | — | **Complete:** full pytest collection/pass; current suite 462 passed |
+| P0-002 | P0 | Reconcile current vs historical test counts | QA | P0-001 | **Complete for local baseline:** canonical root run passes 462 tests; frozen historical evidence remains unchanged |
 | P0-003 | P0 | Prevent ephemeral release environments | Platform | — | **Complete for repository scope:** STAGING/PRODUCTION reject `MEMORY` |
 | P1-001 | P0 | Obtain/hash/reconcile all missing source documents | Product/Engineering | — | Requirements inventory |
 | P1-002 | P0 | Freeze RC config, prompts, schemas, model and flags | Release | P1-001 | Immutable RC manifest |
