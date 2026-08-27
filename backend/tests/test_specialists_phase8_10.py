@@ -22,6 +22,11 @@ class Media:
             return SimpleNamespace(status="READY", media_type="IMAGE")
         return None
 
+    def resolve_ai_media(self, owner, media_ids, animal_id=None):
+        if any(self.get_owned(owner, media_id) is None for media_id in media_ids):
+            raise ValueError("MEDIA_AI_SOURCE_UNAVAILABLE")
+        return [{"id": media_id, "kind": "IMAGE", "mime_type": "image/jpeg", "reference": f"gs://bucket/{media_id}"} for media_id in media_ids]
+
 
 def service(flags=None):
     return SpecialistService(Pets(), Media(), release_flags=flags or {})

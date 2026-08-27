@@ -13,6 +13,8 @@ from enum import StrEnum
 from threading import RLock
 from uuid import uuid4
 
+from app.media.service import MediaError
+
 
 class SpecialistStatus(StrEnum):
     QUEUED = "QUEUED"
@@ -230,16 +232,16 @@ class SpecialistService:
             raise SpecialistError("SPECIALIST_NOT_FOUND")
         return item
 
-    def _validate_media(self, owner, media_ids, analysis_type):
+    def _validate_media(self, owner, animal_id, media_ids, analysis_type):
         if not media_ids:
             raise SpecialistError(analysis_type + "_MEDIA_REQUIRED")
         if len(media_ids) > 8:
             raise SpecialistError(analysis_type + "_TOO_MANY_IMAGES")
-        for media_id in media_ids:
-            media = self.media.get_owned(owner, media_id)
-            if not media or str(media.status) != "READY":
-                raise SpecialistError(analysis_type + "_MEDIA_UNSUPPORTED")
-            if str(media.media_type) != "IMAGE":
+        try:
+            resolved = self.media.resolve_ai_media(owner, media_ids, animal_id)
+        except MediaError as exc:
+            raise SpecialistError(analysis_type + "_MEDIA_UNSUPPORTED") from exc
+        if any(item.get("kind") != "IMAGE" for item in resolved):
                 raise SpecialistError(analysis_type + "_MEDIA_UNSUPPORTED")
 
     @staticmethod
@@ -480,7 +482,7 @@ class SpecialistService:
         self._validate_release(analysis_type)
         pet = self._pet(owner, pet_id, analysis_type)
         media_ids = list(body.get("media_asset_ids") or body.get("source_media_ids") or [])
-        self._validate_media(owner, media_ids, analysis_type)
+        self._validate_media(owner, pet_id, media_ids, analysis_type)
         self._validate_capture_manifest(analysis_type, body, media_ids)
         fingerprint = hashlib.sha256(repr((analysis_type, pet_id, media_ids, body.get("result"), body.get("candidates"))).encode()).hexdigest()
         if idempotency_key and (owner, idempotency_key) in self.idempotency:
