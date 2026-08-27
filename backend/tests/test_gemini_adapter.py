@@ -1,7 +1,6 @@
 from urllib.error import HTTPError
 
 import pytest
-
 from app.ai.preparation.core import MediaPreparer
 from app.ai.providers.base import ProviderError
 from app.ai.providers.gemini import GeminiApiKeyPool, GeminiProvider, VertexGeminiTransport
