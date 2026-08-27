@@ -1,5 +1,7 @@
 from urllib.error import HTTPError
 
+import pytest
+
 from app.ai.preparation.core import MediaPreparer
 from app.ai.providers.base import ProviderError
 from app.ai.providers.gemini import GeminiApiKeyPool, GeminiProvider, VertexGeminiTransport
@@ -18,6 +20,13 @@ def test_gemini_adapter_normalizes_structured_response_and_usage():
     assert result.provider == "GEMINI"
     assert result.usage.input_tokens == 10
     assert seen["response_mime_type"] == "application/json"
+
+
+def test_gemini_provider_rejects_raw_media_alternatives():
+    provider = GeminiProvider("gemini-test", lambda _request: {"payload": {}, "usage": {}})
+    for raw_media in (["asset-1"], [{"id": "asset-1", "reference": "gs://bucket/object"}], "gs://bucket/object"):
+        with pytest.raises(ProviderError, match="PROVIDER_MEDIA_PACKAGE_REQUIRED"):
+            provider.analyze(raw_media, "policy")
 
 
 def test_gemini_capabilities_are_inherited_from_transport():

@@ -41,6 +41,8 @@ class GeminiProvider:
     def analyze(
         self, media: PreparedMediaPackage, prompt: str, user_context: str | None = None
     ) -> ProviderResponse:
+        if not isinstance(media, PreparedMediaPackage):
+            raise ProviderError("PROVIDER_MEDIA_PACKAGE_REQUIRED", False)
         started = time.perf_counter()
         request = {
             "model": self.model,
