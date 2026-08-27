@@ -170,7 +170,7 @@ class VertexGeminiTransport:
         parts: list[dict[str, Any]] = contents[0]["parts"]
         for item in request.get("media", []):
             parts.append(
-                {"text": f"Selected media reference: {item['reference']} ({item['kind']})"}
+                {"fileData": {"fileUri": item["reference"], "mimeType": item["mime_type"]}}
             )
         if request.get("context"):
             parts.append({"text": f"Owner context: {request['context']}"})
@@ -217,10 +217,21 @@ class VertexGenAITransport:
             config = types.GenerateContentConfig(response_mime_type="application/json")
         except ImportError:
             config = {"response_mime_type": "application/json"}
-        contents = [request["prompt"]]
-        contents.extend(f"Media reference: {item['reference']} ({item['kind']})" for item in request.get("media", []))
+        media_parts = []
+        for item in request.get("media", []):
+            reference = item.get("reference")
+            mime_type = item.get("mime_type")
+            if not isinstance(reference, str) or not reference.startswith("gs://"):
+                raise ProviderError("PROVIDER_MEDIA_SOURCE_INVALID", False)
+            if not isinstance(mime_type, str) or "/" not in mime_type:
+                raise ProviderError("PROVIDER_MEDIA_MIME_INVALID", False)
+            try:
+                media_parts.append(types.Part.from_uri(file_uri=reference, mime_type=mime_type))
+            except NameError:
+                media_parts.append({"file_data": {"file_uri": reference, "mime_type": mime_type}})
+        contents = media_parts + [{"text": request["prompt"]}]
         if request.get("context"):
-            contents.append(f"Owner context: {request['context']}")
+            contents.append({"text": f"Owner context: {request['context']}"})
         response = client.models.generate_content(model=request["model"], contents=contents, config=config)
         text = getattr(response, "text", None)
         if not text:
