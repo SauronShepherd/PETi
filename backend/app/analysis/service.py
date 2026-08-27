@@ -319,12 +319,10 @@ class AnalysisService:
             job.status = AnalysisStatus.PREPARING_MEDIA
             if self.job_repository:
                 self.job_repository.save(job)
-            prepared = self.preparer.prepare(
-                [
-                    {"id": media_id, "kind": self.media.assets[media_id].media_type.value}
-                    for media_id in job.media_asset_ids
-                ]
+            resolved_media = self.media.resolve_ai_media(
+                job.owner_user_id, job.media_asset_ids, job.animal_id
             )
+            prepared = self.preparer.prepare(resolved_media)
             job.status = AnalysisStatus.CALLING_PROVIDER
             if self.job_repository:
                 self.job_repository.save(job)

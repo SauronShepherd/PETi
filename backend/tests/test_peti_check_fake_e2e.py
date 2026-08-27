@@ -43,7 +43,9 @@ def test_fake_peti_check_vertical_slice_consumes_once_and_persists_result():
     media.assets["media-1"] = MediaAsset(
         "media-1", "u", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE, "image/jpeg",
         RetentionClass.TRANSIENT_ANALYSIS, animal_id=pet.id, status=MediaStatus.READY,
-    )
+        )
+    media.assets["media-1"].storage_object = "media/media-1/source"
+    media.storage.put("local-media", "media/media-1/source", b"image", "image/jpeg")
     credits = CreditService()
     credits.grant("u", "FREE_ALLOWANCE", 1)
     reservation = credits.reserve("u", "PETI_CHECK", "request-1", "funding-key")
@@ -74,7 +76,9 @@ def test_possible_interpretations_server_flag_gates_output():
     media.assets["media-flag"] = MediaAsset(
         "media-flag", "u", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE, "image/jpeg",
         RetentionClass.TRANSIENT_ANALYSIS, animal_id=pet.id, status=MediaStatus.READY,
-    )
+        )
+    media.assets["media-flag"].storage_object = "media/media-flag/source"
+    media.storage.put("local-media", "media/media-flag/source", b"image", "image/jpeg")
     credits = CreditService()
     credits.grant("u", "FREE_ALLOWANCE", 1)
     reservation = credits.reserve("u", "PETI_CHECK", "request-flag", "funding-flag")
@@ -93,7 +97,9 @@ def test_generic_analysis_applies_semantic_guardrails():
     media.assets["media-generic-guardrail"] = MediaAsset(
         "media-generic-guardrail", "u", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
         "image/jpeg", RetentionClass.TRANSIENT_ANALYSIS, animal_id=pet.id, status=MediaStatus.READY,
-    )
+        )
+    media.assets["media-generic-guardrail"].storage_object = "media/media-generic-guardrail/source"
+    media.storage.put("local-media", "media/media-generic-guardrail/source", b"image", "image/jpeg")
     credits = CreditService()
     credits.grant("u", "FREE_ALLOWANCE", 1)
     reservation = credits.reserve("u", "AI_PHOTO_STANDARD", "request-generic", "funding-generic")
@@ -114,7 +120,9 @@ def test_peti_check_pipeline_rejects_specialist_shaped_payload():
     media.assets["media-specialist-leak"] = MediaAsset(
         "media-specialist-leak", "u", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
         "image/jpeg", RetentionClass.TRANSIENT_ANALYSIS, animal_id=pet.id, status=MediaStatus.READY,
-    )
+        )
+    media.assets["media-specialist-leak"].storage_object = "media/media-specialist-leak/source"
+    media.storage.put("local-media", "media/media-specialist-leak/source", b"image", "image/jpeg")
     credits = CreditService()
     credits.grant("u", "FREE_ALLOWANCE", 1)
     reservation = credits.reserve("u", "PETI_CHECK", "request-specialist-leak", "funding-specialist-leak")
