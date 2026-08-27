@@ -68,6 +68,11 @@ jobs:
       - uses: actions/setup-java@v5
         with: { distribution: 'temurin', java-version: '21' }
       - uses: android-actions/setup-android@v3
+      - name: Enable KVM for Android emulator
+        run: |
+          test -e /dev/kvm
+          sudo chmod 666 /dev/kvm
+          ls -l /dev/kvm
       - name: Instrumentation E2E
         uses: reactivecircus/android-emulator-runner@v2
         with:
