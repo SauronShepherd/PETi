@@ -78,4 +78,5 @@ jobs:
         with:
           api-level: 35
           arch: x86_64
+          emulator-options: -no-metrics
           script: cd android && ./gradlew connectedDebugAndroidTest
