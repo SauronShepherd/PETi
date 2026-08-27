@@ -187,7 +187,7 @@ def test_resolve_ai_media_rechecks_finalized_object_mime_before_provider_use():
     s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
     s.finalize("u1", asset.id, session.id)
     s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
-    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_UNAVAILABLE"):
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE"):
         s.resolve_ai_media("u1", [asset.id], "pet-1")
 
 
