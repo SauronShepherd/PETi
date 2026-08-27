@@ -327,12 +327,9 @@ class AnalysisService:
             if self.job_repository:
                 self.job_repository.save(job)
             job.provider_call_count += 1
-            try:
-                response = self.provider.analyze(
-                    prepared, PROMPTS.resolve(job.prompt_id).content, job.user_context
-                )
-            except TypeError:
-                response = self.provider.analyze(list(job.media_asset_ids))
+            response = self.provider.analyze(
+                prepared, PROMPTS.resolve(job.prompt_id).content, job.user_context
+            )
             if hasattr(response, "payload"):
                 payload, usage = response.payload, response.usage.__dict__
                 job.provider, job.provider_model = response.provider, response.model
