@@ -122,7 +122,7 @@ def test_media_failure_before_provider_releases_reserved_credit():
     media = MediaService(pets)
     asset, session = media.create_session(
         "u", pet.id, MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
-        "image/jpeg", 10, RetentionClass.TRANSIENT_ANALYSIS, "release-media",
+        "image/jpeg", 3, RetentionClass.TRANSIENT_ANALYSIS, "release-media",
     )
     media.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
     media.finalize("u", asset.id, session.id)
