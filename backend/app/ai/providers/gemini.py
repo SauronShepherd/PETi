@@ -1,3 +1,4 @@
+import base64
 import json
 import threading
 import time
@@ -169,9 +170,20 @@ class VertexGeminiTransport:
         contents: list[dict[str, Any]] = body["contents"]
         parts: list[dict[str, Any]] = contents[0]["parts"]
         for item in request.get("media", []):
-            parts.append(
-                {"fileData": {"fileUri": item["reference"], "mimeType": item["mime_type"]}}
-            )
+            mime_type = item.get("mime_type")
+            if not isinstance(mime_type, str) or "/" not in mime_type:
+                raise ProviderError("PROVIDER_MEDIA_MIME_INVALID", False)
+            reference = item.get("reference")
+            if isinstance(reference, str) and reference.startswith("gs://"):
+                parts.append({"fileData": {"fileUri": reference, "mimeType": mime_type}})
+                continue
+            inline_data = item.get("inline_data")
+            if isinstance(inline_data, bytes):
+                inline_data = base64.b64encode(inline_data).decode("ascii")
+            if isinstance(inline_data, str) and inline_data:
+                parts.append({"inlineData": {"mimeType": mime_type, "data": inline_data}})
+                continue
+            raise ProviderError("PROVIDER_MEDIA_SOURCE_INVALID", False)
         if request.get("context"):
             parts.append({"text": f"Owner context: {request['context']}"})
         url = f"{self.endpoint}/{model}:generateContent"
