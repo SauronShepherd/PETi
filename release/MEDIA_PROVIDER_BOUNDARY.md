@@ -17,6 +17,12 @@ Cloud Run worker uses its dedicated worker service account with bucket-scoped
 `roles/storage.objectViewer`; the bucket remains uniform-access and public
 access prevention is enforced. No provider creates an independent GCS client.
 
+LOCAL/FAKE tests use `FakeObjectStorage` (or the local emulator adapter) behind
+the same storage boundary. Any byte reads needed for inline preparation remain
+adapter methods with bounded size; the AI domain does not branch on environment.
+Production configuration requires GCS/ADC and does not substitute the fake
+adapter.
+
 ## Transport forms
 
 | Transport | Media form | Supported behavior |

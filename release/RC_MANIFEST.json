@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
   "status": "SOURCE_READY_EXTERNAL_CERTIFICATION_PENDING",
-  "git_revision": "0cf6cffbf63725c95cd1247b5d97c4abdf39bb6d",
+  "git_revision": "57ad6455b598184e895fe263a335ab6013d9f510",
   "tests_executed": false,
   "local_verification": "PASSED_LOCAL_ONLY",
   "artifact_hashes": {
