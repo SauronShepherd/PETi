@@ -187,23 +187,23 @@ def test_resolve_ai_media_rechecks_finalized_object_mime_before_provider_use():
     s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
     s.finalize("u1", asset.id, session.id)
     s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
-    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE"):
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_MIME_MISMATCH"):
         s.resolve_ai_media("u1", [asset.id], "pet-1")
 
 
 @pytest.mark.parametrize("mutation, error", [
-    (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.UPLOADING), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.UPLOADED_UNVERIFIED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.FAILED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.DELETE_PENDING), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.DELETED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "status", MediaStatus.EXPIRED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.UPLOADING), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.UPLOADED_UNVERIFIED), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.FAILED), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.DELETE_PENDING), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.DELETED), "MEDIA_AI_SOURCE_NOT_READY"),
+    (lambda a: setattr(a, "status", MediaStatus.EXPIRED), "MEDIA_AI_SOURCE_NOT_READY"),
     (lambda a: setattr(a, "deleted_at", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "delete_after", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
-    (lambda a: setattr(a, "mime_type_declared", "image/webp"), "MEDIA_AI_SOURCE_UNSUPPORTED"),
+    (lambda a: setattr(a, "mime_type_declared", "image/webp"), "MEDIA_AI_SOURCE_MIME_INVALID"),
     (lambda a: setattr(a, "storage_bucket", ""), "MEDIA_AI_SOURCE_STORAGE_INVALID"),
-    (lambda a: setattr(a, "storage_object", "asset-id"), "MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE"),
+    (lambda a: setattr(a, "storage_object", "asset-id"), "MEDIA_AI_SOURCE_OBJECT_MISSING"),
 ])
 def test_resolve_ai_media_fails_closed_for_unusable_assets(mutation, error):
     s = service()
@@ -226,7 +226,7 @@ def test_resolve_ai_media_rejects_cross_user_and_wrong_animal():
     )
     s.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/png")
     s.finalize("u1", asset.id, session.id)
-    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_UNAVAILABLE"):
+    with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_NOT_OWNED"):
         s.resolve_ai_media("u2", [asset.id])
     with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_ANIMAL_MISMATCH"):
         s.resolve_ai_media("u1", [asset.id], "other-pet")

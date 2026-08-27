@@ -131,7 +131,7 @@ def test_media_failure_before_provider_releases_reserved_credit():
     reservation = credits.reserve("u", "PETI_CHECK", "request-release", "funding-release")
     service = AnalysisService(pets, media, credits, provider=FakeAIProvider())
     job = service.create("u", pet.id, "PETI_CHECK", [asset.id], None, reservation.id, "submit-release")
-    with pytest.raises(Exception, match="MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE"):
+    with pytest.raises(Exception, match="MEDIA_AI_SOURCE_MIME_MISMATCH"):
         service.process(job.id)
     assert credits.reservations[reservation.id].status.value == "RELEASED"
 

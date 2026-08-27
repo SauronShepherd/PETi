@@ -225,25 +225,30 @@ class MediaService:
             ):
                 raise MediaError("MEDIA_AI_SOURCE_INVALID")
             seen.add(media_asset_id)
-            asset = self.get_owned(owner_user_id, media_asset_id)
-            if (
-                not asset
-                or asset.status != MediaStatus.READY
-                or asset.deleted_at is not None
-                or (asset.delete_after is not None and asset.delete_after <= now)
-            ):
+            asset = self.assets.get(media_asset_id)
+            if not asset:
+                raise MediaError("MEDIA_AI_SOURCE_NOT_FOUND")
+            if asset.owner_user_id != owner_user_id:
+                raise MediaError("MEDIA_AI_SOURCE_NOT_OWNED")
+            if asset.status != MediaStatus.READY:
+                raise MediaError("MEDIA_AI_SOURCE_NOT_READY")
+            if asset.deleted_at is not None or (asset.delete_after is not None and asset.delete_after <= now):
                 raise MediaError("MEDIA_AI_SOURCE_UNAVAILABLE")
             if animal_id is not None and asset.animal_id != animal_id:
                 raise MediaError("MEDIA_AI_SOURCE_ANIMAL_MISMATCH")
-            if asset.media_type not in MIME or asset.mime_type_declared not in MIME[asset.media_type]:
-                raise MediaError("MEDIA_AI_SOURCE_UNSUPPORTED")
+            if asset.media_type not in MIME:
+                raise MediaError("MEDIA_AI_SOURCE_MODALITY_UNSUPPORTED")
+            if asset.mime_type_declared not in MIME[asset.media_type]:
+                raise MediaError("MEDIA_AI_SOURCE_MIME_INVALID")
             bucket = asset.storage_bucket.strip() if isinstance(asset.storage_bucket, str) else ""
             storage_object = asset.storage_object.strip() if isinstance(asset.storage_object, str) else ""
             if not bucket or not storage_object or "://" in storage_object or storage_object.startswith("/"):
                 raise MediaError("MEDIA_AI_SOURCE_STORAGE_INVALID")
             stored = self.storage.stat_object(bucket, storage_object)
-            if not stored or stored.content_type != asset.mime_type_declared:
-                raise MediaError("MEDIA_AI_SOURCE_STORAGE_UNAVAILABLE")
+            if not stored:
+                raise MediaError("MEDIA_AI_SOURCE_OBJECT_MISSING")
+            if stored.content_type != asset.mime_type_declared:
+                raise MediaError("MEDIA_AI_SOURCE_MIME_MISMATCH")
             descriptors.append({
                 "id": asset.id,
                 "asset_id": asset.id,
