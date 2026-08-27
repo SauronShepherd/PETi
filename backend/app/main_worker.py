@@ -78,8 +78,15 @@ async def run_gemini_specialist_task(
     except ValueError as exc:
         raise HTTPException(401, str(exc)) from exc
     body = await request.json()
-    analysis_type = body["analysis_type"]
-    media = MediaPreparer().prepare(body.get("media", []))
+    owner_user_id = body["owner_user_id"]
+    specialist = api_app.state.specialists.get(owner_user_id, body["analysis_id"])
+    analysis_type = specialist.analysis_type
+    # Tasks carry only the durable asset identifiers. Resolve ownership,
+    # lifecycle, MIME, storage and animal scope at execution time.
+    resolved_media = api_app.state.media.resolve_ai_media(
+        owner_user_id, specialist.media_asset_ids, specialist.animal_id
+    )
+    media = MediaPreparer().prepare(resolved_media)
     prompt = (
         f"You are the PETi {analysis_type} specialist. Return JSON observations only. "
         "Include evidence quality, uncertainty, limitations, provenance, and safety guidance. "
@@ -87,7 +94,7 @@ async def run_gemini_specialist_task(
     )
     response = api_app.state.analysis.provider.analyze(media, prompt, body.get("context"))
     analysis = api_app.state.specialists.complete_task(
-        body["owner_user_id"], body["analysis_id"], response.payload,
+        owner_user_id, body["analysis_id"], response.payload,
         response.provider, response.model,
     )
     return {
