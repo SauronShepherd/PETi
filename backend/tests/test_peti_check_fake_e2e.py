@@ -124,7 +124,7 @@ def test_media_failure_before_provider_releases_reserved_credit():
         "u", pet.id, MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
         "image/jpeg", 10, RetentionClass.TRANSIENT_ANALYSIS, "release-media",
     )
-    media.storage.put(asset.storage_bucket, asset.storage_object, b"image", "image/jpeg")
+    media.storage.put(asset.storage_bucket, asset.storage_object, b"abc", "image/jpeg")
     media.finalize("u", asset.id, session.id)
     asset.status = MediaStatus.DELETED
     credits = CreditService()
