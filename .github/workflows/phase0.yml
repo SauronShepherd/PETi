@@ -16,7 +16,7 @@ jobs:
       - run: python -m mypy backend/app
       - run: python scripts/architecture_check.py
       - run: python scripts/check_scope_guard.py
-        - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v5
         with: { distribution: 'temurin', java-version: '21' }
       - uses: android-actions/setup-android@v3
       - name: Android quality
