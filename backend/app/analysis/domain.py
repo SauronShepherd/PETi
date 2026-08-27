@@ -125,3 +125,5 @@ class AnalysisResult:
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     prompt_hash: str | None = None
     schema_hash: str | None = None
+    media_asset_ids: list[str] = field(default_factory=list)
+    provider_config_version: str = "local-v1"

@@ -404,6 +404,8 @@ class AnalysisService:
                 },
                 prompt_hash=job.prompt_hash,
                 schema_hash=job.schema_hash,
+                media_asset_ids=list(job.media_asset_ids),
+                provider_config_version=job.provider_config_version,
             )
             if self.costs:
                 operation_type = "PETI_CHECK" if job.analysis_type == "PETI_CHECK" else "AI_PHOTO_STANDARD"

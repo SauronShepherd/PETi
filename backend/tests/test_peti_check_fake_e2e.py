@@ -59,6 +59,9 @@ def test_fake_peti_check_vertical_slice_consumes_once_and_persists_result():
     assert result is not None
     assert job.status.value == "COMPLETED"
     assert result.structured_payload["source_media_ids"] == ["media-1"]
+    assert result.media_asset_ids == ["media-1"]
+    assert result.provider_config_version == "local-v1"
+    assert "reference" not in str(result.__dict__)
     assert len(operations.costs.records) == 1
     assert next(iter(operations.costs.records.values())).analysis_id == job.id
     assert credits.reservations[reservation.id].status.value == "CONSUMED"
