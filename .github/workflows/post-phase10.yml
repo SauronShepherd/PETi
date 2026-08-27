@@ -1,0 +1,42 @@
+name: Post-Phase-10 qualification
+on: [push, pull_request]
+jobs:
+  post_phase10:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
+      - run: pip install -e 'backend[dev]'
+      - name: Weekly Report deterministic evaluation
+        run: |
+          python eval/weekly_report/run.py --split dev --output "$RUNNER_TEMP/weekly-dev.json"
+          python eval/weekly_report/run.py --split held_out --output "$RUNNER_TEMP/weekly-held-out.json"
+          python eval/weekly_report/run.py --split red_team --output "$RUNNER_TEMP/weekly-red-team.json"
+          python eval/weekly_report/run.py --split regression --output "$RUNNER_TEMP/weekly-regression.json"
+      - name: Specialist manifest inventory
+        run: python scripts/build_specialist_evidence_inventory.py
+      - name: Specialist manifest structural validation
+        run: python scripts/validate_specialist_manifests.py
+      - name: Generate source release evidence
+        run: python scripts/build_release_evidence.py
+      - name: Static release gate
+        run: python scripts/release_gate_check.py
+      - name: Play worksheet consistency
+        run: python scripts/check_play_worksheets.py
+      - name: ADR index check
+        run: python scripts/check_adr_index.py
+      - uses: actions/setup-java@v5
+        with: { distribution: 'temurin', java-version: '21' }
+      - uses: android-actions/setup-android@v3
+      - name: Build debug artifact for inspection
+        working-directory: android
+        run: ./gradlew assembleDebug
+      - name: Signed Android artifact inspection
+        run: python scripts/inspect_release_artifact.py --debug android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Terraform source validation
+        working-directory: infra/terraform/modules/peti-platform
+        run: |
+          terraform init -backend=false -input=false
+          terraform fmt -check
+          terraform validate
