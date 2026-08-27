@@ -3,7 +3,7 @@ import json
 import threading
 import time
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, ClassVar
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from uuid import uuid4
@@ -146,7 +146,7 @@ class GeminiApiKeyTransport:
 
     # AI Studio is intentionally fail-closed for the application's GCS-based
     # preparation contract; it supports inline sources only.
-    media_types = frozenset()
+    media_types: ClassVar[frozenset[str]] = frozenset()
 
     def __init__(self, timeout_seconds: int = 90, endpoint: str = "https://generativelanguage.googleapis.com/v1beta/models"):
         self.timeout_seconds, self.endpoint = timeout_seconds, endpoint.rstrip("/")
@@ -179,7 +179,7 @@ class GeminiApiKeyTransport:
 class VertexGeminiTransport:
     """Minimal Vertex AI transport; credentials are supplied by the runtime."""
 
-    media_types = frozenset({"IMAGE", "VIDEO", "AUDIO"})
+    media_types: ClassVar[frozenset[str]] = frozenset({"IMAGE", "VIDEO", "AUDIO"})
 
     def __init__(self, project_id: str, location: str, token_provider, timeout_seconds: int = 90):
         self.endpoint = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{location}/publishers/google/models"
@@ -234,7 +234,7 @@ class VertexGenAITransport:
     do not need cloud credentials. A client may be injected for contract tests.
     """
 
-    media_types = frozenset({"IMAGE", "VIDEO", "AUDIO"})
+    media_types: ClassVar[frozenset[str]] = frozenset({"IMAGE", "VIDEO", "AUDIO"})
 
     def __init__(self, project_id: str, location: str, *, client=None, timeout_seconds: int = 90):
         self.project_id, self.location, self.client, self.timeout_seconds = project_id, location, client, timeout_seconds
@@ -256,7 +256,7 @@ class VertexGenAITransport:
             config = types.GenerateContentConfig(response_mime_type="application/json")
         except ImportError:
             config = {"response_mime_type": "application/json"}
-        media_parts = []
+        media_parts: list[Any] = []
         for item in request.get("media", []):
             reference = item.get("reference")
             mime_type = item.get("mime_type")
