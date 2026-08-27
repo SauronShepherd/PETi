@@ -193,6 +193,12 @@ def test_resolve_ai_media_rechecks_finalized_object_mime_before_provider_use():
 
 @pytest.mark.parametrize("mutation, error", [
     (lambda a: setattr(a, "status", MediaStatus.PENDING_UPLOAD), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.UPLOADING), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.UPLOADED_UNVERIFIED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.FAILED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.DELETE_PENDING), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.DELETED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
+    (lambda a: setattr(a, "status", MediaStatus.EXPIRED), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "deleted_at", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "delete_after", datetime.now(UTC)), "MEDIA_AI_SOURCE_UNAVAILABLE"),
     (lambda a: setattr(a, "mime_type_declared", "image/webp"), "MEDIA_AI_SOURCE_UNSUPPORTED"),
