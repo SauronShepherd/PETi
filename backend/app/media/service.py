@@ -207,8 +207,10 @@ class MediaService:
         """Resolve owned, finalized media into provider-safe storage descriptors.
 
         Callers may submit identifiers only.  An identifier is never treated as
-        a URI, a filename, or inline media content; the provider reference is
-        constructed solely from the validated asset storage coordinates.
+        a URI, a filename, or inline media content; the provider media-part
+        source is constructed solely from validated server-side storage
+        coordinates. The returned ``id`` is a MediaAsset/provenance ID, not
+        multimedia content.
         """
         if not media_asset_ids:
             raise MediaError("MEDIA_REQUIRED")

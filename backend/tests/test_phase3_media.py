@@ -153,7 +153,7 @@ def test_webp_is_explicitly_rejected_until_all_paths_are_validated():
         )
 
 
-def test_resolve_ai_media_returns_only_validated_storage_references():
+def test_resolve_ai_media_returns_validated_provider_source_and_provenance_id():
     s = service()
     asset, session = s.create_session(
         "u1", "pet-1", MediaType.IMAGE, MediaPurpose.ANALYSIS_SOURCE,
@@ -233,7 +233,7 @@ def test_resolve_ai_media_rejects_cross_user_and_wrong_animal():
 
 
 @pytest.mark.parametrize("identifier", ["gs://bucket/object", "/tmp/media", "https://example.test/media"])
-def test_resolve_ai_media_never_interprets_identifier_as_media_reference(identifier):
+def test_resolve_ai_media_never_interprets_identifier_as_provider_media_part(identifier):
     s = service()
     with pytest.raises(MediaError, match="MEDIA_AI_SOURCE_INVALID"):
         s.resolve_ai_media("u1", [identifier])
