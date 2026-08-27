@@ -470,10 +470,10 @@ resource "google_project_iam_member" "api_storage" {
   member  = "serviceAccount:${google_service_account.api.email}"
 }
 
-resource "google_project_iam_member" "worker_storage" {
-  project = var.project_id
-  role    = "roles/storage.objectViewer"
-  member  = "serviceAccount:${google_service_account.worker.email}"
+resource "google_storage_bucket_iam_member" "worker_media_reader" {
+  bucket = google_storage_bucket.media.name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.worker.email}"
 }
 
 resource "google_project_iam_member" "api_tasks" {
