@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-27T14:30:32.512913+00:00",
-  "git_revision": "0931a11ada31238d024a82d37161ef6adea75540",
+  "generated_at": "2026-08-27T18:51:00.088151+00:00",
+  "git_revision": "0cf6cffbf63725c95cd1247b5d97c4abdf39bb6d",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -71,7 +71,7 @@
     },
     {
       "path": "infra/terraform/modules/peti-platform/main.tf",
-      "sha256": "0f10d4e5471a2314771d5beaa0c772a50b57345271837d746c2166a10ba071c2"
+      "sha256": "555f45c2b2433851803d060f5b3dd0ae073899ed1639aa9b7c2860d219502055"
     },
     {
       "path": "backend/app/privacy/lifecycle.py",
@@ -83,7 +83,7 @@
     },
     {
       "path": "backend/app/logging.py",
-      "sha256": "dd12782d10dea66284afea37c58c82086c5494591968f2d76f65051c2b1bcbfa"
+      "sha256": "1bfdafe22493432201c979a2873917736649f2ee0550e3fa80172881bf4bd43f"
     },
     {
       "path": "backend/app/agent_runtime/execution.py",
@@ -91,11 +91,11 @@
     },
     {
       "path": "backend/app/ai/providers/gemini.py",
-      "sha256": "687ec6358dbd85eb6dfd513728fd82f36c995ff7782e54aa6e54d50a844a5a2a"
+      "sha256": "556ed4a83561b6f42b1a1f9ad1e486adf097e0d7845c8ccf7b0c2ebe3f91c3de"
     },
     {
       "path": "backend/app/api/agent_runs.py",
-      "sha256": "4214345976c9a4aa85d893ff99c322f9e93096af3155810dff68afde9deee659"
+      "sha256": "6b8a874079bd503dfb3ab730be673d01308d9997719bec0ee417628c3bad57ba"
     },
     {
       "path": "eval/weekly_report/run_gemini.py",

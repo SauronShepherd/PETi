@@ -6,6 +6,12 @@
 - Cloud Credits are server-authoritative and costly operations pass through funding.
 - Advertising is isolated to funding flows; there is no ambient advertising.
 - Media is private, owner-scoped, and finalized by backend storage verification.
+- AI media provenance is server-authoritative: a `MediaAsset` ID is resolved by
+  `MediaService` to its validated private bucket/object and MIME; clients and
+  tasks never provide provider-ready URIs or file contents. Vertex transports
+  use private `gs://`/`fileData` or SDK `Part.from_uri` parts, while the AI
+  Studio API-key transport accepts only controlled inline data and fails closed
+  otherwise. Providers do not create GCS clients.
 - Android never chooses authoritative media object paths or retention policy.
 - Media upload retries are idempotent and media deletion never requires credits.
 - Safety is an independent pipeline stage after validation and guardrails.
