@@ -18,6 +18,8 @@ class JsonFormatter(logging.Formatter):
         message = re.sub(r"-----BEGIN [^-]+ PRIVATE KEY-----.*?-----END [^-]+ PRIVATE KEY-----", "[REDACTED_KEY]", message, flags=re.DOTALL)
         message = re.sub(r"eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+", "[REDACTED_TOKEN]", message)
         message = re.sub(r"(?i)(authorization|x-api-key|api[-_ ]?key|token)\s*[:=]\s*[^\s,]+", r"\1=[REDACTED_SECRET]", message)
+        message = re.sub(r"(?i)(authorization\s*:\s*bearer\s+)\S+", r"\1[REDACTED_SECRET]", message)
+        message = re.sub(r"(?i)(bytes|base64)\s*[:=]\s*\S+", r"\1=[REDACTED_SENSITIVE]", message)
         message = re.sub(r"https?://[^\s]+[?&](?:X-Goog-Signature|GoogleAccessId|Signature)=[^\s&]+[^\s]*", "[REDACTED_SIGNED_URL]", message)
         if message.lstrip().startswith(("{", "[")):
             message = "[REDACTED_STRUCTURED_PAYLOAD]"
