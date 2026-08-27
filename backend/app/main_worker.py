@@ -124,7 +124,13 @@ async def run_agent_task(
         raise HTTPException(401, str(exc)) from exc
     body = await request.json()
     owner = body["owner_user_id"]
-    media = MediaPreparer().prepare(body.get("media", []))
+    run = api_app.state.agents.get(owner, body["run_id"])
+    if not run.pet_id:
+        raise HTTPException(409, "AGENT_PET_REQUIRED")
+    resolved_media = api_app.state.media.resolve_ai_media(
+        owner, body.get("media_asset_ids", []), run.pet_id
+    )
+    media = MediaPreparer().prepare(resolved_media)
     result = api_app.state.agent_execution.execute(
         owner, body["run_id"], media, context=body.get("context")
     )

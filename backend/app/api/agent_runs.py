@@ -58,7 +58,10 @@ async def execute_dog_agent_run(run_id: str, body: dict, request: Request, princ
         run = request.app.state.agents.get(principal.user_id, run_id)
         if not run.pet_id:
             raise ValueError("AGENT_PET_REQUIRED")
-        media = MediaPreparer().prepare(body.get("media", []))
+        resolved_media = request.app.state.media.resolve_ai_media(
+            principal.user_id, body.get("media_asset_ids", []), run.pet_id
+        )
+        media = MediaPreparer().prepare(resolved_media)
         return request.app.state.agent_execution.execute(
             principal.user_id, run_id, media, context=body.get("context")
         )
