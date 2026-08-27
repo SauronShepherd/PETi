@@ -3,6 +3,7 @@ from app.ai.preparation.core import (
     AudioMediaPreparer,
     DocumentMediaPreparer,
     ImageMediaPreparer,
+    MediaPreparationError,
     MediaPreparer,
     VideoMediaPreparer,
 )
@@ -80,7 +81,7 @@ def test_result_repository_is_immutable_per_job():
 
 
 def test_provider_output_boundary_and_preparation():
-    package = MediaPreparer().prepare([{"id": "m1", "kind": "image"}])
+    package = MediaPreparer().prepare([{"id": "m1", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}])
     response = FakeAIProvider().analyze(package)
     assert validate_smoke_payload(response.payload).valid
 
@@ -88,15 +89,26 @@ def test_provider_output_boundary_and_preparation():
 def test_preparation_dispatches_each_modality_to_named_boundary():
     preparer = MediaPreparer()
     package = preparer.prepare([
-        {"id": "image", "kind": "IMAGE"},
-        {"id": "video", "kind": "VIDEO"},
-        {"id": "audio", "kind": "AUDIO"},
-        {"id": "document", "kind": "DOCUMENT"},
+        {"id": "image", "kind": "IMAGE", "mime_type": "image/png", "reference": "gs://bucket/image"},
+        {"id": "video", "kind": "VIDEO", "mime_type": "video/mp4", "reference": "gs://bucket/video"},
+        {"id": "audio", "kind": "AUDIO", "mime_type": "audio/mpeg", "reference": "gs://bucket/audio"},
+        {"id": "document", "kind": "DOCUMENT", "mime_type": "application/pdf", "reference": "gs://bucket/document"},
     ])
     assert [item.kind for item in package.items] == [
         ImageMediaPreparer.kind, VideoMediaPreparer.kind,
         AudioMediaPreparer.kind, DocumentMediaPreparer.kind,
     ]
+
+
+@pytest.mark.parametrize("asset, error", [
+    ({"id": "m1", "kind": "IMAGE"}, "MEDIA_SOURCE_REQUIRED"),
+    ({"id": "m1", "kind": "IMAGE", "reference": "m1", "mime_type": "image/png"}, "MEDIA_SOURCE_NOT_PROVIDER_READABLE"),
+    ({"id": "m1", "kind": "IMAGE", "reference": "https://example.test/m", "mime_type": "image/png"}, "MEDIA_SOURCE_NOT_PROVIDER_READABLE"),
+    ({"id": "m1", "kind": "IMAGE", "reference": "gs://bucket/object"}, "MEDIA_MIME_REQUIRED"),
+])
+def test_preparation_rejects_missing_or_non_provider_media_source(asset, error):
+    with pytest.raises(MediaPreparationError, match=error):
+        MediaPreparer().prepare([asset])
 
 
 def test_provider_exposes_explicit_media_capabilities():

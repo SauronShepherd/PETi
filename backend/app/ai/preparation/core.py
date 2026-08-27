@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import StrEnum
+from urllib.parse import urlsplit
 
 
 class PreparedMediaKind(StrEnum):
@@ -31,11 +32,19 @@ class _ModalityPreparer:
     kind: PreparedMediaKind
 
     def prepare_one(self, asset: dict) -> PreparedMedia:
-        if not asset.get("id"):
+        if not isinstance(asset, dict) or not isinstance(asset.get("id"), str) or not asset["id"].strip():
             raise MediaPreparationError("MEDIA_ID_REQUIRED")
+        reference = asset.get("reference")
+        mime_type = asset.get("mime_type")
+        if not isinstance(reference, str) or not reference.strip():
+            raise MediaPreparationError("MEDIA_SOURCE_REQUIRED")
+        parsed = urlsplit(reference)
+        if parsed.scheme != "gs" or not parsed.netloc or not parsed.path.strip("/"):
+            raise MediaPreparationError("MEDIA_SOURCE_NOT_PROVIDER_READABLE")
+        if not isinstance(mime_type, str) or not mime_type.strip() or "/" not in mime_type:
+            raise MediaPreparationError("MEDIA_MIME_REQUIRED")
         return PreparedMedia(
-            str(asset["id"]), self.kind,
-            str(asset.get("reference", asset["id"])), asset.get("mime_type"),
+            asset["id"], self.kind, reference, mime_type,
         )
 
 

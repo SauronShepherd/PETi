@@ -13,7 +13,7 @@ def test_gemini_adapter_normalizes_structured_response_and_usage():
         return {"payload": {"summary": "ok"}, "usage": {"input_tokens": 10, "output_tokens": 4}}
 
     result = GeminiProvider("gemini-test", transport).analyze(
-        MediaPreparer().prepare([{"id": "m", "kind": "image"}]), "policy"
+        MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]), "policy"
     )
     assert result.provider == "GEMINI"
     assert result.usage.input_tokens == 10
@@ -28,7 +28,7 @@ def test_gemini_adapter_normalizes_vertex_usage_metadata_names():
         }
 
     result = GeminiProvider("gemini-test", transport).analyze(
-        MediaPreparer().prepare([{"id": "m", "kind": "image"}]), "policy"
+        MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]), "policy"
     )
     assert result.usage.input_tokens == 21
     assert result.usage.output_tokens == 8
@@ -47,7 +47,7 @@ def test_gemini_keys_round_robin_and_retry_fallback():
         return {"payload": {"summary": "ok"}, "usage": {}}
 
     result = GeminiProvider("gemini-test", transport, api_keys=pool, max_attempts=2).analyze(
-        MediaPreparer().prepare([{"id": "m", "kind": "image"}]), "policy"
+        MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]), "policy"
     )
     assert result.payload["summary"] == "ok"
     assert seen == ["first", "second"]
@@ -67,7 +67,7 @@ def test_gemini_daily_quota_skips_exhausted_key():
 
 
 def test_gemini_provider_normalizes_rate_limit_and_server_errors():
-    prepared = MediaPreparer().prepare([{"id": "m", "kind": "image"}])
+    prepared = MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}])
     for status, expected, retryable in (
         (429, "PROVIDER_RATE_LIMITED", True),
         (503, "PROVIDER_UNAVAILABLE", True),
@@ -88,7 +88,7 @@ def test_gemini_provider_preserves_canonical_provider_errors():
         raise ProviderError("PROVIDER_RATE_LIMITED", True)
     try:
         GeminiProvider("gemini-test", transport).analyze(
-            MediaPreparer().prepare([{"id": "m", "kind": "image"}]), "policy"
+                MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]), "policy"
         )
     except ProviderError as exc:
         assert exc.code == "PROVIDER_RATE_LIMITED"

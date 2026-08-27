@@ -6,7 +6,7 @@ from app.services.ports import FakeScenario
 
 
 def test_fake_provider_success_is_the_default():
-    response = FakeAIProvider().analyze(MediaPreparer().prepare([{"id": "m", "kind": "image"}]))
+    response = FakeAIProvider().analyze(MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]))
     assert response.accepted and response.payload["summary"]
 
 
@@ -16,10 +16,10 @@ def test_fake_provider_success_is_the_default():
 ])
 def test_fake_provider_reproduces_retryable_failures(scenario, code):
     with pytest.raises(ProviderError, match=code):
-        FakeAIProvider(scenario).analyze(MediaPreparer().prepare([{"id": "m", "kind": "image"}]))
+        FakeAIProvider(scenario).analyze(MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}]))
 
 
 def test_fake_provider_reproduces_malformed_and_safety_payloads():
-    media = MediaPreparer().prepare([{"id": "m", "kind": "image"}])
+    media = MediaPreparer().prepare([{"id": "m", "kind": "image", "mime_type": "image/png", "reference": "gs://bucket/object"}])
     assert "malformed" in FakeAIProvider(FakeScenario.MALFORMED_OUTPUT).analyze(media).payload
     assert "diagnosis" in FakeAIProvider(FakeScenario.SAFETY_VIOLATION).analyze(media).payload["summary"]

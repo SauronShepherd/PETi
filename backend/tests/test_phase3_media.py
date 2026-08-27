@@ -1,5 +1,5 @@
-from hashlib import sha256
 from datetime import UTC, datetime
+from hashlib import sha256
 
 import pytest
 from app.media.domain import (
