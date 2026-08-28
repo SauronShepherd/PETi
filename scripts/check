@@ -21,10 +21,10 @@ fi
 "${PYTHON[@]}" -c "import json; json.load(open('contracts/foundations.json'))"
 chmod +x android/gradlew
 (cd android && ./gradlew test lint assembleDebug)
-if [[ -n "${PETI_ADMOB_APP_ID:-}" && -n "${PETI_ADMOB_REWARDED_AD_UNIT_ID:-}" ]]; then
+if [[ -n "${PETI_RELEASE_API_BASE_URL:-}" && -n "${PETI_GOOGLE_WEB_CLIENT_ID:-}" ]]; then
   (cd android && ./gradlew assembleRelease)
 else
-  echo "Skipping assembleRelease: AdMob release inputs are external."
+  echo "Skipping assembleRelease: release API and Google client inputs are external."
 fi
 "${PYTHON[@]}" scripts/phase1_security_check.py
 "${PYTHON[@]}" eval/weekly_report/run.py --split dev --output "${TMPDIR:-/tmp}/peti-weekly-dev.json"

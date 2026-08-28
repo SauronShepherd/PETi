@@ -1,4 +1,4 @@
-"""Safe, deterministic foundations for Phases 21–26."""
+"""Safe, deterministic services for long-term pet context."""
 import hashlib
 import secrets
 from dataclasses import asdict, dataclass, field

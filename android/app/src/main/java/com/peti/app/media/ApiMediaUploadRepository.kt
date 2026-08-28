@@ -7,7 +7,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import android.content.ContentResolver
 
-/** Authenticated Phase-3 API adapter; raw storage capabilities are never persisted or logged. */
+/** Authenticated media API adapter; raw storage capabilities are never persisted or logged. */
 class ApiMediaUploadRepository(
     private val baseUrl: String,
     private val tokens: AccessTokenProvider,

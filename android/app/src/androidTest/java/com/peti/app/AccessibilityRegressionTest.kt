@@ -25,7 +25,7 @@ class AccessibilityRegressionTest {
     }
 
     @Test fun signedOutPrimaryActionIsOperable() {
-        rule.onNodeWithTag("signIn").assertHasClickAction().assertTextEquals("Continue with Google")
+        rule.onNodeWithTag("signIn").assertHasClickAction().assertTextEquals("Continuar con Google")
     }
 
     @Test fun petCreationControlsExposeEditableAndClickActions() {

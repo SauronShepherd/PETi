@@ -25,8 +25,8 @@ fun AudioCaptureDialog(onCaptured: (MediaSource) -> Unit, onDismiss: () -> Unit)
     DisposableEffect(Unit) { onDispose { controller.cancel() } }
     AlertDialog(
         onDismissRequest = { controller.cancel(); onDismiss() },
-        title = { Text("Record observation") },
-        text = { Text(if (recording) "Recording audio… stop when finished." else "Record a short voice observation for PETi Check.") },
+        title = { Text("Grabar observación") },
+        text = { Text(if (recording) "Grabando audio… detén la grabación cuando termines." else "Graba una observación breve para el análisis de PETi.") },
         confirmButton = {
             Button(onClick = {
                 if (recording) controller.stop()?.let { onCaptured(it) } ?: onDismiss()
@@ -35,8 +35,8 @@ fun AudioCaptureDialog(onCaptured: (MediaSource) -> Unit, onDismiss: () -> Unit)
                 } else {
                     permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
                 }
-            }) { Text(if (recording) "Stop and use" else "Start recording") }
+            }) { Text(if (recording) "Detener y usar" else "Empezar a grabar") }
         },
-        dismissButton = { Button(onClick = { controller.cancel(); onDismiss() }) { Text("Cancel") } },
+        dismissButton = { Button(onClick = { controller.cancel(); onDismiss() }) { Text("Cancelar") } },
     )
 }

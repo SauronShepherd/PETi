@@ -4,7 +4,7 @@ import android.content.Context
 import com.peti.app.auth.AuthRepository
 
 /**
- * Disposable, user-scoped read cache for Phase 6.
+ * Disposable, user-scoped read cache for care history.
  * Writes always go to the delegate first; successful writes invalidate related
  * cached projections. Cache misses and failed writes are never fabricated.
  */

@@ -1,10 +1,19 @@
 from pathlib import Path
+import os
+
 root=Path(__file__).resolve().parents[1]
 android=root/'android'
-generated = {'build', '.gradle', '.gradle-home', '__pycache__', '.git', '.terraform', '.mypy_cache', '.pytest_cache', '.ruff_cache', '.idea'}
-for path in android.rglob('*') if android.exists() else []:
-    if generated.intersection(path.parts):
-        continue
+generated = {'build', '.gradle', '.gradle-home', '.kotlin', '__pycache__', '.git', '.terraform', '.mypy_cache', '.pytest_cache', '.ruff_cache', '.idea', 'node_modules'}
+
+def source_files(scan_root):
+    if not scan_root.exists():
+        return
+    for current, dirs, files in os.walk(scan_root):
+        dirs[:] = [name for name in dirs if name not in generated]
+        for name in files:
+            yield Path(current) / name
+
+for path in source_files(android):
     if path.is_file() and path.suffix in {'.kt','.kts','.properties','.xml'}:
         text=path.read_text(errors='ignore').lower()
         assert 'gemini' not in text, f'Gemini reference in Android: {path}'
@@ -20,8 +29,8 @@ for path in android.rglob('*') if android.exists() else []:
             raise AssertionError(f'RewardedAdGateway outside funding: {path}')
 scan_roots = [root / name for name in ('backend', 'android', 'contracts', 'infra', 'eval', 'scripts')]
 for scan_root in scan_roots:
-  for path in scan_root.rglob('*') if scan_root.exists() else []:
-    if path.is_file() and path.name not in {'.gitignore'} and 'node_modules' not in path.parts and not generated.intersection(path.parts):
+  for path in source_files(scan_root):
+    if path.name not in {'.gitignore'}:
         if path.suffix.lower() not in {'.py', '.kt', '.kts', '.xml', '.json', '.yaml', '.yml', '.md', '.toml', '.ps1', '.properties'}:
             continue
         text=path.read_text(errors='ignore')

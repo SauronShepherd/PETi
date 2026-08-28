@@ -50,11 +50,11 @@ if (Test-Path (Join-Path $PSScriptRoot '..\android\gradlew.bat')) {
         }
         .\gradlew.bat test lint assembleDebug
         if ($LASTEXITCODE -ne 0) { throw "Gradle verification failed with exit code $LASTEXITCODE" }
-        if ($env:PETI_ADMOB_APP_ID -and $env:PETI_ADMOB_REWARDED_AD_UNIT_ID) {
+        if ($env:PETI_RELEASE_API_BASE_URL -and $env:PETI_GOOGLE_WEB_CLIENT_ID) {
             .\gradlew.bat assembleRelease
             if ($LASTEXITCODE -ne 0) { throw "Gradle release build failed with exit code $LASTEXITCODE" }
         } else {
-            Write-Host 'Skipping assembleRelease: PETI_ADMOB_APP_ID and PETI_ADMOB_REWARDED_AD_UNIT_ID are external release inputs.'
+            Write-Host 'Skipping assembleRelease: PETI_RELEASE_API_BASE_URL and PETI_GOOGLE_WEB_CLIENT_ID are external release inputs.'
         }
     }
     finally { Pop-Location }

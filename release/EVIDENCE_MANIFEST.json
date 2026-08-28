@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-27T18:57:24.760630+00:00",
-  "git_revision": "57ad6455b598184e895fe263a335ab6013d9f510",
+  "generated_at": "2026-08-28T09:16:06.974582+00:00",
+  "git_revision": "e20ee985a77a85d17f32670f53ab1b4ed71f6ecd",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -23,7 +23,7 @@
   "artifacts": [
     {
       "path": "README.md",
-      "sha256": "1b4f2086560ab42be44c8e840aa171b21bcb8cab1bc822a685c7a75e80dffab6"
+      "sha256": "a4675507a87b1fd246ebacee0f87bb0be87a497f82baff15b3390c87fc7055c7"
     },
     {
       "path": "firebase.json",
@@ -91,7 +91,7 @@
     },
     {
       "path": "backend/app/ai/providers/gemini.py",
-      "sha256": "556ed4a83561b6f42b1a1f9ad1e486adf097e0d7845c8ccf7b0c2ebe3f91c3de"
+      "sha256": "6f3651c2a802cc621e6cb19a2fc040b533c251d87f051b1c410eb669e7cccca3"
     },
     {
       "path": "backend/app/api/agent_runs.py",
@@ -131,7 +131,7 @@
     },
     {
       "path": "release/evaluation/SPECIALIST_EVALUATION_INVENTORY.json",
-      "sha256": "d5d67c5dab9f72c485fc9fe23f43318dac9f132a53a42266d1c470c9ddd6989b"
+      "sha256": "a02c154d36184c18e9d2d67de315e241751a4e27b1abe57f032514f2cd691227"
     },
     {
       "path": "release/prod/web/privacy.html",

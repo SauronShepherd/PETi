@@ -15,6 +15,7 @@ class Phase1PetFlowTest {
         rule.onNodeWithTag("signIn").performClick()
         rule.onNodeWithTag("petName").performTextInput("Milo")
         rule.onNodeWithTag("createPet").performClick()
-        rule.onAllNodesWithText("Milo", substring = true).assertCountEquals(2)
+        rule.waitUntil(5_000) { rule.onAllNodesWithText("Milo").fetchSemanticsNodes().isNotEmpty() }
+        rule.onNodeWithTag("homeDashboard").assertExists()
     }
 }

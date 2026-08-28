@@ -30,7 +30,7 @@ class PersistentLocalAuthRepository(
 
     override suspend fun getAccessToken(forceRefresh: Boolean): String? =
         (authState.value as? AuthState.Authenticated)?.userId?.let {
-            val prefix = if (BuildConfig.PETI_ENVIRONMENT == "DEV") "internal-test" else "local-test"
+            val prefix = if (BuildConfig.PETI_ENVIRONMENT == "DEV") "internal-test" else "session"
             "$prefix:$it"
         }
 

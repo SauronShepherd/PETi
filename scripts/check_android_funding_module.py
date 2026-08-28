@@ -12,13 +12,13 @@ def main() -> int:
     app = APP_BUILD.read_text(encoding="utf-8")
     funding = FUNDING_BUILD.read_text(encoding="utf-8")
     if "play-services-ads" in app:
-        raise SystemExit("Ads dependency must remain in :features:funding")
+        raise SystemExit("Free build must not depend on Ads")
     if 'project(":features:funding")' not in app:
         raise SystemExit(":app must depend on :features:funding")
-    if "play-services-ads" not in funding:
-        raise SystemExit("Funding module must own the Ads dependency")
+    if "play-services-ads" in funding:
+        raise SystemExit("Free build must not include the Ads dependency")
     gateway = list(FUNDING_SRC.rglob("FundingModels.kt"))
-    if not gateway or "RewardedAdGateway" not in gateway[0].read_text(encoding="utf-8"):
+    if not gateway or "UnavailableRewardedAdGateway" not in gateway[0].read_text(encoding="utf-8"):
         raise SystemExit("RewardedAdGateway implementation missing from funding module")
     print("ANDROID_FUNDING_MODULE=PASS")
     return 0

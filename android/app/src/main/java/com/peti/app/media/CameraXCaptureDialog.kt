@@ -43,28 +43,28 @@ fun CameraXCaptureDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (mediaType == MediaType.IMAGE) "Take photo" else "Record video") },
+        title = { Text(if (mediaType == MediaType.IMAGE) "Hacer una foto" else "Grabar vídeo") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 AndroidView(
                     factory = { previewView },
                     modifier = Modifier.fillMaxWidth().height(280.dp),
                 )
-                if (error) Text("Camera unavailable")
+                if (error) Text("Cámara no disponible")
             }
         },
         confirmButton = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (ready && mediaType == MediaType.IMAGE) {
-                    Button(onClick = { controller.capturePhoto { source -> if (source != null) onCaptured(source) } }) { Text("Capture") }
+                    Button(onClick = { controller.capturePhoto { source -> if (source != null) onCaptured(source) } }) { Text("Capturar") }
                 }
                 if (ready && mediaType == MediaType.VIDEO) {
                     Button(onClick = {
                         if (recording) controller.stopVideo() else controller.startVideo { source -> recording = false; if (source != null) onCaptured(source) }
                         recording = !recording
-                    }) { Text(if (recording) "Stop" else "Record") }
+                    }) { Text(if (recording) "Detener" else "Grabar") }
                 }
-                Button(onClick = onDismiss) { Text("Cancel") }
+                Button(onClick = onDismiss) { Text("Cancelar") }
             }
         },
     )

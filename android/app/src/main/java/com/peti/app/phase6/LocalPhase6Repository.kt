@@ -6,7 +6,7 @@ import java.time.Instant
 import java.time.ZoneOffset
 import java.util.UUID
 
-/** Local-only Phase 6 transport used by debug and internal builds. */
+/** Local-only care-history transport used by debug and internal builds. */
 class LocalPhase6Repository : Phase6Repository {
     private val measurements = mutableListOf<JSONObject>()
     private val care = mutableListOf<JSONObject>()

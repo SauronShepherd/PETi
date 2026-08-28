@@ -11,9 +11,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -25,6 +30,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.peti.app.auth.*
 import com.peti.app.pets.*
@@ -44,12 +50,12 @@ import java.util.UUID
 
 class MainActivity : ComponentActivity() {
     private val pendingOccurrence = mutableStateOf<String?>(null)
-    override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); pendingOccurrence.value = CareDeepLink.occurrenceId(intent?.data?.toString()); setContent { MaterialTheme { Surface(Modifier.fillMaxSize()) { Phase1App(this@MainActivity, pendingOccurrence.value) } } } }
+    override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState); pendingOccurrence.value = CareDeepLink.occurrenceId(intent?.data?.toString()); setContent { PetiTheme { Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { PetiApp(this@MainActivity, pendingOccurrence.value) } } } }
     override fun onNewIntent(intent: Intent) { super.onNewIntent(intent); setIntent(intent); pendingOccurrence.value = CareDeepLink.occurrenceId(intent.data?.toString()) }
 }
 
 @Composable
-private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? = null) {
+private fun PetiApp(activity: ComponentActivity, pendingOccurrenceId: String? = null) {
     val scope = rememberCoroutineScope(); val context = LocalContext.current; val services = remember { createAppServices(context) }; val auth = services.auth; val pets = services.pets; val species = services.species
     var authState by remember { mutableStateOf<AuthState>(auth.authState.value) }; var name by remember { mutableStateOf("") }; var editName by remember { mutableStateOf("") }
     val petViewModel: PetViewModel = viewModel(factory = object : androidx.lifecycle.ViewModelProvider.Factory { override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T = PetViewModel(pets, species, PersistentSelectedPetStore(context)) as T }); val state by petViewModel.state.collectAsState()
@@ -57,29 +63,72 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
         val restored = authState as? AuthState.Authenticated ?: return@LaunchedEffect
         petViewModel.load(restored.userId)
     }
-    val rewardedAds = if (AppConfig.environment == AppEnvironment.LOCAL) FakeRewardedAdGateway() else AdMobRewardedAdGateway(activity, BuildConfig.PETI_ADMOB_REWARDED_AD_UNIT_ID)
-    val fundingViewModel: FundingViewModel = viewModel(factory = object : androidx.lifecycle.ViewModelProvider.Factory { override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T = FundingViewModel(services.funding, rewardedAds) as T }); val fundingState by fundingViewModel.state.collectAsState()
-    Column(Modifier.padding(24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("PETi", style = MaterialTheme.typography.headlineLarge); Text("Environment: ${AppConfig.environment.name}")
-        pendingOccurrenceId?.let { Text("Care reminder opened: $it", modifier = Modifier.testTag("careDeepLinkOccurrence")) }
+    val fundingViewModel: FundingViewModel = viewModel(factory = object : androidx.lifecycle.ViewModelProvider.Factory { override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T = FundingViewModel(services.funding, object : RewardedAdGateway { override suspend fun show(intent: RewardIntent) = false }) as T })
+    val fundingState by fundingViewModel.state.collectAsState()
+    var activeSection by rememberSaveable { mutableStateOf("HOME") }
+    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 20.dp, vertical = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text("PETi", style = MaterialTheme.typography.displaySmall, fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold, color = MaterialTheme.colorScheme.primary)
+        Text("Cuida mejor de tu mascota. ♥", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        pendingOccurrenceId?.let { Text("Recordatorio abierto: $it", modifier = Modifier.testTag("careDeepLinkOccurrence")) }
         when (val current = authState) {
-            AuthState.SignedOut -> Button(modifier = Modifier.testTag("signIn"), onClick = { scope.launch { auth.signIn(); authState = auth.authState.value; if (authState is AuthState.Authenticated) petViewModel.load((authState as AuthState.Authenticated).userId) } }) { Text("Continue with Google") }
+            AuthState.SignedOut -> Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(2.dp)) {
+                Column(Modifier.fillMaxWidth().padding(24.dp), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally) {
+                    Text("Tu compañero. Nuestro cuidado.", style = MaterialTheme.typography.headlineSmall, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                    Text("Organiza el bienestar de tu mascota y toma decisiones con información clara.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Button(modifier = Modifier.fillMaxWidth().testTag("signIn"), onClick = { scope.launch { auth.signIn(); authState = auth.authState.value; if (authState is AuthState.Authenticated) petViewModel.load((authState as AuthState.Authenticated).userId) } }, shape = MaterialTheme.shapes.medium) { Text("Continuar con Google") }
+                }
+            }
             is AuthState.Authenticated -> {
                 LaunchedEffect(current.userId) { PetiMessagingRegistration.registerCurrent(context) }
-                Text("Your pets"); if (state.pets.isEmpty() && !state.loading) Text("No pets yet")
-                LazyColumn(Modifier.weight(1f, fill = false)) { items(state.pets) { pet -> Text("${pet.displayName} · ${pet.species}", Modifier.testTag("pet-${pet.id}").semantics { role = Role.Button; contentDescription = "Select ${pet.displayName}, ${pet.species}" }.clickable { petViewModel.select(current.userId, pet); editName = pet.displayName }.padding(12.dp)) } }
-                OutlinedTextField(name, { name = it }, label = { Text("Pet name") }, modifier = Modifier.testTag("petName"))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { Button(modifier = Modifier.testTag("createPet"), onClick = { if (name.isNotBlank()) { petViewModel.create(name, current.userId); name = "" } }) { Text("Add pet") }; Button(onClick = { scope.launch { services.mediaUpload.clearAccount(current.userId); services.records.clearLocalAccount(); auth.signOut(); authState = AuthState.SignedOut } }) { Text("Sign out") } }
-                state.selected?.let { selected -> Text("Selected: ${selected.displayName}"); OutlinedTextField(editName, { editName = it }, label = { Text("Edit pet name") }); Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { Button(onClick = { petViewModel.update(editName) }) { Text("Save") }; Button(onClick = { petViewModel.deleteSelected(current.userId) }) { Text("Delete") } } }
-                state.selected?.let { selected ->
-                    Phase6Panel(services.phase6, selected.id, pendingOccurrenceId, Modifier.testTag("phase6Panel"))
-                    RecordsPanel(services.records, selected.id, Modifier.testTag("recordsPanel")) { readUrl ->
+                state.selected?.takeIf { activeSection == "HOME" }?.let { selected ->
+                    PetiDashboard(selected, onScan = { activeSection = "SCAN" }, onHistory = { activeSection = "HISTORY" }, modifier = Modifier.testTag("homeDashboard"))
+                }
+                if (activeSection != "HOME" || state.selected == null) {
+                    Text("Mis mascotas", style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                }
+                if (state.pets.isEmpty() && !state.loading) Text("Aún no has añadido ninguna mascota.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (activeSection != "HOME" || state.selected == null) Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { state.pets.forEach { pet ->
+                    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(1.dp), modifier = Modifier.fillMaxWidth().testTag("pet-${pet.id}").semantics { role = Role.Button; contentDescription = "Select ${pet.displayName}, ${pet.species}" }.clickable { petViewModel.select(current.userId, pet); editName = pet.displayName }) {
+                        Row(Modifier.padding(14.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Surface(shape = androidx.compose.foundation.shape.CircleShape, color = Color(0xFFFFD8D0), modifier = Modifier.size(58.dp)) { Box(contentAlignment = androidx.compose.ui.Alignment.Center) { Text("", style = MaterialTheme.typography.headlineSmall) } }
+                            Spacer(Modifier.width(12.dp))
+                            Column(Modifier.weight(1f)) { Text(pet.displayName, style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold); Text(pet.species, color = MaterialTheme.colorScheme.onSurfaceVariant); Text("Perfil activo", color = MaterialTheme.colorScheme.primary) }
+                            Text("›", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                } }
+                if (activeSection != "HOME" || state.selected == null) Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF8F6)), elevation = CardDefaults.cardElevation(1.dp), modifier = Modifier.fillMaxWidth().testTag("addPetCard")) {
+                    Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Text("Añade un nuevo miembro", style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                        Text("Crea su perfil en pocos pasos y organiza mejor sus cuidados.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        OutlinedTextField(name, { name = it }, label = { Text("Nombre de tu mascota") }, modifier = Modifier.fillMaxWidth().testTag("petName"), singleLine = true)
+                        Button(modifier = Modifier.fillMaxWidth().testTag("createPet"), onClick = { if (name.isNotBlank()) { petViewModel.create(name, current.userId); name = "" } }, shape = MaterialTheme.shapes.medium) { Text("Continuar") }
+                    }
+                }
+                OutlinedButton(onClick = { scope.launch { services.mediaUpload.clearAccount(current.userId); services.records.clearLocalAccount(); auth.signOut(); authState = AuthState.SignedOut } }, modifier = Modifier.fillMaxWidth()) { Text("Cerrar sesión") }
+                if (activeSection == "PROFILE") state.selected?.let { selected ->
+                    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(1.dp), modifier = Modifier.fillMaxWidth().testTag("profileCard")) {
+                        Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("Perfil de ${selected.displayName}", style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                            Text("Mantén sus datos organizados para personalizar su cuidado.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            OutlinedTextField(editName, { editName = it }, label = { Text("Nombre") }, modifier = Modifier.fillMaxWidth())
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) { Button(onClick = { petViewModel.update(editName) }) { Text("Guardar cambios") }; OutlinedButton(onClick = { petViewModel.deleteSelected(current.userId) }) { Text("Eliminar") } }
+                        }
+                    }
+                }
+                state.selected?.takeIf { activeSection != "HOME" }?.let { selected ->
+                    if (activeSection == "HOME" || activeSection == "HISTORY") Phase6Panel(services.phase6, selected.id, pendingOccurrenceId, Modifier.testTag("phase6Panel"))
+                    if (activeSection == "HISTORY") RecordsPanel(services.records, selected.id, Modifier.testTag("recordsPanel")) { readUrl ->
                         runCatching { activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(readUrl))) }
                             .onFailure { /* Keep the short-lived URL out of app state if no viewer is installed. */ }
                     }
-                    SpecialistPanel(services.specialists, fundingViewModel, selected.id, Modifier.testTag("specialistPanel"))
-                    ReportsPanel(services.reports, selected.id, Modifier.testTag("reportsPanel"))
-                    FuturePanel(services.future, selected.id, Modifier.testTag("futurePanel"))
+                    if (activeSection == "SCAN") SpecialistPanel(services.specialists, fundingViewModel, selected.id, Modifier.testTag("specialistPanel"))
+                    if (activeSection == "HISTORY") ReportsPanel(services.reports, selected.id, Modifier.testTag("reportsPanel"))
+                    if (activeSection == "PROFILE") FuturePanel(services.future, selected.id, Modifier.testTag("futurePanel"))
+                    if (activeSection == "SCAN") {
+                    Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(2.dp), modifier = Modifier.fillMaxWidth().testTag("petiCheckCaptureCard")) {
+                    Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     var checkState by remember(current.userId, selected.id) { mutableStateOf<AnalysisJob?>(null) }
                     var activeJobId by rememberSaveable(current.userId, selected.id) { mutableStateOf<String?>(null) }
                     var checkError by remember(current.userId, selected.id) { mutableStateOf<String?>(null) }
@@ -90,11 +139,11 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
                         if (checkState?.id != jobId) {
                             runCatching { services.analysis.get(jobId) }
                                 .onSuccess { restored -> checkState = restored }
-                                .onFailure { checkError = "Unable to restore this check" }
+                                .onFailure { checkError = "No se pudo recuperar este análisis" }
                         }
                     }
-                    Text("PETi Check", style = MaterialTheme.typography.titleMedium)
-                    Text("Use selected photo or video to record what you are noticing. PETi Check is non-diagnostic.")
+                    if (activeSection == "SCAN") Text("PETi Check", style = MaterialTheme.typography.titleMedium)
+                    Text("Registra lo que estás observando con una foto, vídeo o audio. PETi Check no es un diagnóstico.", color = MaterialTheme.colorScheme.onSurfaceVariant)
                     var selectedMedia by remember(current.userId, selected.id) { mutableStateOf(listOf<ReadyMediaSelection>()) }
                     var uploadedDocumentId by remember(current.userId, selected.id) { mutableStateOf<String?>(null) }
                     var recordStatus by remember(current.userId, selected.id) { mutableStateOf<String?>(null) }
@@ -215,11 +264,12 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
                             onDismiss = { audioCaptureOpen = false },
                         )
                     }
-                    Button(modifier = Modifier.testTag("petiCheckMedia"), onClick = { mediaPicker.launch("image/*") }) { Text("Choose media") }
-                    Button(modifier = Modifier.testTag("petiCheckCamera"), onClick = { cameraXCaptureType = MediaType.IMAGE }) { Text("Take photo") }
-                    Button(modifier = Modifier.testTag("petiCheckCameraVideo"), onClick = { cameraXCaptureType = MediaType.VIDEO }) { Text("Record video") }
-                    Button(modifier = Modifier.testTag("petiCheckAudio"), onClick = { audioCaptureOpen = true }) { Text("Record audio") }
-                    Button(modifier = Modifier.testTag("recordUpload"), onClick = { documentPicker.launch("application/pdf") }) { Text("Add veterinary document") }
+                    Text("¿Qué quieres observar hoy?", style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = Color(0xFF173E43))
+                    PetiCaptureOption("Foto", "Detecta detalles visibles en una imagen.", "◉", Color(0xFFE2F7F4), Modifier.testTag("petiCheckMedia")) { mediaPicker.launch("image/*") }
+                    PetiCaptureOption("Cámara", "Haz una foto guiada de tu mascota.", "▣", Color(0xFFFFF0E4), Modifier.testTag("petiCheckCamera")) { cameraXCaptureType = MediaType.IMAGE }
+                    PetiCaptureOption("Vídeo", "Observa comportamiento, movimiento y postura.", "▶", Color(0xFFFFE9E5), Modifier.testTag("petiCheckCameraVideo")) { cameraXCaptureType = MediaType.VIDEO }
+                    PetiCaptureOption("Audio", "Analiza sonidos, ladridos o quejidos.", "♬", Color(0xFFF0EAFE), Modifier.testTag("petiCheckAudio")) { audioCaptureOpen = true }
+                    PetiCaptureOption("Documento veterinario", "Añade un informe para organizarlo en tu historial.", "▤", Color(0xFFEAF6F4), Modifier.testTag("recordUpload")) { documentPicker.launch("application/pdf") }
                     uploadedDocumentId?.let { mediaId ->
                         Button(modifier = Modifier.testTag("recordCreate"), onClick = {
                             scope.launch {
@@ -227,28 +277,28 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
                                     .onSuccess { recordStatus = "Private record added" }
                                     .onFailure { recordStatus = "Record could not be created" }
                             }
-                        }) { Text("Save document to Records") }
+                        }) { Text("Guardar documento") }
                     }
                     recordStatus?.let { Text(it, modifier = Modifier.testTag("recordUploadStatus")) }
                     OutlinedTextField(
                         value = userContext,
                         onValueChange = { if (it.length <= 500) userContext = it },
-                        label = { Text("What are you noticing? (optional)") },
+                        label = { Text("¿Qué estás observando? (opcional)") },
                         supportingText = { Text("${userContext.length}/500") },
                         modifier = Modifier.testTag("petiCheckContext"),
                     )
                     uploadTasks.values.filter { it.ownerUserId == current.userId && it.state != MediaUploadState.READY }.forEach { task ->
-                        Text("Preparing media: ${task.state}", modifier = Modifier.testTag("petiCheckMediaUpload"))
+                        Text("Preparando contenido: ${task.state}", modifier = Modifier.testTag("petiCheckMediaUpload"))
                     }
                     Button(modifier = Modifier.testTag("petiCheck"), onClick = {
                         val error = validator.validate(selectedMedia, userContext)
                         if (error != null) {
                             checkError = error
                         } else if (fundingState.quote?.operationType != OperationType.PETI_CHECK) {
-                            checkError = "Get a current funding quote before starting PETi Check"
+                            checkError = "Preparando el análisis. Inténtalo de nuevo en unos segundos."
                             fundingViewModel.request(OperationType.PETI_CHECK)
                         } else if (fundingState.quote?.currentlyFundable != true) {
-                            checkError = "PETI_CHECK_FUNDING_REQUIRED: choose the voluntary rewarded option below"
+                            checkError = "Este análisis no está disponible en este momento. Inténtalo de nuevo más tarde."
                         } else scope.launch {
                             checkError = null
                             runCatching {
@@ -280,56 +330,48 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
                             }
                                 .onFailure { checkError = it.message ?: "PETI Check could not be submitted" }
                         }
-                    }) { Text("Start PETi Check") }
+                    }) { Text("Iniciar análisis") }
                     checkError?.let { Text(it, color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("petiCheckError")) }
                     checkState?.let { job ->
-                        Text("Check status: ${customerCheckStatus(job.status)}", modifier = Modifier.testTag("petiCheckStatus"))
+                        Text("Estado: ${customerCheckStatus(job.status)}", modifier = Modifier.testTag("petiCheckStatus"))
                         if (job.status == AnalysisStatus.FAILED_FINAL) {
-                            Text("Please try again later.", modifier = Modifier.testTag("petiCheckFailure"))
+                            Text("Inténtalo de nuevo más tarde.", modifier = Modifier.testTag("petiCheckFailure"))
                         }
                         job.result?.let { result ->
+                            Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface), elevation = CardDefaults.cardElevation(2.dp), modifier = Modifier.fillMaxWidth().testTag("petiCheckResultCard")) {
+                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("Resultado del análisis", style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
                             if (result.safetyState == "URGENT") {
-                                Text(
-                                    "URGENT: seek veterinary help now",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    color = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.testTag("urgentSafetyBanner"),
-                                )
+                                Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE8E4)), modifier = Modifier.fillMaxWidth().testTag("urgentSafetyBanner")) { Text("Atención prioritaria: busca ayuda veterinaria ahora.", Modifier.padding(12.dp), color = MaterialTheme.colorScheme.error, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold) }
                             } else if (result.safetyState == "INSUFFICIENT_EVIDENCE") {
-                                Text(
-                                    "There is not enough clear evidence in this media to assess reliably.",
-                                    style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.testTag("insufficientEvidenceBanner"),
-                                )
-                                Text(
-                                    "Try a clearer, well-lit close-up or recapture the area of concern.",
-                                    modifier = Modifier.testTag("recaptureGuidance"),
-                                )
+                                Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF4E6)), modifier = Modifier.fillMaxWidth().testTag("insufficientEvidenceBanner")) { Column(Modifier.padding(12.dp)) { Text("Necesitamos evidencia más clara.", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold); Text("Prueba una toma bien iluminada o vuelve a capturar el área.", modifier = Modifier.testTag("recaptureGuidance")) } }
                             } else {
-                                Text("Safety: ${result.safetyState}")
+                                AssistChip(onClick = {}, label = { Text("Estado: ${result.safetyState}") })
                             }
                             Text(result.summary, modifier = Modifier.testTag("petiCheckSummary"))
                             if (result.redFlags.isNotEmpty()) {
-                                Text("Red flags", style = MaterialTheme.typography.titleMedium, modifier = Modifier.testTag("petiCheckRedFlagsHeading"))
+                                Text("Señales de alerta", style = MaterialTheme.typography.titleMedium, modifier = Modifier.testTag("petiCheckRedFlagsHeading"))
                             }
-                            result.observations.forEach { Text("Observation: $it", modifier = Modifier.testTag("petiCheckObservation")) }
-                            result.interpretations.forEach { Text("Possible interpretation: $it", modifier = Modifier.testTag("petiCheckInterpretation")) }
-                            result.uncertainties.forEach { Text("Uncertainty: $it", modifier = Modifier.testTag("petiCheckUncertainty")) }
-                            result.redFlags.forEach { Text("Red flag: $it", modifier = Modifier.testTag("petiCheckRedFlag")) }
-                            result.recommendedActions.forEach { Text("Recommended action: $it", modifier = Modifier.testTag("petiCheckAction")) }
-                            Text("Evidence quality: ${result.evidenceQuality}", modifier = Modifier.testTag("evidenceQuality"))
+                            result.observations.forEach { Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFE2F7F4)), shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth().testTag("petiCheckObservation")) { Column(Modifier.padding(14.dp)) { Text("Observado por PETi", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = Color(0xFF008F87)); Text(it) } } }
+                            result.interpretations.forEach { Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3E6)), shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth().testTag("petiCheckInterpretation")) { Column(Modifier.padding(14.dp)) { Text("Posible interpretación", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.secondary); Text(it) } } }
+                            result.uncertainties.forEach { Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFF3F0FF)), shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth().testTag("petiCheckUncertainty")) { Column(Modifier.padding(14.dp)) { Text("Qué no podemos saber", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold); Text(it) } } }
+                            result.redFlags.forEach { Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE8E4)), shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth().testTag("petiCheckRedFlag")) { Column(Modifier.padding(14.dp)) { Text("Señal de alerta", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.error); Text(it) } } }
+                            result.recommendedActions.forEach { Card(colors = CardDefaults.cardColors(containerColor = Color(0xFFEAF6F4)), shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth().testTag("petiCheckAction")) { Column(Modifier.padding(14.dp)) { Text("Qué puedes hacer ahora", fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = Color(0xFF008F87)); Text(it) } } }
+                            Text("Calidad de la evidencia: ${result.evidenceQuality}", modifier = Modifier.testTag("evidenceQuality"))
                             result.limitations.forEach { limitation ->
-                                Text("Limitation: $limitation", modifier = Modifier.testTag("petiCheckLimitation"))
+                                Text("Límite: $limitation", modifier = Modifier.testTag("petiCheckLimitation"))
                             }
                             if (result.sourceMediaIds.isNotEmpty()) {
-                                Text("Source media: ${result.sourceMediaIds.joinToString()}", modifier = Modifier.testTag("petiCheckSourceMedia"))
+                                Text("Evidencia utilizada: ${result.sourceMediaIds.joinToString()}", modifier = Modifier.testTag("petiCheckSourceMedia"))
+                            }
+                            }
                             }
                         }
                     }
                     Button(
                         modifier = Modifier.testTag("petiCheckHistory"),
                         onClick = { scope.launch { checkHistory = services.analysis.listHistory(selected.id) } },
-                    ) { Text("View PETi Check history") }
+                    ) { Text("Ver historial de análisis") }
                     checkHistory.forEach { historical ->
                         Text(
                             "${historical.id}: ${historical.status}",
@@ -342,20 +384,18 @@ private fun Phase1App(activity: ComponentActivity, pendingOccurrenceId: String? 
                 }
                 state.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
                 HorizontalDivider()
-                Text("Cloud funding", style = MaterialTheme.typography.titleMedium)
-                fundingState.summary?.let { Text("Available credits: ${it.availableCredits}") }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(modifier = Modifier.testTag("fundingQuote"), onClick = { fundingViewModel.request(OperationType.PETI_CHECK) }) { Text("Check PETi Check funding") }
-                    Button(modifier = Modifier.testTag("refreshCredits"), onClick = { fundingViewModel.refresh() }) { Text("Refresh credits") }
-                }
-                fundingState.quote?.let { quote ->
-                    Text("Photo analysis: ${quote.requiredCredits} credit")
-                    if (!quote.currentlyFundable && quote.rewardedAdAvailable) Button(modifier = Modifier.testTag("watchRewardedAd"), onClick = { fundingViewModel.watchAdAndRefresh() }) { Text("Watch ad to fund") }
-                }
-                fundingState.status.takeIf { it.isNotBlank() }?.let { Text(it) }
-                fundingState.error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
+                    }
+                    }
+                    }
             }
-            else -> Text("Authentication unavailable. Please retry.")
+            else -> Text("No se puede iniciar sesión ahora. Inténtalo de nuevo.")
+        }
+        }
+        NavigationBar(containerColor = MaterialTheme.colorScheme.surface, modifier = Modifier.height(80.dp)) {
+            listOf("HOME" to ("Inicio" to Icons.Default.Home), "SCAN" to ("Analizar" to Icons.Default.CameraAlt), "HISTORY" to ("Historial" to Icons.Default.History), "PROFILE" to ("Perfil" to Icons.Default.Person)).forEach { (key, labelAndIcon) ->
+                val (label, icon) = labelAndIcon
+                NavigationBarItem(selected = activeSection == key, enabled = state.selected != null || key == "HOME", onClick = { activeSection = key }, modifier = Modifier.testTag("nav-$key"), icon = { Icon(icon, contentDescription = label, modifier = Modifier.size(22.dp)) }, label = { Text(label, style = MaterialTheme.typography.labelSmall) })
+            }
         }
     }
 }
