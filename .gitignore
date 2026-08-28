@@ -24,6 +24,7 @@ service-account*.json
 *.keystore
 build/
 .idea/
+.claude/
 android/.gradle/
 android/**/build/
 android/**/.kotlin/
