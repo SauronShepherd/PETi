@@ -1,7 +1,6 @@
 """Verify that unapproved research routes remain fail-closed outside LOCAL."""
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 MAIN = (ROOT / "backend/app/main.py").read_text(encoding="utf-8")
 REQUIRED_MARKERS = (

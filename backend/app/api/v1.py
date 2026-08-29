@@ -1682,6 +1682,8 @@ def pet_dict(p):
         "owner_user_id": p.owner_user_id,
         "species": p.species,
         "display_name": p.display_name,
+        # A new pet has no completed profile or derived health data.
+        "profile_complete": bool(getattr(p, "profile_field_provenance", {})),
         "active_state": p.active_state.value,
         "avatar_media_id": p.avatar_media_id,
         "created_at": p.created_at,

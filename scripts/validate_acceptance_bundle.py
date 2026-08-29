@@ -5,7 +5,6 @@ import json
 import sys
 from pathlib import Path
 
-
 SCENARIOS = {
     "funded_check",
     "rewarded_funding",

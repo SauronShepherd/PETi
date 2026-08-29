@@ -4,8 +4,10 @@ By default this targets Firestore. Use ``--local`` only for a disposable local
 fixture; it must never be used as evidence of production provisioning.
 """
 import argparse
+
 from app.domain.users import UserRole
 from app.repositories.memory import InMemoryUserRepository
+
 
 def validate_inputs(firebase_uid: str, role: UserRole, persona: str | None) -> None:
     if not firebase_uid.strip():
@@ -19,8 +21,8 @@ def validate_inputs(firebase_uid: str, role: UserRole, persona: str | None) -> N
 def build_repository(local: bool, project: str | None):
     if local:
         return InMemoryUserRepository()
-    from google.cloud import firestore
     from app.repositories.firestore import FirestoreUserRepository
+    from google.cloud import firestore
 
     return FirestoreUserRepository(firestore.Client(project=project) if project else firestore.Client())
 

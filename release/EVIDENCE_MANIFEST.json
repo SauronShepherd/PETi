@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-28T09:16:06.974582+00:00",
-  "git_revision": "e20ee985a77a85d17f32670f53ab1b4ed71f6ecd",
+  "generated_at": "2026-08-28T20:06:55.072083+00:00",
+  "git_revision": "e92a86c6a94bcd59c099924c4728512e184f84fa",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -131,7 +131,7 @@
     },
     {
       "path": "release/evaluation/SPECIALIST_EVALUATION_INVENTORY.json",
-      "sha256": "a02c154d36184c18e9d2d67de315e241751a4e27b1abe57f032514f2cd691227"
+      "sha256": "7a12d36a471982f49b60723f39a05758cf3a07813bafffde0ab1c4eb1172a04c"
     },
     {
       "path": "release/prod/web/privacy.html",

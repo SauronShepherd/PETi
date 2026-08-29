@@ -1,5 +1,5 @@
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 release = root / "android" / "app" / "build" / "outputs" / "apk" / "release" / "app-release.apk"

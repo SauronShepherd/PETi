@@ -30,6 +30,10 @@ def test_species_and_idempotency_crud():
     assert c.get("/v1/species").json()[0]["species_code"] == "DOG"
     headers = {**h("phase1-c"), "Idempotency-Key": "same-key"}
     first = c.post("/v1/pets", headers=headers, json={"display_name": "Nala", "species": "DOG"})
+    assert first.json()["profile_complete"] is False
+    assert "health_score" not in first.json()
+    assert "weight" not in first.json()
+    assert "activity" not in first.json()
     retry = c.post("/v1/pets", headers=headers, json={"display_name": "Nala", "species": "DOG"})
     assert retry.json()["id"] == first.json()["id"]
     assert (

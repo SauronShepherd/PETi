@@ -1,6 +1,5 @@
 """Read-only credit ledger audit entry point for operational use."""
 import json
-import sys
 
 
 def audit(service):

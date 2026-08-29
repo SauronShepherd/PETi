@@ -11,6 +11,7 @@ interface AccessTokenProvider { suspend fun getAccessToken(forceRefresh: Boolean
 interface AuthRepository : AccessTokenProvider {
     val authState: StateFlow<AuthState>
     suspend fun signIn()
+    suspend fun signIn(email: String, password: String) = signIn()
     suspend fun signOut()
     override suspend fun getAccessToken(forceRefresh: Boolean): String?
 }

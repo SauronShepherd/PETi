@@ -1,6 +1,6 @@
 """CI gate for payload-free, bounded-cardinality monitoring labels."""
-from pathlib import Path
 import re
+from pathlib import Path
 
 SOURCE = Path(__file__).resolve().parents[1] / "infra" / "monitoring" / "monitoring.yaml"
 

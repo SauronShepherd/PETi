@@ -1,9 +1,11 @@
 """Local billing abuse-contract checks; no Google Play credentials required."""
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backend.app.billing.premium import PremiumError, PremiumService
+
 
 def main() -> int:
     service = PremiumService(verifier=lambda body: body.get("verification_source") == "LOCAL_TEST", expected_package_name="com.peti.app", local_test_mode=True)

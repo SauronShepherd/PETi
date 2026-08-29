@@ -34,7 +34,11 @@ class PetiApiClient(private val baseUrl: String, private val tokens: AccessToken
     override suspend fun listHistory(animalId: String): List<AnalysisJob> =
         request("GET", "/v1/pets/$animalId/checks").parseAnalysisJobs()
     private fun String.jsonEscaped() = replace("\\", "\\\\").replace("\"", "\\\"")
-    private fun String.parsePet() = Pet(Regex("\"id\":\"([^\"]+)\"" ).find(this)!!.groupValues[1], Regex("\"owner_user_id\":\"([^\"]+)\"" ).find(this)!!.groupValues[1], Regex("\"species\":\"([^\"]+)\"" ).find(this)!!.groupValues[1], Regex("\"display_name\":\"([^\"]+)\"" ).find(this)!!.groupValues[1])
+    private fun String.parsePet(): Pet {
+        fun field(name: String): String = Regex("\"$name\":\"([^\"]+)\"").find(this)!!.groupValues[1]
+        val profileComplete = Regex("\"profile_complete\":(true|false)").find(this)?.groupValues?.get(1) == "true"
+        return Pet(field("id"), field("owner_user_id"), field("species"), field("display_name"), profileComplete)
+    }
     private fun String.parsePets() = Regex("\\{[^{}]*\"id\":\"[^{}]+\\}").findAll(this).map { it.value.parsePet() }.toList()
     private fun String.parseSpecies() = Regex("\"species_code\":\"([^\"]+)\"[^{}]*\"display_name\":\"([^\"]+)\"").findAll(this).map { SpeciesSummary(it.groupValues[1], it.groupValues[2], true) }.toList()
     private fun String.parseAnalysisJob(): AnalysisJob {

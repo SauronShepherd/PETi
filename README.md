@@ -31,6 +31,7 @@ La aplicación usa Firebase para identidad y notificaciones cuando se configura 
 ## Documentación
 
 - [Arquitectura](docs/HACKATHON_ARCHITECTURE.md)
+- [Plan exhaustivo de ejecución multiagente](docs/MULTIAGENTIC_HACKATHON_EXECUTION_PLAN.md)
 - [Guion de demostración](docs/HACKATHON_DEMO_SCRIPT.md)
 - [Instrucciones de pruebas](docs/HACKATHON_TESTING_INSTRUCTIONS.md)
 - [Privacidad y seguridad](docs/ARCHITECTURE_INVARIANTS.md)

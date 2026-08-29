@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun PetiApp(activity: ComponentActivity, pendingOccurrenceId: String? = null) {
     val scope = rememberCoroutineScope(); val context = LocalContext.current; val services = remember { createAppServices(context) }; val auth = services.auth; val pets = services.pets; val species = services.species
-    var authState by remember { mutableStateOf<AuthState>(auth.authState.value) }; var name by remember { mutableStateOf("") }; var editName by remember { mutableStateOf("") }
+    var authState by remember { mutableStateOf<AuthState>(auth.authState.value) }; var name by remember { mutableStateOf("") }; var editName by remember { mutableStateOf("") }; var email by rememberSaveable { mutableStateOf("") }; var password by rememberSaveable { mutableStateOf("") }
     val petViewModel: PetViewModel = viewModel(factory = object : androidx.lifecycle.ViewModelProvider.Factory { override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T = PetViewModel(pets, species, PersistentSelectedPetStore(context)) as T }); val state by petViewModel.state.collectAsState()
     LaunchedEffect(authState) {
         val restored = authState as? AuthState.Authenticated ?: return@LaunchedEffect
@@ -76,7 +76,10 @@ private fun PetiApp(activity: ComponentActivity, pendingOccurrenceId: String? = 
                 Column(Modifier.fillMaxWidth().padding(24.dp), verticalArrangement = Arrangement.spacedBy(14.dp), horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally) {
                     Text("Tu compañero. Nuestro cuidado.", style = MaterialTheme.typography.headlineSmall, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Text("Organiza el bienestar de tu mascota y toma decisiones con información clara.", color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Button(modifier = Modifier.fillMaxWidth().testTag("signIn"), onClick = { scope.launch { auth.signIn(); authState = auth.authState.value; if (authState is AuthState.Authenticated) petViewModel.load((authState as AuthState.Authenticated).userId) } }, shape = MaterialTheme.shapes.medium) { Text("Continuar con Google") }
+                    OutlinedTextField(email, { email = it }, label = { Text("Correo electrónico") }, modifier = Modifier.fillMaxWidth().testTag("email"), singleLine = true)
+                    OutlinedTextField(password, { password = it }, label = { Text("Contraseña") }, modifier = Modifier.fillMaxWidth().testTag("password"), singleLine = true, visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation())
+                    Button(modifier = Modifier.fillMaxWidth().testTag("signIn"), onClick = { scope.launch { auth.signIn(email, password); authState = auth.authState.value; if (authState is AuthState.Authenticated) petViewModel.load((authState as AuthState.Authenticated).userId) } }, shape = MaterialTheme.shapes.medium) { Text("Iniciar sesión") }
+                    if (authState is AuthState.AuthError) Text((authState as AuthState.AuthError).message, color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("authError"))
                 }
             }
             is AuthState.Authenticated -> {
@@ -93,7 +96,7 @@ private fun PetiApp(activity: ComponentActivity, pendingOccurrenceId: String? = 
                         Row(Modifier.padding(14.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
                             Surface(shape = androidx.compose.foundation.shape.CircleShape, color = Color(0xFFFFD8D0), modifier = Modifier.size(58.dp)) { Box(contentAlignment = androidx.compose.ui.Alignment.Center) { Text("", style = MaterialTheme.typography.headlineSmall) } }
                             Spacer(Modifier.width(12.dp))
-                            Column(Modifier.weight(1f)) { Text(pet.displayName, style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold); Text(pet.species, color = MaterialTheme.colorScheme.onSurfaceVariant); Text("Perfil activo", color = MaterialTheme.colorScheme.primary) }
+                            Column(Modifier.weight(1f)) { Text(pet.displayName, style = MaterialTheme.typography.titleMedium, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold); Text(pet.species, color = MaterialTheme.colorScheme.onSurfaceVariant); Text(if (pet.profileComplete) "Perfil completo" else "Completar perfil", color = if (pet.profileComplete) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary) }
                             Text("›", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.primary)
                         }
                     }

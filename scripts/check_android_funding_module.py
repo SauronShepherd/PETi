@@ -1,7 +1,6 @@
 """Verify the funding boundary without starting Gradle."""
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 APP_BUILD = ROOT / "android" / "app" / "build.gradle.kts"
 FUNDING_BUILD = ROOT / "android" / "features" / "funding" / "build.gradle.kts"

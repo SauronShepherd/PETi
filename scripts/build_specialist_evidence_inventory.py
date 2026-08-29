@@ -41,7 +41,7 @@ def main() -> int:
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "SPECIALIST_EVALUATION_INVENTORY.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    for capability, details in capabilities.items():
+    for capability in capabilities:
         certificate = OUT / f"{capability.upper()}_RELEASE_CERTIFICATE.md"
         certificate.write_text(
             f"# {capability} release certificate\n\n"

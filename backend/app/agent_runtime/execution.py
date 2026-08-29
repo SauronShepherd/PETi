@@ -10,6 +10,7 @@ from threading import RLock
 from app.agents.contracts import AgentOrchestrator, EvidenceReference, RunState
 from app.ai.providers.base import AIProvider, ProviderError
 
+from .adk_graph import build_peti_agent, graph_metadata
 from .release_policy import ModelPolicy, validate_policy
 
 
@@ -19,6 +20,12 @@ class AgentExecutionService:
         self.provider = provider
         self.policy = validate_policy(policy or ModelPolicy(model=getattr(provider, "model", "configured-server-model")))
         self._execution_lock = RLock()
+        try:
+            self.adk_agent = build_peti_agent(self.policy.model)
+        except ModuleNotFoundError as exc:
+            if exc.name != "google.adk":
+                raise
+            self.adk_agent = None
 
     def execute(self, owner: str, run_id: str, media, *, context: str | None = None) -> dict:
         """Execute one run atomically for in-process task redelivery.
@@ -40,7 +47,7 @@ class AgentExecutionService:
         self.runs._set_state(run, RunState.RUNNING)
         self.runs._persist_run(run)
         plan = ["EVIDENCE_INTAKE", "PETI_CHECK", "SAFETY_REVIEW", "CARE_REPORT"]
-        self.runs.commit_step(owner, run_id, {"step_id": "plan", "output": {"nodes": plan, "policy": asdict(self.policy)}, "schema_version": "1.0.0"})
+        self.runs.commit_step(owner, run_id, {"step_id": "plan", "output": {"nodes": plan, "policy": asdict(self.policy), "agent_graph": graph_metadata(self.policy.model)}, "schema_version": "1.0.0"})
         try:
             self.runs.commit_step(owner, run_id, {"step_id": "evidence-intake", "output": {"item_count": len(media.items), "media_version": getattr(media, "version", "1.0.0"), "status": "READY"}, "schema_version": "1.0.0"})
             response = self.provider.analyze(media, "Return JSON observations only. Include observations, evidence_quality, uncertainty, limitations, provenance, and safety_guidance. Never diagnose, prescribe, or claim a condition is ruled out.", context)

@@ -8,7 +8,8 @@ care/report follow-up.
 Android / demo client
         | authenticated owner request
         v
-Cloud Run API -> AgentExecutionService (bounded plan + policy)
+Cloud Run API -> AgentExecutionService + Google ADK coordinator (bounded plan + policy)
+        |              | ADK delegates to evidence, specialist and safety sub-agents
         |              | tools validate owner, pet and capability
         |              +--> Evidence Intake -> PETi Check -> Safety Review
         v

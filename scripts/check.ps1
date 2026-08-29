@@ -80,8 +80,10 @@ python scripts/inspect_release_artifact.py
 if (Get-Command terraform -ErrorAction SilentlyContinue) {
     $terraformDir = (Join-Path $PSScriptRoot '..\infra\terraform\modules\peti-platform')
     terraform "-chdir=$terraformDir" fmt -check
-    $sandboxTerraformDir = (Join-Path $PSScriptRoot '..\infra\terraform\environments\sandbox')
-    terraform "-chdir=$sandboxTerraformDir" init -backend=false -input=false
-    terraform "-chdir=$sandboxTerraformDir" fmt -check
-    terraform "-chdir=$sandboxTerraformDir" validate
+    foreach ($environment in @('sandbox', 'staging', 'production')) {
+        $terraformDir = (Join-Path $PSScriptRoot "..\infra\terraform\environments\$environment")
+        terraform "-chdir=$terraformDir" init -backend=false -input=false
+        terraform "-chdir=$terraformDir" fmt -check
+        terraform "-chdir=$terraformDir" validate
+    }
 }

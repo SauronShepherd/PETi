@@ -34,6 +34,15 @@ class FirebaseCredentialAuthRepository(
             mutableState.value = AuthState.Authenticated(firebaseAuth.currentUser?.uid ?: error("Firebase user unavailable"))
         } catch (error: Exception) { mutableState.value = AuthState.AuthError(error.message ?: "Sign-in failed") }
     }
+    override suspend fun signIn(email: String, password: String) {
+        mutableState.value = AuthState.SigningIn
+        try {
+            require(email.isNotBlank()) { "Introduce tu correo" }
+            require(password.isNotBlank()) { "Introduce tu contraseña" }
+            firebaseAuth.signInWithEmailAndPassword(email.trim(), password).await()
+            mutableState.value = AuthState.Authenticated(firebaseAuth.currentUser?.uid ?: error("Firebase user unavailable"))
+        } catch (error: Exception) { mutableState.value = AuthState.AuthError(error.message ?: "No se pudo iniciar sesión") }
+    }
     override suspend fun signOut() { firebaseAuth.signOut(); mutableState.value = AuthState.SignedOut }
     override suspend fun getAccessToken(forceRefresh: Boolean): String? = firebaseAuth.currentUser?.getIdToken(forceRefresh)?.await()?.token
 }

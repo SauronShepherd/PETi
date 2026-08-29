@@ -1,7 +1,13 @@
 package com.peti.app.pets
 
 data class SpeciesSummary(val code: String, val displayName: String, val profileEnabled: Boolean)
-data class Pet(val id: String, val ownerUserId: String, val species: String, val displayName: String)
+data class Pet(
+    val id: String,
+    val ownerUserId: String,
+    val species: String,
+    val displayName: String,
+    val profileComplete: Boolean = false,
+)
 
 interface SpeciesRepository { suspend fun listSpecies(): List<SpeciesSummary> }
 interface PetRepository {

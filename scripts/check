@@ -45,4 +45,9 @@ fi
 "${PYTHON[@]}" scripts/inspect_release_artifact.py
 if command -v terraform >/dev/null 2>&1; then
   terraform -chdir=infra/terraform/modules/peti-platform fmt -check
+  for environment in sandbox staging production; do
+    terraform -chdir="infra/terraform/environments/${environment}" init -backend=false -input=false
+    terraform -chdir="infra/terraform/environments/${environment}" fmt -check
+    terraform -chdir="infra/terraform/environments/${environment}" validate
+  done
 fi

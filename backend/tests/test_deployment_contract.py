@@ -46,6 +46,28 @@ def test_worker_has_separate_entrypoint():
     assert (ROOT / "backend/app/main_worker.py").exists()
 
 
+def test_cloud_images_quote_pip_version_constraints():
+    """Shell parsing must pass comparison constraints through to pip."""
+    for filename in ("infra/cloudrun/Dockerfile", "infra/cloudrun/Dockerfile.worker"):
+        dockerfile = (ROOT / filename).read_text()
+        for requirement in (
+            "google-cloud-storage>=2.18.0",
+            "google-cloud-tasks>=2.16.0",
+            "google-auth>=2.35.0",
+            "google-genai>=1.0.0",
+            "google-adk>=1.0.0",
+            "cryptography>=43.0.0",
+        ):
+            assert f"'{requirement}'" in dockerfile
+
+
+def test_cloud_images_run_as_non_root():
+    for filename in ("infra/cloudrun/Dockerfile", "infra/cloudrun/Dockerfile.worker"):
+        dockerfile = (ROOT / filename).read_text()
+        assert "useradd --create-home --uid 10001 appuser" in dockerfile
+        assert "USER appuser" in dockerfile
+
+
 def test_deployment_keeps_peti_check_disabled_by_default():
     script = (ROOT / "infra/cloudrun/deploy.ps1").read_text()
     assert '"PETI_CHECK_ENABLED=false"' in script

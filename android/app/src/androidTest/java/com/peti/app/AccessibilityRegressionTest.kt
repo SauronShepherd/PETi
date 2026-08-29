@@ -1,7 +1,6 @@
 package com.peti.app
 
 import androidx.compose.ui.test.assertHasClickAction
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -25,7 +24,9 @@ class AccessibilityRegressionTest {
     }
 
     @Test fun signedOutPrimaryActionIsOperable() {
-        rule.onNodeWithTag("signIn").assertHasClickAction().assertTextEquals("Continuar con Google")
+        rule.onNodeWithTag("signIn").assertHasClickAction()
+        rule.onNodeWithTag("email").assertExists()
+        rule.onNodeWithTag("password").assertExists()
     }
 
     @Test fun petCreationControlsExposeEditableAndClickActions() {
