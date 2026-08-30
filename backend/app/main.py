@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import Response
 
 from .advertising.google_ssv_verifier import GoogleSsvVerifier
@@ -33,9 +34,6 @@ from .assistant.grounding import GroundedAssistant
 from .auth.task_auth import TaskAuthenticator
 from .auth.verifiers import FirebaseIdentityVerifier, LocalTestIdentityVerifier
 from .automation.rules import RuleEngine
-from .billing.google_play import GooglePlayPublisherGateway, GooglePlayPublisherVerifier
-from .billing.premium import PremiumService
-from .billing.rtdn import GooglePlayRtdnReceiver
 from .care_advanced.domain import CareRecordsService
 from .collaboration.service import CollaborationService
 from .config import Environment, get_settings
@@ -73,6 +71,19 @@ from .species.capabilities import CapabilityRegistry
 configure_logging()
 settings = get_settings()
 app = FastAPI(title="PETi Cloud API", version="0.1.0")
+
+
+def _web_origins(raw: str) -> list[str]:
+    return [origin.strip().rstrip("/") for origin in raw.split(",") if origin.strip()]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_web_origins(settings.web_allowed_origins),
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Idempotency-Key"],
+)
 def is_out_of_scope_route(path: str) -> bool:
     """Return true only for the explicitly unapproved research surfaces."""
     explicit = (
@@ -326,42 +337,11 @@ app.state.privacy = PrivacyService(
     app.state.pets, app.state.media, app.state.phase6,
     records=app.state.records, specialists=app.state.specialists,
     reports=app.state.reports, users=app.state.users, credits=app.state.credits,
-    premium=None, operations=None, memory=app.state.memory,
+    operations=None, memory=app.state.memory,
     store=FirestorePhase6Store(app.state.firestore_client)
     if hasattr(app.state, "firestore_client")
     else None,
 )
-app.state.google_play_gateway = None
-app.state.google_play_verifier = None
-if settings.environment is not Environment.LOCAL:
-    try:
-        app.state.google_play_gateway = GooglePlayPublisherGateway(settings.google_play_package_name)
-        app.state.google_play_verifier = GooglePlayPublisherVerifier(app.state.google_play_gateway)
-    except Exception:  # noqa: BLE001
-        # Fail closed when ADC or Play credentials are not provisioned yet.
-        app.state.google_play_gateway = None
-app.state.premium = PremiumService(
-    store=FirestorePhase6Store(app.state.firestore_client)
-    if hasattr(app.state, "firestore_client")
-    else None,
-    verifier=(lambda body: bool(body.get("verified") is True and body.get("verification_source") == "LOCAL_TEST"))
-    if settings.environment is Environment.LOCAL else app.state.google_play_verifier,
-    expected_package_name=settings.google_play_package_name,
-    local_test_mode=settings.environment is Environment.LOCAL,
-    rtdn_verifier=(
-        lambda token, product: {
-            **app.state.google_play_gateway.verify(settings.google_play_package_name, product, token),
-            "owner_user_id": app.state.premium.entitlements[app.state.premium.tokens[token]].owner_user_id,
-        }
-        if app.state.google_play_gateway else None
-    ),
-)
-app.state.google_play_rtdn = GooglePlayRtdnReceiver(
-    app.state.premium,
-    lambda token: (app.state.premium.entitlements[app.state.premium.tokens[token]].owner_user_id
-                   if token in app.state.premium.tokens else None),
-)
-app.state.privacy.premium = app.state.premium
 app.state.future = FutureService(
     app.state.pets, app.state.phase6, records=app.state.records, reports=app.state.reports,
     store=FirestorePhase6Store(app.state.firestore_client) if hasattr(app.state, "firestore_client") else None,

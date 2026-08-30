@@ -4,12 +4,13 @@
 
 The bounded Gemini/Vertex provider smoke, Cloud Run topology, and synthetic
 OIDC worker vertical slices are now verified in the non-production sandbox.
-The RC remains blocked by customer-authenticated staging matrices, live
-privacy residual evidence, accessibility/device review, signed Android
-artifacts, store declarations, public legal pages, the required held-out and
-specialist certification suites, and the final video/Devpost submission.
+The web RC remains blocked by customer-authenticated staging matrices, live
+privacy residual evidence, accessibility review, public legal pages, the
+required held-out and specialist certification suites, and the final
+video/Devpost submission. Platform-specific native-client gates are out of
+scope for this web-only release and must not be treated as blockers.
 
-Source-side manifests and runbooks do not clear these gates. Use
+Source-side manifests and local documentation do not clear these gates. Use
 `scripts/build_release_evidence.py` after each source change to refresh hashes,
 then attach execution artifacts only from the exact frozen revision.
 

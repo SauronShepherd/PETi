@@ -47,12 +47,12 @@ class Settings(BaseSettings):
     gemini_max_attempts: int = 3
     gemini_retry_backoff_seconds: float = 0.25
     gemini_daily_limit_per_key: int = 20
-    google_play_package_name: str = "com.peti.app"
     service: str = "peti-api"
     auth_mode: str = "LOCAL_TEST"
     storage_mode: str = "MEMORY"
     firestore_emulator_host: str | None = None
     firebase_project_id: str | None = None
+    web_allowed_origins: str = "http://localhost:4173,http://127.0.0.1:4173"
     firestore_project_id: str | None = None
     firestore_database_id: str | None = None
     media_bucket_region: str = "europe-west1"

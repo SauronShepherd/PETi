@@ -20,7 +20,7 @@ provenance; private GCS stores media with temporary access.
 
 ## Google technology
 
-Android, Firebase Authentication, Firestore, Cloud Storage, Cloud Tasks, Cloud
+Firebase Authentication, Firestore, Cloud Storage, Cloud Tasks, Cloud
 Run, Cloud Scheduler, Pub/Sub, Vertex AI, and the official Google GenAI SDK.
 
 ## Safety and privacy

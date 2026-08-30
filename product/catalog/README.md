@@ -1,3 +1,3 @@
 # Product catalog contracts
 
-Commercial products are configuration; Android prices and currencies remain Google Play-owned.
+Commercial products are configuration owned by the web service.

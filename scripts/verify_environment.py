@@ -1,7 +1,7 @@
 """Static environment contract checker; intentionally not executed by Codex."""
 from pathlib import Path
 
-REQUIRED = ["backend/app/main.py", "android/app/build.gradle.kts", "infra/cloudrun/Dockerfile"]
+REQUIRED = ["web/index.html", "backend/app/main.py", "infra/cloudrun/Dockerfile"]
 
 
 def verify(root: str = ".") -> list[str]:

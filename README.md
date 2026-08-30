@@ -1,6 +1,6 @@
 # PETi
 
-PETi es una aplicación Android de cuidado responsable para mascotas. Permite organizar perfiles, registrar observaciones, analizar imágenes, audio y vídeo con asistencia cloud, consultar historial, gestionar documentos veterinarios y recibir recordatorios de cuidados.
+PETi es una aplicación web responsive de cuidado responsable para mascotas. Permite organizar perfiles, registrar observaciones, analizar imágenes, audio y vídeo con asistencia cloud, consultar historial, gestionar documentos veterinarios y recibir recordatorios de cuidados.
 
 La experiencia está diseñada como un producto gratuito, privado y centrado en el bienestar. Los resultados son orientativos y no sustituyen la valoración de un profesional veterinario.
 
@@ -24,14 +24,14 @@ python -m ruff check backend
 python -m pytest -q
 ```
 
-Para Android se necesita el SDK instalado, `android/local.properties` o `ANDROID_HOME`, y un JDK compatible con el toolchain fijado. El script de verificación selecciona automáticamente un JDK Microsoft compatible cuando es necesario.
+Para la aplicación, consulta [`web/README.md`](web/README.md). El gate principal verifica backend y cliente web.
 
 La aplicación usa Firebase para identidad y notificaciones cuando se configura un entorno real; las credenciales y configuraciones sensibles se suministran externamente y no deben almacenarse en el repositorio.
 
 ## Documentación
 
 - [Arquitectura](docs/HACKATHON_ARCHITECTURE.md)
-- [Plan exhaustivo de ejecución multiagente](docs/MULTIAGENTIC_HACKATHON_EXECUTION_PLAN.md)
+- [Auditoría final de preparación para el hackathon](docs/FINAL_HACKATHON_READINESS_AUDIT_2026-08-29.md)
 - [Guion de demostración](docs/HACKATHON_DEMO_SCRIPT.md)
 - [Instrucciones de pruebas](docs/HACKATHON_TESTING_INSTRUCTIONS.md)
 - [Privacidad y seguridad](docs/ARCHITECTURE_INVARIANTS.md)

@@ -17,6 +17,11 @@ async def live() -> dict[str, str]:
     return {"status": "ok", "service": "peti-analysis-worker"}
 
 
+@app.get("/health/ready")
+async def ready() -> dict[str, str]:
+    return {"status": "ok", "service": "peti-analysis-worker"}
+
+
 @app.post("/internal/tasks/analysis")
 async def run_analysis_task(
     request: Request,

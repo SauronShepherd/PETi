@@ -4,7 +4,7 @@ LOCAL development and pull-request verification use emulators, FakeAI, and
 deterministic fixtures. Cloud environments are not invoked implicitly by local
 commands.
 
-DEV, STAGING, and PRODUCTION may use billable GCP, Gemini, Google Play, and
+DEV, STAGING, and PRODUCTION may use billable GCP and Gemini, and
 notification services only through an explicit operator action after reviewing
 the target project, budget, IAM, secrets, and release gates. Real credentials
 and service-account JSON must never be committed.

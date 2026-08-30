@@ -7,15 +7,14 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDED = {".git", ".gradle", ".gradle-home", "__pycache__", ".terraform", "build", "artifacts", ".idea", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".claude"}
-SOURCE_SUFFIXES = {".py", ".kt", ".kts", ".gradle", ".json", ".yaml", ".yml", ".ps1", ".tf", ".md", ".toml", ".properties"}
+EXCLUDED = {".git", "__pycache__", ".terraform", "build", "artifacts", ".idea", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".claude", "node_modules"}
+SOURCE_SUFFIXES = {".py", ".json", ".yaml", ".yml", ".ps1", ".tf", ".md", ".toml", ".js", ".css", ".html"}
 FORBIDDEN_NAMES = {"service-account.json", "credentials.json"}
 FORBIDDEN_PATTERNS = (
     re.compile(r"AI" + r"za[0-9A-Za-z_-]{20,}"),
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     re.compile(r"local-test:[A-Za-z0-9_-]+"),
 )
-FORBIDDEN_AI_ANDROID = ("google.generativeai", "gemini", "VertexGeminiTransport")
 
 
 def files() -> list[Path]:
@@ -29,26 +28,21 @@ def files() -> list[Path]:
 def main() -> int:
     failures: list[str] = []
     for path in files():
-        is_firebase_client_config = path.name == "google-services.json" and path.parent == ROOT / "android" / "app"
+        is_firebase_client_config = False
         if path.name in FORBIDDEN_NAMES and "src" not in path.parts:
-            failures.append(f"credential-like file outside Android source variant: {path.relative_to(ROOT)}")
+            failures.append(f"credential-like file outside approved source: {path.relative_to(ROOT)}")
         try:
             text = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
-        test_path = any(part.lower() in {"tests", "test", "debugtest", "androidtest"} for part in path.parts) or path.name.lower().startswith("test") or "test-" in path.name.lower()
-        if path.suffix in {".py", ".kt", ".kts", ".gradle", ".gradle.kts", ".json", ".yaml", ".yml", ".ps1", ".tf"}:
+        test_path = any(part.lower() in {"tests", "test"} for part in path.parts) or path.name.lower().startswith("test") or "test-" in path.name.lower()
+        if path.name == "config.example.js":
+            continue
+        if path.suffix in {".py", ".json", ".yaml", ".yml", ".ps1", ".tf", ".md", ".js", ".css", ".html"}:
             for pattern in FORBIDDEN_PATTERNS:
                 public_firebase_key = is_firebase_client_config and pattern.pattern.startswith("AI")
                 if pattern.search(text) and not test_path and not public_firebase_key and "scripts/phase" not in str(path).replace("\\", "/"):
                     failures.append(f"sensitive/test-only marker in release source: {path.relative_to(ROOT)}")
-    android = ROOT / "android" / "app" / "src" / "main"
-    if android.exists():
-        for path in android.rglob("*.kt"):
-            text = path.read_text(encoding="utf-8")
-            for marker in FORBIDDEN_AI_ANDROID:
-                if marker.lower() in text.lower():
-                    failures.append(f"Android local-AI/provider marker: {path.relative_to(ROOT)}")
     for name in ("release/EVIDENCE_MANIFEST.json", "release/RC_MANIFEST.json"):
         path = ROOT / name
         if not path.exists():
@@ -62,7 +56,7 @@ def main() -> int:
         print("\n".join(f"- {failure}" for failure in failures))
         return 1
     print("RELEASE_GATE=PASS_STATIC_ONLY")
-    print("External provider, Play, device, and production evidence remain pending.")
+    print("External provider and production evidence remain pending.")
     return 0
 
 

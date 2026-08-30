@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-28T20:06:55.072083+00:00",
-  "git_revision": "e92a86c6a94bcd59c099924c4728512e184f84fa",
+  "generated_at": "2026-08-30T05:42:36.722986+00:00",
+  "git_revision": "47ed1609ae00a1c691fb0b5d0f359173116da85f",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -16,18 +16,16 @@
   },
   "external_gates": {
     "gcp_staging": "BOUNDED_SANDBOX_EVIDENCE_ATTACHED_FULL_PRODUCT_MATRIX_PENDING",
-    "google_play": "PENDING_EXTERNAL_ACCOUNT",
-    "physical_devices": "PENDING_EXTERNAL_EXECUTION",
-    "production_signing": "PENDING_EXTERNAL_KEY_MATERIAL"
+    "web_hosting": "DEPLOYED_AND_PUBLIC"
   },
   "artifacts": [
     {
       "path": "README.md",
-      "sha256": "a4675507a87b1fd246ebacee0f87bb0be87a497f82baff15b3390c87fc7055c7"
+      "sha256": "846bb62b9cfa0e55b2732a0e99273ed483066cba7e42a1d6e8a7d9548c285261"
     },
     {
       "path": "firebase.json",
-      "sha256": "6c12eca03aad0e6b546d0636b4e007e920aa88cf038ebab8f16d559b859b194d"
+      "sha256": "01e86015201758c574fea8dc3c4f22851fb9f195acd06240f465e122f2e96f48"
     },
     {
       "path": "firestore.rules",
@@ -38,12 +36,8 @@
       "sha256": "ed10206af6e9b728e394ae422f8ac963f411c37a8ca5e1737e89925b3f9b1f82"
     },
     {
-      "path": "docs/PHASES_0_17_PENDING_CHECKLIST.md",
-      "sha256": "df67ddfb128d0462a2caa03b20357047db5439a51f3b10c75b224570b7b05e28"
-    },
-    {
-      "path": "docs/PHASES_0_17_CONTINUATION_STATUS.md",
-      "sha256": "7868bee79249c4bd895440bf58ac086b5d3f1a64dadadf3aa2de609af6e20772"
+      "path": "docs/PETI_WEB_RELEASE_STATUS.md",
+      "sha256": "5843263cd758330d376f36845e43813f80c7aa38fee5b65c75d131e8eee4355c"
     },
     {
       "path": "eval/weekly_report/run.py",
@@ -54,24 +48,8 @@
       "sha256": "2b6d04c5c71556ef454d6c3560b76efe8fda21f216388f96645029f2c7582d75"
     },
     {
-      "path": "docs/operations/SLOS.md",
-      "sha256": "1a65670864c9f88b81fbf4e668c4f320f95af89db261db2d74e212803b10e7a7"
-    },
-    {
-      "path": "backend/app/billing/google_play.py",
-      "sha256": "b9883a11199b9ce63420ecbbc4f7d4385701d08b2c4ef6903fa92365474b785a"
-    },
-    {
-      "path": "backend/app/billing/premium.py",
-      "sha256": "df6abc24efd13ab427f19464c02ffd63647096824f720431c1dba88b88240029"
-    },
-    {
-      "path": "backend/app/billing/rtdn.py",
-      "sha256": "dfb7b95e52ce2adce6a736ea5cf7b272647adda203bba6be194efe5603b28dea"
-    },
-    {
       "path": "infra/terraform/modules/peti-platform/main.tf",
-      "sha256": "555f45c2b2433851803d060f5b3dd0ae073899ed1639aa9b7c2860d219502055"
+      "sha256": "ab0c2550362474252b4f6c8c3136da40ac116771c42b1e62acdc0845831345d8"
     },
     {
       "path": "backend/app/privacy/lifecycle.py",
@@ -87,7 +65,7 @@
     },
     {
       "path": "backend/app/agent_runtime/execution.py",
-      "sha256": "cfe95184e9f30c1a3633963ac421bc050b1e7af7ce216d01cc261bd3bb24375c"
+      "sha256": "5a01b7b43fef6e711e429054d0f4ac23091c1de101cf420456d6c0e2aad32dc7"
     },
     {
       "path": "backend/app/ai/providers/gemini.py",
@@ -102,26 +80,6 @@
       "sha256": "25410fcf1404660ff6afdedb23e4dec4e6a753d93067a5dbdc2729567c475362"
     },
     {
-      "path": "docs/HACKATHON_ARCHITECTURE.md",
-      "sha256": "b5a6b5e31f3c538382a69cc6edabbad59338fa7cd107594f7e648ca6afd9865b"
-    },
-    {
-      "path": "docs/HACKATHON_DEMO_SCRIPT.md",
-      "sha256": "6ac6a0a944b5ca02bfba66f27348ed03b2c8c65162b5170715ccc3e8b707d88e"
-    },
-    {
-      "path": "docs/HACKATHON_TESTING_INSTRUCTIONS.md",
-      "sha256": "8cd1995edee2e8bc0ff32d2ebfb06afa3f0dc595e5b0b2de3479d55a73455a79"
-    },
-    {
-      "path": "docs/CODE_DISCLOSURE.md",
-      "sha256": "c624e2f4ba54a374830129dfda58116355f65228decd053c760114dfd103e907"
-    },
-    {
-      "path": "release/COMPLETION_AUDIT.md",
-      "sha256": "1f3b5cdee2218a8b851ad894c29c90441366f8b54d4a3f6157b59bf7b8befe6f"
-    },
-    {
       "path": "release/PRODUCTION_CONFIG_SNAPSHOT.json",
       "sha256": "aa5f557b2910ddc8351a49bbbbe8251c406f2710e749616a740c8ba70ed8dc8f"
     },
@@ -131,7 +89,7 @@
     },
     {
       "path": "release/evaluation/SPECIALIST_EVALUATION_INVENTORY.json",
-      "sha256": "7a12d36a471982f49b60723f39a05758cf3a07813bafffde0ab1c4eb1172a04c"
+      "sha256": "fd24773dc7be8a83b8f8bc2459200bbff3cec0ad002c2f5f51f1164d0c1943c7"
     },
     {
       "path": "release/prod/web/privacy.html",
@@ -143,63 +101,19 @@
     },
     {
       "path": "release/EXTERNAL_GATES.md",
-      "sha256": "26cb9487275236189dd4c257bde19406a133818f99b86f6d636912fd40eeaf20"
+      "sha256": "4d11681ee1522097a4a4e68cab1acc88fc303e84d3f8b4a2ee7118bb48763860"
     },
     {
       "path": "release/SUBMISSION_SCOPE_DECISION.md",
-      "sha256": "30bddc8b5807b40594b7448807ab83ab46f037b84da463e3928a3ef3d397cfe3"
+      "sha256": "a6bbeb4e29bb1affa3561e375adaacbebd8ee666350f722d889df380c9dffdd4"
     },
     {
       "path": "release/RC_CONFIG_FREEZE.md",
       "sha256": "076997156f1dd359686f5e235969baf00f43a26e5cb0894574387e50c3060cd0"
     },
     {
-      "path": "release/HUMAN_VALIDATION_HANDOFF.md",
-      "sha256": "080d5b0b7b955c3ce95d465e16c75368a2e0a853d8885a03c7a4f8d2a6c102ae"
-    },
-    {
-      "path": "scripts/pre-human-validation.ps1",
-      "sha256": "092d40abde6615ad33b9ab651954b62ba0ddb770527c63983c43ed84a3a335f2"
-    },
-    {
       "path": "release/SOURCE_DOCUMENT_RECONCILIATION.md",
-      "sha256": "5ec6a603acccda56f8132a18edb124ff1727e0cbe60315d4cc096a00bb892c79"
-    },
-    {
-      "path": "docs/adr/ADR_INDEX.md",
-      "sha256": "b958b4c8a46d5526c72ef2a1cc04846b549f97859f43f212706ec6573eb28019"
-    },
-    {
-      "path": "docs/adr/ADR-191-media-format-and-audio-capture.md",
-      "sha256": "de3bb8c8c6c2d9511444b1020d2ba968867fc1f9109afcd63a9e1764b79cb72c"
-    },
-    {
-      "path": "docs/runbooks/UPLOAD_KEY_RECOVERY.md",
-      "sha256": "ba336e10434f6dcf2b686865aead0e4e1e36150d5091021eae4b5b288989722f"
-    },
-    {
-      "path": "docs/runbooks/EXTERNAL_PHASES_0_17_EXECUTION_CHECKLIST.md",
-      "sha256": "760c1083d815d8e59d2efa30ff4a04dd475751b77c0a640c27f11da973331ca9"
-    },
-    {
-      "path": "docs/runbooks/EXTERNAL_QUALIFICATION_EXECUTION_CHECKLIST.md",
-      "sha256": "210bacf0ff965b7be1e5fb3ac9356b6128f7a158c47098518587c48881483c5f"
-    },
-    {
-      "path": "release/PLAY_APP_SIGNING_CONFIGURATION.md",
-      "sha256": "eec22d981f7958695c7050efcb7192f2671446c783424597eacf3c01ca79c0bc"
-    },
-    {
-      "path": "release/evaluation/WEEKLY_REPORT_RELEASE_DECISION_1.0.0.md",
-      "sha256": "b206521abb2c534b60ed513b8f62ce22d48ac141d58894bc040fc1f086fe4540"
-    },
-    {
-      "path": "release/evaluation/WEEKLY_REPORT_RELEASE_DECISION_1.0.0.json",
-      "sha256": "88eebb0b7cfda849c7ea411b6ae69710e45ffdc0bbaf64eb4e20cc35dfaed979"
-    },
-    {
-      "path": "release/evaluation/PREMIUM_RELEASE_DECISION_1.0.0.md",
-      "sha256": "a47c4c3d45cb6fa540fbc0d80384320cde2e3379d318553f539c96285eecfa05"
+      "sha256": "af9b982fa9cd30f48d8d1f1362115a8e972fae1e65967297eac79b2adfd001d6"
     },
     {
       "path": "release/evaluation/PRIVACY_RELEASE_DECISION_1.0.0.md",
@@ -208,6 +122,10 @@
     {
       "path": "release/evaluation/OPERATIONS_RELEASE_DECISION_1.0.0.md",
       "sha256": "fbd7691909325bf3a209aea3cd45b6ed3e8b28dc647f4f8ef2ece9a25b4ff135"
+    },
+    {
+      "path": "release/evaluation/__PYCACHE___RELEASE_CERTIFICATE.md",
+      "sha256": "c9a88742275444d0b32dffa492d0b0c728b0be2138e35506d978668a74e8e561"
     },
     {
       "path": "release/evaluation/DOG_BODY_CHECK_RELEASE_CERTIFICATE.md",
@@ -224,18 +142,6 @@
     {
       "path": "release/evaluation/DOG_INITIAL_SCAN_RELEASE_CERTIFICATE.md",
       "sha256": "8ce40468a5aed0381b62f84423283f9bf62b8c044630ec1a2636c4cab1a0eeee"
-    },
-    {
-      "path": "release/evidence/phase00/engineering-gates-2026-08-26.json",
-      "sha256": "8f18e463cf2ac746e3b8f2596ffaa57e08793bcc2ed989c6cc9d279841a24a4e"
-    },
-    {
-      "path": "release/evidence/phase01/firebase-android-app-2026-08-26.json",
-      "sha256": "36cd227882d11df19d888914bfc716b379f80fffe1ccc6c67186554cad1d2359"
-    },
-    {
-      "path": "release/evidence/phase01/firebase-android-config-build-2026-08-26.json",
-      "sha256": "f449912def8b9125a7f07f8639bd7bf3dc6f416195a2238c2af2030a65bc8fd4"
     },
     {
       "path": "release/evidence/phase01/firebase-auth-config-2026-08-26.json",
@@ -288,14 +194,6 @@
     {
       "path": "release/evidence/phase12/weekly-report-narration-real-2026-08-26.json",
       "sha256": "ff21e3854b758ea3e873a073e83117775f1cbc8250e6123fdfb5e8b72bf95af9"
-    },
-    {
-      "path": "release/evidence/phase16/android-instrumentation-2026-08-26.json",
-      "sha256": "0ede49b58f9c7e9c275e2b02ff7b174170e5df43cd03708b9348f5165e2a1a15"
-    },
-    {
-      "path": "release/evidence/phase17/internal-artifact-2026-08-26.json",
-      "sha256": "d5a6578a75312c38a126e7c86b4621d7c311c323e54bebfe1c5e0de6fc780902"
     }
   ]
 }

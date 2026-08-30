@@ -6,8 +6,8 @@ Decision date: 2026-08-27
 ## Decision
 
 This release candidate is scoped for the hackathon submission and demo only.
-It is not a declaration of Google Play production readiness. The submitted
-product configuration keeps Premium/Google Play Billing out of scope and the
+It is not a declaration of commercial production readiness. The submitted
+product configuration keeps paid entitlements out of scope and the
 release is treated as a free product for this submission.
 
 ## Included scope
@@ -21,8 +21,7 @@ release is treated as a free product for this submission.
 
 ## Excluded scope
 
-- Google Play production launch, Play Console submission, and license-tester
-  billing lifecycle certification.
+- Paid entitlement lifecycle certification.
 - Production Firebase/GCP deployment and production signing.
 - Claims of physical-device certification, legal approval, or complete
   provider/specialist certification.

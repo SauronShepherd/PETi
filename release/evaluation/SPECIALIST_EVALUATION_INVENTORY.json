@@ -1,9 +1,13 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-08-28T20:06:54.523402+00:00",
-  "status": "MANIFESTS_VALID_EXTERNAL_EXECUTION_PENDING",
+  "generated_at": "2026-08-29T13:47:27.528534+00:00",
+  "status": "MANIFESTS_INVALID",
   "provider_runs": "NOT_EXECUTED",
   "capabilities": {
+    "__pycache__": {
+      "manifests": {},
+      "execution": "PENDING_EXTERNAL_GEMINI"
+    },
     "dog_body_check": {
       "manifests": {
         "dev": {
@@ -105,5 +109,10 @@
       "execution": "PENDING_EXTERNAL_GEMINI"
     }
   },
-  "errors": []
+  "errors": [
+    "missing eval\\specialists\\__pycache__\\dev.json",
+    "missing eval\\specialists\\__pycache__\\held_out.json",
+    "missing eval\\specialists\\__pycache__\\red_team.json",
+    "missing eval\\specialists\\__pycache__\\regression.json"
+  ]
 }

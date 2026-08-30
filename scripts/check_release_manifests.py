@@ -47,12 +47,8 @@ def main() -> int:
         failures.append("phase17 must exclude production credentials")
     if not phase17.get("external_gates"):
         failures.append("phase17 external gates are missing")
-    gradle = (ROOT / "android/app/build.gradle.kts").read_text(encoding="utf-8")
-    for required_input in ("PETI_RELEASE_API_BASE_URL", "PETI_GOOGLE_WEB_CLIENT_ID"):
-        if required_input not in gradle:
-            failures.append(f"Android release input is missing: {required_input}")
-    if "https://api.peti.example" in gradle:
-        failures.append("Android release still contains the placeholder production API URL")
+    if not (ROOT / "web/index.html").is_file():
+        failures.append("web release entrypoint is missing")
     if failures:
         print("RELEASE_MANIFESTS=FAIL")
         print("\n".join(failures))

@@ -681,7 +681,7 @@ class Phase6Service:
             owner,
             values["installation_id"],
             token,
-            values.get("platform", "ANDROID"),
+            values.get("platform", "WEB"),
             values.get("app_version", ""),
             values.get("notifications_permission_state", "UNKNOWN"),
             last_seen_at=now,

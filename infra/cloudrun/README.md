@@ -48,13 +48,13 @@ identity/audience so Scheduler requests cannot fall back to analysis-worker
 credentials. PETi Check is disabled by default in the deployment script until
 evaluation evidence is approved.
 
-AI kill switches can be controlled without an Android release, for example:
+AI kill switches can be controlled without a client release, for example:
 
 ```powershell
 ./infra/cloudrun/deploy.ps1 -Environment dev -ProviderEnabled:$false
 ```
 
-The release Android build also requires operator-provided AdMob application and
+The release configuration also requires operator-provided advertising and
 rewarded-unit IDs; debug/internal variants use Google test IDs.
 
 `cloudbuild.yaml` builds and pushes distinct API and worker images; the worker

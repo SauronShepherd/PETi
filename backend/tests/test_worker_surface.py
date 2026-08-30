@@ -11,6 +11,12 @@ def test_worker_surface_does_not_mount_customer_routes():
     assert "/v1/pets/{pet_id}/checks" not in paths
 
 
+def test_worker_exposes_private_health_contract():
+    paths = {route.path for route in app.routes}
+    assert "/health/live" in paths
+    assert "/health/ready" in paths
+
+
 def test_worker_rejects_customer_firebase_bearer_token(monkeypatch):
     def customer_token_verifier(token, audience):
         assert token == "firebase-customer-token"

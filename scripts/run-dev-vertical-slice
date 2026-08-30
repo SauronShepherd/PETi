@@ -3,4 +3,4 @@ set -euo pipefail
 [[ "${PETI_AUTH_MODE:-}" == "FIREBASE" ]] || { echo 'Set PETI_AUTH_MODE=FIREBASE' >&2; exit 1; }
 [[ -n "${PETI_FIREBASE_PROJECT_ID:-}" ]] || { echo 'Set PETI_FIREBASE_PROJECT_ID' >&2; exit 1; }
 [[ -n "${GOOGLE_APPLICATION_CREDENTIALS:-}${GCLOUD_PROJECT:-}" ]] || { echo 'Configure ADC or GCLOUD_PROJECT' >&2; exit 1; }
-echo 'DEV vertical slice prerequisites are present. Start backend with scripts/run-backend and use an internal Firebase-configured Android build.'
+echo 'DEV vertical slice prerequisites are present. Start backend with scripts/run-backend and use the web client.'

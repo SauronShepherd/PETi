@@ -1,7 +1,7 @@
 # PETi source-document reconciliation
 
 Status: `SOURCE_RECONCILIATION_COMPLETE_EXTERNAL_REFERENCE_SET_UNAVAILABLE`
-Date: 2026-08-27
+Date: 2026-08-29
 
 ## Scope
 
@@ -14,23 +14,24 @@ the unresolved external-reference limitation.
 ## Architecture clarification
 
 The repository implementation uses the official `google-genai` SDK for the
-Gemini provider (`backend/app/ai/providers/`) and a PETi-owned bounded
-state-machine orchestrator (`backend/app/agent_runtime/`). There is no
-`google.adk` import in the source tree. Any external HLD/LLD wording that
-describes Google ADK must therefore be treated as a proposed/external design,
-not as a claim about the current implementation.
+Gemini provider (`backend/app/ai/providers/`) and also contains a Google ADK
+graph in `backend/app/agent_runtime/adk_graph.py`. That graph defines a PETi
+coordinator plus Evidence, Specialist and Safety subagents and is covered by
+`backend/tests/test_adk_graph.py`. The bounded PETi state machine remains the
+application safety/orchestration boundary.
 
-For submission language, describe the implementation as “Google Gemini via
-the official GenAI SDK, coordinated by PETi’s bounded multi-agent runtime.” Do
-not claim that PETi is built on Google ADK unless a future implementation and
-matching evidence actually establish that fact.
+This proves local ADK composition, not yet a deployed authenticated `run_async`
+execution with durable ADK event/checkpoint mapping. Submission language may
+state that PETi uses Google Gemini via the official GenAI SDK and a Google ADK
+coordinator with Evidence, Specialist and Safety subagents; deployed execution
+and its evidence remain an external release gate.
 
 ## Repository authorities reconciled
 
-- `PETI_FULL_QUALIFICATION_BUILD_PLAN.md`
-- `docs/PETI_GAP_ANALYSIS_BUILD_PLAN.md`
-- `docs/HACKATHON_ARCHITECTURE.md`
-- `docs/MULTI_AGENT_ARCHITECTURE.md` and related repository specifications
+- `docs/FINAL_HACKATHON_READINESS_AUDIT_2026-08-29.md`
+- `docs/NAVIGATION_UI_UX_EVIDENCE_REPORT_2026-08-29.md`
+- `release/REQUIREMENTS_TRACEABILITY_MATRIX.md`
+- `backend/app/agent_runtime/adk_graph.py` and its tests
 - `release/RC_CONFIG_FREEZE.md`
 - `release/SUBMISSION_SCOPE_DECISION.md`
 - `release/EXTERNAL_GATES.md`

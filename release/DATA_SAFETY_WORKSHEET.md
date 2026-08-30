@@ -14,7 +14,7 @@ features are not declared as shipped functionality.
 | Care, measurements, records | Timeline and owner history | Owner-entered or confirmed candidates | Not shared by default | Deleted/tombstoned with account |
 | Analysis outputs | Safety-oriented observations and provenance | Generated for requested operation | Not sold; backend storage only | Deleted with account; residual verification required |
 | Notification/device token | Care reminders | Only when notifications are registered | Firebase delivery service | Removed on account deletion |
-| Billing identifiers | Premium entitlement reconciliation | Only for purchase flows | Google Play verification boundary | Billing retention policy; token never exposed in logs |
+| Billing identifiers | Premium entitlement reconciliation | Only for purchase flows | Backend verification boundary | Billing retention policy; token never exposed in logs |
 
 PETi does not use location, contacts, advertising ID, unrestricted media
 library access, or on-device AI models. Final declarations require operator

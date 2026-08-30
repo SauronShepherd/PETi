@@ -8,7 +8,6 @@ from pydantic import BaseModel, Field
 
 from app.analysis.service import AnalysisError
 from app.auth.models import AuthenticatedPrincipal
-from app.billing.premium import PremiumError
 from app.credits.domain import OperationType
 from app.credits.service import FundingError
 from app.future.service import FutureDomainError
@@ -206,7 +205,7 @@ class NotificationPreferencesPatch(BaseModel):
 class DeviceRegistrationRequest(BaseModel):
     installation_id: str = Field(min_length=1, max_length=200)
     fcm_token: str = Field(min_length=1, max_length=4096)
-    platform: str = "ANDROID"
+    platform: str = "WEB"
     app_version: str = ""
     notifications_permission_state: str = "UNKNOWN"
 
@@ -541,37 +540,6 @@ async def account_deletion_status(idempotency_key: str, request: Request, princi
         return request.app.state.privacy.deletion_status(principal.user_id, idempotency_key)
     except PrivacyError as exc:
         raise HTTPException(404, str(exc)) from exc
-
-
-@router.get("/me/premium")
-async def get_premium_entitlement(request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    return request.app.state.premium.public(request.app.state.premium.current(principal.user_id))
-
-
-@router.post("/billing/google-play/reconcile")
-async def reconcile_google_play(body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    try:
-        # This marker is an internal LOCAL-test seam only; never pass a
-        # client-controlled copy deeper into the billing service.
-        client_body = {key: value for key, value in body.items() if key != "_trusted_verification"}
-        return request.app.state.premium.public(request.app.state.premium.reconcile(principal.user_id, client_body))
-    except PremiumError as exc:
-        raise HTTPException(409, str(exc)) from exc
-
-
-@router.post("/internal/billing/google-play/rtdn")
-async def receive_google_play_rtdn(body: dict, request: Request):
-    """Receive a Pub/Sub push envelope; Cloud Run IAM authenticates the caller."""
-    message = body.get("message") or {}
-    encoded = message.get("data")
-    if not encoded:
-        raise HTTPException(400, "RTDN_MESSAGE_DATA_REQUIRED")
-    try:
-        payload = json.loads(base64.b64decode(encoded).decode("utf-8"))
-        result = request.app.state.google_play_rtdn.receive(payload)
-        return {"event_id": result.event_id, "status": result.status}
-    except (ValueError, TypeError, json.JSONDecodeError) as exc:
-        raise HTTPException(400, str(exc)) from exc
 
 
 @router.get("/reports/{report_id}")

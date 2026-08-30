@@ -27,8 +27,8 @@ with an OIDC token whose service account is the dedicated API runtime identity
 and whose audience is the worker URL.
 
 The generated environment outputs are the only supported source for API and
-worker URLs. Do not copy them into Android source; pass them through the
-environment-specific Gradle/Firebase build configuration.
+worker URLs. Pass them through the environment-specific web deployment
+configuration.
 
 The module provisions private uniform-access media storage, Firestore, an
 authenticated Cloud Tasks queue, separate API/worker service accounts, private

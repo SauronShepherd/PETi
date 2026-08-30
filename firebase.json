@@ -2,7 +2,7 @@
   "firestore": { "rules": "firestore.rules" },
   "storage": { "rules": "storage.rules" },
   "hosting": {
-    "public": "release/prod/web",
+    "public": "web",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   },
   "emulators": {
