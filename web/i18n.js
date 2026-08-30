@@ -39,6 +39,7 @@
     "Especialista": "Specialist", "Interpreta solo la capacidad solicitada.": "Interprets only the requested capability.",
     "Agente de seguridad": "Safety agent", "Revisa incertidumbre y señales de alerta.": "Reviews uncertainty and warning signals.",
     "Iniciar revisión": "Start review", "Revisión en curso": "Review in progress",
+    "Vista previa interactiva: simula los estados del flujo y no crea una ejecución en el backend. Inicia sesión con una cuenta de revisión para ejecutar el flujo real de Cloud Run y ADK.": "Interactive preview: it simulates workflow states and does not create a backend run. Sign in with a reviewer account to execute the real Cloud Run and ADK workflow.",
     "Administración": "Administration", "Estado operativo": "Operational status",
     "Métricas técnicas protegidas para operadores autorizados.": "Technical metrics protected for authorized operators.",
     "Comprobando permisos…": "Checking permissions…", "No se muestran datos operativos hasta validar el rol.": "Operational data is hidden until the role is validated.",

@@ -48,6 +48,21 @@ test("documents route sends upload action to the real evidence flow", async ({ p
   await expect(page.locator("#file-picker")).toBeAttached();
 });
 
+test("demo agent preview completes without calling the authenticated backend", async ({ page }) => {
+  let agentRequests = 0;
+  await page.route("**/v1/agent/runs**", async (route) => {
+    agentRequests += 1;
+    await route.abort();
+  });
+  await page.goto("/?demo=1&lang=en#AGENTS");
+  await expect(page.locator(".demo-run-note")).toContainText("does not create a backend run");
+  await page.getByRole("button", { name: "Start review" }).click();
+  await expect(page.locator(".agent-stage.running .badge")).toHaveText("ORCHESTRATOR");
+  await expect(page.locator("section.card p.meta").filter({ has: page.locator("code") })).toContainText("COMPLETED", { timeout: 5000 });
+  expect(agentRequests).toBe(0);
+  await expect(page.locator("body")).not.toContainText("API 401");
+});
+
 test("privacy export exposes a user-safe state", async ({ page }) => {
   await page.goto("/?demo=1#PROFILE");
   await page.getByRole("button", { name: "Exportar mis datos" }).click();
