@@ -58,6 +58,7 @@ test("privacy export exposes a user-safe state", async ({ page }) => {
 
 test("care creation validates missing pet without leaking internals", async ({ page }) => {
   await page.goto("/?demo=1#CARE");
+  await page.evaluate(() => { window.PETI_STATE.selectedPet = null; window.PETI_RENDER(); });
   await page.locator("#care-title").fill("Paseo de la tarde");
   await page.locator("#care-due").fill("2026-08-30T18:00");
   await page.locator("#care-form button[type=submit]").click();
@@ -138,6 +139,7 @@ test("feedback requires an authenticated session without leaking internals", asy
 
 test("collaboration validates missing pet safely", async ({ page }) => {
   await page.goto("/?demo=1#COLLABORATION");
+  await page.evaluate(() => { window.PETI_STATE.selectedPet = null; window.PETI_RENDER(); });
   await page.locator("#member-user").fill("caregiver@example.test");
   await page.getByRole("button", { name: "Enviar invitación" }).click();
   await expect(page.locator("#collaboration-status")).toHaveText("Añade una mascota antes de compartirla.");
