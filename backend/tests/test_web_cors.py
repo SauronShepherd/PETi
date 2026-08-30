@@ -1,6 +1,5 @@
-from fastapi.testclient import TestClient
-
 from app.main import app
+from fastapi.testclient import TestClient
 
 
 def test_web_origin_is_allowed_for_browser_authenticated_requests() -> None:

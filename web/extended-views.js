@@ -50,7 +50,7 @@ window.PETI_ADMIN_REFRESH = async () => { const output = document.querySelector(
 document.addEventListener("click", (event) => {
   if (event.target.id !== "save-settings") return;
   const language = document.querySelector("#language-setting").value; const theme = document.querySelector("#theme-setting").value;
-  localStorage.setItem("peti.language", language); localStorage.setItem("peti.theme", theme); document.documentElement.lang = language; document.documentElement.dataset.theme = theme;
+  window.PETI_I18N?.setLanguage(language); localStorage.setItem("peti.theme", theme); document.documentElement.dataset.theme = theme; window.PETI_RENDER?.();
   document.querySelector("#settings-status").textContent = "Preferencias guardadas en este dispositivo.";
 });
 
