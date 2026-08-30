@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "project-10727829-3ad9-4fa2-b85"
+  },
+  "targets": {
+    "project-10727829-3ad9-4fa2-b85": {
+      "hosting": {
+        "peti-care": [
+          "peti-care"
+        ]
+      }
+    }
   }
 }
