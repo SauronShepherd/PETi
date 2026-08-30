@@ -16,6 +16,8 @@ Al seleccionar a Max en la web pública, las dos primeras evidencias eran del bo
 
 Se generaron tres fotografías nuevas, realistas y no gráficas, conservando la identidad de Max: border collie adulto blanco y negro, un ojo marrón y otro azul claro, mismo patrón facial y postura de baja energía que requiere observación. Se sustituyeron tanto los recursos web como sus fixtures de prueba.
 
+La primera comprobación post-deploy confirmó que Firebase contenía los binarios correctos, pero un navegador previamente abierto aún mostraba las imágenes antiguas por caché. Los tres nombres se versionaron con `-v2` y se añadió `Cache-Control: no-cache, max-age=0, must-revalidate` a `/assets/pets/**` para evitar futuras sustituciones invisibles.
+
 ## Protección contra regresiones
 
 - Se añadió una baseline visual dedicada al panel de evidencias de Max.

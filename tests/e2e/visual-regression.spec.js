@@ -51,7 +51,7 @@ test("demo exercises two synthetic pets with five observations each", async ({ p
   const picker = page.locator("#file-picker");
   const pets = [
     { id: "demo-luna", name: "Luna", files: ["luna-healthy-01.jpg", "luna-healthy-02.jpg", "luna-healthy-03.jpg", "luna-healthy-04.jpg", "luna-healthy-05.jpg"] },
-    { id: "demo-max", name: "Max", files: ["max-unhealthy-01.jpg", "max-unhealthy-02.jpg", "max-unhealthy-03.jpg", "max-unhealthy-04.jpg", "max-unhealthy-05.jpg"] },
+    { id: "demo-max", name: "Max", files: ["max-unhealthy-01.jpg", "max-unhealthy-02.jpg", "max-unhealthy-03-v2.jpg", "max-unhealthy-04-v2.jpg", "max-unhealthy-05-v2.jpg"] },
   ];
   for (const pet of pets) {
     await page.evaluate((value) => { window.PETI_STATE.selectedPet = value; }, { id: pet.id, display_name: pet.name, species: "DOG" });
