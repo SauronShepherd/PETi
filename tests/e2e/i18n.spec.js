@@ -6,9 +6,11 @@ test("English mode translates the public demo and agent workflow", async ({ page
   await expect(page).toHaveTitle("PETi — Your companion. Our care.");
   await expect(page.getByRole("heading", { name: "Everything important, today." })).toBeVisible();
   await expect(page.getByText("Select a pet to explore its evidence.")).toBeVisible();
+  await expect(page.getByAltText("Evidence 1 for Luna")).toBeVisible();
   await page.evaluate(() => { location.hash = "AGENTS"; });
   await expect(page.getByRole("heading", { name: "Multi-agent workflow" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Start review" })).toBeVisible();
+  await page.getByRole("button", { name: "Start review" }).click();
+  await expect(page.locator("section.card p.meta").filter({ has: page.locator("code") })).toContainText("Status: COMPLETED", { timeout: 5000 });
   await expect(page.locator("body")).not.toContainText(/Inicio|Selecciona una mascota|Flujo multi-agente|Iniciar revisión/);
 });
 

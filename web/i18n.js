@@ -38,7 +38,7 @@
     "Agente de evidencia": "Evidence agent", "Busca y organiza fuentes guardadas.": "Finds and organizes saved sources.",
     "Especialista": "Specialist", "Interpreta solo la capacidad solicitada.": "Interprets only the requested capability.",
     "Agente de seguridad": "Safety agent", "Revisa incertidumbre y señales de alerta.": "Reviews uncertainty and warning signals.",
-    "Iniciar revisión": "Start review", "Revisión en curso": "Review in progress",
+    "Iniciar revisión": "Start review", "Revisión en curso": "Review in progress", "· Estado:": "· Status:",
     "Vista previa interactiva: simula los estados del flujo y no crea una ejecución en el backend. Inicia sesión con una cuenta de revisión para ejecutar el flujo real de Cloud Run y ADK.": "Interactive preview: it simulates workflow states and does not create a backend run. Sign in with a reviewer account to execute the real Cloud Run and ADK workflow.",
     "Administración": "Administration", "Estado operativo": "Operational status",
     "Métricas técnicas protegidas para operadores autorizados.": "Technical metrics protected for authorized operators.",
@@ -107,8 +107,8 @@
       const next = translated(trimmed);
       if (next !== trimmed) node.nodeValue = value.replace(trimmed, next);
     }
-    const elements = root.querySelectorAll?.("[placeholder], [title], [aria-label]") || [];
-    for (const element of elements) for (const attribute of ["placeholder", "title", "aria-label"]) {
+    const elements = root.querySelectorAll?.("[placeholder], [title], [aria-label], [alt]") || [];
+    for (const element of elements) for (const attribute of ["placeholder", "title", "aria-label", "alt"]) {
       const value = element.getAttribute(attribute);
       if (value) element.setAttribute(attribute, translated(value));
     }
