@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test("assistant validates empty questions without leaking internals", async ({ page }) => {
   await page.goto("/?demo=1#ASSISTANT");
   await page.locator("#assistant-form button").click();
-  await expect(page.locator("#assistant-status")).toContainText("Añade una mascota");
+  await expect(page.locator("#assistant-status")).toContainText("Escribe una pregunta");
   await expect(page.locator("body")).not.toContainText("TypeError");
   await page.screenshot({ path: test.info().outputPath("assistant-empty-validation.png"), fullPage: true });
 });

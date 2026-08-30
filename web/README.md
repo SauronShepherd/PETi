@@ -1,29 +1,34 @@
-# PETi Web
+# PETi web client
 
-Web responsive de PETi, con el mismo lenguaje visual de las referencias y
-conexión al backend Cloud API. La autenticación usa Firebase Web Auth:
-email/contraseña y Google. La configuración se inyecta en runtime mediante
-`window.PETI_CONFIG` y nunca se guarda en el repositorio.
+Responsive PETi client connected to the authenticated Cloud API. Firebase Web
+Auth supports email/password and Google sign-in. Runtime configuration is
+provided through `window.PETI_CONFIG`; secrets must never be committed.
 
-## Ejecución local
+## Local run
 
-Desde PowerShell, la forma recomendada es:
+From PowerShell:
 
 ```powershell
 .\scripts\start-web.ps1
 ```
 
-También puede arrancarse manualmente:
+Or:
 
 ```powershell
 python -m http.server 4173 --bind 0.0.0.0 -d web
 ```
 
-Abrir `http://localhost:4173/?demo=1` para la demo visual. Para habilitar autenticación real, definir antes
-de cargar `index.html` un `window.PETI_CONFIG` con `apiBaseUrl` y
-`firebaseConfig`, o reemplazar `web/config.example.js` por una configuración
-local no versionada.
+Open `http://localhost:4173/?demo=1` for the safe visual demo. The hosted demo
+is https://peti-care.web.app/?demo=1 and includes two synthetic pets with five
+evidence images per pet. It does not perform destructive backend writes.
 
-La página funciona sin backend para inspección visual con `?demo=1`, pero no
-inventa datos: los estados vacíos se muestran como tales. Sin ese parámetro y
-sin Firebase configurado, el acceso permanece cerrado.
+For real authentication, provide `apiBaseUrl` and `firebaseConfig` at runtime.
+
+Without Firebase configuration, the non-demo route remains sign-in protected.
+
+## Validation
+
+```powershell
+npm run test:e2e
+npx playwright test tests/e2e/visual-regression.spec.js
+```
