@@ -58,7 +58,7 @@ test("demo agent preview completes without calling the authenticated backend", a
   await page.goto("/?demo=1&lang=en#AGENTS");
   await expect(page.locator(".demo-run-note")).toContainText("does not create a backend run");
   await page.getByRole("button", { name: "Start review" }).click();
-  await expect(page.locator(".agent-stage.running .badge")).toHaveText("ORCHESTRATOR");
+  await expect(page.locator("section.card p.meta code")).toHaveText("demo-demo-luna");
   await expect(page.locator("section.card p.meta").filter({ has: page.locator("code") })).toContainText("COMPLETED", { timeout: 5000 });
   expect(agentRequests).toBe(0);
   await expect(page.locator("body")).not.toContainText("API 401");

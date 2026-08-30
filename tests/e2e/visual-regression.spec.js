@@ -18,6 +18,19 @@ for (const route of routes) {
   });
 }
 
+test("visual baseline Max evidence", async ({ page }) => {
+  await page.goto("/?demo=1#HOME");
+  await page.locator('[data-demo-pet="demo-max"]').click();
+  const panel = page.locator("#demo-pets");
+  await expect(panel).toContainText(/(?:Evidence for|Evidencias de) Max:/);
+  await expect(panel).toHaveScreenshot("max-evidence.png", {
+    animations: "disabled",
+    caret: "hide",
+    scale: "css",
+    maxDiffPixelRatio: 0.01,
+  });
+});
+
 test("golden retriever fixture loads and is accepted by the demo image flow", async ({ page }) => {
   await page.goto("/?demo=1#SCAN");
   const picker = page.locator("#file-picker");
