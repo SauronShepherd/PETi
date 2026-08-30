@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("assistant validates empty questions without leaking internals", async ({ page }) => {
   await page.goto("/?demo=1#ASSISTANT");
+  await expect.poll(() => page.evaluate(() => Boolean(window.PETI_STATE?.route === "ASSISTANT" && document.querySelector("#assistant-form")))).toBe(true);
   await page.locator("#assistant-form button").click();
   await expect(page.locator("#assistant-status")).toContainText("Escribe una pregunta");
   await expect(page.locator("body")).not.toContainText("TypeError");
@@ -9,7 +10,7 @@ test("assistant validates empty questions without leaking internals", async ({ p
 });
 
 test("login configuration failures are rendered as plain user-safe text", async ({ page }) => {
-  await page.route("**/config.example.js", async (route) => {
+  await page.route("**/config.example.js*", async (route) => {
     await route.fulfill({
       contentType: "application/javascript",
       body: "window.PETI_CONFIG = { apiBaseUrl: '', firebaseConfig: {} };",
