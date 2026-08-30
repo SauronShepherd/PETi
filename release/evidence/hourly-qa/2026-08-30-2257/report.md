@@ -31,4 +31,12 @@ Las cinco miniaturas de Max corresponden ahora al mismo border collie. En móvil
 
 ## Despliegue y validación pública
 
-Pendiente de completar en este ciclo.
+- Cambios de evidencia y baseline: commit `fcab620`.
+- Versionado de recursos y política de caché: commit `17a6a8a`.
+- Ambos commits enviados a `origin/main`.
+- Firebase Hosting finalizó correctamente en `https://peti-care.web.app`.
+- La portada demo y la API `/health/ready` responden HTTP 200.
+- Los tres recursos `max-unhealthy-0[3-5]-v2.jpg` responden HTTP 200, miden 768×768, tienen hashes SHA-256 idénticos al repositorio y devuelven `must-revalidate, no-cache, max-age=0`.
+- La navegación post-deploy desde el mismo navegador previamente afectado muestra las cinco fotografías correctas, sin imágenes rotas ni desbordamiento horizontal.
+
+No quedan errores, anomalías visuales ni mejoras correctivas reproducibles detectadas en este ciclo.
