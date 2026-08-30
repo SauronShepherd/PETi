@@ -29,6 +29,8 @@ La primera comprobación post-deploy confirmó que Firebase contenía los binari
 
 Las cinco miniaturas de Max corresponden ahora al mismo border collie. En móvil el panel reorganiza las evidencias en dos filas, mantiene objetivos táctiles suficientes y no produce scroll horizontal.
 
+![Max corregido en producción móvil](deployed-max-mobile.png)
+
 ## Despliegue y validación pública
 
 - Cambios de evidencia y baseline: commit `fcab620`.
