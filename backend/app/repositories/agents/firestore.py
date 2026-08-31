@@ -114,6 +114,10 @@ class FirestoreAgentRepository:
         @transactional
         def commit(tx):
             snap = tx.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            if snap is None:
+                return False
             step = snap.to_dict() if snap.exists else None
             if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch):
                 return False
