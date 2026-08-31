@@ -40,6 +40,10 @@ class FirestorePhase6Store:
         @transactional
         def write(transaction):
             snap = transaction.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            if snap is None:
+                return False
             if not snap.exists:
                 return False
             current = snap.to_dict() or {}
