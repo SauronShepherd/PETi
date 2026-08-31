@@ -1,13 +1,13 @@
 """Production GCS adapter. Credentials come from ADC/service identity only."""
 
+import os
 from datetime import timedelta
 from hashlib import sha256
-import os
 from typing import Any
 
 import google.auth
-from google.auth.transport.requests import Request
 from google.auth.credentials import Signing
+from google.auth.transport.requests import Request
 
 
 class GcsObjectStorage:

@@ -3,7 +3,7 @@
 This source freeze records the repository candidate for the PETi hackathon
 golden path.
 
-- Candidate commit: `78f3bff1`
+- Candidate commit: `31d637c78e37a4cb59a11a15a0683d4e8f98e70d`
 - Branch: `main`
 - Client surface: `web/`
 - Recipe: `FECES_COMPARE_V1`

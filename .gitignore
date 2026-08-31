@@ -34,3 +34,4 @@ android/**/.idea/
 generated-signed-url*
 # Firebase client configuration is environment-specific and must never be committed.
 android/app/google-services.json
+.tmp/

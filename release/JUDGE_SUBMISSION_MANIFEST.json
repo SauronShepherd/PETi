@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "status": "SOURCE_PACKAGE_READY_EXTERNAL_RUNTIME_EVIDENCE_PENDING",
-  "candidate_sha": "78f3bff1",
+  "candidate_sha": "31d637c78e37a4cb59a11a15a0683d4e8f98e70d",
   "surface": "web",
   "golden_path": "FECES_COMPARE_V1 -> explicit reminder approval -> ActionReceipt",
   "preview": "?demo=1 is synthetic and creates no backend agent run",
