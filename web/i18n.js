@@ -71,7 +71,10 @@
     "Revisión pendiente": "Review pending", "Completa las observaciones con buena luz y detente si tu mascota se incomoda.": "Complete observations in good light and stop if your pet becomes uncomfortable.",
     "Ojos": "Eyes", "Oídos": "Ears", "Piel y pelaje": "Skin and coat", "Patas y postura": "Legs and posture",
     "Respiración en reposo": "Breathing at rest", "Heces observables": "Observable stool", "Sin señales visibles preocupantes": "No concerning visible signs",
-    "Finalizar revisión": "Finish review", "Si detectas dolor, dificultad respiratoria, sangrado o un cambio intenso, contacta con un veterinario.": "If you observe pain, breathing difficulty, bleeding or a severe change, contact a veterinarian."
+    "Finalizar revisión": "Finish review", "Si detectas dolor, dificultad respiratoria, sangrado o un cambio intenso, contacta con un veterinario.": "If you observe pain, breathing difficulty, bleeding or a severe change, contact a veterinarian.",
+    "Tu compañero. Nuestro cuidado.": "Your companion. Our care.", "Bienvenida": "Welcome", "Correo electrónico": "Email", "Contraseña": "Password",
+    "Continuar con correo electrónico": "Continue with email", "Continuar con Google": "Continue with Google",
+    "Al continuar aceptas los términos de uso y la política de privacidad.": "By continuing, you accept the terms of use and privacy policy.", "o": "or"
     ,"DOG · Perfil registrado": "DOG · Profile saved",
     "Analizar y entender": "Analyze and understand", "Elige una evidencia. PETi observa señales visibles y declara sus límites.": "Choose evidence. PETi observes visible signs and states its limits.",
     "¿Qué quieres observar?": "What do you want to observe?", "Cada análisis conserva su origen y requiere evidencia suficiente.": "Every analysis preserves its source and requires sufficient evidence.",

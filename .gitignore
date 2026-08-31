@@ -36,3 +36,4 @@ generated-signed-url*
 android/app/google-services.json
 .tmp/
 test-results/
+node_modules/
