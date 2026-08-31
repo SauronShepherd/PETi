@@ -173,6 +173,17 @@ class AgentExecutionService:
             validate_synthesis(claims, safety_state)
             self.runs.persist_claims(owner, run_id, claims)
             result = {"answer_type": "GROUNDED_OBSERVATIONS", "schema_version": "1.0.0", "status": safety_state, "outcome": "SAFETY_ROUTED" if safety_state != "NORMAL_INFORMATION" else "ANSWERED", "safety_state": safety_state, "claims": claims, "evidence_references": [asdict(ref) for ref in evidence], "payload": response.payload}
+            if recipe_id == "FECES_COMPARE_FOLLOW_UP_V1":
+                action = self.runs.propose_action(
+                    owner, run_id, "FOLLOW_UP_REMINDER",
+                    "Revisar el estado de Max mañana",
+                    {"title": "Revisar el estado de Max", "category": "OTHER", "due_at": (self.runs.clock() + __import__("datetime").timedelta(days=1)).isoformat(), "source": "PETi_AGENT"},
+                )
+                result["proposed_actions"] = [action]
+                result["outcome"] = "WAITING_FOR_APPROVAL"
+                current = self.runs.get(owner, run_id)
+                self.runs.release_execution_lease(owner, run_id, lease_owner, lease_epoch=lease_epoch, expected_version=current.run_version)
+                return self.runs.get(owner, run_id).public()
             published = self.lab.publish_response(run, outcome=result["outcome"], safety_state=safety_state, provider=response.provider, model=response.model) if self.lab else None
             if published:
                 result["response_id"] = published.id

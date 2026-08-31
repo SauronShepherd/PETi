@@ -51,7 +51,7 @@ FECES_CURRENT_V1 = Recipe(
 )
 FECES_COMPARE_FOLLOW_UP_V1 = Recipe(
     "FECES_COMPARE_FOLLOW_UP_V1", "FECES", ("RECENT_FECES_OBSERVATIONS",),
-    FECES_COMPARE_V1.nodes + (("care-proposal", "AGENT", "CARE_FOLLOW_UP_PROPOSAL", ("final-safety",)),
+    FECES_COMPARE_V1.nodes[:-1] + (("care-proposal", "AGENT", "CARE_FOLLOW_UP_PROPOSAL", ("final-safety",)),
                               ("user-approval", "USER_APPROVAL", "CARE_FOLLOW_UP_PROPOSAL", ("care-proposal",)),
                               ("execute-reminder", "TOOL", "CREATE_CARE_REMINDER_ACTION", ("user-approval",))),
 )
