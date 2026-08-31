@@ -1,0 +1,76 @@
+Welcome to PETi, a safety-first AI assistant for pet care.
+
+In this demonstration, we will follow a complete multi-agent workflow,
+from the pet owner's experience to the operational view used by administrators
+and reviewers.
+
+We begin in the user application. PETi is designed to help owners understand
+visible evidence and organize follow-up care. It does not diagnose medical
+conditions, prescribe treatment, or replace a veterinarian.
+
+The Agents workspace is where the owner starts a review. The request is
+processed as a bounded workflow, with explicit safety and evidence controls.
+
+Now we move to the administrative Agent Laboratory.
+
+This is the operational view of the multi-agent system. It shows the available
+agents, the configured models, and the execution history.
+
+The workflow is coordinated by an orchestrator and delegated to specialized
+stages. Evidence intake checks that the submitted evidence is usable and
+grounded. The pet specialist reviews the permitted visible observations.
+The safety review checks the result against deterministic PETi safety rules.
+
+The important point is that agents reason, but PETi remains authoritative.
+The agents cannot change ownership, access arbitrary data, select their own
+tools, or execute care actions independently.
+
+The Model Intelligence view shows the model configuration used by the runtime.
+Model identity and execution metadata are visible for review, while private
+prompts, tokens, hidden reasoning, and sensitive customer data remain protected.
+
+Next, we open Live Runs.
+
+Each run has a durable identifier and an explicit lifecycle. The system records
+the stages, their status, evidence counts, claims, safety state, and operational
+metadata. This state is persisted by the backend, so the workflow does not
+depend on one browser session or an in-process lock.
+
+We now open a run inspector.
+
+This view shows how PETi reached the result without exposing chain of thought.
+Instead, it presents structured provenance: the evidence used, the claims
+produced, the model and tools involved, and the safety decision.
+
+The Evidence and Claims tab separates observations from interpretations and
+keeps source references attached to the result.
+
+The Models and Tools tab shows which model and bounded tools were involved.
+The Versions tab provides the relevant runtime and policy versions so that the
+result can be audited and reproduced.
+
+This separation is central to PETi's design. A visible observation is not the
+same as a diagnosis. A model suggestion is not the same as an authoritative
+fact. And a proposed action is not the same as an executed action.
+
+On the user side, a reminder or care action requires explicit approval.
+PETi binds approval to the exact proposed payload and persists an ActionReceipt
+after the canonical care mutation succeeds.
+
+That means the system can prove what was proposed, what the user approved,
+and what was actually created.
+
+The administrative view therefore complements the user experience. The owner
+gets a clear, safe answer and an actionable next step. Reviewers can inspect
+the multi-agent execution, evidence provenance, safety controls, and durable
+state behind that experience.
+
+This is PETi's bounded multi-agent approach: multiple specialized stages,
+real orchestration, deterministic safety, least-privilege context, and
+explicit human approval before action.
+
+The public preview is clearly marked as synthetic demo data. Production-like
+claims are only made when they are supported by the backend and its evidence.
+
+PETi is not an autonomous veterinarian. It is a transparent, safety-first
+assistant that helps owners observe, understand, and follow up responsibly.
