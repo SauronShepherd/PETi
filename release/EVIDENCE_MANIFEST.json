@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-30T05:42:36.722986+00:00",
-  "git_revision": "47ed1609ae00a1c691fb0b5d0f359173116da85f",
+  "generated_at": "2026-08-31T15:54:10.012370+00:00",
+  "git_revision": "78f3bff1af1074ff9af5dcb7b9e47ea7ff856bb6",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -21,11 +21,11 @@
   "artifacts": [
     {
       "path": "README.md",
-      "sha256": "846bb62b9cfa0e55b2732a0e99273ed483066cba7e42a1d6e8a7d9548c285261"
+      "sha256": "6cde35007a85aebd3f9025475995c9684d544f5f7a413eea9445a8d3a0045ca9"
     },
     {
       "path": "firebase.json",
-      "sha256": "01e86015201758c574fea8dc3c4f22851fb9f195acd06240f465e122f2e96f48"
+      "sha256": "b6a24f483af726019b9311d9b6c7606d19df4569effd50784553c1cc58dabcd1"
     },
     {
       "path": "firestore.rules",
@@ -45,15 +45,15 @@
     },
     {
       "path": "infra/monitoring/monitoring.yaml",
-      "sha256": "2b6d04c5c71556ef454d6c3560b76efe8fda21f216388f96645029f2c7582d75"
+      "sha256": "4871c5aa4421738f5a55e34415535bff6d8c7bf5189da99f14bc82d7da74d3d4"
     },
     {
       "path": "infra/terraform/modules/peti-platform/main.tf",
-      "sha256": "ab0c2550362474252b4f6c8c3136da40ac116771c42b1e62acdc0845831345d8"
+      "sha256": "7d52ef73e3641d04e5e15a604591ad68913dd7490ca007e75eacc02402a8fed2"
     },
     {
       "path": "backend/app/privacy/lifecycle.py",
-      "sha256": "7c2e0ae646a04294fbf3801b00673d7b2a498fd8b6f4043207b3f2213bbdc390"
+      "sha256": "eb666b1d9563e2f868853f6a6a3f0181e5865b3fde29105a87c08ce18756a201"
     },
     {
       "path": "backend/app/operations/platform.py",
@@ -65,7 +65,7 @@
     },
     {
       "path": "backend/app/agent_runtime/execution.py",
-      "sha256": "5a01b7b43fef6e711e429054d0f4ac23091c1de101cf420456d6c0e2aad32dc7"
+      "sha256": "6e716a7da18f01be84985509fc77fabf654f310e472f0a2617ad1a66ea8fe0bb"
     },
     {
       "path": "backend/app/ai/providers/gemini.py",
@@ -73,7 +73,7 @@
     },
     {
       "path": "backend/app/api/agent_runs.py",
-      "sha256": "6b8a874079bd503dfb3ab730be673d01308d9997719bec0ee417628c3bad57ba"
+      "sha256": "36157ae03b2f64cd7fd9fb95e40ff2fddd258cb4f882a696a8518cdf30d8171b"
     },
     {
       "path": "eval/weekly_report/run_gemini.py",
@@ -85,7 +85,7 @@
     },
     {
       "path": "release/PRODUCTION_FEATURE_FLAGS.json",
-      "sha256": "62944c7c2b4dba461d6c241d4420ab987368b7dee77537fcd840c8f42507c18b"
+      "sha256": "4c09f56f49d1f32ada7a1a982d72b16fd44dec7b12ee599b2cb9f275e4c0db31"
     },
     {
       "path": "release/evaluation/SPECIALIST_EVALUATION_INVENTORY.json",

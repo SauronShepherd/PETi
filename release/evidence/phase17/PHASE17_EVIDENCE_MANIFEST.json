@@ -3,14 +3,14 @@
   "phase": "17",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_EVIDENCE_PENDING",
   "production_credentials_included": false,
-  "git_revision": "47ed1609ae00a1c691fb0b5d0f359173116da85f",
+  "git_revision": "78f3bff1af1074ff9af5dcb7b9e47ea7ff856bb6",
   "web_artifacts": {
     "release/prod/web/privacy.html": "d213d08cd943f2472f2d06955b36cdbbc5bd3807e2fcc3afb37575a3cac99687",
     "release/prod/web/delete-account.html": "54dba77fee442dd8ab1ebe3d2f13b4f07d30416ebddaa14a2a474e945b2ab9bf"
   },
   "release_artifacts": {
     "release/PRODUCTION_CONFIG_SNAPSHOT.json": "aa5f557b2910ddc8351a49bbbbe8251c406f2710e749616a740c8ba70ed8dc8f",
-    "release/PRODUCTION_FEATURE_FLAGS.json": "62944c7c2b4dba461d6c241d4420ab987368b7dee77537fcd840c8f42507c18b",
+    "release/PRODUCTION_FEATURE_FLAGS.json": "4c09f56f49d1f32ada7a1a982d72b16fd44dec7b12ee599b2cb9f275e4c0db31",
     "release/evaluation/SPECIALIST_EVALUATION_INVENTORY.json": "fd24773dc7be8a83b8f8bc2459200bbff3cec0ad002c2f5f51f1164d0c1943c7",
     "release/prod/web/privacy.html": "d213d08cd943f2472f2d06955b36cdbbc5bd3807e2fcc3afb37575a3cac99687",
     "release/prod/web/delete-account.html": "54dba77fee442dd8ab1ebe3d2f13b4f07d30416ebddaa14a2a474e945b2ab9bf",
