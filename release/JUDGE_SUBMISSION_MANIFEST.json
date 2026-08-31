@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "status": "SOURCE_PACKAGE_READY_EXTERNAL_RUNTIME_EVIDENCE_PENDING",
+  "candidate_sha": "acf37d3c",
+  "surface": "web",
+  "golden_path": "FECES_COMPARE_V1 -> explicit reminder approval -> ActionReceipt",
+  "preview": "?demo=1 is synthetic and creates no backend agent run",
+  "external_evidence": "pending until a credentialed sandbox run is captured",
+  "ci": "not requested for this iteration"
+}

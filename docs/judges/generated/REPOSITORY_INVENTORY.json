@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "agents": [
+    "backend/app/agents/__init__.py",
+    "backend/app/agents/care/__init__.py",
+    "backend/app/agents/contracts.py",
+    "backend/app/agents/evidence/__init__.py",
+    "backend/app/agents/feces/__init__.py",
+    "backend/app/agents/longitudinal/__init__.py",
+    "backend/app/agents/orchestrator/__init__.py",
+    "backend/app/agents/role_agents.py",
+    "backend/app/agents/roster.py",
+    "backend/app/agents/schemas.py",
+    "backend/app/agents/synthesis/__init__.py",
+    "backend/app/agents/technical_contracts.py"
+  ],
+  "recipes": [
+    "backend/app/agent_runtime/recipe_registry.py"
+  ],
+  "judge_documents": [
+    "ARCHITECTURE.md",
+    "DEMO_RUNBOOK.md",
+    "JUDGE_CHECKLIST.md",
+    "KNOWN_LIMITATIONS.md",
+    "MULTI_AGENT_RUNTIME.md",
+    "PRODUCT_AND_PROBLEM.md",
+    "PROOF_OF_ACTION.md",
+    "QUICKSTART.md",
+    "REPOSITORY_MAP.md",
+    "SAFETY_PRIVACY_AND_AUTHORITY.md",
+    "START_HERE.md",
+    "TESTING_AND_VERIFICATION.md",
+    "TROUBLESHOOTING.md"
+  ]
+}
