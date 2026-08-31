@@ -61,17 +61,22 @@ class FirestorePhase6Store:
         return bool(write(tx))
 
     def put_agent_run_versioned(self, run_id: str, data: dict[str, Any], *, owner: str, expected_version: int) -> bool:
+        from google.cloud.firestore_v1.transaction import transactional
         ref = self.client.collection("agent_runs").document(run_id)
         transaction = self.client.transaction()
-        snap = ref.get(transaction=transaction)
-        current = snap.to_dict() if snap.exists else None
-        if not current or current.get("owner_user_id") != owner or int(current.get("run_version", 0)) != int(expected_version):
-            return False
-        next_data = dict(data)
-        next_data["run_version"] = int(expected_version) + 1
-        transaction.set(ref, next_data)
-        transaction.commit()
-        return True
+        @transactional
+        def write(tx):
+            snap = tx.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            current = snap.to_dict() if snap is not None and snap.exists else None
+            if not current or current.get("owner_user_id") != owner or int(current.get("run_version", 0)) != int(expected_version):
+                return False
+            next_data = dict(data)
+            next_data["run_version"] = int(expected_version) + 1
+            tx.set(ref, next_data)
+            return True
+        return bool(write(transaction))
 
     def delete(self, collection: str, record_id: str) -> None:
         self.client.collection(collection).document(record_id).delete()
