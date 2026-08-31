@@ -231,6 +231,25 @@ class MediaService:
                 raise MediaError("MEDIA_AI_SOURCE_INVALID")
             seen.add(media_asset_id)
             asset = self.assets.get(media_asset_id)
+            # A long-lived worker may have started before the API finalized
+            # this asset. Refresh the single requested identity from the
+            # durable metadata store instead of relying on process memory.
+            if asset is None and self.metadata_store and hasattr(self.metadata_store, "get_asset"):
+                raw = self.metadata_store.get_asset(media_asset_id)
+                if raw:
+                    data = dict(raw)
+                    for key in ("delete_after", "created_at", "uploaded_at", "finalized_at", "deleted_at"):
+                        value = data.get(key)
+                        if value is not None and not isinstance(value, datetime):
+                            data[key] = datetime.fromisoformat(str(value))
+                    for key, enum_type in (
+                        ("media_type", MediaType), ("purpose", MediaPurpose),
+                        ("retention_class", RetentionClass), ("status", MediaStatus),
+                        ("upload_strategy", UploadStrategy),
+                    ):
+                        data[key] = enum_type(data[key])
+                    asset = MediaAsset(**{k: data[k] for k in MediaAsset.__dataclass_fields__ if k in data})
+                    self.assets[media_asset_id] = asset
             if not asset:
                 raise MediaError("MEDIA_AI_SOURCE_NOT_FOUND")
             if asset.owner_user_id != owner_user_id:
