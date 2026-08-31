@@ -7,11 +7,12 @@
   "cloud_build": {"id": "9dbb0daf-8d11-4c61-83a6-a5cf66d9a025", "status": "SUCCESS"},
   "services": {
     "api": {"name": "peti-api-dev", "revision": "peti-api-dev-00015-lj7", "health_live": 200, "health_ready": 200},
-    "worker": {"name": "peti-worker-dev", "revision": "peti-worker-dev-00016-4zp", "private": true, "unauthenticated_health_probe": 404}
+    "worker": {"name": "peti-worker-dev", "revision": "peti-worker-dev-00016-4zp", "private": true, "ingress": "internal", "direct_external_probe": 404, "direct_probe_interpretation": "expected: public ingress is disabled; invocation is through Cloud Tasks/API service identity"}
   },
   "tasks": {"queue": "analysis-dev", "state": "RUNNING", "max_attempts": 5, "max_concurrent_dispatches": 10},
   "limitations": [
-    "Authenticated worker probe was not captured: the active user lacks iam.serviceAccounts.getAccessToken for the worker service account.",
+    "Direct worker probe is intentionally not a valid runtime test because Cloud Run ingress is internal.",
+    "Cloud Tasks-delivered worker probe and golden-path user run are not yet captured; a Firebase sandbox user and valid media asset are required.",
     "No golden-path user run or ActionReceipt is claimed by this artifact."
   ]
 }
