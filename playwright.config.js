@@ -8,7 +8,7 @@ export default defineConfig({
   use: { baseURL: process.env.PETI_WEB_BASE_URL || "http://127.0.0.1:4173", screenshot: "on", trace: "retain-on-failure" },
   webServer: process.env.PETI_WEB_BASE_URL
     ? undefined
-    : { command: "python -m http.server 4173 --bind 127.0.0.1 -d web", url: "http://127.0.0.1:4173/?demo=1", reuseExistingServer: true, timeout: 30_000 },
+    : { command: "python -m http.server 4173 --bind 127.0.0.1 -d web", url: "http://127.0.0.1:4173/?demo=1", reuseExistingServer: false, timeout: 30_000 },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
     { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 1024, height: 768 }, isMobile: false } },
