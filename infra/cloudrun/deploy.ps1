@@ -78,6 +78,7 @@ $envArgs = @(
     "PETI_GEMINI_TRANSPORT=SDK",
     "PETI_GEMINI_LOCATION=global",
     "PETI_CHECK_ENABLED=false"
+    ,"PETI_AGENT_RUNTIME_ENABLED=true"
 )
 
 Invoke-Gcloud builds submit . --config=infra/cloudrun/cloudbuild.yaml --substitutions="_ENVIRONMENT=$Environment,_IMAGE_PREFIX=$imagePrefix"
