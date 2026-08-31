@@ -236,7 +236,7 @@ class AgentOrchestrator:
                 owner=owner, lease_epoch=lease_epoch, expected_version=expected_version,
             ):
                 raise ValueError("STALE_AGENT_EXECUTION")
-            run.run_version = expected_version + 1
+            run.run_version = max(expected_version, run.run_version) + 1
         else:
             run.run_version = expected_version + 1
             self._persist_run(run)
@@ -440,7 +440,19 @@ class AgentOrchestrator:
         run.evidence.extend(evidence or []); self._set_state(run, RunState.RUNNING)
         if lease_epoch is not None and expected_version is not None and self.store and hasattr(self.store, "put_agent_run_fenced"):
             if not self.store.put_agent_run_fenced(run.id, {**asdict(run), "state": run.state.value}, owner=owner, lease_epoch=lease_epoch, expected_version=expected_version):
-                raise ValueError("STALE_AGENT_EXECUTION")
+                # The step repository and aggregate use separate durable CAS
+                # writes. Re-read once when the same lease advanced the
+                # aggregate between those writes; never overwrite a different
+                # lease holder.
+                latest = self.get(owner, run_id)
+                if latest.execution_lease_owner != run.execution_lease_owner or latest.lease_epoch != lease_epoch:
+                    raise ValueError("STALE_AGENT_EXECUTION")
+                run.run_version = latest.run_version
+                if not self.store.put_agent_run_fenced(
+                    run.id, {**asdict(run), "state": run.state.value},
+                    owner=owner, lease_epoch=lease_epoch, expected_version=run.run_version,
+                ):
+                    raise ValueError("STALE_AGENT_EXECUTION")
             run.run_version = expected_version + 1
         else:
             self._persist_run(run)
