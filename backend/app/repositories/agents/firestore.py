@@ -74,24 +74,26 @@ class FirestoreAgentRepository:
         return True
 
     def claim_step(self, run_id, step_id, worker_id, now, lease_seconds=300):
+        from google.cloud.firestore_v1.transaction import transactional
         transaction = self.client.transaction()
         ref = self._run(run_id).collection("steps").document(step_id)
         run_ref = self._run(run_id)
-        run_snap = run_ref.get(transaction=transaction)
-        step_snap = ref.get(transaction=transaction)
-        run = run_snap.to_dict() if run_snap.exists else None
-        step = step_snap.to_dict() if step_snap.exists else None
-        if not run or not step or run.get("status") in {"COMPLETED", "CANCELED", "DELETED"}:
-            return False
-        if step.get("status") not in {"READY", "RETRY_SCHEDULED"}:
-            return False
-        expiry = step.get("lease_expires_at")
-        if expiry and expiry > now:
-            return False
-        step.update({"status": "RUNNING", "lease_owner": worker_id, "lease_expires_at": now + timedelta(seconds=lease_seconds), "lease_epoch": int(step.get("lease_epoch", 0)) + 1, "attempt_count": int(step.get("attempt_count", 0)) + 1})
-        transaction.set(ref, step)
-        transaction.commit()
-        return True
+        @transactional
+        def claim(tx):
+            run_snap, step_snap = tx.get_all([run_ref, ref])
+            run = run_snap.to_dict() if run_snap.exists else None
+            step = step_snap.to_dict() if step_snap.exists else None
+            if not run or not step or run.get("status") in {"COMPLETED", "CANCELED", "DELETED"}:
+                return False
+            if step.get("status") not in {"READY", "RETRY_SCHEDULED"}:
+                return False
+            expiry = step.get("lease_expires_at")
+            if expiry and expiry > now:
+                return False
+            step.update({"status": "RUNNING", "lease_owner": worker_id, "lease_expires_at": now + timedelta(seconds=lease_seconds), "lease_epoch": int(step.get("lease_epoch", 0)) + 1, "attempt_count": int(step.get("attempt_count", 0)) + 1})
+            tx.set(ref, step)
+            return True
+        return bool(claim(transaction))
 
     def renew_step_lease(self, run_id, step_id, worker_id, lease_epoch, now, lease_seconds=300):
         transaction = self.client.transaction()
