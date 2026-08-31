@@ -108,16 +108,19 @@ class FirestoreAgentRepository:
         return True
 
     def commit_step_result(self, run_id, step_id, worker_id, lease_epoch, result):
+        from google.cloud.firestore_v1.transaction import transactional
         transaction = self.client.transaction()
         ref = self._run(run_id).collection("steps").document(step_id)
-        snap = ref.get(transaction=transaction)
-        step = snap.to_dict() if snap.exists else None
-        if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch):
-            return False
-        step.update({"status": "SUCCEEDED", "result": result, "lease_owner": None, "lease_expires_at": None})
-        transaction.set(ref, step)
-        transaction.commit()
-        return True
+        @transactional
+        def commit(tx):
+            snap = tx.get(ref)
+            step = snap.to_dict() if snap.exists else None
+            if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch):
+                return False
+            step.update({"status": "SUCCEEDED", "result": result, "lease_owner": None, "lease_expires_at": None})
+            tx.set(ref, step)
+            return True
+        return bool(commit(transaction))
 
     def schedule_step_retry(self, run_id, step_id, worker_id, lease_epoch, now):
         transaction = self.client.transaction(); ref = self._run(run_id).collection("steps").document(step_id)
