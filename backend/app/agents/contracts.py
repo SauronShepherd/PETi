@@ -160,6 +160,10 @@ class AgentOrchestrator:
             @transactional
             def claim(tx):
                 snap = tx.get(ref)
+                if not hasattr(snap, "exists"):
+                    snap = next(iter(snap), None)
+                if snap is None:
+                    return False
                 if not snap.exists: return False
                 data = snap.to_dict() or {}
                 if data.get("owner_user_id") != owner or data.get("state") not in {"QUEUED", "RUNNING"}: return False
