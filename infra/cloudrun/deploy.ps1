@@ -61,6 +61,7 @@ $envArgs = @(
     "PETI_PROJECT_ID=$Project",
     "PETI_FIREBASE_PROJECT_ID=$FirebaseProject",
     "PETI_MEDIA_BUCKET=$MediaBucket",
+    "PETI_MEDIA_SIGNING_SERVICE_ACCOUNT=$MaintenanceServiceAccount",
     "PETI_TASKS_PROJECT_ID=$Project",
     "PETI_TASKS_LOCATION=$Region",
     "PETI_ANALYSIS_QUEUE_NAME=$Queue",

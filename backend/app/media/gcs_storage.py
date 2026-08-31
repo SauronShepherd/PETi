@@ -2,7 +2,12 @@
 
 from datetime import timedelta
 from hashlib import sha256
+import os
 from typing import Any
+
+import google.auth
+from google.auth import impersonated_credentials
+from google.auth.credentials import Signing
 
 
 class GcsObjectStorage:
@@ -14,12 +19,27 @@ class GcsObjectStorage:
 
     def create_upload_authorization(self, bucket, name, content_type, expires_seconds=900):
         blob = self.client.bucket(bucket or self.bucket_name).blob(name)
+        credentials = self.client._credentials
+        if not isinstance(credentials, Signing):
+            service_account_email = os.getenv("PETI_MEDIA_SIGNING_SERVICE_ACCOUNT")
+            if not service_account_email:
+                raise ValueError("MEDIA_SIGNING_SERVICE_ACCOUNT_REQUIRED")
+            source_credentials, _ = google.auth.default(
+                scopes=["https://www.googleapis.com/auth/cloud-platform"]
+            )
+            credentials = impersonated_credentials.Credentials(
+                source_credentials=source_credentials,
+                target_principal=service_account_email,
+                target_scopes=["https://www.googleapis.com/auth/cloud-platform"],
+                lifetime=min(expires_seconds, 3600),
+            )
         return {
             "upload_url": blob.generate_signed_url(
                 version="v4",
                 expiration=timedelta(seconds=expires_seconds),
                 method="PUT",
                 content_type=content_type,
+                credentials=credentials,
             ),
             "required_headers": {"Content-Type": content_type},
         }
