@@ -1,7 +1,7 @@
 window.PETI_CONFIG = {
   apiBaseUrl: "https://peti-api-dev-g2vgrtwnqq-ew.a.run.app",
   firebaseConfig: {
-    apiKey: "AIzaSyC4Q2A5FCMaCUgyONxF9UEH2DMk_OeCVKw",
+    apiKey: "REPLACE_WITH_FIREBASE_WEB_API_KEY",
     authDomain: "project-10727829-3ad9-4fa2-b85.firebaseapp.com",
     projectId: "project-10727829-3ad9-4fa2-b85",
     storageBucket: "project-10727829-3ad9-4fa2-b85.firebasestorage.app",
