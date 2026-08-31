@@ -3,11 +3,11 @@
   "captured_at": "2026-08-31T16:31:00Z",
   "project": "project-10727829-3ad9-4fa2-b85",
   "region": "europe-west1",
-  "source_commit": "f597b0ba",
-  "cloud_build": {"id": "7a92a8be-6a4e-4c59-8f19-650857344e17", "status": "SUCCESS"},
+  "source_commit": "4397cf43",
+  "cloud_build": {"id": "82510c74-a6ce-4467-8abc-9b66bfec7391", "status": "SUCCESS"},
   "services": {
-    "api": {"name": "peti-api-dev", "revision": "peti-api-dev-00016-6sk", "health_live": 200, "health_ready": 200, "authenticated_me": 200, "authenticated_pets": 200},
-    "worker": {"name": "peti-worker-dev", "revision": "peti-worker-dev-00017-pgd", "private": true, "ingress": "internal", "direct_external_probe": 404, "direct_probe_interpretation": "expected: public ingress is disabled; invocation is through Cloud Tasks/API service identity"}
+    "api": {"name": "peti-api-dev", "revision": "peti-api-dev-00017-m2t", "health_live": 200, "health_ready": 200, "authenticated_me": 200, "authenticated_pets": 200},
+    "worker": {"name": "peti-worker-dev", "revision": "peti-worker-dev-00018-bqm", "private": true, "ingress": "internal", "direct_external_probe": 404, "direct_probe_interpretation": "expected: public ingress is disabled; invocation is through Cloud Tasks/API service identity"}
   },
   "tasks": {"queue": "analysis-dev", "state": "RUNNING", "max_attempts": 5, "max_concurrent_dispatches": 10},
   "limitations": [
