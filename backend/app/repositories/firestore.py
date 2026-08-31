@@ -37,6 +37,13 @@ class FirestoreUserRepository:
             @transactional
             def get_or_create_transaction(tx):
                 snapshot = tx.get(ref)
+                # google-cloud-firestore versions differ here: older clients
+                # return a snapshot, while newer clients return an iterator of
+                # snapshots for transaction reads.
+                if not hasattr(snapshot, "exists"):
+                    snapshot = next(iter(snapshot), None)
+                if snapshot is None:
+                    raise RuntimeError("FIRESTORE_TRANSACTION_READ_EMPTY")
                 if snapshot.exists:
                     data = snapshot.to_dict()
                     if data.get("deleted_at") is not None:
