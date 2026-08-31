@@ -30,7 +30,7 @@ class GcsObjectStorage:
             credentials, _ = google.auth.default(
                 scopes=["https://www.googleapis.com/auth/cloud-platform"]
             )
-            if not credentials.valid:
+            if not credentials.valid or not credentials.token:
                 credentials.refresh(Request())
             # Compute/Cloud Run credentials cannot sign locally. The storage
             # signer uses the IAM Credentials signBlob endpoint with the
