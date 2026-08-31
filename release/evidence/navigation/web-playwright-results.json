@@ -5,7 +5,7 @@
       "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\node_modules\\@playwright\\test\\cli.js",
       "test",
       "tests/e2e/lab-polling.spec.js",
-      "--workers=1"
+      "--project=desktop"
     ],
     "configFile": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\playwright.config.js",
     "rootDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
@@ -94,11 +94,11 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.62.1",
-    "workers": 1,
+    "workers": 6,
     "webServer": {
       "command": "python -m http.server 4173 --bind 127.0.0.1 -d web",
       "url": "http://127.0.0.1:4173/?demo=1",
-      "reuseExistingServer": true,
+      "reuseExistingServer": false,
       "timeout": 30000
     }
   },
@@ -125,12 +125,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3964,
+                  "duration": 4940,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-31T14:34:44.584Z",
+                  "startTime": "2026-08-31T16:00:17.726Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -148,95 +148,15 @@
           "file": "lab-polling.spec.js",
           "line": 3,
           "column": 5
-        },
-        {
-          "title": "real adapter polling is non-overlapping and pauses while hidden",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "tablet",
-              "projectName": "tablet",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3156,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-08-31T14:34:50.191Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-polling-real-adapter-p-b99af-ing-and-pauses-while-hidden-tablet\\test-finished-1.png"
-                    }
-                  ]
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "bae5ed3684a4fcd18792-3e3281fb3f40618f0df6",
-          "file": "lab-polling.spec.js",
-          "line": 3,
-          "column": 5
-        },
-        {
-          "title": "real adapter polling is non-overlapping and pauses while hidden",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "mobile",
-              "projectName": "mobile",
-              "results": [
-                {
-                  "workerIndex": 2,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 4042,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-08-31T14:34:54.745Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-polling-real-adapter-p-b99af-ing-and-pauses-while-hidden-mobile\\test-finished-1.png"
-                    }
-                  ]
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "bae5ed3684a4fcd18792-bd564834ca600be83e76",
-          "file": "lab-polling.spec.js",
-          "line": 3,
-          "column": 5
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-31T14:34:42.826Z",
-    "duration": 17632.641000000003,
-    "expected": 3,
+    "startTime": "2026-08-31T16:00:15.532Z",
+    "duration": 9551.729,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
