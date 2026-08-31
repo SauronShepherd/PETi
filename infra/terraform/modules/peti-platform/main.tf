@@ -82,6 +82,34 @@ variable "maintenance_task_audience" {
   type    = string
   default = null
 }
+variable "lab_enabled" {
+  type    = bool
+  default = false
+}
+variable "lab_telemetry_enabled" {
+  type    = bool
+  default = false
+}
+variable "lab_feedback_enabled" {
+  type    = bool
+  default = false
+}
+variable "lab_admin_enabled" {
+  type    = bool
+  default = false
+}
+variable "lab_rollups_enabled" {
+  type    = bool
+  default = false
+}
+variable "agent_runtime_enabled" {
+  type    = bool
+  default = false
+}
+variable "lab_hash_secret_id" {
+  type    = string
+  default = "peti-lab-hash-secret"
+}
 
 locals {
   # GCP resource identifiers are lowercase; keep the public environment
@@ -200,6 +228,18 @@ resource "google_secret_manager_secret" "gemini" {
   }
   depends_on = [google_project_service.services]
 }
+resource "google_secret_manager_secret" "lab_hash" {
+  secret_id = var.lab_hash_secret_id
+  replication {
+    auto {}
+  }
+  depends_on = [google_project_service.services]
+}
+resource "google_secret_manager_secret_iam_member" "api_lab_hash" {
+  secret_id = google_secret_manager_secret.lab_hash.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.api.email}"
+}
 
 resource "google_secret_manager_secret_iam_member" "worker_gemini" {
   secret_id = google_secret_manager_secret.gemini.id
@@ -312,6 +352,18 @@ resource "google_cloud_run_v2_service" "worker" {
       env {
         name  = "PETI_AI_MODEL_ENABLED"
         value = tostring(var.ai_model_enabled)
+      }
+      env {
+        name  = "PETI_AGENT_RUNTIME_ENABLED"
+        value = tostring(var.agent_runtime_enabled)
+      }
+      env {
+        name  = "PETI_LAB_ENABLED"
+        value = tostring(var.lab_enabled)
+      }
+      env {
+        name  = "PETI_LAB_TELEMETRY_ENABLED"
+        value = tostring(var.lab_telemetry_enabled)
       }
       dynamic "env" {
         for_each = var.ai_enabled && var.ai_provider == "GEMINI" ? [true] : []
@@ -427,6 +479,39 @@ resource "google_cloud_run_v2_service" "api" {
         name  = "PETI_AI_MODEL_ENABLED"
         value = tostring(var.ai_model_enabled)
       }
+      env {
+        name  = "PETI_AGENT_RUNTIME_ENABLED"
+        value = tostring(var.agent_runtime_enabled)
+      }
+      env {
+        name  = "PETI_LAB_ENABLED"
+        value = tostring(var.lab_enabled)
+      }
+      env {
+        name  = "PETI_LAB_TELEMETRY_ENABLED"
+        value = tostring(var.lab_telemetry_enabled)
+      }
+      env {
+        name  = "PETI_LAB_FEEDBACK_ENABLED"
+        value = tostring(var.lab_feedback_enabled)
+      }
+      env {
+        name  = "PETI_LAB_ADMIN_ENABLED"
+        value = tostring(var.lab_admin_enabled)
+      }
+      env {
+        name  = "PETI_LAB_ROLLUPS_ENABLED"
+        value = tostring(var.lab_rollups_enabled)
+      }
+      env {
+        name = "PETI_LAB_HASH_SECRET"
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.lab_hash.secret_id
+            version = "latest"
+          }
+        }
+      }
     }
   }
   depends_on = [google_project_service.services]
@@ -462,6 +547,51 @@ resource "google_cloud_scheduler_job" "media_maintenance" {
     }
   }
   depends_on = [google_project_service.services]
+}
+resource "google_cloud_scheduler_job" "lab_rollup" {
+  count     = var.lab_rollups_enabled ? 1 : 0
+  name      = "peti-lab-rollup-${local.environment_slug}"
+  schedule  = "*/10 * * * *"
+  time_zone = "Etc/UTC"
+  region    = var.region
+  http_target {
+    http_method = "POST"
+    uri         = "${google_cloud_run_v2_service.api.uri}/v1/internal/tasks/lab-rollup"
+    oidc_token {
+      service_account_email = google_service_account.api.email
+      audience              = coalesce(var.maintenance_task_audience, local.maintenance_audience)
+    }
+  }
+  depends_on = [google_project_service.services]
+}
+resource "google_cloud_scheduler_job" "lab_retention" {
+  count     = var.lab_enabled ? 1 : 0
+  name      = "peti-lab-retention-${local.environment_slug}"
+  schedule  = "17 2 * * *"
+  time_zone = "Etc/UTC"
+  region    = var.region
+  http_target {
+    http_method = "POST"
+    uri         = "${google_cloud_run_v2_service.api.uri}/v1/internal/tasks/lab-retention"
+    oidc_token {
+      service_account_email = google_service_account.api.email
+      audience              = coalesce(var.maintenance_task_audience, local.maintenance_audience)
+    }
+  }
+  depends_on = [google_project_service.services]
+}
+
+resource "google_firestore_field" "lab_ttl" {
+  for_each = toset([
+    "telemetry_events", "agent_run_traces", "agent_step_traces", "model_call_traces",
+    "tool_call_traces", "safety_decision_traces", "evidence_usage_traces", "safety_reports",
+    "feedback_comments"
+  ])
+  project    = var.project_id
+  database   = google_firestore_database.default.name
+  collection = each.value
+  field      = "expires_at"
+  ttl_config {}
 }
 
 resource "google_project_iam_member" "api_storage" {

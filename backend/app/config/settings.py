@@ -48,6 +48,7 @@ class Settings(BaseSettings):
     gemini_retry_backoff_seconds: float = 0.25
     gemini_daily_limit_per_key: int = 20
     service: str = "peti-api"
+    deployment_revision: str = "local"
     auth_mode: str = "LOCAL_TEST"
     storage_mode: str = "MEMORY"
     firestore_emulator_host: str | None = None
@@ -64,6 +65,18 @@ class Settings(BaseSettings):
     max_video_bytes: int = 500_000_000
     max_audio_bytes: int = 100_000_000
     max_document_bytes: int = 50_000_000
+    agent_runtime_enabled: bool = False
+    lab_enabled: bool = False
+    lab_telemetry_enabled: bool = False
+    lab_feedback_enabled: bool = False
+    lab_admin_enabled: bool = False
+    lab_rollups_enabled: bool = False
+    lab_demo_enabled: bool = True
+    lab_hash_secret: str = "local-lab-hash-secret"
+    lab_comment_retention_days: int = 90
+    lab_trace_retention_days: int = 180
+    lab_event_retention_days: int = 90
+    lab_rollup_min_sample: int = 30
 
     def validate_startup(self) -> None:
         if self.provider_timeout_seconds <= 0:
@@ -74,6 +87,25 @@ class Settings(BaseSettings):
             raise ValueError("PETI_GEMINI_DAILY_LIMIT_PER_KEY must be positive")
         if self.gemini_transport not in {"SDK", "REST"}:
             raise ValueError("PETI_GEMINI_TRANSPORT must be SDK or REST")
+        if any(
+            value <= 0
+            for value in (
+                self.lab_comment_retention_days,
+                self.lab_trace_retention_days,
+                self.lab_event_retention_days,
+                self.lab_rollup_min_sample,
+            )
+        ):
+            raise ValueError("PETI Lab retention and sample settings must be positive")
+        if any((self.lab_telemetry_enabled, self.lab_feedback_enabled, self.lab_admin_enabled, self.lab_rollups_enabled)) and not self.lab_enabled:
+            raise ValueError("PETI Lab subfeatures require PETI_LAB_ENABLED")
+        if self.lab_feedback_enabled and not self.agent_runtime_enabled:
+            raise ValueError("PETI Lab feedback requires PETI_AGENT_RUNTIME_ENABLED")
+        if self.environment is not Environment.LOCAL and self.lab_enabled:
+            if self.lab_hash_secret == "local-lab-hash-secret":
+                raise ValueError("non-LOCAL PETi Lab requires PETI_LAB_HASH_SECRET")
+            if self.storage_mode != "FIRESTORE":
+                raise ValueError("non-LOCAL PETi Lab requires FIRESTORE storage")
         if self.environment is Environment.PRODUCTION and not self.project_id:
             raise ValueError("PRODUCTION requires PETI_PROJECT_ID")
         if self.environment is Environment.PRODUCTION and self.auth_mode != "FIREBASE":

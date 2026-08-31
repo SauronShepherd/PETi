@@ -1,6 +1,8 @@
 """Dedicated agent API router boundary; mounted by deployments that expose agent v1."""
 from fastapi import APIRouter, Depends, HTTPException, Request
 
+from app.agent_runtime.queue import AgentQueueError
+from app.agents.contracts import RunState
 from app.ai.preparation.core import MediaPreparationError, MediaPreparer
 from app.auth.models import AuthenticatedPrincipal
 
@@ -30,7 +32,30 @@ async def get_agent_session(dog_id: str, session_id: str, request: Request, prin
 async def create_dog_agent_run(dog_id: str, body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
     try:
         request.app.state.pets.get(principal.user_id, dog_id) or (_ for _ in ()).throw(ValueError("DOG_NOT_FOUND"))
-        return request.app.state.agents.create_run(principal.user_id, body.get("goal", ""), dog_id, body.get("agent_type", "ORCHESTRATOR"), session_id=body.get("session_id")).public()
+        run = request.app.state.agents.create_run(
+            principal.user_id,
+            body.get("goal", ""),
+            dog_id,
+            body.get("agent_type", "ORCHESTRATOR"),
+            session_id=body.get("session_id"),
+            interaction_id=getattr(request.state, "interaction_id", None),
+            correlation_id=getattr(request.state, "correlation_id", None),
+            deployment_id=request.app.state.settings.deployment_revision,
+        )
+        if request.app.state.settings.lab_enabled:
+            request.app.state.lab_tracing.create_run(run)
+        try:
+            request.app.state.agent_queue.enqueue_agent(
+                run_id=run.id,
+                owner_user_id=principal.user_id,
+                media_asset_ids=list(body.get("media_asset_ids", [])),
+                context=body.get("context"),
+            )
+        except AgentQueueError:
+            request.app.state.agents._set_state(run, RunState.WAITING)
+            request.app.state.agents._persist_run(run)
+            raise ValueError("AGENT_QUEUE_SUBMISSION_FAILED")
+        return run.public()
     except ValueError as exc: raise HTTPException(409, str(exc)) from exc
 
 

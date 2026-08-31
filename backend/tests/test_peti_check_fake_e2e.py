@@ -51,13 +51,20 @@ def test_fake_peti_check_vertical_slice_consumes_once_and_persists_result():
     reservation = credits.reserve("u", "PETI_CHECK", "request-1", "funding-key")
     analytics = AnalyticsRecorder()
     operations = OperationsService(analytics)
-    service = AnalysisService(pets, media, credits, provider=FakeAIProvider(), analytics=analytics, costs=operations.costs)
+    published = []
+    service = AnalysisService(
+        pets, media, credits, provider=FakeAIProvider(), analytics=analytics,
+        costs=operations.costs,
+        response_publisher=lambda job, result: published.append((job.id, result.id)) or f"response-{job.id}",
+    )
 
     job = service.create("u", pet.id, "PETI_CHECK", ["media-1"], None, reservation.id, "submit-key")
     result = service.process_next()
 
     assert result is not None
     assert job.status.value == "COMPLETED"
+    assert job.response_id == f"response-{job.id}"
+    assert published == [(job.id, result.id)]
     assert result.structured_payload["source_media_ids"] == ["media-1"]
     assert result.media_asset_ids == ["media-1"]
     assert result.provider_config_version == "1.0.0"
@@ -66,6 +73,7 @@ def test_fake_peti_check_vertical_slice_consumes_once_and_persists_result():
     assert next(iter(operations.costs.records.values())).analysis_id == job.id
     assert credits.reservations[reservation.id].status.value == "CONSUMED"
     service.process(job.id)
+    assert published == [(job.id, result.id)]
     events = [event["event"] for event in analytics.events]
     assert events.count("check_started") == 1
     assert events.count("check_completed") == 1

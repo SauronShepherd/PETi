@@ -4,6 +4,8 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 
+from app.agent_runtime.queue import AgentQueueError
+from app.agents.contracts import RunState
 from app.analysis.service import AnalysisError
 from app.auth.models import AuthenticatedPrincipal
 from app.credits.domain import OperationType
@@ -92,6 +94,39 @@ async def run_media_maintenance_task(
         "expired_media": request.app.state.retention.expire_due(now),
         "abandoned_uploads": request.app.state.retention.expire_abandoned_uploads(now),
     }
+
+
+async def _verify_maintenance(request, authorization, service_identity, audience):
+    authenticator = getattr(request.app.state, "maintenance_task_authenticator", request.app.state.task_authenticator)
+    if request.app.state.settings.environment.value == "LOCAL":
+        authenticator.verify(service_identity, audience)
+    else:
+        authenticator.verify_bearer(authorization)
+
+
+@router.post("/internal/tasks/lab-rollup")
+async def run_lab_rollup_task(request: Request,
+    authorization: str | None = Header(default=None, alias="Authorization"),
+    service_identity: str | None = Header(default=None, alias="X-Task-Service-Identity"),
+    audience: str | None = Header(default=None, alias="X-Task-Audience")):
+    if not request.app.state.settings.lab_rollups_enabled:
+        raise HTTPException(status_code=404, detail="LAB_ROLLUPS_NOT_ENABLED")
+    try: await _verify_maintenance(request, authorization, service_identity, audience)
+    except ValueError as exc: raise HTTPException(status_code=401, detail=str(exc)) from exc
+    items = request.app.state.lab_operations.recompute_rollups()
+    return {"status": "COMPLETED", "rollups_written": len(items)}
+
+
+@router.post("/internal/tasks/lab-retention")
+async def run_lab_retention_task(request: Request,
+    authorization: str | None = Header(default=None, alias="Authorization"),
+    service_identity: str | None = Header(default=None, alias="X-Task-Service-Identity"),
+    audience: str | None = Header(default=None, alias="X-Task-Audience")):
+    if not request.app.state.settings.lab_enabled:
+        raise HTTPException(status_code=404, detail="LAB_NOT_ENABLED")
+    try: await _verify_maintenance(request, authorization, service_identity, audience)
+    except ValueError as exc: raise HTTPException(status_code=401, detail=str(exc)) from exc
+    return {"status": "COMPLETED", **request.app.state.lab_operations.expire()}
 
 
 @router.post("/internal/tasks/notifications")
@@ -647,7 +682,24 @@ async def preview_portable_import(body: dict, request: Request, principal: Authe
 
 @router.post("/agent/runs", status_code=202)
 async def create_agent_run(body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    return request.app.state.agents.create_run(principal.user_id, body.get("goal", ""), body.get("pet_id"), body.get("agent_type", "ORCHESTRATOR")).public()
+    pet_id = body.get("pet_id")
+    if not pet_id:
+        raise HTTPException(400, "PET_ID_REQUIRED_USE_CANONICAL_DOG_ROUTE")
+    try:
+        request.app.state.pets.get(principal.user_id, pet_id) or (_ for _ in ()).throw(ValueError("DOG_NOT_FOUND"))
+        run = request.app.state.agents.create_run(principal.user_id, body.get("goal", ""), pet_id,
+            body.get("agent_type", "ORCHESTRATOR"), session_id=body.get("session_id"),
+            interaction_id=request.state.interaction_id, correlation_id=request.state.correlation_id,
+            deployment_id=request.app.state.settings.deployment_revision)
+        if request.app.state.settings.lab_enabled: request.app.state.lab_tracing.create_run(run)
+        request.app.state.agent_queue.enqueue_agent(run_id=run.id, owner_user_id=principal.user_id,
+            media_asset_ids=list(body.get("media_asset_ids", [])), context=body.get("context"))
+        return run.public()
+    except AgentQueueError as exc:
+        if 'run' in locals():
+            request.app.state.agents._set_state(run, RunState.WAITING); request.app.state.agents._persist_run(run)
+        raise HTTPException(409, "AGENT_QUEUE_SUBMISSION_FAILED") from exc
+    except ValueError as exc: raise HTTPException(409, str(exc)) from exc
 
 
 @router.get("/agent/runs/{run_id}")

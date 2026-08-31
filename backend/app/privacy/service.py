@@ -29,6 +29,7 @@ class PrivacyService:
         self.portability = portability
         self.memory = memory
         self.agents = agents
+        self.lab = None
         self.store = store
         self.clock = clock or (lambda: datetime.now(UTC))
         self.deletion_planner = DeletionDependencyResolver()
@@ -128,6 +129,25 @@ class PrivacyService:
             if item.owner_user_id == owner
         )
 
+    def attach_lab(self, repository) -> None:
+        """Attach personal Lab records to export, deletion and residual verification."""
+        self.lab = repository
+        for domain, getter in (
+            ("lab_responses", repository.list_responses),
+            ("lab_feedback", repository.list_feedback),
+            ("lab_run_traces", repository.list_runs),
+            ("lab_safety_reports", repository.list_safety_reports),
+            ("lab_outcomes", repository.list_outcomes),
+            ("lab_step_traces", repository.list_steps),
+            ("lab_model_calls", repository.list_model_calls),
+            ("lab_tool_calls", repository.list_tool_calls),
+            ("lab_safety_decisions", repository.list_safety_decisions),
+            ("lab_evidence_usage", repository.list_evidence_usage),
+        ):
+            self.deletion_verifier.inventory[domain] = lambda owner, getter=getter: sum(
+                1 for item in getter() if getattr(item, "owner_user_id", None) == owner
+            )
+
     def _hydrate_deletion_jobs(self) -> None:
         if not self.store or not hasattr(self.store, "all"):
             return
@@ -214,6 +234,11 @@ class PrivacyService:
             payload["agent_runs"] = [asdict(x) for x in self.agents.runs.values() if x.owner_user_id == owner and not x.deleted_at]
             payload["agent_context_requests"] = [x for x in self.agents.context_requests.values() if x.get("run_id") in owned_run_ids]
             payload["agent_actions"] = [x for x in self.agents.actions.values() if x.get("run_id") in owned_run_ids]
+        if self.lab:
+            payload["lab_responses"] = [x.public() for x in self.lab.list_responses() if x.owner_user_id == owner and not x.deleted_at]
+            payload["lab_feedback"] = [x.public() for x in self.lab.list_feedback() if x.owner_user_id == owner and not x.removed_at]
+            payload["lab_outcomes"] = [x.public() for x in self.lab.list_outcomes() if x.owner_user_id == owner and not x.removed_at]
+            # Internal prompts, comments, costs, reviewer identity and audit events are intentionally excluded.
         domains = [key for key, value in payload.items() if isinstance(value, list)]
         payload["export_manifest"] = {
             "owner_user_id": owner,
@@ -388,6 +413,8 @@ class PrivacyService:
                     self.operations.support.pop(case_id, None)
                     if getattr(self.operations, "store", None) and hasattr(self.operations.store, "delete"):
                         self.operations.store.delete("support_cases", case_id)
+        if self.lab:
+            deleted["lab"] = sum(self.lab.delete_owner_lab_data(owner).values())
         return {"status": "DELETED", "deleted": deleted, "completed_at": self.clock()}
 
     def delete_account(self, owner, confirm=False, idempotency_key=None):

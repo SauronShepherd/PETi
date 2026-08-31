@@ -1,7 +1,7 @@
 import hashlib
 import json
 from dataclasses import asdict, dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from enum import StrEnum
 from uuid import uuid4
 
@@ -41,6 +41,18 @@ class AgentRun:
     steps: list[dict] = field(default_factory=list)
     evidence: list[EvidenceReference] = field(default_factory=list)
     policy_snapshot: dict = field(default_factory=dict)
+    interaction_id: str | None = None
+    correlation_id: str | None = None
+    plan_id: str | None = None
+    recipe_id: str | None = None
+    deployment_id: str | None = None
+    response_id: str | None = None
+    outcome: str | None = None
+    safety_state: str | None = None
+    started_at: datetime | None = None
+    completed_at: datetime | None = None
+    execution_lease_owner: str | None = None
+    execution_lease_expires_at: datetime | None = None
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     deleted_at: datetime | None = None
@@ -76,7 +88,7 @@ class AgentOrchestrator:
         for data in rows("agent_sessions"):
             try:
                 data = dict(data)
-                for key in ("created_at", "updated_at"):
+                for key in ("created_at", "updated_at", "started_at", "completed_at", "execution_lease_expires_at"):
                     value = data.get(key)
                     if value is not None and not isinstance(value, datetime):
                         data[key] = datetime.fromisoformat(str(value))
@@ -89,7 +101,7 @@ class AgentOrchestrator:
                 data = dict(data)
                 data["state"] = RunState(data["state"])
                 data["evidence"] = [EvidenceReference(**x) for x in data.get("evidence", [])]
-                for key in ("created_at", "updated_at"):
+                for key in ("created_at", "updated_at", "started_at", "completed_at", "execution_lease_expires_at"):
                     value = data.get(key)
                     if value is not None and not isinstance(value, datetime):
                         data[key] = datetime.fromisoformat(str(value))
@@ -109,6 +121,43 @@ class AgentOrchestrator:
         data = asdict(run)
         data["state"] = run.state.value
         self._save("agent_runs", run.id, data)
+
+    def acquire_execution_lease(self, owner: str, run_id: str, lease_owner: str, ttl_seconds: int = 300) -> bool:
+        """Atomically claim provider execution across worker instances."""
+        now = self.clock(); expires = now + timedelta(seconds=ttl_seconds)
+        if self.store and hasattr(self.store, "client") and hasattr(self.store.client, "transaction"):
+            from google.cloud.firestore_v1.transaction import (
+                transactional,  # type: ignore[import-untyped]
+            )
+            ref = self.store.client.collection("agent_runs").document(run_id)
+            transaction = self.store.client.transaction()
+            @transactional
+            def claim(tx):
+                snap = tx.get(ref)
+                if not snap.exists: return False
+                data = snap.to_dict() or {}
+                if data.get("owner_user_id") != owner or data.get("state") not in {"QUEUED", "RUNNING"}: return False
+                current_expiry = data.get("execution_lease_expires_at")
+                if current_expiry and not isinstance(current_expiry, datetime):
+                    current_expiry = datetime.fromisoformat(str(current_expiry))
+                if current_expiry and current_expiry > now and data.get("execution_lease_owner") != lease_owner: return False
+                tx.update(ref, {"execution_lease_owner": lease_owner, "execution_lease_expires_at": expires})
+                return True
+            acquired = bool(claim(transaction))
+        else:
+            run = self.get(owner, run_id)
+            acquired = not (run.execution_lease_expires_at and run.execution_lease_expires_at > now and run.execution_lease_owner != lease_owner)
+            if acquired:
+                run.execution_lease_owner = lease_owner; run.execution_lease_expires_at = expires; self._persist_run(run)
+        if acquired and run_id in self.runs:
+            self.runs[run_id].execution_lease_owner = lease_owner
+            self.runs[run_id].execution_lease_expires_at = expires
+        return acquired
+
+    def release_execution_lease(self, owner: str, run_id: str, lease_owner: str) -> None:
+        run = self.get(owner, run_id)
+        if run.execution_lease_owner != lease_owner: return
+        run.execution_lease_owner = None; run.execution_lease_expires_at = None; self._persist_run(run)
 
     @staticmethod
     def _action_hash(action_type, summary, arguments):
@@ -135,12 +184,38 @@ class AgentOrchestrator:
         if not session or session.owner_user_id != owner or session.status != "ACTIVE": raise ValueError("AGENT_SESSION_NOT_FOUND")
         return session
 
-    def create_run(self, owner, goal, pet_id=None, agent_type="ORCHESTRATOR", policy=None, session_id=None):
+    def create_run(
+        self,
+        owner,
+        goal,
+        pet_id=None,
+        agent_type="ORCHESTRATOR",
+        policy=None,
+        session_id=None,
+        interaction_id=None,
+        correlation_id=None,
+        deployment_id=None,
+    ):
         if not goal or len(goal) > 1000: raise ValueError("AGENT_GOAL_INVALID")
         if session_id:
             session = self.get_session(owner, session_id)
             if session.pet_id != pet_id: raise ValueError("AGENT_SESSION_PET_MISMATCH")
-        run = AgentRun(owner, pet_id, goal, agent_type=agent_type, policy_snapshot=policy or {"web": False, "medical_advice": False, "max_steps": 8, "session_id": session_id})
+        run = AgentRun(
+            owner,
+            pet_id,
+            goal,
+            agent_type=agent_type,
+            policy_snapshot=policy
+            or {
+                "web": False,
+                "medical_advice": False,
+                "max_steps": 8,
+                "session_id": session_id,
+            },
+            interaction_id=interaction_id or str(uuid4()),
+            correlation_id=correlation_id or str(uuid4()),
+            deployment_id=deployment_id,
+        )
         self._set_state(run, RunState.QUEUED); self.runs[run.id] = run; self._persist_run(run); return run
 
     def get(self, owner, run_id):
@@ -152,6 +227,10 @@ class AgentOrchestrator:
                 try:
                     data["state"] = RunState(data["state"])
                     data["evidence"] = [EvidenceReference(**x) for x in data.get("evidence", [])]
+                    for key in ("created_at", "updated_at", "started_at", "completed_at", "execution_lease_expires_at"):
+                        value = data.get(key)
+                        if value is not None and not isinstance(value, datetime):
+                            data[key] = datetime.fromisoformat(str(value))
                     run = AgentRun(**{k: data[k] for k in AgentRun.__dataclass_fields__ if k in data})
                     self.runs[run.id] = run
                 except (KeyError, TypeError, ValueError):
@@ -198,4 +277,11 @@ class AgentOrchestrator:
     def complete(self, owner, run_id, result: dict):
         run = self.get(owner, run_id)
         if not run.evidence and result.get("answer_type") == "FACTUAL": raise ValueError("AGENT_RESULT_NOT_GROUNDED")
-        self._set_state(run, RunState.COMPLETED); run.steps.append({"final": result, "schema_version": result.get("schema_version", "1.0.0")}); self._persist_run(run); return run
+        self._set_state(run, RunState.COMPLETED)
+        run.response_id = result.get("response_id")
+        run.outcome = result.get("outcome") or result.get("status")
+        run.safety_state = result.get("safety_state") or result.get("status")
+        run.completed_at = self.clock()
+        run.steps.append({"final": result, "schema_version": result.get("schema_version", "1.0.0")})
+        self._persist_run(run)
+        return run

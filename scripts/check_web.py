@@ -23,7 +23,7 @@ js = (WEB / "app.js").read_text(encoding="utf-8")
 for forbidden in ("92/100", "Hoy · 18:00", "18.5 kg"):
     if forbidden in js:
         raise SystemExit(f"WEB_CHECK=FAIL fabricated metric present: {forbidden}")
-for contract in ("headers.Authorization", "/v1/pets", "/v1/pets/", "/v1/agent/runs"):
+for contract in ("headers.Authorization", "/v1/pets", "/v1/pets/", "/v1/dogs/", "/v1/agent-runs/"):
     if contract not in js:
         raise SystemExit(f"WEB_CHECK=FAIL missing runtime contract: {contract}")
 if "if(!state.firebase){if(demoMode)" not in js:

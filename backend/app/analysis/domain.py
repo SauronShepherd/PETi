@@ -88,6 +88,7 @@ class AnalysisJob:
     attempt_count: int = 0
     provider_call_count: int = 0
     correlation_id: str | None = None
+    response_id: str | None = None
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     queued_at: datetime | None = None
     started_at: datetime | None = None

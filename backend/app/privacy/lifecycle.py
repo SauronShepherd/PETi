@@ -33,7 +33,7 @@ class DeletionJobState:
 
 
 class DeletionDependencyResolver:
-    ORDER: ClassVar[list[str]] = ["tasks", "notifications", "search_projection", "memory", "reports", "analyses", "records", "measurements", "media", "pets", "account"]
+    ORDER: ClassVar[list[str]] = ["tasks", "notifications", "search_projection", "memory", "lab", "reports", "analyses", "records", "measurements", "media", "pets", "account"]
     def plan(self, owner, idempotency_key):
         return DeletionPlan(owner, list(self.ORDER), idempotency_key, self.dependencies(owner))
 
@@ -45,6 +45,7 @@ class DeletionDependencyResolver:
     def dependencies(self, owner: str) -> dict[str, tuple[str, ...]]:
         return {
             "reports": ("analyses", "records", "measurements", "timeline"),
+            "lab": ("agent_runs", "feedback", "reviews", "comments"),
             "analyses": ("media", "pets"),
             "records": ("candidate_facts", "documented_facts"),
             "candidate_facts": ("records",),

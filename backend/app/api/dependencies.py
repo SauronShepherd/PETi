@@ -21,7 +21,7 @@ async def require_principal(
     except Exception as exc:
         raise HTTPException(status_code=401, detail="AUTH_INVALID_TOKEN") from exc
     user = request.app.state.users.get_or_create(identity.firebase_uid)
-    return AuthenticatedPrincipal(
+    principal = AuthenticatedPrincipal(
         identity.firebase_uid,
         user.id,
         user.role.value,
@@ -29,3 +29,5 @@ async def require_principal(
         user.ads_exempt,
         user.internal_persona_code,
     )
+    request.state.principal = principal
+    return principal

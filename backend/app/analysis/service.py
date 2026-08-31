@@ -85,6 +85,7 @@ class AnalysisService:
         analytics=None,
         costs=None,
         economics_policy=None,
+        response_publisher=None,
     ):
         self.pets, self.media, self.credits = pets, media, credits
         self.queue: TaskQueue = queue or FakeTaskQueue()
@@ -101,6 +102,7 @@ class AnalysisService:
         self.analytics = analytics
         self.costs = costs
         self.economics_policy = economics_policy
+        self.response_publisher = response_publisher
         self.provider_kill_switches: dict[str, bool] = {}
         self.model_kill_switches: dict[str, bool] = {}
         self.species_kill_switches: dict[str, bool] = {}
@@ -416,6 +418,8 @@ class AnalysisService:
             if self.result_repository:
                 self.result_repository.save(result)
             job.status, job.completed_at = AnalysisStatus.COMPLETED, datetime.now(UTC)
+            if self.response_publisher:
+                job.response_id = self.response_publisher(job, result)
             if self.analytics and job.analysis_type == "PETI_CHECK":
                 self.analytics.record("check_completed", user_id=job.owner_user_id, check_id=job.id)
                 self.analytics.record("check_safety_state", user_id=job.owner_user_id, check_id=job.id, safety_state=safety)

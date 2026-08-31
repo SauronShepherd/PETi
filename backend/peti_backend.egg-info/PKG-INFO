@@ -8,6 +8,10 @@ Requires-Dist: uvicorn==0.35.0
 Requires-Dist: firebase-admin==7.1.0
 Requires-Dist: google-cloud-firestore==2.21.0
 Requires-Dist: google-cloud-storage>=2.18.0
+Requires-Dist: google-cloud-tasks>=2.16.0
+Requires-Dist: google-auth>=2.35.0
+Requires-Dist: google-genai>=1.0.0
+Requires-Dist: google-adk>=1.0.0
 Requires-Dist: cryptography>=43.0.0
 Provides-Extra: dev
 Requires-Dist: pytest==8.4.1; extra == "dev"

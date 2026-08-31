@@ -24,6 +24,10 @@ python scripts/check_logging_contract.py
 python scripts/check_production_config.py
 python scripts/check_release_manifests.py
 python scripts/check_metric_cardinality.py
+python scripts/check_lab_privacy.py
+python scripts/check_lab_contracts.py
+python scripts/seed_lab_demo.py
+python -c "import json,glob; [json.load(open(p, encoding='utf-8')) for p in glob.glob('contracts/lab/*.schema.json')]"
 if (Get-Command terraform -ErrorAction SilentlyContinue) {
     $terraformDir = (Join-Path $PSScriptRoot '..\infra\terraform\modules\peti-platform')
     terraform "-chdir=$terraformDir" fmt -check

@@ -47,19 +47,18 @@ class CloudTasksQueue:
         audience: str | None = None,
     ):
         self.client, self.parent = client, client.queue_path(project, location, queue)
+        base_worker_url = worker_url.rstrip("/")
         self.worker_url, self.service_account, self.audience = (
-            worker_url,
+            base_worker_url + "/internal/tasks/analysis",
             service_account,
-            audience or worker_url,
+            audience or base_worker_url,
         )
 
     def enqueue_analysis(self, job_id: str, task_id: str, schedule_time=None):
-        from google.cloud import tasks_v2  # type: ignore[attr-defined,import-untyped]
-
         task = {
             "name": f"{self.parent}/tasks/{task_id}",
             "http_request": {
-                "http_method": tasks_v2.HttpMethod.POST,
+                "http_method": "POST",
                 "url": self.worker_url,
                 "headers": {"Content-Type": "application/json"},
                 "body": f'{{"job_id":"{job_id}"}}'.encode(),

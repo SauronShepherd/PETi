@@ -44,6 +44,127 @@
         { "fieldPath": "analysis_type", "order": "ASCENDING" },
         { "fieldPath": "created_at", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "agent_run_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "DESCENDING" },
+        { "fieldPath": "run_id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agent_run_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "DESCENDING" },
+        { "fieldPath": "run_id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agent_run_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "safety_state", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "DESCENDING" },
+        { "fieldPath": "run_id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agent_run_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "agent_type", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "DESCENDING" },
+        { "fieldPath": "run_id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "agent_step_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "run_id", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "model_call_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "run_id", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "model_call_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "model_id", "order": "ASCENDING" },
+        { "fieldPath": "started_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "interaction_responses", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "published_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "response_feedback", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "owner_user_id", "order": "ASCENDING" },
+        { "fieldPath": "updated_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "response_feedback", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "value", "order": "ASCENDING" },
+        { "fieldPath": "updated_at", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "safety_decision_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "run_id", "order": "ASCENDING" },
+        { "fieldPath": "decided_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "evidence_usage_traces", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "run_id", "order": "ASCENDING" },
+        { "fieldPath": "recorded_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "response_feedback", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "environment", "order": "ASCENDING" },
+        { "fieldPath": "updated_at", "order": "DESCENDING" },
+        { "fieldPath": "id", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "human_reviews", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "severity", "order": "DESCENDING" },
+        { "fieldPath": "created_at", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "metric_rollups", "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "granularity", "order": "ASCENDING" },
+        { "fieldPath": "metric_name", "order": "ASCENDING" },
+        { "fieldPath": "bucket", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "admin_audit_events", "queryScope": "COLLECTION",
+      "fields": [{ "fieldPath": "occurred_at", "order": "DESCENDING" }]
     }
   ],
   "fieldOverrides": []

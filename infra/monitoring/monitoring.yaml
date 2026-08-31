@@ -32,6 +32,9 @@ dashboards:
   - id: specialist-capabilities
     title: Specialist Capabilities
     widgets: [initial_scan_rate, dental_rate, feces_rate, body_check_rate, abstention_rate]
+  - id: veterinary-ai-lab
+    title: Veterinary AI Lab
+    widgets: [lab_rollup_lag, lab_telemetry_write_failures, lab_feedback_error_rate, lab_admin_p95, duplicate_execution_prevented, provider_cost_anomaly]
 alerts:
   - id: api-error-rate-critical
     metric: error_rate
@@ -49,6 +52,18 @@ alerts:
     metric: variable_cost_daily
     condition: "> budget.daily_critical"
     severity: critical
+  - id: lab-rollup-lag-warning
+    metric: lab_rollup_lag_seconds
+    condition: "> 1800 for 10m"
+    severity: warning
+  - id: lab-feedback-errors-critical
+    metric: lab_feedback_5xx_rate
+    condition: "> 0.02 for 10m"
+    severity: critical
+  - id: agent-queue-age-warning
+    metric: agent_queue_age_seconds
+    condition: "> 900 for 10m"
+    severity: warning
 budgets:
   daily_warning: 10.0
   daily_critical: 25.0

@@ -1,3 +1,4 @@
+import re
 import time
 from collections.abc import Awaitable, Callable
 from uuid import uuid4
@@ -10,6 +11,7 @@ from starlette.responses import Response
 from .advertising.google_ssv_verifier import GoogleSsvVerifier
 from .advertising.service import RewardService
 from .agent_runtime.execution import AgentExecutionService
+from .agent_runtime.queue import CloudAgentTaskQueue, FakeAgentTaskQueue
 from .agents.contracts import AgentOrchestrator
 from .ai.providers import (
     AIProvider,
@@ -20,6 +22,7 @@ from .ai.providers import (
     VertexGeminiTransport,
     VertexGenAITransport,
 )
+from .ai.providers.instrumented import InstrumentedAIProvider, LabProviderTraceObserver
 from .analysis.firestore_repositories import (
     FirestoreAnalysisJobRepository,
     FirestoreAnalysisResultRepository,
@@ -29,6 +32,8 @@ from .analysis.service import AnalysisService
 from .analytics import AnalyticsRecorder
 from .api.agent_runs import router as agent_runs_router
 from .api.errors import PetiError, error_handler
+from .api.feedback import router as feedback_router
+from .api.lab import router as lab_router
 from .api.v1 import router as v1_router
 from .assistant.grounding import GroundedAssistant
 from .auth.task_auth import TaskAuthenticator
@@ -42,6 +47,15 @@ from .credits.service import CreditService
 from .economics.policy import EconomicsPolicy
 from .future.service import FutureService
 from .infrastructure.firebase import create_firebase_auth, create_firebase_services
+from .lab.contracts import TraceContext
+from .lab.enums import DataClassification
+from .lab.feedback import FeedbackService
+from .lab.firestore_repositories import FirestoreLabRepository
+from .lab.operations import LabOperationsService
+from .lab.queries import LabQueryService
+from .lab.repositories import InMemoryLabRepository
+from .lab.telemetry import TelemetryService
+from .lab.tracing import LabTraceService
 from .logging import configure_logging
 from .media.firestore_metadata import FirestoreMediaMetadataStore
 from .media.floci_storage import FlociObjectStorage
@@ -81,8 +95,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_web_origins(settings.web_allowed_origins),
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type", "Idempotency-Key"],
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-Correlation-ID", "X-Interaction-ID"],
 )
 def is_out_of_scope_route(path: str) -> bool:
     """Return true only for the explicitly unapproved research surfaces."""
@@ -104,7 +118,12 @@ def is_out_of_scope_route(path: str) -> bool:
 
 @app.middleware("http")
 async def reject_unapproved_scope(request: Request, call_next: Callable[..., Awaitable[Response]]) -> Response:
-    if settings.environment is not Environment.LOCAL and is_out_of_scope_route(request.url.path):
+    agent_route = "/agent-runs" in request.url.path or request.url.path.startswith("/v1/agent/runs")
+    if (
+        settings.environment is not Environment.LOCAL
+        and is_out_of_scope_route(request.url.path)
+        and not (settings.agent_runtime_enabled and agent_route)
+    ):
         return JSONResponse({"detail": "ROUTE_NOT_ENABLED"}, status_code=404)
     return await call_next(request)
 app.state.settings = settings
@@ -191,6 +210,7 @@ app.state.rewards = RewardService(
     store=app.state.economic_store,
 )
 app.state.abuse_guard = AbuseGuard()
+app.state.lab_feedback_abuse_guard = AbuseGuard(max_requests=30, window_seconds=3600)
 app.state.retention_categories = RETENTION_CATEGORIES
 app.state.media_metadata_store = (
     FirestoreMediaMetadataStore(getattr(app.state, "firestore_client", None))
@@ -253,6 +273,7 @@ if settings.ai_provider == "GEMINI":
         )
 if settings.environment is Environment.LOCAL:
     analysis_queue: TaskQueue = FakeTaskQueue()
+    agent_queue = FakeAgentTaskQueue()
 else:
     from google.cloud import tasks_v2  # type: ignore[attr-defined,import-untyped]
 
@@ -265,6 +286,16 @@ else:
         settings.analysis_task_service_account or "",
         settings.analysis_task_audience,
     )
+    agent_queue = CloudAgentTaskQueue(
+        tasks_v2.CloudTasksClient(),
+        project=settings.tasks_project_id or settings.project_id or "",
+        location=settings.tasks_location or "europe-west1",
+        queue=settings.analysis_queue_name,
+        worker_url=settings.analysis_worker_url or settings.worker_url or "",
+        service_account=settings.analysis_task_service_account or "",
+        audience=settings.analysis_task_audience,
+    )
+app.state.agent_queue = agent_queue
 
 app.state.analytics = AnalyticsRecorder()
 app.state.operations = OperationsService(
@@ -273,6 +304,44 @@ app.state.operations = OperationsService(
     if hasattr(app.state, "firestore_client") else None,
     store=FirestorePhase6Store(app.state.firestore_client)
     if hasattr(app.state, "firestore_client") else None,
+)
+app.state.lab_repository = (
+    FirestoreLabRepository(
+        app.state.firestore_client,
+        settings.environment.value,
+        comment_retention_days=settings.lab_comment_retention_days,
+    )
+    if hasattr(app.state, "firestore_client")
+    else InMemoryLabRepository()
+)
+app.state.lab_telemetry = TelemetryService(
+    app.state.lab_repository,
+    hash_secret=settings.lab_hash_secret,
+    retention_days=settings.lab_event_retention_days,
+    enabled=settings.lab_telemetry_enabled,
+)
+app.state.lab_tracing = LabTraceService(
+    app.state.lab_repository,
+    app.state.lab_telemetry,
+    hash_secret=settings.lab_hash_secret,
+    environment=settings.environment.value,
+    deployment_id=settings.deployment_revision,
+    trace_retention_days=settings.lab_trace_retention_days,
+)
+app.state.lab_feedback = FeedbackService(
+    app.state.lab_repository,
+    app.state.lab_telemetry,
+    hash_secret=settings.lab_hash_secret,
+)
+app.state.lab_queries = LabQueryService(
+    app.state.lab_repository, minimum_sample=settings.lab_rollup_min_sample,
+    telemetry=app.state.lab_telemetry,
+)
+app.state.lab_operations = LabOperationsService(
+    app.state.lab_repository, hash_secret=settings.lab_hash_secret,
+    retention_days=settings.lab_comment_retention_days,
+    minimum_sample=settings.lab_rollup_min_sample,
+    telemetry=app.state.lab_telemetry,
 )
 app.state.analysis = AnalysisService(
     app.state.pets,
@@ -294,6 +363,11 @@ app.state.analysis = AnalysisService(
     analytics=app.state.analytics,
     provider=provider,
     costs=app.state.operations.costs,
+    response_publisher=(
+        app.state.lab_tracing.publish_analysis_response
+        if settings.lab_enabled and settings.lab_feedback_enabled
+        else None
+    ),
 )
 app.state.operations.apply_to_analysis(app.state.analysis)
 app.state.phase6 = Phase6Service(
@@ -373,7 +447,15 @@ app.state.agents = AgentOrchestrator(
     if hasattr(app.state, "firestore_client")
     else None,
 )
-app.state.agent_execution = AgentExecutionService(app.state.agents, provider)
+agent_provider = (
+    InstrumentedAIProvider(provider, LabProviderTraceObserver(app.state.agents, app.state.lab_tracing))
+    if settings.lab_enabled else provider
+)
+app.state.agent_execution = AgentExecutionService(
+    app.state.agents,
+    agent_provider,
+    lab=app.state.lab_tracing if settings.lab_enabled else None,
+)
 app.state.collaboration = CollaborationService(
     app.state.pets,
     store=FirestorePhase6Store(app.state.firestore_client)
@@ -386,6 +468,7 @@ app.state.privacy.future = app.state.future
 app.state.privacy.portability = app.state.portability
 app.state.privacy.attach_agents(app.state.agents)
 app.state.privacy.attach_operations(app.state.operations)
+app.state.privacy.attach_lab(app.state.lab_repository)
 app.state.specialists.release_flags = app.state.operations.flags
 app.state.task_authenticator = TaskAuthenticator(
     settings.analysis_expected_service_account,
@@ -400,18 +483,39 @@ app.state.maintenance_task_authenticator = TaskAuthenticator(
 )
 app.include_router(v1_router)
 app.include_router(agent_runs_router)
+app.include_router(feedback_router)
+app.include_router(lab_router)
 
 
 @app.middleware("http")
 async def correlation(
     request: Request, call_next: Callable[[Request], Awaitable[Response]]
 ) -> Response:
-    cid = request.headers.get("X-Correlation-ID") or str(uuid4())
+    safe_id = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
+    supplied_cid = request.headers.get("X-Correlation-ID")
+    supplied_iid = request.headers.get("X-Interaction-ID")
+    cid = supplied_cid if supplied_cid and safe_id.fullmatch(supplied_cid) else str(uuid4())
+    iid = supplied_iid if supplied_iid and safe_id.fullmatch(supplied_iid) else str(uuid4())
     request.state.correlation_id = cid
+    request.state.interaction_id = iid
     started = time.perf_counter()
     response = await call_next(request)
+    duration_ms = round((time.perf_counter() - started) * 1000, 2)
     response.headers["X-Correlation-ID"] = cid
-    response.headers["X-Response-Time-Ms"] = str(round((time.perf_counter() - started) * 1000, 2))
+    response.headers["X-Interaction-ID"] = iid
+    response.headers["X-Response-Time-Ms"] = str(duration_ms)
+    if settings.lab_telemetry_enabled and not request.url.path.startswith("/health"):
+        route = request.scope.get("route")
+        route_template = getattr(route, "path", "UNMATCHED")
+        principal = getattr(request.state, "principal", None)
+        app.state.lab_telemetry.emit("api_request_completed", context=TraceContext(
+            cid, iid, settings.deployment_revision, settings.environment.value,
+            DataClassification.REAL if settings.environment is not Environment.LOCAL else DataClassification.TEST,
+            owner_user_id=getattr(principal, "user_id", None)), properties={
+                "route_template": route_template, "method": request.method,
+                "status_code": response.status_code, "duration_ms": duration_ms,
+                "role_class": getattr(principal, "role", "ANONYMOUS"),
+            })
     return response
 
 
