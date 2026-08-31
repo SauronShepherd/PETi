@@ -49,7 +49,7 @@ class GeminiProvider:
             "prompt": prompt,
             "context": user_context,
             "media": [
-                {"id": x.asset_id, "kind": x.kind.value, "reference": x.reference}
+                {"id": x.asset_id, "kind": x.kind.value, "reference": x.reference, "mime_type": x.mime_type}
                 for x in media.items
             ],
             "response_mime_type": "application/json",
