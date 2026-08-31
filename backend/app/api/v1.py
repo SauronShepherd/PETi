@@ -1914,6 +1914,8 @@ async def refresh_media_authorization(
     asset = request.app.state.media.get_owned(principal.user_id, media_id)
     if not asset:
         raise HTTPException(404, "MEDIA_NOT_FOUND")
+    if str(getattr(asset, "status", "")) != "PENDING_UPLOAD":
+        raise HTTPException(409, "MEDIA_UPLOAD_ALREADY_FINALIZED")
     return request.app.state.media.storage.create_upload_authorization(
         asset.storage_bucket, asset.storage_object, asset.mime_type_declared
     )

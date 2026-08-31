@@ -86,3 +86,26 @@ def test_media_api_retention_and_refresh_are_owner_scoped():
         json={"retention_class": "NOT_A_RETENTION_CLASS"},
     )
     assert invalid.status_code == 400
+
+
+def test_media_api_does_not_refresh_authorization_after_finalize():
+    client = TestClient(app)
+    response = client.post(
+        "/v1/media/upload-sessions",
+        headers={**auth("finalized-user"), "Idempotency-Key": "finalized-1"},
+        json={
+            "media_type": "IMAGE",
+            "purpose": "ANALYSIS_SOURCE",
+            "mime_type": "image/jpeg",
+            "size_bytes": 3,
+            "retention_class": "TRANSIENT_ANALYSIS",
+        },
+    )
+    media_id = response.json()["media_asset"]["id"]
+    app.state.media.assets[media_id].status = "READY"
+    blocked = client.post(
+        f"/v1/media/{media_id}/upload-authorization",
+        headers=auth("finalized-user"),
+    )
+    assert blocked.status_code == 409
+    assert "MEDIA_UPLOAD_ALREADY_FINALIZED" in blocked.text
