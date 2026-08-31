@@ -18,7 +18,6 @@ class SpecialistWorkerCompletion(BaseModel):
     """Internal-only shape for a trusted worker completion."""
     model_config = ConfigDict(extra="forbid")
     analysis_id: str
-    owner_user_id: str
     result: dict[str, Any]
     provider: str
     provider_model: str

@@ -555,6 +555,22 @@ class SpecialistService:
         with self.lock:
             return self._complete_task(owner, analysis_id, result, provider, provider_model)
 
+    def complete_task_internal(self, analysis_id, result, provider="GEMINI", provider_model="cloud-specialist"):
+        """Complete a persisted analysis using its stored owner scope.
+
+        Internal task payloads identify an analysis, never an authoritative
+        owner.  The owner is resolved from the persisted analysis before the
+        normal owner/media/funding checks run.
+        """
+        with self.lock:
+            analysis = self.analyses.get(analysis_id)
+            if not analysis and self.store and hasattr(self.store, "all"):
+                self._hydrate()
+                analysis = self.analyses.get(analysis_id)
+            if not analysis or analysis.deleted_at:
+                raise SpecialistError("SPECIALIST_NOT_FOUND")
+            return self._complete_task(analysis.owner_user_id, analysis_id, result, provider, provider_model)
+
     def _complete_task(self, owner, analysis_id, result, provider="GEMINI", provider_model="cloud-specialist"):
         analysis = self._owned(owner, analysis_id)
         if analysis.status == SpecialistStatus.COMPLETED:
@@ -611,6 +627,15 @@ class SpecialistService:
 
     def get(self, owner, analysis_id):
         return self._owned(owner, analysis_id)
+
+    def get_by_id_internal(self, analysis_id):
+        item = self.analyses.get(analysis_id)
+        if not item and self.store and hasattr(self.store, "all"):
+            self._hydrate()
+            item = self.analyses.get(analysis_id)
+        if not item or item.deleted_at:
+            raise SpecialistError("SPECIALIST_NOT_FOUND")
+        return item
 
     def candidates_for(self, owner, analysis_id):
         self._owned(owner, analysis_id)

@@ -18,7 +18,7 @@ from app.reports.service import ReportError
 from app.specialists.service import SpecialistError
 
 from .dependencies import require_principal
-from .models.specialists import SpecialistCreateRequest
+from .models.specialists import SpecialistCreateRequest, SpecialistWorkerCompletion
 
 router = APIRouter(prefix="/v1")
 
@@ -167,8 +167,8 @@ async def complete_specialist_task(
     except ValueError as exc:
         raise HTTPException(status_code=401, detail=str(exc)) from exc
     try:
-        body = await request.json()
-        analysis = request.app.state.specialists.complete_task(body["owner_user_id"], body["analysis_id"], body["result"], body.get("provider", "GEMINI"), body.get("provider_model", "cloud-specialist"))
+        body = SpecialistWorkerCompletion.model_validate(await request.json())
+        analysis = request.app.state.specialists.complete_task_internal(body.analysis_id, body.result, body.provider, body.provider_model)
         return {"status": "completed", "analysis_id": analysis.id}
     except SpecialistError as exc:
         specialist_error(exc)

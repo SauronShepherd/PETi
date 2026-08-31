@@ -83,8 +83,9 @@ async def run_gemini_specialist_task(
     except ValueError as exc:
         raise HTTPException(401, str(exc)) from exc
     body = await request.json()
-    owner_user_id = body["owner_user_id"]
-    specialist = api_app.state.specialists.get(owner_user_id, body["analysis_id"])
+    analysis_id = body["analysis_id"]
+    specialist = api_app.state.specialists.get_by_id_internal(analysis_id)
+    owner_user_id = specialist.owner_user_id
     analysis_type = specialist.analysis_type
     # Tasks carry only the durable asset identifiers. Resolve ownership,
     # lifecycle, MIME, storage and animal scope at execution time.
@@ -98,8 +99,8 @@ async def run_gemini_specialist_task(
         "Never diagnose, prescribe, or claim disease is ruled out."
     )
     response = api_app.state.analysis.provider.analyze(media, prompt, body.get("context"))
-    analysis = api_app.state.specialists.complete_task(
-        owner_user_id, body["analysis_id"], response.payload,
+    analysis = api_app.state.specialists.complete_task_internal(
+        analysis_id, response.payload,
         response.provider, response.model,
     )
     return {
