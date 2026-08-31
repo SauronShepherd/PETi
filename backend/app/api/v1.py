@@ -798,7 +798,13 @@ def _specialist_routes(analysis_type, singular, plural, candidate_prefix=None):
     @router.post(f"/pets/{{pet_id}}/{plural}", status_code=202, name=f"create_{singular}")
     async def create_specialist(pet_id: str, body: dict, request: Request, idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"), principal: AuthenticatedPrincipal = Depends(require_principal)):
         try:
-            return specialist_public(request.app.state.specialists.create(principal.user_id, pet_id, analysis_type, body, idempotency_key, principal.billing_exempt))
+            # Provider output and provenance are worker-owned. Never forward
+            # client-controlled completion fields into the domain service.
+            forbidden = {"result", "provider", "provider_model", "provider_config_version", "prompt_version", "schema_version", "guardrail_version", "safety_version", "evaluation_certificate_id"}
+            if forbidden.intersection(body):
+                raise SpecialistError("SPECIALIST_PROVIDER_OUTPUT_SERVER_ONLY")
+            request_body = {key: value for key, value in body.items() if key not in forbidden}
+            return specialist_public(request.app.state.specialists.create(principal.user_id, pet_id, analysis_type, request_body, idempotency_key, principal.billing_exempt))
         except SpecialistError as exc:
             specialist_error(exc)
 

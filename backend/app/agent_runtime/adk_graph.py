@@ -15,7 +15,22 @@ def build_peti_agent(model: str = "gemini-3.5-flash") -> Any:
     Imports are lazy so local fake-provider tests do not require the optional
     ADK runtime to be installed. Production images install ``google-adk``.
     """
-    from google.adk.agents import LlmAgent
+    try:
+        from google.adk.agents import LlmAgent
+    except ModuleNotFoundError as exc:
+        # Keep the graph contract usable in the lightweight test image. The
+        # production dependency is declared in pyproject.toml; this fallback
+        # is deliberately a data-only graph and cannot invoke a model.
+        if exc.name not in {"google", "google.adk", "google.adk.agents"}:
+            raise
+
+        class LlmAgent:  # type: ignore[no-redef]
+            def __init__(self, *, name, model, description, instruction, sub_agents=None):
+                self.name = name
+                self.model = model
+                self.description = description
+                self.instruction = instruction
+                self.sub_agents = list(sub_agents or [])
 
     evidence = LlmAgent(
         name="evidence_intake_agent",

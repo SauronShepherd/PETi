@@ -116,7 +116,9 @@ async def respond_agent_context(run_id: str, request_id: str, body: dict, reques
 
 @router.post("/agent-runs/{run_id}/actions/{action_id}/approve")
 async def approve_agent_action(run_id: str, action_id: str, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    try: return request.app.state.agents.decide_action(principal.user_id, run_id, action_id, True)
+    try:
+        body = await request.json() if request.headers.get("content-length", "0") != "0" else {}
+        return request.app.state.agents.decide_action(principal.user_id, run_id, action_id, True, body.get("payload_hash"))
     except ValueError as exc: raise HTTPException(409, str(exc)) from exc
 
 

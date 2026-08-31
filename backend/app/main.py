@@ -40,6 +40,7 @@ from .auth.task_auth import TaskAuthenticator
 from .auth.verifiers import FirebaseIdentityVerifier, LocalTestIdentityVerifier
 from .automation.rules import RuleEngine
 from .care_advanced.domain import CareRecordsService
+from .agent_runtime.action_executor import CareActionExecutor
 from .collaboration.service import CollaborationService
 from .config import Environment, get_settings
 from .credits.firestore_service import FirestoreEconomicStore
@@ -429,6 +430,7 @@ app.state.care_advanced = CareRecordsService(
     if hasattr(app.state, "firestore_client")
     else None,
 )
+app.state.agent_action_executor = CareActionExecutor(app.state.phase6, app.state.pets)
 app.state.portability = PortabilityService(
     lambda owner, pet_id: app.state.privacy.export_pet(owner, pet_id),
     store=FirestorePhase6Store(app.state.firestore_client)
@@ -446,6 +448,7 @@ app.state.agents = AgentOrchestrator(
     store=FirestorePhase6Store(app.state.firestore_client)
     if hasattr(app.state, "firestore_client")
     else None,
+    action_executor=app.state.agent_action_executor,
 )
 agent_provider = (
     InstrumentedAIProvider(provider, LabProviderTraceObserver(app.state.agents, app.state.lab_tracing))

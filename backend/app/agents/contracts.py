@@ -53,6 +53,8 @@ class AgentRun:
     completed_at: datetime | None = None
     execution_lease_owner: str | None = None
     execution_lease_expires_at: datetime | None = None
+    lease_epoch: int = 0
+    run_version: int = 0
     created_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     updated_at: datetime = field(default_factory=lambda: datetime.now(UTC))
     deleted_at: datetime | None = None
@@ -62,8 +64,9 @@ class AgentRun:
 
 class AgentOrchestrator:
     """A durable-model seam. Provider execution is intentionally injected."""
-    def __init__(self, context_broker=None, tool_gateway=None, store=None, clock=None):
+    def __init__(self, context_broker=None, tool_gateway=None, store=None, clock=None, action_executor=None):
         self.context_broker, self.tool_gateway, self.store = context_broker, tool_gateway, store
+        self.action_executor = action_executor
         self.clock = clock or (lambda: datetime.now(UTC))
         self.runs: dict[str, AgentRun] = {}
         self.sessions: dict[str, AgentSession] = {}
@@ -141,23 +144,32 @@ class AgentOrchestrator:
                 if current_expiry and not isinstance(current_expiry, datetime):
                     current_expiry = datetime.fromisoformat(str(current_expiry))
                 if current_expiry and current_expiry > now and data.get("execution_lease_owner") != lease_owner: return False
-                tx.update(ref, {"execution_lease_owner": lease_owner, "execution_lease_expires_at": expires})
-                return True
-            acquired = bool(claim(transaction))
+                epoch = int(data.get("lease_epoch", 0)) + 1
+                tx.update(ref, {"execution_lease_owner": lease_owner, "execution_lease_expires_at": expires, "lease_epoch": epoch, "run_version": int(data.get("run_version", 0)) + 1})
+                return epoch
+            epoch = claim(transaction)
+            acquired = epoch is not False
         else:
             run = self.get(owner, run_id)
             acquired = not (run.execution_lease_expires_at and run.execution_lease_expires_at > now and run.execution_lease_owner != lease_owner)
             if acquired:
-                run.execution_lease_owner = lease_owner; run.execution_lease_expires_at = expires; self._persist_run(run)
+                run.execution_lease_owner = lease_owner; run.execution_lease_expires_at = expires; run.lease_epoch += 1; run.run_version += 1; self._persist_run(run)
         if acquired and run_id in self.runs:
             self.runs[run_id].execution_lease_owner = lease_owner
             self.runs[run_id].execution_lease_expires_at = expires
+            self.runs[run_id].lease_epoch = int(epoch if self.store and hasattr(self.store, "client") else self.runs[run_id].lease_epoch)
         return acquired
 
     def release_execution_lease(self, owner: str, run_id: str, lease_owner: str) -> None:
         run = self.get(owner, run_id)
         if run.execution_lease_owner != lease_owner: return
         run.execution_lease_owner = None; run.execution_lease_expires_at = None; self._persist_run(run)
+
+    def _assert_fence(self, run, lease_epoch=None, expected_version=None):
+        if lease_epoch is not None and run.lease_epoch != lease_epoch:
+            raise ValueError("STALE_AGENT_EXECUTION")
+        if expected_version is not None and run.run_version != expected_version:
+            raise ValueError("STALE_AGENT_EXECUTION")
 
     @staticmethod
     def _action_hash(action_type, summary, arguments):
@@ -256,26 +268,40 @@ class AgentOrchestrator:
         action = {"id": str(uuid4()), "run_id": run.id, "action_type": action_type, "summary": summary, "arguments": args, "approval_payload_hash": self._action_hash(action_type, summary, args), "status": "PENDING_APPROVAL"}
         self.actions[action["id"]] = action; self._set_state(run, RunState.WAITING); self._save("agent_actions", action["id"], action); self._persist_run(run); return action
 
-    def decide_action(self, owner, run_id, action_id, approved):
+    def decide_action(self, owner, run_id, action_id, approved, presented_payload_hash=None):
         run = self.get(owner, run_id); action = self.actions.get(action_id)
         if not action or action["run_id"] != run.id or action["status"] != "PENDING_APPROVAL": raise ValueError("AGENT_ACTION_NOT_FOUND")
         expected = self._action_hash(action["action_type"], action["summary"], action.get("arguments", {}))
         if action.get("approval_payload_hash") != expected:
             raise ValueError("AGENT_ACTION_PAYLOAD_CHANGED")
+        if presented_payload_hash is not None and presented_payload_hash != expected:
+            raise ValueError("AGENT_ACTION_APPROVAL_HASH_MISMATCH")
         action.update({"status": "APPROVED" if approved else "REJECTED", "approved_by": owner, "receipt_id": str(uuid4())})
+        if approved and self.action_executor:
+            receipt = self.action_executor.execute(owner, run.pet_id, action, f"agent-action-{action['id']}")
+            action["receipt"] = receipt
         self._set_state(run, RunState.RUNNING); self._save("agent_actions", action_id, action); self._persist_run(run); return action
 
-    def commit_step(self, owner, run_id, step: dict, evidence: list[EvidenceReference] | None = None):
+    def commit_step(self, owner, run_id, step: dict, evidence: list[EvidenceReference] | None = None, *, lease_epoch=None, expected_version=None):
         run = self.get(owner, run_id)
+        self._assert_fence(run, lease_epoch, expected_version)
         if run.state in {RunState.CANCELLED, RunState.COMPLETED}: raise ValueError("AGENT_RUN_NOT_WRITABLE")
         step_id = step.get("step_id", str(uuid4()))
         if any(item.get("step_id") == step_id for item in run.steps):
             return run
         run.steps.append({"step_id": step_id, "output": step.get("output"), "schema_version": step.get("schema_version"), "safety_state": step.get("safety_state", "SAFE_TO_DISPLAY")})
-        run.evidence.extend(evidence or []); self._set_state(run, RunState.RUNNING); self._persist_run(run); return run
+        run.evidence.extend(evidence or []); self._set_state(run, RunState.RUNNING)
+        if lease_epoch is not None and expected_version is not None and self.store and hasattr(self.store, "put_agent_run_fenced"):
+            if not self.store.put_agent_run_fenced(run.id, {**asdict(run), "state": run.state.value}, owner=owner, lease_epoch=lease_epoch, expected_version=expected_version):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected_version + 1
+        else:
+            self._persist_run(run)
+        return run
 
-    def complete(self, owner, run_id, result: dict):
+    def complete(self, owner, run_id, result: dict, *, lease_epoch=None, expected_version=None):
         run = self.get(owner, run_id)
+        self._assert_fence(run, lease_epoch, expected_version)
         if not run.evidence and result.get("answer_type") == "FACTUAL": raise ValueError("AGENT_RESULT_NOT_GROUNDED")
         self._set_state(run, RunState.COMPLETED)
         run.response_id = result.get("response_id")

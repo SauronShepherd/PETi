@@ -59,6 +59,15 @@ class AgentExecutionService:
         if not self.runs.acquire_execution_lease(owner, run_id, lease_owner):
             # Redelivery while another instance owns the provider call is a successful no-op.
             return {**run.public(), "duplicate_execution_prevented": True}
+        run = self.runs.get(owner, run_id)
+        lease_epoch = run.lease_epoch
+        def commit(step, evidence=None):
+            current = self.runs.get(owner, run_id)
+            return self.runs.commit_step(
+                owner, run_id, step, evidence,
+                lease_epoch=lease_epoch,
+                expected_version=current.run_version,
+            )
         self.runs._set_state(run, RunState.RUNNING)
         run.started_at = run.started_at or self.runs.clock()
         self.runs._persist_run(run)
@@ -74,13 +83,13 @@ class AgentExecutionService:
             self.lab.start_run(run)
         model_call: tuple[str, float] | None = None
         plan_started = self.lab.start_step(run, "plan", "ORCHESTRATOR") if self.lab else None
-        self.runs.commit_step(owner, run_id, {"step_id": "plan", "output": {"plan": asdict(plan), "policy": asdict(self.policy), "agent_graph": graph_metadata(self.policy.model)}, "schema_version": "1.0.0"})
+        commit({"step_id": "plan", "output": {"plan": asdict(plan), "policy": asdict(self.policy), "agent_graph": graph_metadata(self.policy.model)}, "schema_version": "1.0.0"})
         if self.lab and plan_started is not None:
             self.lab.complete_step(run, "plan", "ORCHESTRATOR", plan_started)
         try:
             evidence_started = self.lab.start_step(run, "evidence-intake", "EVIDENCE_INTAKE") if self.lab else None
             evidence_tool = self.lab.start_tool_call(run, step_id="evidence-intake", agent_id="EVIDENCE_INTAKE", tool_id="evidence-catalog") if self.lab else None
-            self.runs.commit_step(owner, run_id, {"step_id": "evidence-intake", "output": {"item_count": len(media.items), "media_version": getattr(media, "version", "1.0.0"), "status": "READY"}, "schema_version": "1.0.0"})
+            commit({"step_id": "evidence-intake", "output": {"item_count": len(media.items), "media_version": getattr(media, "version", "1.0.0"), "status": "READY"}, "schema_version": "1.0.0"})
             if self.lab and evidence_started is not None:
                 if evidence_tool is not None:
                     self.lab.complete_tool_call(evidence_tool[0], evidence_tool[1], result_code="EVIDENCE_READY")
@@ -104,18 +113,18 @@ class AgentExecutionService:
             evidence = []
             if run.pet_id:
                 evidence.append(EvidenceReference("MEDIA", "input", run.pet_id, owner))
-            self.runs.commit_step(owner, run_id, {"step_id": "peti-check", "output": response.payload, "schema_version": "1.0.0", "safety_state": "PENDING_REVIEW"}, evidence)
+            commit({"step_id": "peti-check", "output": response.payload, "schema_version": "1.0.0", "safety_state": "PENDING_REVIEW"}, evidence)
             if self.lab and specialist_started is not None:
                 observations = response.payload.get("observations", [])
                 self.lab.complete_step(run, "peti-check", "PET_SPECIALIST", specialist_started, safety_state="PENDING_REVIEW", evidence_count=len(evidence), claim_count=len(observations) if isinstance(observations, list) else 0)
                 self.lab.handoff(run, "PET_SPECIALIST", "SAFETY_REVIEW", "SAFETY_GATE_REQUIRED", len(evidence))
             safety_started = self.lab.start_step(run, "safety-review", "SAFETY_REVIEW") if self.lab else None
-            self.runs.commit_step(owner, run_id, {"step_id": "safety-review", "output": {"decision": "REVIEW_REQUIRED", "provider": response.provider, "model": response.model, "usage": asdict(response.usage)}, "schema_version": "1.0.0"})
+            commit({"step_id": "safety-review", "output": {"decision": "REVIEW_REQUIRED", "provider": response.provider, "model": response.model, "usage": asdict(response.usage)}, "schema_version": "1.0.0"})
             if self.lab and safety_started is not None:
                 self.lab.complete_step(run, "safety-review", "SAFETY_REVIEW", safety_started, safety_state="REVIEW_REQUIRED", outcome="SAFETY_ROUTED")
                 self.lab.handoff(run, "SAFETY_REVIEW", "CARE_REPORT", "SAFETY_DECISION_AVAILABLE", len(evidence))
             report_started = self.lab.start_step(run, "care-report", "CARE_REPORT") if self.lab else None
-            self.runs.commit_step(owner, run_id, {"step_id": "care-report", "output": {"status": "PENDING_REVIEW", "actions": [], "source_step": "safety-review"}, "schema_version": "1.0.0"})
+            commit({"step_id": "care-report", "output": {"status": "PENDING_REVIEW", "actions": [], "source_step": "safety-review"}, "schema_version": "1.0.0"})
             if self.lab and report_started is not None:
                 self.lab.complete_step(run, "care-report", "CARE_REPORT", report_started, safety_state="REVIEW_REQUIRED")
             result = {"answer_type": "GROUNDED_OBSERVATIONS", "schema_version": "1.0.0", "status": "REVIEW_REQUIRED", "outcome": "SAFETY_ROUTED", "safety_state": "REVIEW_REQUIRED", "payload": response.payload}
@@ -123,7 +132,8 @@ class AgentExecutionService:
             if published:
                 result["response_id"] = published.id
                 result["feedback_eligible"] = published.eligible_for_feedback
-            self.runs.complete(owner, run_id, result)
+            current = self.runs.get(owner, run_id)
+            self.runs.complete(owner, run_id, result, lease_epoch=lease_epoch, expected_version=current.run_version)
             if self.lab and published:
                 self.lab.complete_run(run, published)
             result_public = self.runs.get(owner, run_id).public()
