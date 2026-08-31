@@ -406,7 +406,13 @@ class AgentOrchestrator:
             "receipt": action.get("receipt"),
         }
         self._save("agent_action_approvals", approval_event["id"], approval_event)
-        self._set_state(run, RunState.RUNNING)
+        if approved and action.get("receipt"):
+            self._set_state(run, RunState.COMPLETED)
+            run.outcome = "ACTION_EXECUTED"
+            run.safety_state = "SAFE_TO_DISPLAY"
+            run.completed_at = self.clock()
+        else:
+            self._set_state(run, RunState.RUNNING)
         if self.store and hasattr(self.store, "put_agent_run_versioned"):
             if not self.store.put_agent_run_versioned(run.id, {**asdict(run), "state": run.state.value}, owner=owner, expected_version=expected_version):
                 raise ValueError("STALE_AGENT_EXECUTION")
