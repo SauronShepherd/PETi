@@ -61,17 +61,22 @@ class FirestoreAgentRepository:
         return [dict(x.to_dict() or {}, id=x.id) for x in self._run(run_id).collection("claims").stream()]
 
     def transition_run(self, run_id, owner_user_id, expected_version, status):
+        from google.cloud.firestore_v1.transaction import transactional
         transaction = self.client.transaction()
         ref = self._run(run_id)
-        snap = ref.get(transaction=transaction)
-        data = snap.to_dict() if snap.exists else None
-        if not data or data.get("owner_user_id") != owner_user_id or int(data.get("run_version", 0)) != int(expected_version):
-            return False
-        data["status"] = status
-        data["run_version"] = int(expected_version) + 1
-        transaction.set(ref, data)
-        transaction.commit()
-        return True
+        @transactional
+        def transition(tx):
+            snap = tx.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            data = snap.to_dict() if snap is not None and snap.exists else None
+            if not data or data.get("owner_user_id") != owner_user_id or int(data.get("run_version", 0)) != int(expected_version):
+                return False
+            data["status"] = status
+            data["run_version"] = int(expected_version) + 1
+            tx.set(ref, data)
+            return True
+        return bool(transition(transaction))
 
     def claim_step(self, run_id, step_id, worker_id, now, lease_seconds=300):
         from google.cloud.firestore_v1.transaction import transactional
@@ -96,16 +101,20 @@ class FirestoreAgentRepository:
         return bool(claim(transaction))
 
     def renew_step_lease(self, run_id, step_id, worker_id, lease_epoch, now, lease_seconds=300):
+        from google.cloud.firestore_v1.transaction import transactional
         transaction = self.client.transaction()
         ref = self._run(run_id).collection("steps").document(step_id)
-        snap = ref.get(transaction=transaction)
-        step = snap.to_dict() if snap.exists else None
-        if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch):
-            return False
-        step["lease_expires_at"] = now + timedelta(seconds=lease_seconds)
-        transaction.set(ref, step)
-        transaction.commit()
-        return True
+        @transactional
+        def renew(tx):
+            snap = tx.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            step = snap.to_dict() if snap is not None and snap.exists else None
+            if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch):
+                return False
+            tx.update(ref, {"lease_expires_at": now + timedelta(seconds=lease_seconds)})
+            return True
+        return bool(renew(transaction))
 
     def commit_step_result(self, run_id, step_id, worker_id, lease_epoch, result):
         from google.cloud.firestore_v1.transaction import transactional
@@ -127,7 +136,15 @@ class FirestoreAgentRepository:
         return bool(commit(transaction))
 
     def schedule_step_retry(self, run_id, step_id, worker_id, lease_epoch, now):
+        from google.cloud.firestore_v1.transaction import transactional
         transaction = self.client.transaction(); ref = self._run(run_id).collection("steps").document(step_id)
-        snap = ref.get(transaction=transaction); step = snap.to_dict() if snap.exists else None
-        if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch): return False
-        transaction.update(ref, {"status": "RETRY_SCHEDULED", "lease_owner": None, "lease_expires_at": None, "last_retry_at": now}); transaction.commit(); return True
+        @transactional
+        def retry(tx):
+            snap = tx.get(ref)
+            if not hasattr(snap, "exists"):
+                snap = next(iter(snap), None)
+            step = snap.to_dict() if snap is not None and snap.exists else None
+            if not step or step.get("status") != "RUNNING" or step.get("lease_owner") != worker_id or int(step.get("lease_epoch", 0)) != int(lease_epoch): return False
+            tx.update(ref, {"status": "RETRY_SCHEDULED", "lease_owner": None, "lease_expires_at": None, "last_retry_at": now})
+            return True
+        return bool(retry(transaction))
