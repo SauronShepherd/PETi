@@ -79,6 +79,7 @@ class MediaAsset:
     size_bytes_verified: int | None = None
     checksum_sha256_declared: str | None = None
     checksum_sha256_verified: str | None = None
+    storage_generation: str | None = None
     storage_bucket: str = "local-media"
     storage_object: str = ""
     upload_strategy: UploadStrategy = UploadStrategy.SIMPLE_SIGNED_PUT

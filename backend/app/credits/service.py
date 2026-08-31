@@ -63,6 +63,9 @@ class CreditService:
                 self.grants[data["id"]] = CreditGrant(
                     **{k: data[k] for k in CreditGrant.__dataclass_fields__ if k in data}
                 )
+                grant = self.grants[data["id"]]
+                if grant.source == FundingSource.FREE_ALLOWANCE and grant.source_reference == "allowance:v1":
+                    self.idempotency[(grant.user_id, "FREE_ALLOWANCE")] = grant
             except (KeyError, TypeError, ValueError):
                 continue
         try:
@@ -152,8 +155,7 @@ class CreditService:
                     amount = grant.remaining_amount
                     grant.remaining_amount = 0
                     grant.exhausted_at = now
-                    self.ledger.append(
-                        CreditLedgerEntry(
+                    entry = CreditLedgerEntry(
                             str(uuid4()),
                             grant.user_id,
                             LedgerDirection.EXPIRE,
@@ -163,7 +165,8 @@ class CreditService:
                             grant_id=grant.id,
                             reason_code="GRANT_EXPIRED",
                         )
-                    )
+                    self._commit([("credit_grants", grant.id, grant.__dict__), ("credit_ledger", entry.id, entry.__dict__)])
+                    self.ledger.append(entry)
                     expired += 1
             for reservation in self.reservations.values():
                 if (
@@ -211,10 +214,7 @@ class CreditService:
             g = CreditGrant(
                 str(uuid4()), user_id, source, amount, amount, source_reference=source_reference
             )
-            self.grants[g.id] = g
-            self._commit([("credit_grants", g.id, g.__dict__)])
-            self.ledger.append(
-                CreditLedgerEntry(
+            entry = CreditLedgerEntry(
                     str(uuid4()),
                     user_id,
                     LedgerDirection.GRANT,
@@ -223,8 +223,9 @@ class CreditService:
                     idempotency_key or g.id,
                     grant_id=g.id,
                 )
-            )
-            self._commit([("credit_ledger", self.ledger[-1].id, self.ledger[-1].__dict__)])
+            self._commit([("credit_grants", g.id, g.__dict__), ("credit_ledger", entry.id, entry.__dict__)])
+            self.grants[g.id] = g
+            self.ledger.append(entry)
             if idempotency_key:
                 self.idempotency[idempotency_key] = g
             return g
@@ -280,13 +281,22 @@ class CreditService:
                 )
                 self.reservations[reservation.id] = reservation
                 return reservation
+            # Explicitly earned/promotional balances are consumed before the
+            # free allowance. The allowance remains a durable fallback and
+            # must not unexpectedly hide paid/rewarded provenance.
+            source_priority = {
+                FundingSource.REWARDED_AD: 0,
+                FundingSource.PROMOTIONAL: 1,
+                FundingSource.PREMIUM: 2,
+                FundingSource.FREE_ALLOWANCE: 3,
+            }
             grants = sorted(
                 [
                     g
                     for g in self.grants.values()
                     if g.user_id == user_id and g.remaining_amount - g.reserved_amount > 0
                 ],
-                    key=lambda g: (g.expires_at or datetime.max.replace(tzinfo=UTC), g.created_at, g.id),
+                    key=lambda g: (source_priority.get(g.source, 99), g.expires_at or datetime.max.replace(tzinfo=UTC), g.created_at, g.id),
             )
             alloc = []
             left = need

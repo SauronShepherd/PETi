@@ -1,9 +1,11 @@
 import json
 from importlib.util import module_from_spec, spec_from_file_location
+from pathlib import Path
 
 
 def load_checker():
-    spec = spec_from_file_location("check_production_config", "scripts/check_production_config.py")
+    script = Path(__file__).resolve().parents[2] / "scripts" / "check_production_config.py"
+    spec = spec_from_file_location("check_production_config", script)
     assert spec and spec.loader
     module = module_from_spec(spec)
     spec.loader.exec_module(module)

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "demo-fb-max",
+    "reasons": [
+      "NO_CLEAR_NEXT_STEP"
+    ],
+    "response_id": "demo-response-max",
+    "revision": 1,
+    "run_id": "demo-run-max",
+    "value": "NOT_QUITE"
+  },
+  {
+    "id": "demo-fb-luna",
+    "reasons": [
+      "CLEAR",
+      "USED_EVIDENCE_WELL"
+    ],
+    "response_id": "demo-response-luna",
+    "revision": 1,
+    "run_id": "demo-run-luna",
+    "value": "HELPED"
+  }
+]

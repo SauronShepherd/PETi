@@ -3,9 +3,11 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from threading import Barrier
 
+from app.agent_runtime.agent_model_provider import ProviderInvocationResult
 from app.agent_runtime.execution import AgentExecutionService
 from app.agents.contracts import AgentOrchestrator, RunState
 from app.ai.providers.fake import FakeAIProvider
+from app.repositories.agents.memory import MemoryAgentRepository
 
 
 @dataclass
@@ -16,6 +18,35 @@ class Media:
         self.items = self.items or []
 
 
+class MultiRoleProvider:
+    def __init__(self):
+        self.calls = []
+
+    def invoke(self, **kwargs):
+        self.calls.append(kwargs)
+        role = kwargs["role"]
+        payloads = {
+            "EVIDENCE_INTAKE": {"usable": True, "evidence_quality": "GOOD", "evidence_ids": ["asset-1"]},
+            "FECES_CURRENT_ASSESSMENT": {"evidence_quality": "GOOD", "observations": []},
+            "FECES_LONGITUDINAL_COMPARE": {"comparability": "INSUFFICIENT_DATA", "evidence_ids": ["asset-1"]},
+        }
+        return ProviderInvocationResult("multi-role-test", "stable-model-v1", f"req-{len(self.calls)}", payloads[role], {"input_tokens": 1})
+
+
+def test_compare_execution_dispatches_and_persists_three_role_invocations():
+    runs = AgentOrchestrator()
+    provider = MultiRoleProvider()
+    service = AgentExecutionService(runs, FakeAIProvider(), agent_model_provider=provider)
+    run = runs.create_run("owner-a", "Compare today's stool with history", "pet-a")
+    result = service.execute("owner-a", run.id, Media([{"id": "asset-1", "pet_id": "pet-a", "modality": "FECES", "taxonomy_version": "v1", "evidence_quality": "GOOD"}]))
+    assert result["state"] == RunState.COMPLETED
+    assert [call["role"] for call in provider.calls] == [
+        "EVIDENCE_INTAKE", "FECES_CURRENT_ASSESSMENT", "FECES_LONGITUDINAL_COMPARE"
+    ]
+    assert result["steps"][-1]["final"]["payload"]["comparability"] == "INSUFFICIENT_DATA"
+    assert runs.list_claims("owner-a", run.id) == []
+
+
 def test_agent_execution_persists_bounded_plan_and_review_state():
     runs = AgentOrchestrator()
     service = AgentExecutionService(runs, FakeAIProvider())
@@ -23,7 +54,18 @@ def test_agent_execution_persists_bounded_plan_and_review_state():
     result = service.execute("owner-a", run.id, Media())
     assert result["state"] == RunState.COMPLETED
     assert [step["step_id"] for step in result["steps"][:5]] == ["plan", "evidence-intake", "peti-check", "safety-review", "care-report"]
-    assert result["steps"][-1]["final"]["status"] == "REVIEW_REQUIRED"
+    assert result["steps"][-1]["final"]["status"] == "PROFESSIONAL_REVIEW_RECOMMENDED"
+
+def test_agent_execution_commits_matching_durable_step():
+    repository = MemoryAgentRepository()
+    runs = AgentOrchestrator(repository=repository)
+    service = AgentExecutionService(runs, FakeAIProvider())
+    run = runs.create_run("owner-a", "What should I review?", "pet-a")
+    result = service.execute("owner-a", run.id, Media())
+    assert result["state"] == RunState.COMPLETED
+    durable = {step["id"]: step for step in repository.list_steps(run.id)}
+    assert durable["evidence-intake"]["status"] == "SUCCEEDED"
+    assert all(durable[name]["status"] == "SUCCEEDED" for name in ("plan", "evidence-intake", "peti-check", "safety-review", "care-report"))
 
 
 def test_agent_duplicate_delivery_uses_one_provider_call():

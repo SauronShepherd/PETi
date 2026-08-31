@@ -4,8 +4,6 @@ from datetime import UTC, datetime
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 
-from app.agent_runtime.queue import AgentQueueError
-from app.agents.contracts import RunState
 from app.analysis.service import AnalysisError
 from app.auth.models import AuthenticatedPrincipal
 from app.credits.domain import OperationType
@@ -20,6 +18,7 @@ from app.reports.service import ReportError
 from app.specialists.service import SpecialistError
 
 from .dependencies import require_principal
+from .models.specialists import SpecialistCreateRequest
 
 router = APIRouter(prefix="/v1")
 
@@ -680,26 +679,9 @@ async def preview_portable_import(body: dict, request: Request, principal: Authe
     return request.app.state.portability.import_preview(principal.user_id, body)
 
 
-@router.post("/agent/runs", status_code=202)
-async def create_agent_run(body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    pet_id = body.get("pet_id")
-    if not pet_id:
-        raise HTTPException(400, "PET_ID_REQUIRED_USE_CANONICAL_DOG_ROUTE")
-    try:
-        request.app.state.pets.get(principal.user_id, pet_id) or (_ for _ in ()).throw(ValueError("DOG_NOT_FOUND"))
-        run = request.app.state.agents.create_run(principal.user_id, body.get("goal", ""), pet_id,
-            body.get("agent_type", "ORCHESTRATOR"), session_id=body.get("session_id"),
-            interaction_id=request.state.interaction_id, correlation_id=request.state.correlation_id,
-            deployment_id=request.app.state.settings.deployment_revision)
-        if request.app.state.settings.lab_enabled: request.app.state.lab_tracing.create_run(run)
-        request.app.state.agent_queue.enqueue_agent(run_id=run.id, owner_user_id=principal.user_id,
-            media_asset_ids=list(body.get("media_asset_ids", [])), context=body.get("context"))
-        return run.public()
-    except AgentQueueError as exc:
-        if 'run' in locals():
-            request.app.state.agents._set_state(run, RunState.WAITING); request.app.state.agents._persist_run(run)
-        raise HTTPException(409, "AGENT_QUEUE_SUBMISSION_FAILED") from exc
-    except ValueError as exc: raise HTTPException(409, str(exc)) from exc
+@router.post("/agent/runs", status_code=410)
+async def create_agent_run_legacy():
+    raise HTTPException(410, "AGENT_ROUTE_RETIRED_USE_CANONICAL_DOG_ROUTE")
 
 
 @router.get("/agent/runs/{run_id}")
@@ -796,14 +778,9 @@ async def set_variable_cost_intake(
 
 def _specialist_routes(analysis_type, singular, plural, candidate_prefix=None):
     @router.post(f"/pets/{{pet_id}}/{plural}", status_code=202, name=f"create_{singular}")
-    async def create_specialist(pet_id: str, body: dict, request: Request, idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"), principal: AuthenticatedPrincipal = Depends(require_principal)):
+    async def create_specialist(pet_id: str, body: SpecialistCreateRequest, request: Request, idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"), principal: AuthenticatedPrincipal = Depends(require_principal)):
         try:
-            # Provider output and provenance are worker-owned. Never forward
-            # client-controlled completion fields into the domain service.
-            forbidden = {"result", "provider", "provider_model", "provider_config_version", "prompt_version", "schema_version", "guardrail_version", "safety_version", "evaluation_certificate_id"}
-            if forbidden.intersection(body):
-                raise SpecialistError("SPECIALIST_PROVIDER_OUTPUT_SERVER_ONLY")
-            request_body = {key: value for key, value in body.items() if key not in forbidden}
+            request_body = body.model_dump(exclude_none=True)
             return specialist_public(request.app.state.specialists.create(principal.user_id, pet_id, analysis_type, request_body, idempotency_key, principal.billing_exempt))
         except SpecialistError as exc:
             specialist_error(exc)
@@ -836,9 +813,9 @@ async def delete_dental_check(check_id: str, request: Request, principal: Authen
 
 
 @router.post("/pets/{pet_id}/initial-scans", status_code=202)
-async def create_initial_scan(pet_id: str, body: dict, request: Request, idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"), principal: AuthenticatedPrincipal = Depends(require_principal)):
+async def create_initial_scan(pet_id: str, body: SpecialistCreateRequest, request: Request, idempotency_key: str | None = Header(default=None, alias="Idempotency-Key"), principal: AuthenticatedPrincipal = Depends(require_principal)):
     try:
-        return specialist_public(request.app.state.specialists.create(principal.user_id, pet_id, "DOG_INITIAL_SCAN", body, idempotency_key, principal.billing_exempt))
+        return specialist_public(request.app.state.specialists.create(principal.user_id, pet_id, "DOG_INITIAL_SCAN", body.model_dump(exclude_none=True), idempotency_key, principal.billing_exempt))
     except SpecialistError as exc:
         specialist_error(exc)
 
@@ -1657,31 +1634,6 @@ async def reserve_funding(
         funding_error(exc)
 
 
-@router.post("/funding/reservations/{reservation_id}/consume")
-async def consume_funding(
-    reservation_id: str,
-    request: Request,
-    execution_id: str = Header(..., alias="Execution-Id"),
-    principal: AuthenticatedPrincipal = Depends(require_principal),
-):
-    try:
-        return request.app.state.credits.consume(reservation_id, execution_id).__dict__
-    except FundingError as exc:
-        funding_error(exc)
-
-
-@router.post("/funding/reservations/{reservation_id}/release")
-async def release_funding(
-    reservation_id: str,
-    request: Request,
-    principal: AuthenticatedPrincipal = Depends(require_principal),
-):
-    try:
-        return request.app.state.credits.release(reservation_id).__dict__
-    except FundingError as exc:
-        funding_error(exc)
-
-
 @router.get("/internal/credits/audit")
 async def credit_audit(
     request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)
@@ -1927,6 +1879,8 @@ async def get_media(
     asset = request.app.state.media.get_owned(principal.user_id, media_id)
     if not asset:
         raise HTTPException(404, "MEDIA_NOT_FOUND")
+    if str(getattr(asset, "status", "")) != "PENDING_UPLOAD":
+        raise HTTPException(409, "MEDIA_UPLOAD_ALREADY_FINALIZED")
     return media_dict(asset)
 
 

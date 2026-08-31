@@ -1,0 +1,2159 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/visual-regression.spec.js",
+      "--output=release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results"
+    ],
+    "configFile": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\playwright.config.js",
+    "rootDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/visual-regression-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/visual-regression-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "tablet",
+        "name": "tablet",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/visual-regression-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "release/evidence/navigation/web-playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "visual-regression.spec.js",
+      "file": "visual-regression.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "visual baseline HOME",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:33:43.733Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HOME-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-e41e5ec461cc93cd1954",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SCAN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5016,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:33:58.435Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SCAN-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-46d6c1acccfffe5dd50d",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline HISTORY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:03.511Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HISTORY-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-01459847077f2d79d428",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PROFILE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5160,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:08.473Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PROFILE-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-456be51e3064087c8b4d",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline AGENTS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5701,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:13.722Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-AGENTS-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-1f086982ff977bd7323c",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline CARE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4183,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:19.479Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-CARE-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-4c2c0fed2329123c3ee1",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline BODY_CHECK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4142,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:23.711Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-BODY-CHECK-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-026288d178bb866c2c30",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline RECORDS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5345,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:27.901Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-RECORDS-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-9d5aef4af7a61ccad868",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ASSISTANT",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5457,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:33.350Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ASSISTANT-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-80989c133b5615d018df",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PLANS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:38.890Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PLANS-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-96de332538c0751db6c8",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SETTINGS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4179,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:44.470Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SETTINGS-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-6bcc8edb2b6e3e67bd56",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline FEEDBACK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5826,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:48.688Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-FEEDBACK-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-efcea6534007eb505f25",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline COLLABORATION",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8984,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:54.570Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-COLLABORATION-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-db7ee1d24c73ad0d14e2",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline LIBRARY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6637,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:03.604Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-LIBRARY-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-df5f12a2362d2621eabd",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ADMIN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:10.346Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ADMIN-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-2e61461c089cd117eef0",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "golden retriever fixture loads and is accepted by the demo image flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7955,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:17.227Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-golden-r-7b191-pted-by-the-demo-image-flow-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-c5bc77858a90f14878ba",
+          "file": "visual-regression.spec.js",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "demo exercises two synthetic pets with five observations each",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5360,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:25.257Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-demo-exe-ab6b8-with-five-observations-each-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-9b16579da70e76004493",
+          "file": "visual-regression.spec.js",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "visual baseline HOME",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 13466,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:33:44.747Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HOME-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-5532431687737e8c2561",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SCAN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4908,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:02.492Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SCAN-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-ea4a302c671f5f3d2b63",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline HISTORY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4370,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:07.496Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HISTORY-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-0d4211fd7167c2d4ad2f",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PROFILE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5706,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:11.924Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PROFILE-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-8553f2b7371d17f33de0",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline AGENTS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4583,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:17.696Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-AGENTS-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-0938707714b1c15452c0",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline CARE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4297,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:22.346Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-CARE-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-dd2f563aed7260e01806",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline BODY_CHECK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4273,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:26.679Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-BODY-CHECK-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-d7fe7de9df66e4db2d61",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline RECORDS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:31.005Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-RECORDS-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-493ddf0c77abd8dfbca0",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ASSISTANT",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5929,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:38.384Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ASSISTANT-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-643f63879a6181b73a36",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PLANS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4018,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:44.375Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PLANS-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-23da5264e1d6b08a55f7",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SETTINGS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5479,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:48.434Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SETTINGS-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-03cb177b86049698e43e",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline FEEDBACK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8454,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:53.962Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-FEEDBACK-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-aa3e06cac7ad13caaba9",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline COLLABORATION",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 6445,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:02.605Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-COLLABORATION-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-d95ef1c2eb4ec495fe9b",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline LIBRARY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 6739,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:09.179Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-LIBRARY-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-251927b94d0aa861a8ed",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ADMIN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 7731,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:15.994Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ADMIN-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-5967cb77d0bf6c4f8492",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "golden retriever fixture loads and is accepted by the demo image flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:23.784Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-golden-r-7b191-pted-by-the-demo-image-flow-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-34e4196f5cbd3c40c0b4",
+          "file": "visual-regression.spec.js",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "demo exercises two synthetic pets with five observations each",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5927,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:28.982Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-demo-exe-ab6b8-with-five-observations-each-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-5908dfcf2f59100871e6",
+          "file": "visual-regression.spec.js",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "visual baseline HOME",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 10927,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:33:43.847Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HOME-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-02c8c840ad3cb6a4737b",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SCAN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:33:58.281Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SCAN-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-2a9d12cb67343aaee239",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline HISTORY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:03.370Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-HISTORY-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-50d8d038745ca685c703",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PROFILE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4591,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:08.056Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PROFILE-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-0c874fcc06db8de11ebf",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline AGENTS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5434,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:12.738Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-AGENTS-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-272aa00b2379fcbd2f91",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline CARE",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4329,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:18.301Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-CARE-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-4fcbb6324bbf3d069b0a",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline BODY_CHECK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:22.747Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-BODY-CHECK-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-8061b72974dbba4d368f",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline RECORDS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4277,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:27.117Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-RECORDS-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-78680be780cade73daeb",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ASSISTANT",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 7103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:31.512Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ASSISTANT-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-4b09a7c1c725b8ea8bfd",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline PLANS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5381,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:38.800Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-PLANS-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-03363117bee1441807b0",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline SETTINGS",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 4369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:44.262Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-SETTINGS-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-a33d0a96ac2a8d4197b3",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline FEEDBACK",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5878,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:48.684Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-FEEDBACK-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-d22b24dfa919c2eb3915",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline COLLABORATION",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 8997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:34:54.618Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-COLLABORATION-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-35567ae30549d0b5494d",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline LIBRARY",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 6432,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:03.720Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-LIBRARY-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-752c5bb62188129cf581",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "visual baseline ADMIN",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 6697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:10.326Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-visual-baseline-ADMIN-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-642e4ca7aef8b8d3bf19",
+          "file": "visual-regression.spec.js",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "golden retriever fixture loads and is accepted by the demo image flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 7926,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:17.127Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-golden-r-7b191-pted-by-the-demo-image-flow-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-da28a82b6cbfe207adb8",
+          "file": "visual-regression.spec.js",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "demo exercises two synthetic pets with five observations each",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:35:25.136Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\visual-regression-results\\visual-regression-demo-exe-ab6b8-with-five-observations-each-mobile\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "614534ba5c1e0a84453e-2dba922411e12e4784ac",
+          "file": "visual-regression.spec.js",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-30T15:33:41.538Z",
+    "duration": 139042.321,
+    "expected": 51,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

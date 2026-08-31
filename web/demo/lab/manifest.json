@@ -1,0 +1,53 @@
+{
+  "contains_real_user_data": false,
+  "data_classification": "SYNTHETIC_DEMO",
+  "files": [
+    {
+      "bytes": 1440,
+      "file": "overview.json",
+      "sha256": "c979412e81bf93770bd3e8e78c123008c697ef362d17dbaa6a4280a62ddfc247"
+    },
+    {
+      "bytes": 915,
+      "file": "runs.json",
+      "sha256": "28a328350c2ff96b5c455183f80266f4d4d35f1ff0098d49742ead156eff9f00"
+    },
+    {
+      "bytes": 1111,
+      "file": "agents.json",
+      "sha256": "da88dabd0de2feadcfd874d46acecfa5cc4100b4d980e4277697563dbaeaa490"
+    },
+    {
+      "bytes": 500,
+      "file": "models.json",
+      "sha256": "a25795941a5eabae292e16a85358bc4c723174c32400bf52b83e225a53f707ad"
+    },
+    {
+      "bytes": 416,
+      "file": "feedback.json",
+      "sha256": "4abb2c4f407c9fdbf8a02925fde985560d928ebd1eab56d8f2b01fa9c6cdb2af"
+    },
+    {
+      "bytes": 492,
+      "file": "evaluations.json",
+      "sha256": "bafe6b1c0711ca741767bf53cfd3e81a71428c3d4215afdb50e8ed8b04e3097a"
+    },
+    {
+      "bytes": 1996,
+      "file": "run-luna.json",
+      "sha256": "4c1c5add0240af7331c87de27a8c80affe5fc96494f85adab7c0f4e62c4be15a"
+    },
+    {
+      "bytes": 2032,
+      "file": "run-max.json",
+      "sha256": "ba08f490f9c5f1fda2dbee569bca94536ec2f796d5509de6f56ef9aa827b007a"
+    }
+  ],
+  "fixture_id": "peti-veterinary-ai-lab-demo-v1",
+  "scenarios": [
+    "LUNA_HEALTHY",
+    "MAX_REVIEW_REQUIRED"
+  ],
+  "schema_version": "1.0.0",
+  "source": "data.json"
+}

@@ -31,7 +31,9 @@ class FirestorePhase6Store:
 
     def put_agent_run_fenced(self, run_id: str, data: dict[str, Any], *, owner: str, lease_epoch: int, expected_version: int) -> bool:
         """Atomically persist an agent aggregate only under its active fence."""
-        from google.cloud.firestore_v1.transaction import transactional  # type: ignore[import-untyped]
+        from google.cloud.firestore_v1.transaction import (
+            transactional,  # type: ignore[import-untyped]
+        )
         ref = self.client.collection("agent_runs").document(run_id)
         tx = self.client.transaction()
 
@@ -53,6 +55,19 @@ class FirestorePhase6Store:
             return True
 
         return bool(write(tx))
+
+    def put_agent_run_versioned(self, run_id: str, data: dict[str, Any], *, owner: str, expected_version: int) -> bool:
+        ref = self.client.collection("agent_runs").document(run_id)
+        transaction = self.client.transaction()
+        snap = ref.get(transaction=transaction)
+        current = snap.to_dict() if snap.exists else None
+        if not current or current.get("owner_user_id") != owner or int(current.get("run_version", 0)) != int(expected_version):
+            return False
+        next_data = dict(data)
+        next_data["run_version"] = int(expected_version) + 1
+        transaction.set(ref, next_data)
+        transaction.commit()
+        return True
 
     def delete(self, collection: str, record_id: str) -> None:
         self.client.collection(collection).document(record_id).delete()

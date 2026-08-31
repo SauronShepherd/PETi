@@ -10,6 +10,9 @@ from starlette.responses import Response
 
 from .advertising.google_ssv_verifier import GoogleSsvVerifier
 from .advertising.service import RewardService
+from .agent_runtime.action_executor import CareActionExecutor
+from .agent_runtime.adk_graph import build_peti_agent
+from .agent_runtime.adk_runner import AdkAgentModelProvider, AdkRunner
 from .agent_runtime.execution import AgentExecutionService
 from .agent_runtime.queue import CloudAgentTaskQueue, FakeAgentTaskQueue
 from .agents.contracts import AgentOrchestrator
@@ -40,7 +43,6 @@ from .auth.task_auth import TaskAuthenticator
 from .auth.verifiers import FirebaseIdentityVerifier, LocalTestIdentityVerifier
 from .automation.rules import RuleEngine
 from .care_advanced.domain import CareRecordsService
-from .agent_runtime.action_executor import CareActionExecutor
 from .collaboration.service import CollaborationService
 from .config import Environment, get_settings
 from .credits.firestore_service import FirestoreEconomicStore
@@ -71,6 +73,7 @@ from .portability.service import PortabilityService
 from .privacy.service import PrivacyService
 from .records.vault import RecordVaultService
 from .reports.service import WeeklyReportService
+from .repositories.agents.firestore import FirestoreAgentRepository
 from .repositories.firestore import FirestoreAnimalRepository, FirestoreUserRepository
 from .repositories.memory import (
     InMemoryAnimalRepository,
@@ -449,15 +452,22 @@ app.state.agents = AgentOrchestrator(
     if hasattr(app.state, "firestore_client")
     else None,
     action_executor=app.state.agent_action_executor,
+    repository=FirestoreAgentRepository(app.state.firestore_client) if hasattr(app.state, "firestore_client") else None,
 )
 agent_provider = (
     InstrumentedAIProvider(provider, LabProviderTraceObserver(app.state.agents, app.state.lab_tracing))
     if settings.lab_enabled else provider
 )
+agent_model_provider = None
+if settings.agent_adk_enabled:
+    agent_model_provider = AdkAgentModelProvider(
+        AdkRunner(build_peti_agent(settings.ai_model)),
+    )
 app.state.agent_execution = AgentExecutionService(
     app.state.agents,
     agent_provider,
     lab=app.state.lab_tracing if settings.lab_enabled else None,
+    agent_model_provider=agent_model_provider,
 )
 app.state.collaboration = CollaborationService(
     app.state.pets,

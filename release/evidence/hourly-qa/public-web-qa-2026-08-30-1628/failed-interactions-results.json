@@ -1,0 +1,791 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/extended-interactions.spec.js",
+      "--grep",
+      "assistant validates|care creation|collaboration validates"
+    ],
+    "configFile": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\playwright.config.js",
+    "rootDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "tablet",
+        "name": "tablet",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "release/evidence/navigation/web-playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 6,
+    "webServer": {
+      "command": "python -m http.server 4173 --bind 127.0.0.1 -d web",
+      "url": "http://127.0.0.1:4173/?demo=1",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "extended-interactions.spec.js",
+      "file": "extended-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "assistant validates empty questions without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12719,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 51,
+                      "line": 6
+                    },
+                    "snippet": "  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 51,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n\n  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:06.874Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 51,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-f08ea4da5b50e8869ad8",
+          "file": "extended-interactions.spec.js",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "care creation validates missing pet without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11693,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 46,
+                      "line": 64
+                    },
+                    "snippet": "  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 46,
+                        "line": 64
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n\n  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:23.661Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 46,
+                    "line": 64
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-edd88abefcbc5e1f64be",
+          "file": "extended-interactions.spec.js",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "collaboration validates missing pet safely",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10247,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 55,
+                      "line": 143
+                    },
+                    "snippet": "  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 55,
+                        "line": 143
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n\n  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:38.516Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 55,
+                    "line": 143
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-c3e14fc37b61e31dcfcb",
+          "file": "extended-interactions.spec.js",
+          "line": 139,
+          "column": 5
+        },
+        {
+          "title": "assistant validates empty questions without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 12776,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 51,
+                      "line": 6
+                    },
+                    "snippet": "  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 51,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n\n  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:07.019Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 51,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-a4ca3235132e06b3ae97",
+          "file": "extended-interactions.spec.js",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "care creation validates missing pet without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 11848,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 46,
+                      "line": 64
+                    },
+                    "snippet": "  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 46,
+                        "line": 64
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n\n  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:23.758Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-tablet\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-tablet\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-tablet\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 46,
+                    "line": 64
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-790a8b3ca59f84c18642",
+          "file": "extended-interactions.spec.js",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "collaboration validates missing pet safely",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 10355,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 55,
+                      "line": 143
+                    },
+                    "snippet": "  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 55,
+                        "line": 143
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n\n  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:38.724Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 55,
+                    "line": 143
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-c01ed1d702a138d8a2e1",
+          "file": "extended-interactions.spec.js",
+          "line": 139,
+          "column": 5
+        },
+        {
+          "title": "assistant validates empty questions without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 12685,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 51,
+                      "line": 6
+                    },
+                    "snippet": "  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 51,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#assistant-status')\nExpected substring: \u001b[32m\"\u001b[7mAñade una masco\u001b[27mta\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mEscribe una pregun\u001b[27mta\u001b[7m.\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#assistant-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"assistant-status\">Escribe una pregunta.</div>\u001b[22m\n\u001b[2m       - unexpected value \"Escribe una pregunta.\"\u001b[22m\n\n\n  4 |   await page.goto(\"/?demo=1#ASSISTANT\");\n  5 |   await page.locator(\"#assistant-form button\").click();\n> 6 |   await expect(page.locator(\"#assistant-status\")).toContainText(\"Añade una mascota\");\n    |                                                   ^\n  7 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  8 |   await page.screenshot({ path: test.info().outputPath(\"assistant-empty-validation.png\"), fullPage: true });\n  9 | });\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:6:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:06.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 51,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-1505c0ea157695aba29b",
+          "file": "extended-interactions.spec.js",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "care creation validates missing pet without leaking internals",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 11939,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 46,
+                      "line": 64
+                    },
+                    "snippet": "  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 46,
+                        "line": 64
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#care-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de crear un cuidad\u001b[27mo.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mNo se pudo guardar el evento. Inténtalo de nuev\u001b[27mo.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#care-status')\u001b[22m\n\u001b[2m    5 × locator resolved to <div id=\"care-status\" class=\"footer-note\">Guardando evento…</div>\u001b[22m\n\u001b[2m      - unexpected value \"Guardando evento…\"\u001b[22m\n\u001b[2m    9 × locator resolved to <div id=\"care-status\" class=\"footer-note\">No se pudo guardar el evento. Inténtalo de nuevo.</div>\u001b[22m\n\u001b[2m      - unexpected value \"No se pudo guardar el evento. Inténtalo de nuevo.\"\u001b[22m\n\n\n  62 |   await page.locator(\"#care-due\").fill(\"2026-08-30T18:00\");\n  63 |   await page.locator(\"#care-form button[type=submit]\").click();\n> 64 |   await expect(page.locator(\"#care-status\")).toHaveText(\"Añade una mascota antes de crear un cuidado.\");\n     |                                              ^\n  65 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  66 | });\n  67 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:64:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:23.977Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-mobile\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-care-56c77-t-without-leaking-internals-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 46,
+                    "line": 64
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-1bf2ea7343dfef2323e2",
+          "file": "extended-interactions.spec.js",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "collaboration validates missing pet safely",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 10819,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55",
+                    "location": {
+                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                      "column": 55,
+                      "line": 143
+                    },
+                    "snippet": "  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                        "column": 55,
+                        "line": 143
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#collaboration-status')\nExpected: \u001b[32m\"\u001b[7mAñade una mascota antes de compartirla\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mLa invitación se enviará al iniciar sesión\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#collaboration-status')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"footer-note\" id=\"collaboration-status\">La invitación se enviará al iniciar sesión.</div>\u001b[22m\n\u001b[2m       - unexpected value \"La invitación se enviará al iniciar sesión.\"\u001b[22m\n\n\n  141 |   await page.locator(\"#member-user\").fill(\"caregiver@example.test\");\n  142 |   await page.getByRole(\"button\", { name: \"Enviar invitación\" }).click();\n> 143 |   await expect(page.locator(\"#collaboration-status\")).toHaveText(\"Añade una mascota antes de compartirla.\");\n      |                                                       ^\n  144 |   await expect(page.locator(\"body\")).not.toContainText(\"TypeError\");\n  145 | });\n  146 |\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js:143:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T14:29:39.056Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\extended-interactions.spec.js",
+                    "column": 55,
+                    "line": 143
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-4002b30de469af4e5003",
+          "file": "extended-interactions.spec.js",
+          "line": 139,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-30T14:29:03.164Z",
+    "duration": 49295.299,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}

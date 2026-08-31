@@ -1,0 +1,78 @@
+{
+  "feedback_count": 34,
+  "metrics": {
+    "feedback_coverage": {
+      "ci95": {
+        "high": 0.84,
+        "low": 0.6
+      },
+      "denominator": 46,
+      "numerator": 34,
+      "preliminary": false,
+      "value": 0.74
+    },
+    "grounded": {
+      "ci95": {
+        "high": 0.98,
+        "low": 0.82
+      },
+      "denominator": 46,
+      "numerator": 43,
+      "preliminary": false,
+      "value": 0.93
+    },
+    "helpfulness": {
+      "ci95": {
+        "high": 0.92,
+        "low": 0.66
+      },
+      "denominator": 34,
+      "numerator": 28,
+      "preliminary": false,
+      "value": 0.82
+    },
+    "rufs": {
+      "ci95": {
+        "high": 0.87,
+        "low": 0.64
+      },
+      "denominator": 46,
+      "numerator": 36,
+      "preliminary": false,
+      "value": 0.78
+    },
+    "run_completion": {
+      "ci95": {
+        "high": 0.99,
+        "low": 0.86
+      },
+      "denominator": 48,
+      "numerator": 46,
+      "preliminary": false,
+      "value": 0.96
+    },
+    "safe_completion": {
+      "ci95": {
+        "high": 1.0,
+        "low": 0.92
+      },
+      "denominator": 46,
+      "numerator": 46,
+      "preliminary": false,
+      "value": 1.0
+    }
+  },
+  "model_calls": {
+    "GEMINI/gemini-2.5-flash": 6,
+    "GEMINI/gemini-3.5-flash": 42
+  },
+  "response_count": 46,
+  "run_count": 48,
+  "runs_by_agent": {
+    "ORCHESTRATOR": 48
+  },
+  "runs_by_state": {
+    "STARTED": 2,
+    "SUCCEEDED": 46
+  }
+}

@@ -3,10 +3,10 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 
 from app.agent_runtime.queue import AgentQueueError
 from app.agents.contracts import RunState
-from app.ai.preparation.core import MediaPreparationError, MediaPreparer
 from app.auth.models import AuthenticatedPrincipal
 
 from .dependencies import require_principal
+from .models.agent_public import AgentRunCreateRequest
 
 router = APIRouter(prefix="/v1")
 
@@ -29,15 +29,15 @@ async def get_agent_session(dog_id: str, session_id: str, request: Request, prin
 
 
 @router.post("/dogs/{dog_id}/agent-runs", status_code=202)
-async def create_dog_agent_run(dog_id: str, body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
+async def create_dog_agent_run(dog_id: str, body: AgentRunCreateRequest, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
     try:
         request.app.state.pets.get(principal.user_id, dog_id) or (_ for _ in ()).throw(ValueError("DOG_NOT_FOUND"))
         run = request.app.state.agents.create_run(
             principal.user_id,
-            body.get("goal", ""),
+            body.goal,
             dog_id,
-            body.get("agent_type", "ORCHESTRATOR"),
-            session_id=body.get("session_id"),
+            "ORCHESTRATOR",
+            session_id=body.session_id,
             interaction_id=getattr(request.state, "interaction_id", None),
             correlation_id=getattr(request.state, "correlation_id", None),
             deployment_id=request.app.state.settings.deployment_revision,
@@ -48,8 +48,8 @@ async def create_dog_agent_run(dog_id: str, body: dict, request: Request, princi
             request.app.state.agent_queue.enqueue_agent(
                 run_id=run.id,
                 owner_user_id=principal.user_id,
-                media_asset_ids=list(body.get("media_asset_ids", [])),
-                context=body.get("context"),
+                media_asset_ids=list(body.media_asset_ids),
+                context=body.context,
             )
         except AgentQueueError:
             request.app.state.agents._set_state(run, RunState.WAITING)
@@ -65,33 +65,19 @@ async def get_dog_agent_run(run_id: str, request: Request, principal: Authentica
     except ValueError as exc: raise HTTPException(404, str(exc)) from exc
 
 
+@router.get("/dogs/{dog_id}/agent-runs")
+async def list_active_dog_agent_runs(dog_id: str, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
+    try:
+        request.app.state.pets.get(principal.user_id, dog_id) or (_ for _ in ()).throw(ValueError("DOG_NOT_FOUND"))
+        return [run.public() for run in request.app.state.agents.list_active_runs(principal.user_id, dog_id)]
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
 @router.post("/agent-runs/{run_id}/cancel")
 async def cancel_dog_agent_run(run_id: str, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
     try: return request.app.state.agents.cancel(principal.user_id, run_id).public()
     except ValueError as exc: raise HTTPException(409, str(exc)) from exc
-
-
-@router.post("/agent-runs/{run_id}/execute")
-async def execute_dog_agent_run(run_id: str, body: dict, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
-    """Execute the bounded provider-backed plan for a queued run.
-
-    Production callers normally invoke this through an authenticated Cloud
-    Tasks worker; the endpoint remains useful for local and staging vertical
-    slices and never accepts raw provider credentials.
-    """
-    try:
-        run = request.app.state.agents.get(principal.user_id, run_id)
-        if not run.pet_id:
-            raise ValueError("AGENT_PET_REQUIRED")
-        resolved_media = request.app.state.media.resolve_ai_media(
-            principal.user_id, body.get("media_asset_ids", []), run.pet_id
-        )
-        media = MediaPreparer().prepare(resolved_media)
-        return request.app.state.agent_execution.execute(
-            principal.user_id, run_id, media, context=body.get("context")
-        )
-    except (ValueError, MediaPreparationError) as exc:
-        raise HTTPException(409, str(exc)) from exc
 
 
 @router.get("/agent-runs/{run_id}/evidence")
@@ -104,7 +90,15 @@ async def get_agent_evidence(run_id: str, request: Request, principal: Authentic
 async def get_agent_provenance(run_id: str, request: Request, principal: AuthenticatedPrincipal = Depends(require_principal)):
     try:
         run = request.app.state.agents.get(principal.user_id, run_id)
-        return {"run_id": run.id, "policy_snapshot": run.policy_snapshot, "agent_type": run.agent_type}
+        claims = request.app.state.agents.list_claims(principal.user_id, run.id)
+        return {
+            "run_id": run.id,
+            "policy_snapshot": run.policy_snapshot,
+            "agent_type": run.agent_type,
+            "claims": claims,
+            "evidence_references": [ref.__dict__ for ref in run.evidence],
+            "steps": [{"step_id": step.get("step_id"), "schema_version": step.get("schema_version"), "safety_state": step.get("safety_state")} for step in run.steps if step.get("step_id")],
+        }
     except ValueError as exc: raise HTTPException(404, str(exc)) from exc
 
 

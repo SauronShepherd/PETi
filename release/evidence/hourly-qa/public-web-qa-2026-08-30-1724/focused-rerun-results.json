@@ -1,0 +1,290 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/extended-interactions.spec.js:3",
+      "tests/e2e/i18n.spec.js:3",
+      "--project=desktop",
+      "--project=tablet",
+      "--output=release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\focused-rerun-results"
+    ],
+    "configFile": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\playwright.config.js",
+    "rootDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/focused-rerun-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/focused-rerun-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "tablet",
+        "name": "tablet",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/release/evidence/hourly-qa/public-web-qa-2026-08-30-1724/focused-rerun-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "release/evidence/navigation/web-playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "extended-interactions.spec.js",
+      "file": "extended-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "assistant validates empty questions without leaking internals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6597,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:45:47.186Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\focused-rerun-results\\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-f08ea4da5b50e8869ad8",
+          "file": "extended-interactions.spec.js",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "assistant validates empty questions without leaking internals",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 6600,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:45:47.234Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\focused-rerun-results\\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04ff91670fa1548b81e9-a4ca3235132e06b3ae97",
+          "file": "extended-interactions.spec.js",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "i18n.spec.js",
+      "file": "i18n.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "English mode translates the public demo and agent workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 6697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:45:47.123Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\focused-rerun-results\\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-desktop\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a353259dd088e7db040-f5bebc8707a892e88d2e",
+          "file": "i18n.spec.js",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "English mode translates the public demo and agent workflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 6711,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-30T15:45:47.166Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1724\\focused-rerun-results\\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-tablet\\test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a353259dd088e7db040-6faf92cf4a6769f9c10b",
+          "file": "i18n.spec.js",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-30T15:45:44.799Z",
+    "duration": 12407.079,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

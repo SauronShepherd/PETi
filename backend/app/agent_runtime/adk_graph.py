@@ -50,7 +50,7 @@ def build_peti_agent(model: str = "gemini-3.5-flash") -> Any:
         description="Reviews candidate observations for safety and escalation needs.",
         instruction="Never rule out a condition. Flag uncertainty and urgent escalation.",
     )
-    return LlmAgent(
+    root = LlmAgent(
         name="peti_orchestrator_agent",
         model=model,
         description="Coordinates PETi's evidence, specialist and safety workflow.",
@@ -61,6 +61,14 @@ def build_peti_agent(model: str = "gemini-3.5-flash") -> Any:
         ),
         sub_agents=[evidence, specialist, safety],
     )
+    object.__setattr__(root, "role_agents", {
+        "EVIDENCE_INTAKE": evidence,
+        "FECES_CURRENT_ASSESSMENT": specialist,
+        "FECES_LONGITUDINAL_COMPARE": specialist,
+        "SAFETY_REVIEW": safety,
+        "FINAL_SYNTHESIS": root,
+    })
+    return root
 
 
 def graph_metadata(model: str = "gemini-3.5-flash") -> dict[str, Any]:

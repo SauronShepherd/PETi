@@ -1,0 +1,367 @@
+
+> test:e2e
+> playwright test --output=release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results
+
+
+Running 150 tests using 6 workers
+
+(node:29388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:24544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:27744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25552) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok   5 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › HOME renders without layout or asset regressions (30.1s)
+  ok   7 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › SCAN renders without layout or asset regressions (16.1s)
+  ok   8 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › HISTORY renders without layout or asset regressions (11.7s)
+  ok   9 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › PROFILE renders without layout or asset regressions (12.4s)
+  x    4 [tablet] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow (32.7s)
+  x    1 [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (41.4s)
+  ok  10 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › AGENTS renders without layout or asset regressions (10.6s)
+  x    2 [desktop] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow (35.2s)
+  x    3 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME (35.8s)
+(node:29248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x    6 [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (41.2s)
+  ok  11 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › CARE renders without layout or asset regressions (5.8s)
+(node:9104) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  12 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › BODY_CHECK renders without layout or asset regressions (5.8s)
+(node:28784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  15 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › RECORDS renders without layout or asset regressions (5.0s)
+  ok  17 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › ASSISTANT renders without layout or asset regressions (5.9s)
+  ok  20 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › PLANS renders without layout or asset regressions (7.8s)
+  ok  13 [tablet] › tests\e2e\extended-interactions.spec.js:11:5 › login configuration failures are rendered as plain user-safe text (15.5s)
+  ok  21 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › SETTINGS renders without layout or asset regressions (5.6s)
+  ok  22 [tablet] › tests\e2e\extended-interactions.spec.js:26:5 › Google login exposes progress and recovers after provider failure (8.5s)
+  ok  23 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › FEEDBACK renders without layout or asset regressions (4.9s)
+  ok  16 [desktop] › tests\e2e\i18n.spec.js:15:5 › English mode covers every public demo route (20.8s)
+  ok  14 [tablet] › tests\e2e\i18n.spec.js:15:5 › English mode covers every public demo route (24.4s)
+  ok  24 [tablet] › tests\e2e\extended-interactions.spec.js:44:5 › documents route sends upload action to the real evidence flow (6.0s)
+  ok  25 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › COLLABORATION renders without layout or asset regressions (7.2s)
+(node:18444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  26 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › HOME renders without layout or asset regressions (8.6s)
+  ok  18 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SCAN (17.8s)
+  ok  19 [desktop] › tests\e2e\extended-interactions.spec.js:11:5 › login configuration failures are rendered as plain user-safe text (17.9s)
+  ok  27 [tablet] › tests\e2e\extended-interactions.spec.js:51:5 › privacy export exposes a user-safe state (11.7s)
+  ok  28 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › LIBRARY renders without layout or asset regressions (10.8s)
+  ok  30 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › SCAN renders without layout or asset regressions (9.6s)
+  ok  31 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HISTORY (10.4s)
+  ok  32 [desktop] › tests\e2e\extended-interactions.spec.js:26:5 › Google login exposes progress and recovers after provider failure (11.4s)
+  ok  33 [tablet] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (7.1s)
+  ok  35 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › HISTORY renders without layout or asset regressions (6.4s)
+  ok  34 [desktop] › tests\e2e\web-navigation.spec.js:6:7 › ADMIN renders without layout or asset regressions (7.4s)
+  ok  36 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PROFILE (9.1s)
+  ok  38 [tablet] › tests\e2e\extended-interactions.spec.js:69:5 › care Body Check opens and preserves observable-only safety copy (6.4s)
+  ok  39 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › PROFILE renders without layout or asset regressions (6.8s)
+  ok  37 [desktop] › tests\e2e\extended-interactions.spec.js:44:5 › documents route sends upload action to the real evidence flow (11.8s)
+(node:4708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  29 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME (21.0s)
+  ok  41 [tablet] › tests\e2e\extended-interactions.spec.js:82:5 › authenticated Body Check persists an owner-reported care record (7.5s)
+  ok  40 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline AGENTS (11.3s)
+  ok  42 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › AGENTS renders without layout or asset regressions (9.1s)
+  ok  43 [desktop] › tests\e2e\extended-interactions.spec.js:51:5 › privacy export exposes a user-safe state (8.5s)
+  ok  48 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › CARE renders without layout or asset regressions (5.4s)
+  ok  44 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SCAN (7.7s)
+  ok  45 [tablet] › tests\e2e\extended-interactions.spec.js:99:5 › records route renders an honest empty state (7.9s)
+  ok  47 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline CARE (8.1s)
+  ok  49 [desktop] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (4.8s)
+  ok  50 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › BODY_CHECK renders without layout or asset regressions (4.8s)
+  ok  52 [tablet] › tests\e2e\extended-interactions.spec.js:106:5 › account deletion is disabled safely in demo mode (4.9s)
+  ok  51 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HISTORY (5.3s)
+  ok  53 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline BODY_CHECK (5.2s)
+  ok  54 [desktop] › tests\e2e\extended-interactions.spec.js:69:5 › care Body Check opens and preserves observable-only safety copy (6.2s)
+  ok  55 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › RECORDS renders without layout or asset regressions (5.1s)
+  ok  56 [tablet] › tests\e2e\extended-interactions.spec.js:113:5 › settings persist language and theme locally (8.1s)
+  ok  57 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PROFILE (9.2s)
+  ok  58 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline RECORDS (7.8s)
+  ok  59 [desktop] › tests\e2e\extended-interactions.spec.js:82:5 › authenticated Body Check persists an owner-reported care record (8.1s)
+  ok  60 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › ASSISTANT renders without layout or asset regressions (8.1s)
+  ok  61 [tablet] › tests\e2e\extended-interactions.spec.js:124:5 › plan view fails closed without exposing billing internals (5.6s)
+  ok  62 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline AGENTS (6.0s)
+  ok  64 [desktop] › tests\e2e\extended-interactions.spec.js:99:5 › records route renders an honest empty state (5.0s)
+  ok  46 [mobile] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (18.5s)
+  ok  65 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › PLANS renders without layout or asset regressions (6.8s)
+  ok  63 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ASSISTANT (9.8s)
+  ok  66 [tablet] › tests\e2e\extended-interactions.spec.js:132:5 › feedback requires an authenticated session without leaking internals (6.8s)
+  ok  68 [desktop] › tests\e2e\extended-interactions.spec.js:106:5 › account deletion is disabled safely in demo mode (5.9s)
+  ok  67 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline CARE (9.0s)
+  ok  70 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › SETTINGS renders without layout or asset regressions (5.8s)
+  ok  69 [mobile] › tests\e2e\extended-interactions.spec.js:11:5 › login configuration failures are rendered as plain user-safe text (8.4s)
+  ok  72 [tablet] › tests\e2e\extended-interactions.spec.js:140:5 › collaboration validates missing pet safely (7.5s)
+  ok  71 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PLANS (9.0s)
+  ok  73 [desktop] › tests\e2e\extended-interactions.spec.js:113:5 › settings persist language and theme locally (7.6s)
+  ok  74 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline BODY_CHECK (6.8s)
+  ok  75 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › FEEDBACK renders without layout or asset regressions (6.2s)
+  ok  77 [tablet] › tests\e2e\extended-interactions.spec.js:149:5 › library fails closed before authentication (5.7s)
+  ok  79 [desktop] › tests\e2e\extended-interactions.spec.js:124:5 › plan view fails closed without exposing billing internals (5.5s)
+  ok  78 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SETTINGS (7.7s)
+  ok  76 [mobile] › tests\e2e\extended-interactions.spec.js:26:5 › Google login exposes progress and recovers after provider failure (10.9s)
+  ok  81 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › COLLABORATION renders without layout or asset regressions (7.3s)
+  ok  82 [tablet] › tests\e2e\extended-interactions.spec.js:157:5 › admin view fails closed for demo users (6.0s)
+  ok  80 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline RECORDS (9.0s)
+  ok  83 [desktop] › tests\e2e\extended-interactions.spec.js:132:5 › feedback requires an authenticated session without leaking internals (5.8s)
+  ok  86 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › LIBRARY renders without layout or asset regressions (6.6s)
+  ok  84 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline FEEDBACK (9.0s)
+  ok  85 [mobile] › tests\e2e\extended-interactions.spec.js:44:5 › documents route sends upload action to the real evidence flow (8.1s)
+  ok  87 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ASSISTANT (8.2s)
+  ok  88 [desktop] › tests\e2e\extended-interactions.spec.js:140:5 › collaboration validates missing pet safely (7.8s)
+  ok  89 [tablet] › tests\e2e\web-navigation.spec.js:6:7 › ADMIN renders without layout or asset regressions (5.8s)
+  ok  90 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline COLLABORATION (6.2s)
+  ok  91 [mobile] › tests\e2e\extended-interactions.spec.js:51:5 › privacy export exposes a user-safe state (6.2s)
+  ok  93 [desktop] › tests\e2e\extended-interactions.spec.js:149:5 › library fails closed before authentication (5.0s)
+  ok  92 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PLANS (5.5s)
+(node:4608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  95 [mobile] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (5.0s)
+  ok  96 [desktop] › tests\e2e\extended-interactions.spec.js:157:5 › admin view fails closed for demo users (4.9s)
+  ok  94 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline LIBRARY (7.2s)
+  ok  97 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SETTINGS (5.1s)
+(node:21496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  99 [mobile] › tests\e2e\extended-interactions.spec.js:69:5 › care Body Check opens and preserves observable-only safety copy (5.5s)
+  ok 101 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline FEEDBACK (6.1s)
+  ok 100 [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ADMIN (7.1s)
+  ok 103 [mobile] › tests\e2e\extended-interactions.spec.js:82:5 › authenticated Body Check persists an owner-reported care record (4.0s)
+(node:29524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 104 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline COLLABORATION (4.8s)
+  ok 105 [desktop] › tests\e2e\visual-regression.spec.js:21:5 › golden retriever fixture loads and is accepted by the demo image flow (6.7s)
+  ok  98 [mobile] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow (11.3s)
+  ok 106 [mobile] › tests\e2e\extended-interactions.spec.js:99:5 › records route renders an honest empty state (7.8s)
+  ok 108 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline LIBRARY (10.5s)
+  ok 109 [desktop] › tests\e2e\visual-regression.spec.js:36:5 › demo exercises two synthetic pets with five observations each (12.4s)
+  ok 111 [mobile] › tests\e2e\extended-interactions.spec.js:106:5 › account deletion is disabled safely in demo mode (11.1s)
+  ok 110 [mobile] › tests\e2e\i18n.spec.js:15:5 › English mode covers every public demo route (18.9s)
+  ok 112 [tablet] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ADMIN (14.0s)
+  ok 113 [mobile] › tests\e2e\extended-interactions.spec.js:113:5 › settings persist language and theme locally (11.5s)
+  ok 114 [tablet] › tests\e2e\visual-regression.spec.js:21:5 › golden retriever fixture loads and is accepted by the demo image flow (6.2s)
+  ok 107 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › HOME renders without layout or asset regressions (23.9s)
+  ok 115 [mobile] › tests\e2e\extended-interactions.spec.js:124:5 › plan view fails closed without exposing billing internals (5.6s)
+  ok 116 [tablet] › tests\e2e\visual-regression.spec.js:36:5 › demo exercises two synthetic pets with five observations each (6.7s)
+  ok 117 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › SCAN renders without layout or asset regressions (6.8s)
+  ok 118 [mobile] › tests\e2e\extended-interactions.spec.js:132:5 › feedback requires an authenticated session without leaking internals (6.3s)
+  ok 120 [mobile] › tests\e2e\extended-interactions.spec.js:140:5 › collaboration validates missing pet safely (4.3s)
+  ok 119 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › HISTORY renders without layout or asset regressions (4.8s)
+  ok 121 [mobile] › tests\e2e\extended-interactions.spec.js:149:5 › library fails closed before authentication (4.2s)
+  ok 122 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › PROFILE renders without layout or asset regressions (4.7s)
+  ok 123 [mobile] › tests\e2e\extended-interactions.spec.js:157:5 › admin view fails closed for demo users (10.5s)
+  ok 124 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › AGENTS renders without layout or asset regressions (10.5s)
+  ok 125 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › CARE renders without layout or asset regressions (7.0s)
+  ok 126 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › BODY_CHECK renders without layout or asset regressions (6.7s)
+  ok 127 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › RECORDS renders without layout or asset regressions (6.7s)
+  ok 128 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › ASSISTANT renders without layout or asset regressions (4.8s)
+  ok 129 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › PLANS renders without layout or asset regressions (7.8s)
+  ok 130 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › SETTINGS renders without layout or asset regressions (5.0s)
+  ok 131 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › FEEDBACK renders without layout or asset regressions (5.4s)
+  ok 132 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › COLLABORATION renders without layout or asset regressions (4.3s)
+  ok 133 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › LIBRARY renders without layout or asset regressions (5.2s)
+  ok 134 [mobile] › tests\e2e\web-navigation.spec.js:6:7 › ADMIN renders without layout or asset regressions (4.4s)
+  x  102 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME (30.4s)
+(node:19112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 135 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SCAN (9.5s)
+  ok 136 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HISTORY (4.1s)
+  ok 137 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PROFILE (4.9s)
+  ok 138 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline AGENTS (4.4s)
+  ok 139 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline CARE (4.3s)
+  ok 140 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline BODY_CHECK (4.0s)
+  ok 141 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline RECORDS (5.7s)
+  ok 142 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ASSISTANT (4.1s)
+  ok 143 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline PLANS (4.2s)
+  ok 144 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline SETTINGS (4.0s)
+  ok 145 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline FEEDBACK (5.5s)
+  ok 146 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline COLLABORATION (4.0s)
+  ok 147 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline LIBRARY (4.8s)
+  ok 148 [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline ADMIN (4.0s)
+  ok 149 [mobile] › tests\e2e\visual-regression.spec.js:21:5 › golden retriever fixture loads and is accepted by the demo image flow (7.1s)
+  ok 150 [mobile] › tests\e2e\visual-regression.spec.js:36:5 › demo exercises two synthetic pets with five observations each (5.2s)
+
+
+  1) [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.goto: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+      - navigating to "https://peti-care.web.app/?demo=1#ASSISTANT", waiting until "load"
+
+
+      2 |
+      3 | test("assistant validates empty questions without leaking internals", async ({ page }) => {
+    > 4 |   await page.goto("/?demo=1#ASSISTANT");
+        |              ^
+      5 |   await page.locator("#assistant-form button").click();
+      6 |   await expect(page.locator("#assistant-status")).toContainText("Escribe una pregunta");
+      7 |   await expect(page.locator("body")).not.toContainText("TypeError");
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:4:14
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [desktop] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-desktop\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME ────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-desktop\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#assistant-status')
+    Expected substring: "Escribe una pregunta"
+    Received string:    ""
+
+
+      4 |   await page.goto("/?demo=1#ASSISTANT");
+      5 |   await page.locator("#assistant-form button").click();
+    > 6 |   await expect(page.locator("#assistant-status")).toContainText("Escribe una pregunta");
+        |                                                   ^
+      7 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      8 |   await page.screenshot({ path: test.info().outputPath("assistant-empty-validation.png"), fullPage: true });
+      9 | });
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:6:51
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [tablet] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-tablet\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-tablet\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-tablet\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\i18n-English-mode-translat-f31e3-lic-demo-and-agent-workflow-tablet\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME ─────────────────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+      Expected an image 390px by 1840px, received 390px by 1779px. 66788 pixels (ratio 0.10 of all image pixels) are different.
+
+      Snapshot: home.png
+
+    Call log:
+      - Expect "toHaveScreenshot(home.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - Expected an image 390px by 1840px, received 390px by 1779px. 66788 pixels (ratio 0.10 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - captured a stable screenshot
+      - Expected an image 390px by 1840px, received 390px by 1779px. 66788 pixels (ratio 0.10 of all image pixels) are different.
+
+
+       9 |     await page.goto(`/?demo=1#${route}`);
+      10 |     await expect(page.locator("#app")).toBeVisible();
+    > 11 |     await expect(page).toHaveScreenshot(`${route.toLowerCase()}.png`, {
+         |                        ^
+      12 |       fullPage: true,
+      13 |       animations: "disabled",
+      14 |       caret: "hide",
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\visual-regression.spec.js:11:24
+
+    attachment #1: home (image/png) ────────────────────────────────────────────────────────────────
+    Expected: tests\e2e\visual-regression.spec.js-snapshots\home-mobile-win32.png
+    Received: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\home-actual.png
+    Diff:     release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\home-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace release\evidence\hourly-qa\public-web-qa-2026-08-30-1724\full-test-results\visual-regression-visual-baseline-HOME-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+    [desktop] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow 
+    [desktop] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME ─────────────────────
+    [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+    [tablet] › tests\e2e\i18n.spec.js:3:5 › English mode translates the public demo and agent workflow 
+    [mobile] › tests\e2e\visual-regression.spec.js:8:7 › visual baseline HOME ──────────────────────
+  144 passed (8.5m)

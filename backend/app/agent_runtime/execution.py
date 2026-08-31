@@ -6,15 +6,26 @@ write durable state outside the supplied gateway and run store.
 """
 from dataclasses import asdict
 from threading import RLock
+from types import SimpleNamespace
 from uuid import uuid4
 
 from app.agents.contracts import AgentOrchestrator, EvidenceReference, RunState
+from app.agents.schemas import EvidenceIntakeResultV1, FecesAgentResultV1, LongitudinalAgentResultV1
 from app.agents.technical_contracts import ExecutionPlan, PlanNode
-from app.ai.providers.base import AIProvider, ProviderError
+from app.ai.providers.base import AIProvider, ProviderError, ProviderUsage
 
 from .adk_graph import build_peti_agent, graph_metadata
+from .agent_model_provider import AgentModelProvider, ProviderInvocationResult
+from .capability_registry import CapabilityRegistry
+from .claim_composition import compose_claims
+from .config.capabilities_v1 import CAPABILITIES_V1
 from .instrumentation import InvocationContext, invocation_scope
+from .longitudinal_selector import select_compatible_candidates
+from .plan_validator import PlanValidator
+from .recipe_registry import resolve_recipe
 from .release_policy import ModelPolicy, validate_policy
+from .role_dispatch import RoleDispatcher, RoleInvocation
+from .semantic_validation import deterministic_feces_safety, validate_synthesis
 
 
 class AgentExecutionService:
@@ -25,12 +36,14 @@ class AgentExecutionService:
         *,
         policy: ModelPolicy | None = None,
         lab=None,
+        agent_model_provider: AgentModelProvider | None = None,
     ):
         self.runs = runs
         self.provider = provider
         self.policy = validate_policy(policy or ModelPolicy(model=getattr(provider, "model", "configured-server-model")))
         self._execution_lock = RLock()
         self.lab = lab
+        self.agent_model_provider = agent_model_provider
         try:
             self.adk_agent = build_peti_agent(self.policy.model)
         except ModuleNotFoundError as exc:
@@ -68,17 +81,26 @@ class AgentExecutionService:
                 lease_epoch=lease_epoch,
                 expected_version=current.run_version,
             )
-        self.runs._set_state(run, RunState.RUNNING)
         run.started_at = run.started_at or self.runs.clock()
-        self.runs._persist_run(run)
-        plan = ExecutionPlan(run.id, "peti-care-review-v1", [
-            PlanNode("plan", "CONTROL", "ORCHESTRATOR", [], "execution-plan-v1"),
-            PlanNode("evidence-intake", "EVIDENCE", "EVIDENCE_INTAKE", ["plan"], "evidence-summary-v1"),
-            PlanNode("peti-check", "MODEL", "PET_SPECIALIST", ["evidence-intake"], "peti-check-v1"),
-            PlanNode("safety-review", "POLICY", "SAFETY_REVIEW", ["peti-check"], "safety-decision-v1"),
-            PlanNode("care-report", "SYNTHESIS", "CARE_REPORT", ["safety-review"], "care-report-v1"),
-        ], "agent-response-v1")
+        # started_at is part of the same fenced lifecycle write, not a loose
+        # cache mutation.
+        run = self.runs.transition_state_fenced(
+            owner, run_id, RunState.RUNNING,
+            lease_epoch=lease_epoch, expected_version=run.run_version,
+            started_at=run.started_at,
+        )
+        goal_text = str(run.goal).lower()
+        recipe_id = "FECES_COMPARE_FOLLOW_UP_V1" if ("remind" in goal_text or "recordatorio" in goal_text) and ("compare" in goal_text or "compara" in goal_text or "history" in goal_text or "historial" in goal_text) else ("FECES_COMPARE_V1" if "compare" in goal_text or "compara" in goal_text or "history" in goal_text or "historial" in goal_text else "FECES_CURRENT_V1")
+        recipe = resolve_recipe(recipe_id)
+        plan = ExecutionPlan(run.id, recipe.recipe_id, [
+            PlanNode(node_id, kind, executor, list(deps), "1.0.0")
+            for node_id, kind, executor, deps in recipe.nodes
+        ], "agent-answer-v1")
+        validator = PlanValidator(CapabilityRegistry(CAPABILITIES_V1))
+        validator.validate([{"node_id": n.node_id, "executor_id": n.executor_id, "depends_on": n.depends_on} for n in plan.nodes], requires_final_safety=False, max_steps=run.policy_snapshot.get("max_steps", 8))
         run.plan_id = plan.id; run.recipe_id = plan.recipe_id; self.runs._persist_run(run)
+        if self.runs.repository and hasattr(self.runs.repository, "ensure_steps"):
+            self.runs.repository.ensure_steps(run.id, [{"id": node.node_id, "kind": node.kind, "executor_id": node.executor_id, "depends_on": node.depends_on} for node in plan.nodes])
         if self.lab:
             self.lab.start_run(run)
         model_call: tuple[str, float] | None = None
@@ -107,28 +129,51 @@ class AgentExecutionService:
             invocation = InvocationContext(owner, run.id, "peti-check", "PET_SPECIALIST",
                 run.correlation_id or run.id, run.deployment_id or "unknown")
             with invocation_scope(invocation):
-                response = self.provider.analyze(media, "Return JSON observations only. Include observations, evidence_quality, uncertainty, limitations, provenance, and safety_guidance. Never diagnose, prescribe, or claim a condition is ruled out.", context)
+                if self.agent_model_provider and recipe_id == "FECES_COMPARE_V1":
+                    bundle = {"owner_user_id": owner, "run_id": run.id, "session_id": run.policy_snapshot.get("session_id") or run.id, "pet_id": run.pet_id, "items": [{"id": getattr(item, "id", None)} for item in media.items]}
+                    current = {"pet_id": run.pet_id, "modality": "FECES", "taxonomy_version": "v1"}
+                    candidates = [item for item in media.items if isinstance(item, dict)]
+                    compatible = select_compatible_candidates(current, candidates)
+                    dispatcher = RoleDispatcher(self.agent_model_provider)
+                    role_requests = [
+                        RoleInvocation("EVIDENCE_INTAKE", self.policy.model, self.policy.prompt_version, bundle, EvidenceIntakeResultV1),
+                        RoleInvocation("FECES_CURRENT_ASSESSMENT", self.policy.model, self.policy.prompt_version, bundle, FecesAgentResultV1),
+                    ]
+                    if compatible:
+                        role_requests.append(RoleInvocation("FECES_LONGITUDINAL_COMPARE", self.policy.model, self.policy.prompt_version, {**bundle, "prior_candidates": compatible}, LongitudinalAgentResultV1))
+                    role_results = dispatcher.dispatch_many(role_requests)
+                    last = role_results[-1] if compatible else ProviderInvocationResult("deterministic", "none", None, {"comparability": "INSUFFICIENT_DATA", "evidence_ids": []}, {})
+                    response = SimpleNamespace(payload=last.structured_payload, provider=last.provider, model=last.model_id, usage=ProviderUsage(**{k: v for k, v in last.usage.items() if k in {"input_tokens", "output_tokens", "cached_input_tokens", "media_usage", "provider_request_id", "latency_ms"}}))
+                else:
+                    response = self.provider.analyze(media, "Return JSON observations only. Include observations, evidence_quality, uncertainty, limitations, provenance, and safety_guidance. Never diagnose, prescribe, or claim a condition is ruled out.", context)
             if self.lab and model_call and not getattr(self.provider, "instrumented", False):
                 self.lab.complete_model_call(run, model_call[0], model_call[1], response)
             evidence = []
-            if run.pet_id:
-                evidence.append(EvidenceReference("MEDIA", "input", run.pet_id, owner))
+            for item in getattr(media, "items", []) or []:
+                asset_id = item.get("id") if isinstance(item, dict) else getattr(item, "id", None)
+                if asset_id:
+                    evidence.append(EvidenceReference("MEDIA_ASSET", str(asset_id), run.pet_id or "", owner))
             commit({"step_id": "peti-check", "output": response.payload, "schema_version": "1.0.0", "safety_state": "PENDING_REVIEW"}, evidence)
             if self.lab and specialist_started is not None:
                 observations = response.payload.get("observations", [])
                 self.lab.complete_step(run, "peti-check", "PET_SPECIALIST", specialist_started, safety_state="PENDING_REVIEW", evidence_count=len(evidence), claim_count=len(observations) if isinstance(observations, list) else 0)
                 self.lab.handoff(run, "PET_SPECIALIST", "SAFETY_REVIEW", "SAFETY_GATE_REQUIRED", len(evidence))
+            safety_state = deterministic_feces_safety(response.payload, run.owner_context if hasattr(run, "owner_context") else None)
             safety_started = self.lab.start_step(run, "safety-review", "SAFETY_REVIEW") if self.lab else None
-            commit({"step_id": "safety-review", "output": {"decision": "REVIEW_REQUIRED", "provider": response.provider, "model": response.model, "usage": asdict(response.usage)}, "schema_version": "1.0.0"})
+            commit({"step_id": "safety-review", "output": {"decision": safety_state, "provider": response.provider, "model": response.model, "usage": asdict(response.usage)}, "schema_version": "1.0.0", "safety_state": safety_state})
             if self.lab and safety_started is not None:
-                self.lab.complete_step(run, "safety-review", "SAFETY_REVIEW", safety_started, safety_state="REVIEW_REQUIRED", outcome="SAFETY_ROUTED")
+                self.lab.complete_step(run, "safety-review", "SAFETY_REVIEW", safety_started, safety_state=safety_state, outcome="SAFETY_DECISION_AVAILABLE")
                 self.lab.handoff(run, "SAFETY_REVIEW", "CARE_REPORT", "SAFETY_DECISION_AVAILABLE", len(evidence))
             report_started = self.lab.start_step(run, "care-report", "CARE_REPORT") if self.lab else None
-            commit({"step_id": "care-report", "output": {"status": "PENDING_REVIEW", "actions": [], "source_step": "safety-review"}, "schema_version": "1.0.0"})
+            commit({"step_id": "care-report", "output": {"status": safety_state, "actions": [], "source_step": "safety-review"}, "schema_version": "1.0.0", "safety_state": safety_state})
             if self.lab and report_started is not None:
-                self.lab.complete_step(run, "care-report", "CARE_REPORT", report_started, safety_state="REVIEW_REQUIRED")
-            result = {"answer_type": "GROUNDED_OBSERVATIONS", "schema_version": "1.0.0", "status": "REVIEW_REQUIRED", "outcome": "SAFETY_ROUTED", "safety_state": "REVIEW_REQUIRED", "payload": response.payload}
-            published = self.lab.publish_response(run, outcome="SAFETY_ROUTED", safety_state="REVIEW_REQUIRED", provider=response.provider, model=response.model) if self.lab else None
+                self.lab.complete_step(run, "care-report", "CARE_REPORT", report_started, safety_state=safety_state)
+            claim_evidence_ids = [ref.entity_id for ref in evidence]
+            claims = compose_claims(response.payload, claim_evidence_ids)
+            validate_synthesis(claims, safety_state)
+            self.runs.persist_claims(owner, run_id, claims)
+            result = {"answer_type": "GROUNDED_OBSERVATIONS", "schema_version": "1.0.0", "status": safety_state, "outcome": "SAFETY_ROUTED" if safety_state != "NORMAL_INFORMATION" else "ANSWERED", "safety_state": safety_state, "claims": claims, "evidence_references": [asdict(ref) for ref in evidence], "payload": response.payload}
+            published = self.lab.publish_response(run, outcome=result["outcome"], safety_state=safety_state, provider=response.provider, model=response.model) if self.lab else None
             if published:
                 result["response_id"] = published.id
                 result["feedback_eligible"] = published.eligible_for_feedback
@@ -137,7 +182,7 @@ class AgentExecutionService:
             if self.lab and published:
                 self.lab.complete_run(run, published)
             result_public = self.runs.get(owner, run_id).public()
-            self.runs.release_execution_lease(owner, run_id, lease_owner)
+            self.runs.release_execution_lease(owner, run_id, lease_owner, lease_epoch=lease_epoch, expected_version=self.runs.get(owner, run_id).run_version)
             return result_public
         except ProviderError as exc:
             if self.lab: self.lab.fail_open_steps(run, error_code=exc.code, retryable=exc.retryable)
@@ -152,7 +197,7 @@ class AgentExecutionService:
             self.runs._set_state(run, RunState.FAILED if not exc.retryable else RunState.WAITING)
             self.runs._persist_run(run)
             if self.lab: self.lab.fail_run(run, error_code=exc.code, retryable=exc.retryable)
-            self.runs.release_execution_lease(owner, run_id, lease_owner)
+            self.runs.release_execution_lease(owner, run_id, lease_owner, lease_epoch=lease_epoch, expected_version=self.runs.get(owner, run_id).run_version)
             raise
         except Exception:
             if self.lab: self.lab.fail_open_steps(run, error_code="UNEXPECTED_PROVIDER_ERROR", retryable=False)
@@ -170,5 +215,5 @@ class AgentExecutionService:
             self.runs._set_state(run, RunState.FAILED)
             self.runs._persist_run(run)
             if self.lab: self.lab.fail_run(run, error_code="UNEXPECTED_PROVIDER_ERROR", retryable=False)
-            self.runs.release_execution_lease(owner, run_id, lease_owner)
+            self.runs.release_execution_lease(owner, run_id, lease_owner, lease_epoch=lease_epoch, expected_version=self.runs.get(owner, run_id).run_version)
             raise

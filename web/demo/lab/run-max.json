@@ -1,0 +1,93 @@
+{
+  "evidence_usage": [
+    {
+      "claim_count": 3,
+      "modality": "IMAGE",
+      "selected_count": 5,
+      "step_id": "evidence-intake"
+    }
+  ],
+  "feedback": {
+    "reasons": [
+      "NO_CLEAR_NEXT_STEP"
+    ],
+    "value": "NOT_QUITE"
+  },
+  "model_calls": [
+    {
+      "cached_input_tokens": 1840,
+      "input_tokens": 2482,
+      "latency_ms": 2770,
+      "model_id": "gemini-3.5-flash",
+      "output_tokens": 431,
+      "provider": "GEMINI",
+      "status": "SUCCEEDED",
+      "usage_status": "KNOWN"
+    }
+  ],
+  "response": {
+    "eligible_for_feedback": true,
+    "id": "demo-response-max",
+    "outcome": "SAFETY_ROUTED",
+    "safety_state": "REVIEW_REQUIRED"
+  },
+  "safety_decisions": [
+    {
+      "decision": "REVIEW_REQUIRED",
+      "policy_version": "PETI_CHECK-SAFETY-v1",
+      "step_id": "safety-review"
+    }
+  ],
+  "steps": [
+    {
+      "agent_id": "ORCHESTRATOR",
+      "claim_count": 0,
+      "duration_ms": 14,
+      "evidence_count": 0,
+      "status": "SUCCEEDED",
+      "step_id": "plan"
+    },
+    {
+      "agent_id": "EVIDENCE_INTAKE",
+      "claim_count": 0,
+      "duration_ms": 240,
+      "evidence_count": 5,
+      "status": "SUCCEEDED",
+      "step_id": "evidence-intake"
+    },
+    {
+      "agent_id": "PET_SPECIALIST",
+      "claim_count": 3,
+      "duration_ms": 2770,
+      "evidence_count": 5,
+      "status": "SUCCEEDED",
+      "step_id": "peti-check"
+    },
+    {
+      "agent_id": "SAFETY_REVIEW",
+      "claim_count": 3,
+      "duration_ms": 620,
+      "evidence_count": 5,
+      "safety_state": "REVIEW_REQUIRED",
+      "status": "SUCCEEDED",
+      "step_id": "safety-review"
+    },
+    {
+      "agent_id": "CARE_REPORT",
+      "claim_count": 3,
+      "duration_ms": 266,
+      "evidence_count": 5,
+      "safety_state": "REVIEW_REQUIRED",
+      "status": "SUCCEEDED",
+      "step_id": "care-report"
+    }
+  ],
+  "tool_calls": [
+    {
+      "duration_ms": 41,
+      "result_code": "EVIDENCE_READY",
+      "status": "SUCCEEDED",
+      "tool_id": "evidence-catalog"
+    }
+  ]
+}

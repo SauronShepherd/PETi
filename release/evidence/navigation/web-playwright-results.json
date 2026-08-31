@@ -4,9 +4,8 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "tests/e2e/lab-demo.spec.js",
-      "tests/e2e/lab-accessibility.spec.js",
-      "--project=desktop"
+      "tests/e2e/lab-polling.spec.js",
+      "--workers=1"
     ],
     "configFile": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\playwright.config.js",
     "rootDir": "C:/Users/angel.alvarez/IdeaProjects/PETi/tests/e2e",
@@ -20,7 +19,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 2
+      "actualWorkers": 1
     },
     "preserveOutput": "always",
     "projects": [
@@ -29,7 +28,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 2
+          "actualWorkers": 1
         },
         "id": "desktop",
         "name": "desktop",
@@ -45,7 +44,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 2
+          "actualWorkers": 1
         },
         "id": "tablet",
         "name": "tablet",
@@ -61,7 +60,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 2
+          "actualWorkers": 1
         },
         "id": "mobile",
         "name": "mobile",
@@ -95,7 +94,7 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.62.1",
-    "workers": 6,
+    "workers": 1,
     "webServer": {
       "command": "python -m http.server 4173 --bind 127.0.0.1 -d web",
       "url": "http://127.0.0.1:4173/?demo=1",
@@ -105,13 +104,13 @@
   },
   "suites": [
     {
-      "title": "lab-accessibility.spec.js",
-      "file": "lab-accessibility.spec.js",
+      "title": "lab-polling.spec.js",
+      "file": "lab-polling.spec.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "Lab navigation exposes state, focus and landmarks",
+          "title": "real adapter polling is non-overlapping and pauses while hidden",
           "ok": true,
           "tags": [],
           "tests": [
@@ -126,18 +125,18 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5496,
+                  "duration": 3964,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-31T09:22:43.414Z",
+                  "startTime": "2026-08-31T14:34:44.584Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-accessibility-Lab-navi-fe611-s-state-focus-and-landmarks-desktop\\test-finished-1.png"
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-polling-real-adapter-p-b99af-ing-and-pauses-while-hidden-desktop\\test-finished-1.png"
                     }
                   ]
                 }
@@ -145,13 +144,13 @@
               "status": "expected"
             }
           ],
-          "id": "001d5221625764288fd4-5eba34fbeac986b3f17d",
-          "file": "lab-accessibility.spec.js",
+          "id": "bae5ed3684a4fcd18792-1b651874c148a9506208",
+          "file": "lab-polling.spec.js",
           "line": 3,
           "column": 5
         },
         {
-          "title": "Lab mobile has no document-level horizontal overflow and honors reduced motion",
+          "title": "real adapter polling is non-overlapping and pauses while hidden",
           "ok": true,
           "tags": [],
           "tests": [
@@ -159,113 +158,25 @@
               "timeout": 30000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "desktop",
-              "projectName": "desktop",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 2216,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-08-31T09:22:50.279Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-accessibility-Lab-mobi-74f20-w-and-honors-reduced-motion-desktop\\test-finished-1.png"
-                    }
-                  ]
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "001d5221625764288fd4-cf5684fdbac282765b03",
-          "file": "lab-accessibility.spec.js",
-          "line": 16,
-          "column": 5
-        },
-        {
-          "title": "every Lab view has complete English copy coverage",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "desktop",
-              "projectName": "desktop",
-              "results": [
-                {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 3045,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-08-31T09:22:52.526Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-accessibility-every-La-b7441-plete-English-copy-coverage-desktop\\test-finished-1.png"
-                    }
-                  ]
-                }
-              ],
-              "status": "expected"
-            }
-          ],
-          "id": "001d5221625764288fd4-9c9e622e601e6e50ec93",
-          "file": "lab-accessibility.spec.js",
-          "line": 25,
-          "column": 5
-        }
-      ]
-    },
-    {
-      "title": "lab-demo.spec.js",
-      "file": "lab-demo.spec.js",
-      "column": 0,
-      "line": 0,
-      "specs": [
-        {
-          "title": "Veterinary AI Lab demo exposes a labelled multi-agent mission control",
-          "ok": true,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "desktop",
-              "projectName": "desktop",
+              "projectId": "tablet",
+              "projectName": "tablet",
               "results": [
                 {
                   "workerIndex": 1,
-                  "parallelIndex": 1,
+                  "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5306,
+                  "duration": 3156,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-31T09:22:43.401Z",
+                  "startTime": "2026-08-31T14:34:50.191Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-demo-Veterinary-AI-Lab-51489-multi-agent-mission-control-desktop\\test-finished-1.png"
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-polling-real-adapter-p-b99af-ing-and-pauses-while-hidden-tablet\\test-finished-1.png"
                     }
                   ]
                 }
@@ -273,87 +184,13 @@
               "status": "expected"
             }
           ],
-          "id": "bd6df5683724285e41c6-dde27e5e80ac71ae54e1",
-          "file": "lab-demo.spec.js",
+          "id": "bae5ed3684a4fcd18792-3e3281fb3f40618f0df6",
+          "file": "lab-polling.spec.js",
           "line": 3,
           "column": 5
         },
         {
-          "title": "Lab demo navigates through agents, models, feedback and run trace",
-          "ok": false,
-          "tags": [],
-          "tests": [
-            {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "desktop",
-              "projectName": "desktop",
-              "results": [
-                {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "failed",
-                  "duration": 8049,
-                  "error": {
-                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/peti-check · MULTIMODAL/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/peti-check · MULTIMODAL/)\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/peti-check · MULTIMODAL/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/peti-check · MULTIMODAL/)\u001b[22m\n\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\lab-demo.spec.js:36:59",
-                    "location": {
-                      "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\lab-demo.spec.js",
-                      "column": 59,
-                      "line": 36
-                    },
-                    "snippet": "  34 |   await page.getByRole(\"tab\", { name: \"Evidence & claims\" }).click();\n  35 |   await expect(page.getByRole(\"heading\", { name: \"Evidence & claims\" })).toBeVisible();\n> 36 |   await expect(page.getByText(/peti-check · MULTIMODAL/)).toBeVisible();\n     |                                                           ^\n  37 |   await page.getByRole(\"tab\", { name: \"Models & tools\" }).click();\n  38 |   await expect(page.getByText(\"gemini-3.5-flash\", { exact: true })).toBeVisible();\n  39 |   await expect(page.getByText(\"evidence-catalog\", { exact: true })).toBeVisible();"
-                  },
-                  "errors": [
-                    {
-                      "location": {
-                        "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\lab-demo.spec.js",
-                        "column": 59,
-                        "line": 36
-                      },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/peti-check · MULTIMODAL/)\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/peti-check · MULTIMODAL/)\u001b[22m\n\n\n  34 |   await page.getByRole(\"tab\", { name: \"Evidence & claims\" }).click();\n  35 |   await expect(page.getByRole(\"heading\", { name: \"Evidence & claims\" })).toBeVisible();\n> 36 |   await expect(page.getByText(/peti-check · MULTIMODAL/)).toBeVisible();\n     |                                                           ^\n  37 |   await page.getByRole(\"tab\", { name: \"Models & tools\" }).click();\n  38 |   await expect(page.getByText(\"gemini-3.5-flash\", { exact: true })).toBeVisible();\n  39 |   await expect(page.getByText(\"evidence-catalog\", { exact: true })).toBeVisible();\n    at C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\lab-demo.spec.js:36:59"
-                    }
-                  ],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2026-08-31T09:22:49.985Z",
-                  "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-demo-Lab-demo-navigate-bc2f9-dels-feedback-and-run-trace-desktop\\test-failed-1.png"
-                    },
-                    {
-                      "name": "error-context",
-                      "contentType": "text/markdown",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-demo-Lab-demo-navigate-bc2f9-dels-feedback-and-run-trace-desktop\\error-context.md"
-                    },
-                    {
-                      "name": "trace",
-                      "contentType": "application/zip",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-demo-Lab-demo-navigate-bc2f9-dels-feedback-and-run-trace-desktop\\trace.zip"
-                    }
-                  ],
-                  "errorLocation": {
-                    "file": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\tests\\e2e\\lab-demo.spec.js",
-                    "column": 59,
-                    "line": 36
-                  }
-                }
-              ],
-              "status": "unexpected"
-            }
-          ],
-          "id": "bd6df5683724285e41c6-7ed4a08e754255615765",
-          "file": "lab-demo.spec.js",
-          "line": 16,
-          "column": 5
-        },
-        {
-          "title": "agent response feedback is contextual, editable and local in demo",
+          "title": "real adapter polling is non-overlapping and pauses while hidden",
           "ok": true,
           "tags": [],
           "tests": [
@@ -361,25 +198,25 @@
               "timeout": 30000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "desktop",
-              "projectName": "desktop",
+              "projectId": "mobile",
+              "projectName": "mobile",
               "results": [
                 {
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7362,
+                  "duration": 4042,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-31T09:22:58.951Z",
+                  "startTime": "2026-08-31T14:34:54.745Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-demo-agent-response-fe-1a183--editable-and-local-in-demo-desktop\\test-finished-1.png"
+                      "path": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\test-results\\lab-polling-real-adapter-p-b99af-ing-and-pauses-while-hidden-mobile\\test-finished-1.png"
                     }
                   ]
                 }
@@ -387,9 +224,9 @@
               "status": "expected"
             }
           ],
-          "id": "bd6df5683724285e41c6-0209747d371b45c999ef",
-          "file": "lab-demo.spec.js",
-          "line": 46,
+          "id": "bae5ed3684a4fcd18792-bd564834ca600be83e76",
+          "file": "lab-polling.spec.js",
+          "line": 3,
           "column": 5
         }
       ]
@@ -397,11 +234,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-31T09:22:42.107Z",
-    "duration": 26857.845,
-    "expected": 5,
+    "startTime": "2026-08-31T14:34:42.826Z",
+    "duration": 17632.641000000003,
+    "expected": 3,
     "skipped": 0,
-    "unexpected": 1,
+    "unexpected": 0,
     "flaky": 0
   }
 }

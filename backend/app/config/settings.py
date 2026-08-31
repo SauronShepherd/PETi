@@ -66,6 +66,7 @@ class Settings(BaseSettings):
     max_audio_bytes: int = 100_000_000
     max_document_bytes: int = 50_000_000
     agent_runtime_enabled: bool = False
+    agent_adk_enabled: bool = False
     lab_enabled: bool = False
     lab_telemetry_enabled: bool = False
     lab_feedback_enabled: bool = False
@@ -101,6 +102,10 @@ class Settings(BaseSettings):
             raise ValueError("PETI Lab subfeatures require PETI_LAB_ENABLED")
         if self.lab_feedback_enabled and not self.agent_runtime_enabled:
             raise ValueError("PETI Lab feedback requires PETI_AGENT_RUNTIME_ENABLED")
+        if self.agent_adk_enabled and not self.agent_runtime_enabled:
+            raise ValueError("PETI ADK requires PETI_AGENT_RUNTIME_ENABLED")
+        if self.agent_adk_enabled and self.ai_provider == "FAKE":
+            raise ValueError("PETI ADK requires a configured model provider")
         if self.environment is not Environment.LOCAL and self.lab_enabled:
             if self.lab_hash_secret == "local-lab-hash-secret":
                 raise ValueError("non-LOCAL PETi Lab requires PETI_LAB_HASH_SECRET")

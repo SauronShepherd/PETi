@@ -1,0 +1,3452 @@
+[
+  {
+    "route": "HOME",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HOME",
+      "hash": "#HOME",
+      "title": "Todo lo importante, hoy.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SCAN",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SCAN",
+      "hash": "#SCAN",
+      "title": "Analizar y entender",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "HISTORY",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HISTORY",
+      "hash": "#HISTORY",
+      "title": "Todo en orden y con origen claro.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PROFILE",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PROFILE",
+      "hash": "#PROFILE",
+      "title": "Tu mascota, organizada.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "AGENTS",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#AGENTS",
+      "hash": "#AGENTS",
+      "title": "PETi coordina una revisión.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "CARE",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#CARE",
+      "hash": "#CARE",
+      "title": "Calendario y Body Check",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "BODY_CHECK",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "hash": "#BODY_CHECK",
+      "title": "Revisión visible de bienestar",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "RECORDS",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#RECORDS",
+      "hash": "#RECORDS",
+      "title": "Documentos y registros",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ASSISTANT",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "hash": "#ASSISTANT",
+      "title": "Pregunta sobre tu historial",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PLANS",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PLANS",
+      "hash": "#PLANS",
+      "title": "Tu plan y tus límites",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SETTINGS",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "hash": "#SETTINGS",
+      "title": "Preferencias",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "FEEDBACK",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "hash": "#FEEDBACK",
+      "title": "Feedback y soporte",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "COLLABORATION",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "hash": "#COLLABORATION",
+      "title": "Comparte el cuidado",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "LIBRARY",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "hash": "#LIBRARY",
+      "title": "Busca en la historia de tu mascota",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ADMIN",
+    "viewport": "desktop",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ADMIN",
+      "hash": "#ADMIN",
+      "title": "Estado operativo",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 23,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "NAVIGATION_BEHAVIOR",
+    "viewport": "desktop",
+    "nav": {
+      "viewport": "desktop",
+      "homeTitle": "Todo lo importante, hoy.",
+      "scanTitle": "Analizar y entender",
+      "afterReload": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterBack": {
+        "url": "https://peti-care.web.app/?demo=1#HOME",
+        "title": "Todo lo importante, hoy."
+      },
+      "afterForward": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterSamePageHash": {
+        "url": "https://peti-care.web.app/?demo=1#AGENTS",
+        "title": "PETi coordina una revisión."
+      }
+    }
+  },
+  {
+    "route": "HOME",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HOME",
+      "hash": "#HOME",
+      "title": "Todo lo importante, hoy.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SCAN",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SCAN",
+      "hash": "#SCAN",
+      "title": "Analizar y entender",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "HISTORY",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HISTORY",
+      "hash": "#HISTORY",
+      "title": "Todo en orden y con origen claro.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PROFILE",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PROFILE",
+      "hash": "#PROFILE",
+      "title": "Tu mascota, organizada.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "AGENTS",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#AGENTS",
+      "hash": "#AGENTS",
+      "title": "PETi coordina una revisión.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "CARE",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#CARE",
+      "hash": "#CARE",
+      "title": "Calendario y Body Check",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "BODY_CHECK",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "hash": "#BODY_CHECK",
+      "title": "Revisión visible de bienestar",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "RECORDS",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#RECORDS",
+      "hash": "#RECORDS",
+      "title": "Documentos y registros",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ASSISTANT",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "hash": "#ASSISTANT",
+      "title": "Pregunta sobre tu historial",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PLANS",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PLANS",
+      "hash": "#PLANS",
+      "title": "Tu plan y tus límites",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SETTINGS",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "hash": "#SETTINGS",
+      "title": "Preferencias",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "FEEDBACK",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "hash": "#FEEDBACK",
+      "title": "Feedback y soporte",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "COLLABORATION",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "hash": "#COLLABORATION",
+      "title": "Comparte el cuidado",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "LIBRARY",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "hash": "#LIBRARY",
+      "title": "Busca en la historia de tu mascota",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ADMIN",
+    "viewport": "tablet",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ADMIN",
+      "hash": "#ADMIN",
+      "title": "Estado operativo",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 23,
+      "smallButtons": [
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "♙Perfil",
+          "name": "♙Perfil",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "NAVIGATION_BEHAVIOR",
+    "viewport": "tablet",
+    "nav": {
+      "viewport": "tablet",
+      "homeTitle": "Todo lo importante, hoy.",
+      "scanTitle": "Analizar y entender",
+      "afterReload": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterBack": {
+        "url": "https://peti-care.web.app/?demo=1#HOME",
+        "title": "Todo lo importante, hoy."
+      },
+      "afterForward": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterSamePageHash": {
+        "url": "https://peti-care.web.app/?demo=1#AGENTS",
+        "title": "PETi coordina una revisión."
+      }
+    }
+  },
+  {
+    "route": "HOME",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HOME",
+      "hash": "#HOME",
+      "title": "Todo lo importante, hoy.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SCAN",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SCAN",
+      "hash": "#SCAN",
+      "title": "Analizar y entender",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "HISTORY",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#HISTORY",
+      "hash": "#HISTORY",
+      "title": "Todo en orden y con origen claro.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PROFILE",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PROFILE",
+      "hash": "#PROFILE",
+      "title": "Tu mascota, organizada.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 27,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "AGENTS",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#AGENTS",
+      "hash": "#AGENTS",
+      "title": "PETi coordina una revisión.",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "CARE",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#CARE",
+      "hash": "#CARE",
+      "title": "Calendario y Body Check",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "BODY_CHECK",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "hash": "#BODY_CHECK",
+      "title": "Revisión visible de bienestar",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "RECORDS",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#RECORDS",
+      "hash": "#RECORDS",
+      "title": "Documentos y registros",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 25,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ASSISTANT",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "hash": "#ASSISTANT",
+      "title": "Pregunta sobre tu historial",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "PLANS",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#PLANS",
+      "hash": "#PLANS",
+      "title": "Tu plan y tus límites",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "SETTINGS",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "hash": "#SETTINGS",
+      "title": "Preferencias",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "FEEDBACK",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "hash": "#FEEDBACK",
+      "title": "Feedback y soporte",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "COLLABORATION",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "hash": "#COLLABORATION",
+      "title": "Comparte el cuidado",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "LIBRARY",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "hash": "#LIBRARY",
+      "title": "Busca en la historia de tu mascota",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 24,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "ADMIN",
+    "viewport": "mobile",
+    "status": "ok",
+    "error": "",
+    "consoleMessages": [],
+    "failedRequests": [],
+    "pageErrors": [],
+    "metadata": {
+      "url": "https://peti-care.web.app/?demo=1#ADMIN",
+      "hash": "#ADMIN",
+      "title": "Estado operativo",
+      "lang": "es",
+      "overflowX": 0,
+      "brokenImages": [],
+      "internalTextHits": [],
+      "buttonCount": 23,
+      "smallButtons": [
+        {
+          "text": "Biblioteca",
+          "name": "Biblioteca",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Plan",
+          "name": "Plan",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Compartir",
+          "name": "Compartir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ayuda",
+          "name": "Ayuda",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Ajustes",
+          "name": "Ajustes",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Admin",
+          "name": "Admin",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "Salir",
+          "name": "Salir",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "⌂Inicio",
+          "name": "⌂Inicio",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "✦Analizar",
+          "name": "✦Analizar",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "text": "◷Historial",
+          "name": "◷Historial",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "route": "NAVIGATION_BEHAVIOR",
+    "viewport": "mobile",
+    "nav": {
+      "viewport": "mobile",
+      "homeTitle": "Todo lo importante, hoy.",
+      "scanTitle": "Analizar y entender",
+      "afterReload": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterBack": {
+        "url": "https://peti-care.web.app/?demo=1#HOME",
+        "title": "Todo lo importante, hoy."
+      },
+      "afterForward": {
+        "url": "https://peti-care.web.app/?demo=1#SCAN",
+        "title": "Analizar y entender"
+      },
+      "afterSamePageHash": {
+        "url": "https://peti-care.web.app/?demo=1#AGENTS",
+        "title": "PETi coordina una revisión."
+      }
+    }
+  }
+]

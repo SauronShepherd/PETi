@@ -1,0 +1,59 @@
+[
+  {
+    "activity_status": "ACTIVE",
+    "agent_id": "ORCHESTRATOR",
+    "capabilities": [
+      "plan",
+      "synthesize"
+    ],
+    "helpfulness": 0.82,
+    "run_count": 48
+  },
+  {
+    "activity_status": "ACTIVE",
+    "agent_id": "EVIDENCE_INTAKE",
+    "capabilities": [
+      "select evidence",
+      "ground claims"
+    ],
+    "helpfulness": 0.86,
+    "run_count": 48
+  },
+  {
+    "activity_status": "ACTIVE",
+    "agent_id": "PET_SPECIALIST",
+    "capabilities": [
+      "interpret observations"
+    ],
+    "helpfulness": 0.8,
+    "run_count": 46
+  },
+  {
+    "activity_status": "ACTIVE",
+    "agent_id": "SAFETY_REVIEW",
+    "capabilities": [
+      "calibrate",
+      "route safety"
+    ],
+    "helpfulness": 0.84,
+    "run_count": 46
+  },
+  {
+    "activity_status": "NOT_RELEASED",
+    "agent_id": "DENTAL_SPECIALIST",
+    "capabilities": [
+      "observe dental"
+    ],
+    "helpfulness": null,
+    "run_count": 0
+  },
+  {
+    "activity_status": "NOT_RELEASED",
+    "agent_id": "FECES_SPECIALIST",
+    "capabilities": [
+      "observe feces"
+    ],
+    "helpfulness": null,
+    "run_count": 0
+  }
+]

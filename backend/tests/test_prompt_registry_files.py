@@ -4,7 +4,7 @@ from app.ai.registry import PROMPTS, SCHEMAS
 
 
 def test_active_registry_artifacts_are_loaded_from_versioned_files():
-    root = Path("backend/app/ai")
+    root = Path(__file__).resolve().parents[1] / "app" / "ai"
     expected = {
         "platform_smoke": ("prompts/platform_smoke/v1.0.0.md", "schemas/platform_smoke_v1.json"),
         "peti_check": ("prompts/peti_check/v1.0.0.md", "schemas/peti_check_v1.json"),

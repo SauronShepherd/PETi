@@ -1,0 +1,35 @@
+[
+  {
+    "agent_type": "ORCHESTRATOR",
+    "duration_ms": 2840,
+    "interaction_id": "demo-int-luna",
+    "outcome": "ANSWERED",
+    "response_id": "demo-response-luna",
+    "run_id": "demo-run-luna",
+    "safety_state": "SAFE_TO_DISPLAY",
+    "started_at": "2026-08-31T02:57:00Z",
+    "status": "SUCCEEDED"
+  },
+  {
+    "agent_type": "ORCHESTRATOR",
+    "duration_ms": 3910,
+    "interaction_id": "demo-int-max",
+    "outcome": "SAFETY_ROUTED",
+    "response_id": "demo-response-max",
+    "run_id": "demo-run-max",
+    "safety_state": "REVIEW_REQUIRED",
+    "started_at": "2026-08-31T02:54:00Z",
+    "status": "SUCCEEDED"
+  },
+  {
+    "agent_type": "ORCHESTRATOR",
+    "duration_ms": null,
+    "interaction_id": "demo-int-followup",
+    "outcome": null,
+    "response_id": null,
+    "run_id": "demo-run-followup",
+    "safety_state": null,
+    "started_at": "2026-08-31T02:59:45Z",
+    "status": "STARTED"
+  }
+]

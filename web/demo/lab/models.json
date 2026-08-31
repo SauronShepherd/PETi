@@ -1,0 +1,23 @@
+[
+  {
+    "average_latency_ms": 2240,
+    "call_count": 42,
+    "helpfulness": 0.84,
+    "input_tokens": 84320,
+    "model_id": "gemini-3.5-flash",
+    "output_tokens": 14540,
+    "provider": "GEMINI",
+    "unknown_usage_count": 0
+  },
+  {
+    "average_latency_ms": 1910,
+    "call_count": 6,
+    "helpfulness": 0.75,
+    "input_tokens": 11940,
+    "model_id": "gemini-2.5-flash",
+    "output_tokens": 2080,
+    "provider": "GEMINI",
+    "release_state": "SHADOW",
+    "unknown_usage_count": 0
+  }
+]

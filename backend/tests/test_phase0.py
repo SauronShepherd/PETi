@@ -94,3 +94,13 @@ def test_production_rejects_peti_check_without_external_release_certificate():
             ai_provider="GEMINI",
             peti_check_enabled=True,
         ).validate_startup()
+
+
+def test_adk_requires_agent_runtime():
+    with pytest.raises(ValueError, match="ADK requires PETI_AGENT_RUNTIME_ENABLED"):
+        Settings(agent_adk_enabled=True).validate_startup()
+
+
+def test_adk_rejects_fake_provider():
+    with pytest.raises(ValueError, match="ADK requires a configured model provider"):
+        Settings(agent_adk_enabled=True, agent_runtime_enabled=True).validate_startup()

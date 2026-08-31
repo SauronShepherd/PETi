@@ -1,1 +1,1 @@
-"""Cloud repository ports are introduced behind this package."""
+"""Narrow persistence ports used by durable PETi workflows."""

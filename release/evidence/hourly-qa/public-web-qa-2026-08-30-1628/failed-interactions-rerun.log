@@ -1,0 +1,400 @@
+[WebServer] 127.0.0.1 - - [30/Aug/2026 16:29:05] "GET /?demo=1 HTTP/1.1" 200 -
+
+Running 9 tests using 3 workers
+
+(node:24460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (12.7s)
+  x  3 [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (12.8s)
+  x  2 [mobile] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals (12.7s)
+(node:13192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:10196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 [desktop] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (11.7s)
+  x  5 [tablet] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (11.8s)
+  x  6 [mobile] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals (11.9s)
+(node:14204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  7 [desktop] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely (10.2s)
+  x  8 [tablet] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely (10.4s)
+  x  9 [mobile] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely (10.8s)
+
+
+  1) [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#assistant-status')
+    Expected substring: "Añade una mascota"
+    Received string:    "Escribe una pregunta."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#assistant-status')
+        14 × locator resolved to <div class="footer-note" id="assistant-status">Escribe una pregunta.</div>
+           - unexpected value "Escribe una pregunta."
+
+
+      4 |   await page.goto("/?demo=1#ASSISTANT");
+      5 |   await page.locator("#assistant-form button").click();
+    > 6 |   await expect(page.locator("#assistant-status")).toContainText("Añade una mascota");
+        |                                                   ^
+      7 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      8 |   await page.screenshot({ path: test.info().outputPath("assistant-empty-validation.png"), fullPage: true });
+      9 | });
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:6:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-assi-c104b-s-without-leaking-internals-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [desktop] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#care-status')
+    Expected: "Añade una mascota antes de crear un cuidado."
+    Received: "No se pudo guardar el evento. Inténtalo de nuevo."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#care-status')
+        5 × locator resolved to <div id="care-status" class="footer-note">Guardando evento…</div>
+          - unexpected value "Guardando evento…"
+        9 × locator resolved to <div id="care-status" class="footer-note">No se pudo guardar el evento. Inténtalo de nuevo.</div>
+          - unexpected value "No se pudo guardar el evento. Inténtalo de nuevo."
+
+
+      62 |   await page.locator("#care-due").fill("2026-08-30T18:00");
+      63 |   await page.locator("#care-form button[type=submit]").click();
+    > 64 |   await expect(page.locator("#care-status")).toHaveText("Añade una mascota antes de crear un cuidado.");
+         |                                              ^
+      65 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      66 | });
+      67 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:64:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-desktop\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-care-56c77-t-without-leaking-internals-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-care-56c77-t-without-leaking-internals-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [desktop] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#collaboration-status')
+    Expected: "Añade una mascota antes de compartirla."
+    Received: "La invitación se enviará al iniciar sesión."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#collaboration-status')
+        14 × locator resolved to <div class="footer-note" id="collaboration-status">La invitación se enviará al iniciar sesión.</div>
+           - unexpected value "La invitación se enviará al iniciar sesión."
+
+
+      141 |   await page.locator("#member-user").fill("caregiver@example.test");
+      142 |   await page.getByRole("button", { name: "Enviar invitación" }).click();
+    > 143 |   await expect(page.locator("#collaboration-status")).toHaveText("Añade una mascota antes de compartirla.");
+          |                                                       ^
+      144 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      145 | });
+      146 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:143:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#assistant-status')
+    Expected substring: "Añade una mascota"
+    Received string:    "Escribe una pregunta."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#assistant-status')
+        14 × locator resolved to <div class="footer-note" id="assistant-status">Escribe una pregunta.</div>
+           - unexpected value "Escribe una pregunta."
+
+
+      4 |   await page.goto("/?demo=1#ASSISTANT");
+      5 |   await page.locator("#assistant-form button").click();
+    > 6 |   await expect(page.locator("#assistant-status")).toContainText("Añade una mascota");
+        |                                                   ^
+      7 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      8 |   await page.screenshot({ path: test.info().outputPath("assistant-empty-validation.png"), fullPage: true });
+      9 | });
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:6:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-assi-c104b-s-without-leaking-internals-tablet\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [tablet] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#care-status')
+    Expected: "Añade una mascota antes de crear un cuidado."
+    Received: "No se pudo guardar el evento. Inténtalo de nuevo."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#care-status')
+        5 × locator resolved to <div id="care-status" class="footer-note">Guardando evento…</div>
+          - unexpected value "Guardando evento…"
+        9 × locator resolved to <div id="care-status" class="footer-note">No se pudo guardar el evento. Inténtalo de nuevo.</div>
+          - unexpected value "No se pudo guardar el evento. Inténtalo de nuevo."
+
+
+      62 |   await page.locator("#care-due").fill("2026-08-30T18:00");
+      63 |   await page.locator("#care-form button[type=submit]").click();
+    > 64 |   await expect(page.locator("#care-status")).toHaveText("Añade una mascota antes de crear un cuidado.");
+         |                                              ^
+      65 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      66 | });
+      67 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:64:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-tablet\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-care-56c77-t-without-leaking-internals-tablet\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-tablet\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-care-56c77-t-without-leaking-internals-tablet\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [tablet] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#collaboration-status')
+    Expected: "Añade una mascota antes de compartirla."
+    Received: "La invitación se enviará al iniciar sesión."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#collaboration-status')
+        14 × locator resolved to <div class="footer-note" id="collaboration-status">La invitación se enviará al iniciar sesión.</div>
+           - unexpected value "La invitación se enviará al iniciar sesión."
+
+
+      141 |   await page.locator("#member-user").fill("caregiver@example.test");
+      142 |   await page.getByRole("button", { name: "Enviar invitación" }).click();
+    > 143 |   await expect(page.locator("#collaboration-status")).toHaveText("Añade una mascota antes de compartirla.");
+          |                                                       ^
+      144 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      145 | });
+      146 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:143:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-tablet\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [mobile] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#assistant-status')
+    Expected substring: "Añade una mascota"
+    Received string:    "Escribe una pregunta."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#assistant-status')
+        14 × locator resolved to <div class="footer-note" id="assistant-status">Escribe una pregunta.</div>
+           - unexpected value "Escribe una pregunta."
+
+
+      4 |   await page.goto("/?demo=1#ASSISTANT");
+      5 |   await page.locator("#assistant-form button").click();
+    > 6 |   await expect(page.locator("#assistant-status")).toContainText("Añade una mascota");
+        |                                                   ^
+      7 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      8 |   await page.screenshot({ path: test.info().outputPath("assistant-empty-validation.png"), fullPage: true });
+      9 | });
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:6:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-assi-c104b-s-without-leaking-internals-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [mobile] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#care-status')
+    Expected: "Añade una mascota antes de crear un cuidado."
+    Received: "No se pudo guardar el evento. Inténtalo de nuevo."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#care-status')
+        5 × locator resolved to <div id="care-status" class="footer-note">Guardando evento…</div>
+          - unexpected value "Guardando evento…"
+        9 × locator resolved to <div id="care-status" class="footer-note">No se pudo guardar el evento. Inténtalo de nuevo.</div>
+          - unexpected value "No se pudo guardar el evento. Inténtalo de nuevo."
+
+
+      62 |   await page.locator("#care-due").fill("2026-08-30T18:00");
+      63 |   await page.locator("#care-form button[type=submit]").click();
+    > 64 |   await expect(page.locator("#care-status")).toHaveText("Añade una mascota antes de crear un cuidado.");
+         |                                              ^
+      65 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      66 | });
+      67 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:64:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-mobile\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-care-56c77-t-without-leaking-internals-mobile\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-care-56c77-t-without-leaking-internals-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-care-56c77-t-without-leaking-internals-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [mobile] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#collaboration-status')
+    Expected: "Añade una mascota antes de compartirla."
+    Received: "La invitación se enviará al iniciar sesión."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#collaboration-status')
+        14 × locator resolved to <div class="footer-note" id="collaboration-status">La invitación se enviará al iniciar sesión.</div>
+           - unexpected value "La invitación se enviará al iniciar sesión."
+
+
+      141 |   await page.locator("#member-user").fill("caregiver@example.test");
+      142 |   await page.getByRole("button", { name: "Enviar invitación" }).click();
+    > 143 |   await expect(page.locator("#collaboration-status")).toHaveText("Añade una mascota antes de compartirla.");
+          |                                                       ^
+      144 |   await expect(page.locator("body")).not.toContainText("TypeError");
+      145 | });
+      146 |
+        at C:\Users\angel.alvarez\IdeaProjects\PETi\tests\e2e\extended-interactions.spec.js:143:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extended-interactions-coll-3b634-alidates-missing-pet-safely-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9 failed
+    [desktop] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+    [desktop] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+    [desktop] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 
+    [tablet] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+    [tablet] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+    [tablet] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 
+    [mobile] › tests\e2e\extended-interactions.spec.js:3:5 › assistant validates empty questions without leaking internals 
+    [mobile] › tests\e2e\extended-interactions.spec.js:59:5 › care creation validates missing pet without leaking internals 
+    [mobile] › tests\e2e\extended-interactions.spec.js:139:5 › collaboration validates missing pet safely 

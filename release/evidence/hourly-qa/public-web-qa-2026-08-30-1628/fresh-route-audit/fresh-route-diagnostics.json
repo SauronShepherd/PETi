@@ -1,0 +1,1350 @@
+{
+  "target": "https://peti-care.web.app/?demo=1",
+  "createdAt": "2026-08-30T14:37:30.814Z",
+  "results": [
+    {
+      "viewport": "desktop",
+      "route": "HOME",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HOME",
+      "appVisible": true,
+      "mainTitle": "Todo lo importante, hoy.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\home-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "SCAN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SCAN",
+      "appVisible": true,
+      "mainTitle": "Analizar y entender",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "file-picker",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\scan-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "HISTORY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HISTORY",
+      "appVisible": true,
+      "mainTitle": "Todo en orden y con origen claro.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\history-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "PROFILE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PROFILE",
+      "appVisible": true,
+      "mainTitle": "Tu mascota, organizada.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 29,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "pet-name",
+          "disabled": false,
+          "rect": {
+            "width": 585,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\profile-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "AGENTS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#AGENTS",
+      "appVisible": true,
+      "mainTitle": "PETi coordina una revisión.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\agents-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "CARE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#CARE",
+      "appVisible": true,
+      "mainTitle": "Calendario y Body Check",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-title",
+          "disabled": false,
+          "rect": {
+            "width": 585,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-due",
+          "disabled": false,
+          "rect": {
+            "width": 585,
+            "height": 52
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Medicación\nPaseo\nVacuna\nCita veterinaria",
+          "aria": "",
+          "id": "care-category",
+          "disabled": false,
+          "rect": {
+            "width": 585,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\care-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "BODY_CHECK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "appVisible": true,
+      "mainTitle": "Revisión visible de bienestar",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 30,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\body-check-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "RECORDS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#RECORDS",
+      "appVisible": true,
+      "mainTitle": "Documentos y registros",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\records-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "ASSISTANT",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "appVisible": true,
+      "mainTitle": "Pregunta sobre tu historial",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "assistant-question",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 66
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\assistant-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "PLANS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PLANS",
+      "appVisible": true,
+      "mainTitle": "Tu plan y tus límites",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\plans-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "SETTINGS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "appVisible": true,
+      "mainTitle": "Preferencias",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Español\nEnglish",
+          "aria": "",
+          "id": "language-setting",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 19
+          }
+        },
+        {
+          "tag": "select",
+          "text": "Claro\nOscuro",
+          "aria": "",
+          "id": "theme-setting",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\settings-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "FEEDBACK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "appVisible": true,
+      "mainTitle": "Feedback y soporte",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "feedback-message",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 81
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Sugerencia\nProblema técnico\nSeguridad",
+          "aria": "",
+          "id": "feedback-category",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\feedback-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "COLLABORATION",
+      "finalUrl": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "appVisible": true,
+      "mainTitle": "Comparte el cuidado",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-user",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-ttl",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Cuidador\nSolo lectura",
+          "aria": "",
+          "id": "member-role",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\collaboration-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "LIBRARY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "appVisible": true,
+      "mainTitle": "Busca en la historia de tu mascota",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "library-query",
+          "disabled": false,
+          "rect": {
+            "width": 910,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\library-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "ADMIN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ADMIN",
+      "appVisible": true,
+      "mainTitle": "Estado operativo",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 23,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\admin-desktop.png"
+    },
+    {
+      "viewport": "desktop",
+      "route": "RUNTIME_MESSAGES",
+      "consoleMessages": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": "tablet",
+      "route": "HOME",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HOME",
+      "appVisible": true,
+      "mainTitle": "Todo lo importante, hoy.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\home-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "SCAN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SCAN",
+      "appVisible": true,
+      "mainTitle": "Analizar y entender",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "file-picker",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\scan-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "HISTORY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HISTORY",
+      "appVisible": true,
+      "mainTitle": "Todo en orden y con origen claro.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\history-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "PROFILE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PROFILE",
+      "appVisible": true,
+      "mainTitle": "Tu mascota, organizada.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 29,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "pet-name",
+          "disabled": false,
+          "rect": {
+            "width": 421,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\profile-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "AGENTS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#AGENTS",
+      "appVisible": true,
+      "mainTitle": "PETi coordina una revisión.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\agents-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "CARE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#CARE",
+      "appVisible": true,
+      "mainTitle": "Calendario y Body Check",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-title",
+          "disabled": false,
+          "rect": {
+            "width": 421,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-due",
+          "disabled": false,
+          "rect": {
+            "width": 421,
+            "height": 52
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Medicación\nPaseo\nVacuna\nCita veterinaria",
+          "aria": "",
+          "id": "care-category",
+          "disabled": false,
+          "rect": {
+            "width": 421,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\care-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "BODY_CHECK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "appVisible": true,
+      "mainTitle": "Revisión visible de bienestar",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 30,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\body-check-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "RECORDS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#RECORDS",
+      "appVisible": true,
+      "mainTitle": "Documentos y registros",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\records-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "ASSISTANT",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "appVisible": true,
+      "mainTitle": "Pregunta sobre tu historial",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "assistant-question",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 66
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\assistant-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "PLANS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PLANS",
+      "appVisible": true,
+      "mainTitle": "Tu plan y tus límites",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\plans-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "SETTINGS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "appVisible": true,
+      "mainTitle": "Preferencias",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Español\nEnglish",
+          "aria": "",
+          "id": "language-setting",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 19
+          }
+        },
+        {
+          "tag": "select",
+          "text": "Claro\nOscuro",
+          "aria": "",
+          "id": "theme-setting",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\settings-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "FEEDBACK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "appVisible": true,
+      "mainTitle": "Feedback y soporte",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "feedback-message",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 81
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Sugerencia\nProblema técnico\nSeguridad",
+          "aria": "",
+          "id": "feedback-category",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\feedback-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "COLLABORATION",
+      "finalUrl": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "appVisible": true,
+      "mainTitle": "Comparte el cuidado",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-user",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-ttl",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Cuidador\nSolo lectura",
+          "aria": "",
+          "id": "member-role",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\collaboration-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "LIBRARY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "appVisible": true,
+      "mainTitle": "Busca en la historia de tu mascota",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "library-query",
+          "disabled": false,
+          "rect": {
+            "width": 664,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\library-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "ADMIN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ADMIN",
+      "appVisible": true,
+      "mainTitle": "Estado operativo",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 23,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\admin-tablet.png"
+    },
+    {
+      "viewport": "tablet",
+      "route": "RUNTIME_MESSAGES",
+      "consoleMessages": [],
+      "failedRequests": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "HOME",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HOME",
+      "appVisible": true,
+      "mainTitle": "Todo lo importante, hoy.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\home-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "SCAN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SCAN",
+      "appVisible": true,
+      "mainTitle": "Analizar y entender",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "file-picker",
+          "disabled": false,
+          "rect": {
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\scan-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "HISTORY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#HISTORY",
+      "appVisible": true,
+      "mainTitle": "Todo en orden y con origen claro.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\history-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "PROFILE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PROFILE",
+      "appVisible": true,
+      "mainTitle": "Tu mascota, organizada.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 29,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "pet-name",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\profile-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "AGENTS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#AGENTS",
+      "appVisible": true,
+      "mainTitle": "PETi coordina una revisión.",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\agents-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "CARE",
+      "finalUrl": "https://peti-care.web.app/?demo=1#CARE",
+      "appVisible": true,
+      "mainTitle": "Calendario y Body Check",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 28,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-title",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "care-due",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 52
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Medicación\nPaseo\nVacuna\nCita veterinaria",
+          "aria": "",
+          "id": "care-category",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\care-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "BODY_CHECK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#BODY_CHECK",
+      "appVisible": true,
+      "mainTitle": "Revisión visible de bienestar",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 30,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        },
+        {
+          "tag": "input",
+          "text": "on",
+          "aria": "",
+          "id": "",
+          "disabled": false,
+          "rect": {
+            "width": 13,
+            "height": 13
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\body-check-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "RECORDS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#RECORDS",
+      "appVisible": true,
+      "mainTitle": "Documentos y registros",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\records-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "ASSISTANT",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ASSISTANT",
+      "appVisible": true,
+      "mainTitle": "Pregunta sobre tu historial",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "assistant-question",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 66
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\assistant-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "PLANS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#PLANS",
+      "appVisible": true,
+      "mainTitle": "Tu plan y tus límites",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 24,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\plans-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "SETTINGS",
+      "finalUrl": "https://peti-care.web.app/?demo=1#SETTINGS",
+      "appVisible": true,
+      "mainTitle": "Preferencias",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Español\nEnglish",
+          "aria": "",
+          "id": "language-setting",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 19
+          }
+        },
+        {
+          "tag": "select",
+          "text": "Claro\nOscuro",
+          "aria": "",
+          "id": "theme-setting",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\settings-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "FEEDBACK",
+      "finalUrl": "https://peti-care.web.app/?demo=1#FEEDBACK",
+      "appVisible": true,
+      "mainTitle": "Feedback y soporte",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 26,
+      "unnamedControls": [
+        {
+          "tag": "textarea",
+          "text": "",
+          "aria": "",
+          "id": "feedback-message",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 81
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Sugerencia\nProblema técnico\nSeguridad",
+          "aria": "",
+          "id": "feedback-category",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\feedback-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "COLLABORATION",
+      "finalUrl": "https://peti-care.web.app/?demo=1#COLLABORATION",
+      "appVisible": true,
+      "mainTitle": "Comparte el cuidado",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 27,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-user",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 50
+          }
+        },
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "member-ttl",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [
+        {
+          "tag": "select",
+          "text": "Cuidador\nSolo lectura",
+          "aria": "",
+          "id": "member-role",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 19
+          }
+        }
+      ],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\collaboration-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "LIBRARY",
+      "finalUrl": "https://peti-care.web.app/?demo=1#LIBRARY",
+      "appVisible": true,
+      "mainTitle": "Busca en la historia de tu mascota",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 25,
+      "unnamedControls": [
+        {
+          "tag": "input",
+          "text": "",
+          "aria": "",
+          "id": "library-query",
+          "disabled": false,
+          "rect": {
+            "width": 320,
+            "height": 50
+          }
+        }
+      ],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\library-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "ADMIN",
+      "finalUrl": "https://peti-care.web.app/?demo=1#ADMIN",
+      "appVisible": true,
+      "mainTitle": "Estado operativo",
+      "overflowX": 0,
+      "brokenImages": [],
+      "focusables": 23,
+      "unnamedControls": [],
+      "tooSmallControls": [],
+      "forbiddenText": [],
+      "screenshot": "C:\\Users\\angel.alvarez\\IdeaProjects\\PETi\\release\\evidence\\hourly-qa\\public-web-qa-2026-08-30-1628\\fresh-route-audit\\admin-mobile.png"
+    },
+    {
+      "viewport": "mobile",
+      "route": "RUNTIME_MESSAGES",
+      "consoleMessages": [],
+      "failedRequests": []
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+.lab-nav button:focus-visible,
+.lab-link:focus-visible,
+.lab-run-link:focus-visible,
+.response-feedback button:focus-visible,
+.response-feedback select:focus-visible,
+.response-feedback textarea:focus-visible {
+  outline: 3px solid #f4b24f;
+  outline-offset: 3px;
+}
+
+.lab-main:focus {
+  outline: none;
+}
+
+.lab-runtime-warning {
+  align-items: center;
+  background: #fff3de;
+  border-bottom: 1px solid #edcf97;
+  color: #725122;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 9px 18px;
+  font-size: 12px;
+}
+
+.lab-chart { margin: 0; }
+.lab-chart figcaption { color: #102f35; font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+.lab-chart svg { display: block; max-width: 100%; width: 100%; }
+.lab-chart text { fill: #486b6e; font-size: 11px; }
+.lab-chart-track { fill: #edf5f3; }
+.lab-chart-value { fill: #5dc9bf; }
+.lab-chart-number { font-family: ui-monospace, monospace; font-weight: 800; }
+.lab-chart-table { display: flex; flex-wrap: wrap; gap: 8px; color: #678184; font-size: 10px; }
+.lab-chart-table span { display: inline-flex; gap: 3px; }
+.lab-chart-table i { font-style: normal; }
+
+.lab-inspector-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 15px;
+  overflow-x: auto;
+  padding: 3px;
+}
+.lab-inspector-tabs button {
+  background: #e8f3f1;
+  border-radius: 999px;
+  color: #426568;
+  flex: 0 0 auto;
+  font-size: 11px;
+  padding: 8px 12px;
+}
+.lab-inspector-tabs button.active { background: #176e75; color: #fff; }
+.lab-version-set { background: #102f35; border-radius: 12px; color: #d8f0ed; overflow: auto; padding: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .peti-lab *,
+  .peti-lab *::before,
+  .peti-lab *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .lab-status,
+  .lab-node,
+  .lab-metric,
+  .lab-panel {
+    border: 1px solid CanvasText;
+  }
+}

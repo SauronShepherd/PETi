@@ -1,0 +1,4 @@
+project_id = "peti-judge-project"
+region = "europe-west1"
+api_image = "europe-west1-docker.pkg.dev/peti-judge-project/peti/api:judge"
+worker_image = "europe-west1-docker.pkg.dev/peti-judge-project/peti/worker:judge"

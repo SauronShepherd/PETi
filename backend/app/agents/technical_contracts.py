@@ -39,6 +39,9 @@ class PlanNode:
     executor_id: str
     depends_on: list[str] = field(default_factory=list)
     output_schema: str = "1.0.0"
+    required: bool = True
+    input_refs: list[str] = field(default_factory=list)
+    failure_policy: str = "FAIL_RUN"
 
 
 @dataclass

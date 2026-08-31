@@ -179,18 +179,21 @@ class MediaService:
             raise MediaError("MEDIA_CHECKSUM_MISMATCH")
         a.size_bytes_verified = actual_size
         a.checksum_sha256_verified = checksum
+        generation = getattr(obj, "generation", None)
+        if generation is not None:
+            a.storage_generation = str(generation)
         a.transition(MediaStatus.UPLOADED_UNVERIFIED)
         a.transition(MediaStatus.READY)
+        a.finalized_at = self.clock()
+        a.uploaded_at = a.finalized_at
+        s.status = UploadSessionStatus.COMPLETED
+        s.finalized_at = a.finalized_at
         if self.metadata_store:
             if hasattr(self.metadata_store, "atomic_state"):
                 self.metadata_store.atomic_state(a, s)
             else:
                 self.metadata_store.save_asset(a)
                 self.metadata_store.save_session(s)
-        a.finalized_at = self.clock()
-        a.uploaded_at = a.finalized_at
-        s.status = UploadSessionStatus.COMPLETED
-        s.finalized_at = a.finalized_at
         return a
 
     def get_owned(self, user_id, media_id):
@@ -251,6 +254,12 @@ class MediaService:
                 raise MediaError("MEDIA_AI_SOURCE_OBJECT_MISSING")
             if stored.content_type != asset.mime_type_declared:
                 raise MediaError("MEDIA_AI_SOURCE_MIME_MISMATCH")
+            stored_generation = getattr(stored, "generation", None)
+            if asset.storage_generation is not None and str(stored_generation) != asset.storage_generation:
+                raise MediaError("MEDIA_AI_SOURCE_GENERATION_MISMATCH")
+            if (asset.checksum_sha256_verified is not None and hasattr(self.storage, "checksum_object")
+                    and self.storage.checksum_object(stored) != asset.checksum_sha256_verified):
+                raise MediaError("MEDIA_AI_SOURCE_CHECKSUM_MISMATCH")
             descriptors.append({
                 "id": asset.id,
                 "asset_id": asset.id,

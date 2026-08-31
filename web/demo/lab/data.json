@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "data_classification": "SYNTHETIC_DEMO",
+  "generated_at": "2026-08-31T03:00:00Z",
+  "overview": {
+    "run_count": 48,
+    "response_count": 46,
+    "feedback_count": 34,
+    "metrics": {
+      "rufs": {"value": 0.78, "numerator": 36, "denominator": 46, "ci95": {"low": 0.64, "high": 0.87}, "preliminary": false},
+      "run_completion": {"value": 0.96, "numerator": 46, "denominator": 48, "ci95": {"low": 0.86, "high": 0.99}, "preliminary": false},
+      "helpfulness": {"value": 0.82, "numerator": 28, "denominator": 34, "ci95": {"low": 0.66, "high": 0.92}, "preliminary": false},
+      "feedback_coverage": {"value": 0.74, "numerator": 34, "denominator": 46, "ci95": {"low": 0.60, "high": 0.84}, "preliminary": false},
+      "safe_completion": {"value": 1.0, "numerator": 46, "denominator": 46, "ci95": {"low": 0.92, "high": 1.0}, "preliminary": false},
+      "grounded": {"value": 0.93, "numerator": 43, "denominator": 46, "ci95": {"low": 0.82, "high": 0.98}, "preliminary": false}
+    },
+    "runs_by_state": {"STARTED": 2, "SUCCEEDED": 46},
+    "runs_by_agent": {"ORCHESTRATOR": 48},
+    "model_calls": {"GEMINI/gemini-3.5-flash": 42, "GEMINI/gemini-2.5-flash": 6}
+  },
+  "runs": [
+    {"run_id": "demo-run-luna", "interaction_id": "demo-int-luna", "agent_type": "ORCHESTRATOR", "status": "SUCCEEDED", "outcome": "ANSWERED", "safety_state": "SAFE_TO_DISPLAY", "response_id": "demo-response-luna", "duration_ms": 2840, "started_at": "2026-08-31T02:57:00Z"},
+    {"run_id": "demo-run-max", "interaction_id": "demo-int-max", "agent_type": "ORCHESTRATOR", "status": "SUCCEEDED", "outcome": "SAFETY_ROUTED", "safety_state": "REVIEW_REQUIRED", "response_id": "demo-response-max", "duration_ms": 3910, "started_at": "2026-08-31T02:54:00Z"},
+    {"run_id": "demo-run-followup", "interaction_id": "demo-int-followup", "agent_type": "ORCHESTRATOR", "status": "STARTED", "outcome": null, "safety_state": null, "response_id": null, "duration_ms": null, "started_at": "2026-08-31T02:59:45Z"}
+  ],
+  "run_details": {
+    "demo-run-luna": {
+      "steps": [
+        {"step_id": "plan", "agent_id": "ORCHESTRATOR", "status": "SUCCEEDED", "duration_ms": 12, "evidence_count": 0, "claim_count": 0},
+        {"step_id": "evidence-intake", "agent_id": "EVIDENCE_INTAKE", "status": "SUCCEEDED", "duration_ms": 185, "evidence_count": 5, "claim_count": 0},
+        {"step_id": "peti-check", "agent_id": "PET_SPECIALIST", "status": "SUCCEEDED", "duration_ms": 2090, "evidence_count": 5, "claim_count": 4},
+        {"step_id": "safety-review", "agent_id": "SAFETY_REVIEW", "status": "SUCCEEDED", "duration_ms": 384, "evidence_count": 5, "claim_count": 4, "safety_state": "SAFE_TO_DISPLAY"},
+        {"step_id": "care-report", "agent_id": "CARE_REPORT", "status": "SUCCEEDED", "duration_ms": 169, "evidence_count": 5, "claim_count": 4}
+      ],
+      "model_calls": [{"provider": "GEMINI", "model_id": "gemini-3.5-flash", "status": "SUCCEEDED", "latency_ms": 2090, "input_tokens": 2154, "output_tokens": 386, "cached_input_tokens": 0, "usage_status": "KNOWN"}],
+      "tool_calls": [{"tool_id": "evidence-catalog", "status": "SUCCEEDED", "duration_ms": 34, "result_code": "EVIDENCE_READY"}],
+      "evidence_usage": [{"step_id": "evidence-intake", "modality": "IMAGE", "selected_count": 5, "claim_count": 4}],
+      "safety_decisions": [{"step_id": "safety-review", "decision": "SAFE_TO_DISPLAY", "policy_version": "PETI_CHECK-SAFETY-v1"}],
+      "response": {"id": "demo-response-luna", "outcome": "ANSWERED", "safety_state": "SAFE_TO_DISPLAY", "eligible_for_feedback": true},
+      "feedback": {"value": "HELPED", "reasons": ["CLEAR", "USED_EVIDENCE_WELL"]}
+    },
+    "demo-run-max": {
+      "steps": [
+        {"step_id": "plan", "agent_id": "ORCHESTRATOR", "status": "SUCCEEDED", "duration_ms": 14, "evidence_count": 0, "claim_count": 0},
+        {"step_id": "evidence-intake", "agent_id": "EVIDENCE_INTAKE", "status": "SUCCEEDED", "duration_ms": 240, "evidence_count": 5, "claim_count": 0},
+        {"step_id": "peti-check", "agent_id": "PET_SPECIALIST", "status": "SUCCEEDED", "duration_ms": 2770, "evidence_count": 5, "claim_count": 3},
+        {"step_id": "safety-review", "agent_id": "SAFETY_REVIEW", "status": "SUCCEEDED", "duration_ms": 620, "evidence_count": 5, "claim_count": 3, "safety_state": "REVIEW_REQUIRED"},
+        {"step_id": "care-report", "agent_id": "CARE_REPORT", "status": "SUCCEEDED", "duration_ms": 266, "evidence_count": 5, "claim_count": 3, "safety_state": "REVIEW_REQUIRED"}
+      ],
+      "model_calls": [{"provider": "GEMINI", "model_id": "gemini-3.5-flash", "status": "SUCCEEDED", "latency_ms": 2770, "input_tokens": 2482, "output_tokens": 431, "cached_input_tokens": 1840, "usage_status": "KNOWN"}],
+      "tool_calls": [{"tool_id": "evidence-catalog", "status": "SUCCEEDED", "duration_ms": 41, "result_code": "EVIDENCE_READY"}],
+      "evidence_usage": [{"step_id": "evidence-intake", "modality": "IMAGE", "selected_count": 5, "claim_count": 3}],
+      "safety_decisions": [{"step_id": "safety-review", "decision": "REVIEW_REQUIRED", "policy_version": "PETI_CHECK-SAFETY-v1"}],
+      "response": {"id": "demo-response-max", "outcome": "SAFETY_ROUTED", "safety_state": "REVIEW_REQUIRED", "eligible_for_feedback": true},
+      "feedback": {"value": "NOT_QUITE", "reasons": ["NO_CLEAR_NEXT_STEP"]}
+    }
+  },
+  "agents": [
+    {"agent_id": "ORCHESTRATOR", "capabilities": ["plan", "synthesize"], "run_count": 48, "activity_status": "ACTIVE", "helpfulness": 0.82},
+    {"agent_id": "EVIDENCE_INTAKE", "capabilities": ["select evidence", "ground claims"], "run_count": 48, "activity_status": "ACTIVE", "helpfulness": 0.86},
+    {"agent_id": "PET_SPECIALIST", "capabilities": ["interpret observations"], "run_count": 46, "activity_status": "ACTIVE", "helpfulness": 0.80},
+    {"agent_id": "SAFETY_REVIEW", "capabilities": ["calibrate", "route safety"], "run_count": 46, "activity_status": "ACTIVE", "helpfulness": 0.84},
+    {"agent_id": "DENTAL_SPECIALIST", "capabilities": ["observe dental"], "run_count": 0, "activity_status": "NOT_RELEASED", "helpfulness": null},
+    {"agent_id": "FECES_SPECIALIST", "capabilities": ["observe feces"], "run_count": 0, "activity_status": "NOT_RELEASED", "helpfulness": null}
+  ],
+  "models": [
+    {"provider": "GEMINI", "model_id": "gemini-3.5-flash", "call_count": 42, "input_tokens": 84320, "output_tokens": 14540, "unknown_usage_count": 0, "helpfulness": 0.84, "average_latency_ms": 2240},
+    {"provider": "GEMINI", "model_id": "gemini-2.5-flash", "call_count": 6, "input_tokens": 11940, "output_tokens": 2080, "unknown_usage_count": 0, "helpfulness": 0.75, "average_latency_ms": 1910, "release_state": "SHADOW"}
+  ],
+  "feedback": [
+    {"id": "demo-fb-max", "response_id": "demo-response-max", "run_id": "demo-run-max", "value": "NOT_QUITE", "reasons": ["NO_CLEAR_NEXT_STEP"], "revision": 1},
+    {"id": "demo-fb-luna", "response_id": "demo-response-luna", "run_id": "demo-run-luna", "value": "HELPED", "reasons": ["CLEAR", "USED_EVIDENCE_WELL"], "revision": 1}
+  ],
+  "evidence": {"selected_evidence_count": 126, "claim_count": 112, "grounded_claim_count": 104, "grounded_claim_rate": {"value": 0.93, "numerator": 104, "denominator": 112, "ci95": {"low": 0.86, "high": 0.96}, "preliminary": false}, "modalities": {"IMAGE": 110, "VIDEO": 6, "AUDIO": 4, "DOCUMENT": 6}, "modality_coverage": "KNOWN"},
+  "safety": {"review_required_count": 7, "critical_gates": [{"gate": "dangerous_under_triage", "status": "PASS"}, {"gate": "diagnosis_language", "status": "PASS"}, {"gate": "fabricated_measurement", "status": "PASS"}, {"gate": "medication_guidance", "status": "PASS"}, {"gate": "false_reassurance", "status": "PASS"}, {"gate": "schema_pass", "status": "PASS"}]},
+  "performance": {"run_count": 48, "model_call_count": 48, "input_tokens": 96260, "output_tokens": 16620, "unknown_usage_count": 0, "average_model_latency_ms": 2199, "estimated_cost_microunits": 18420, "cost_status": "ESTIMATED"},
+    "health": {"status": "OK", "telemetry_event_count": 624, "trace_count": 48, "model_call_trace_count": 48, "latest_event_at": "2026-08-31T03:00:00Z", "data_freshness": "CURRENT", "trace_completeness_rate": {"value": 0.979, "numerator": 47, "denominator": 48, "ci95": {"low": 0.89, "high": 0.996}, "preliminary": false}, "orphan_trace_count": 0, "rollup_lag_seconds": 84, "telemetry_events_attempted": 624, "telemetry_events_written": 624, "telemetry_events_dropped": 0}
+}

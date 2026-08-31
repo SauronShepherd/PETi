@@ -64,20 +64,43 @@ class AgentRun:
 
 class AgentOrchestrator:
     """A durable-model seam. Provider execution is intentionally injected."""
-    def __init__(self, context_broker=None, tool_gateway=None, store=None, clock=None, action_executor=None):
+    def __init__(self, context_broker=None, tool_gateway=None, store=None, clock=None, action_executor=None, repository=None):
         self.context_broker, self.tool_gateway, self.store = context_broker, tool_gateway, store
         self.action_executor = action_executor
+        self.repository = repository
         self.clock = clock or (lambda: datetime.now(UTC))
         self.runs: dict[str, AgentRun] = {}
         self.sessions: dict[str, AgentSession] = {}
         self.context_requests: dict[str, dict] = {}
         self.actions: dict[str, dict] = {}
         self.observation_plans: dict[str, object] = {}
+        self._claims: dict[str, list[dict]] = {}
         self._hydrate()
 
     def _save(self, collection, key, value):
         if self.store and hasattr(self.store, "put_raw"):
             self.store.put_raw(collection, key, value)
+
+    def _load_raw(self, collection, key):
+        if not self.store or not hasattr(self.store, "client"):
+            return None
+        snap = self.store.client.collection(collection).document(key).get()
+        return snap.to_dict() if snap.exists else None
+
+    def persist_claims(self, owner, run_id, claims):
+        self.get(owner, run_id)
+        self._claims[run_id] = [dict(claim) for claim in claims]
+        for index, claim in enumerate(claims):
+            self._save("agent_claims", f"{run_id}:{index}", {**dict(claim), "run_id": run_id, "owner_user_id": owner})
+
+    def list_claims(self, owner, run_id):
+        if self.store and hasattr(self.store, "all"):
+            return [dict(row) for row in self.store.all("agent_claims") if row.get("run_id") == run_id and row.get("owner_user_id") == owner]
+        self.get(owner, run_id)
+        return [dict(claim) for claim in self._claims.get(run_id, [])]
+
+    def list_active_runs(self, owner, pet_id):
+        return [run for run in self.runs.values() if run.owner_user_id == owner and run.pet_id == pet_id and run.state in {RunState.QUEUED, RunState.RUNNING, RunState.WAITING}]
 
     def _hydrate(self):
         if not self.store or not hasattr(self.store, "all"):
@@ -160,10 +183,18 @@ class AgentOrchestrator:
             self.runs[run_id].lease_epoch = int(epoch if self.store and hasattr(self.store, "client") else self.runs[run_id].lease_epoch)
         return acquired
 
-    def release_execution_lease(self, owner: str, run_id: str, lease_owner: str) -> None:
+    def release_execution_lease(self, owner: str, run_id: str, lease_owner: str, *, lease_epoch=None, expected_version=None) -> None:
         run = self.get(owner, run_id)
         if run.execution_lease_owner != lease_owner: return
-        run.execution_lease_owner = None; run.execution_lease_expires_at = None; self._persist_run(run)
+        self._assert_fence(run, lease_epoch, expected_version)
+        run.execution_lease_owner = None; run.execution_lease_expires_at = None
+        next_version = (expected_version + 1) if expected_version is not None else run.run_version + 1
+        run.run_version = next_version
+        if lease_epoch is not None and expected_version is not None and self.store and hasattr(self.store, "put_agent_run_fenced"):
+            if not self.store.put_agent_run_fenced(run.id, {**asdict(run), "state": run.state.value}, owner=owner, lease_epoch=lease_epoch, expected_version=expected_version):
+                raise ValueError("STALE_AGENT_EXECUTION")
+        else:
+            self._persist_run(run)
 
     def _assert_fence(self, run, lease_epoch=None, expected_version=None):
         if lease_epoch is not None and run.lease_epoch != lease_epoch:
@@ -188,11 +219,40 @@ class AgentOrchestrator:
         run.state = target
         run.updated_at = self.clock()
 
+    def transition_state_fenced(self, owner, run_id, target, *, lease_epoch, expected_version, started_at=None):
+        """Persist a leased lifecycle transition through the same CAS gate as steps."""
+        run = self.get(owner, run_id)
+        self._assert_fence(run, lease_epoch, expected_version)
+        if started_at is not None:
+            run.started_at = started_at
+        self._set_state(run, target)
+        if self.store and hasattr(self.store, "put_agent_run_fenced"):
+            if not self.store.put_agent_run_fenced(
+                run.id, {**asdict(run), "state": run.state.value},
+                owner=owner, lease_epoch=lease_epoch, expected_version=expected_version,
+            ):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected_version + 1
+        else:
+            run.run_version = expected_version + 1
+            self._persist_run(run)
+        return run
+
     def create_session(self, owner, pet_id):
         session = AgentSession(owner, pet_id); self.sessions[session.id] = session; self._save("agent_sessions", session.id, asdict(session)); return session
 
     def get_session(self, owner, session_id):
         session = self.sessions.get(session_id)
+        raw = self._load_raw("agent_sessions", session_id)
+        if raw:
+            for key in ("created_at", "updated_at"):
+                if raw.get(key) is not None and not isinstance(raw[key], datetime):
+                    raw[key] = datetime.fromisoformat(str(raw[key]))
+            try:
+                session = AgentSession(**{k: raw[k] for k in AgentSession.__dataclass_fields__ if k in raw})
+                self.sessions[session.id] = session
+            except (TypeError, ValueError):
+                session = None
         if not session or session.owner_user_id != owner or session.status != "ACTIVE": raise ValueError("AGENT_SESSION_NOT_FOUND")
         return session
 
@@ -228,7 +288,15 @@ class AgentOrchestrator:
             correlation_id=correlation_id or str(uuid4()),
             deployment_id=deployment_id,
         )
-        self._set_state(run, RunState.QUEUED); self.runs[run.id] = run; self._persist_run(run); return run
+        self._set_state(run, RunState.QUEUED); self.runs[run.id] = run
+        if self.repository:
+            self.repository.create_run_with_initial_step(
+                {**asdict(run), "state": run.state.value},
+                {"id": "initial-coordination", "run_id": run.id, "status": "READY", "idempotency_key": f"initial:{run.id}"},
+            )
+        else:
+            self._persist_run(run)
+        return run
 
     def get(self, owner, run_id):
         run = self.runs.get(run_id)
@@ -251,36 +319,97 @@ class AgentOrchestrator:
         return run
 
     def cancel(self, owner, run_id):
-        run = self.get(owner, run_id); self._set_state(run, RunState.CANCELLED); self._persist_run(run); return run
+        run = self.get(owner, run_id); expected = run.run_version; self._set_state(run, RunState.CANCELLED)
+        data = {**asdict(run), "state": run.state.value}
+        if self.store and hasattr(self.store, "put_agent_run_versioned"):
+            if not self.store.put_agent_run_versioned(run.id, data, owner=owner, expected_version=expected):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected + 1
+        else:
+            self._persist_run(run)
+        if self.repository and hasattr(self.repository, "cancel_steps"):
+            self.repository.cancel_steps(run.id)
+        return run
 
     def request_context(self, owner, run_id, request_type, required_items=None):
         run = self.get(owner, run_id)
+        expected = run.run_version
         request = {"id": str(uuid4()), "run_id": run.id, "request_type": request_type, "required_items": list(required_items or []), "status": "OPEN"}
-        self.context_requests[request["id"]] = request; self._set_state(run, RunState.WAITING); self._save("agent_context_requests", request["id"], request); self._persist_run(run); return request
+        self.context_requests[request["id"]] = request; self._set_state(run, RunState.WAITING)
+        if self.store and hasattr(self.store, "put_agent_run_versioned"):
+            if not self.store.put_agent_run_versioned(run.id, {**asdict(run), "state": run.state.value}, owner=owner, expected_version=expected):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected + 1
+        else:
+            self._persist_run(run)
+        self._save("agent_context_requests", request["id"], request); return request
 
     def respond_context(self, owner, run_id, request_id, resource_refs):
-        run = self.get(owner, run_id); request = self.context_requests.get(request_id)
+        run = self.get(owner, run_id); expected = run.run_version; request = self.context_requests.get(request_id) or self._load_raw("agent_context_requests", request_id)
         if not request or request["run_id"] != run.id or request["status"] != "OPEN": raise ValueError("AGENT_CONTEXT_REQUEST_NOT_FOUND")
-        request.update({"status": "RESPONDED", "resource_refs": list(resource_refs or [])}); self._set_state(run, RunState.RUNNING); self._save("agent_context_requests", request_id, request); self._persist_run(run); return request
+        request.update({"status": "RESPONDED", "resource_refs": list(resource_refs or [])}); self._set_state(run, RunState.RUNNING)
+        if self.store and hasattr(self.store, "put_agent_run_versioned"):
+            if not self.store.put_agent_run_versioned(run.id, {**asdict(run), "state": run.state.value}, owner=owner, expected_version=expected):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected + 1
+        else:
+            self._persist_run(run)
+        self._save("agent_context_requests", request_id, request); return request
 
     def propose_action(self, owner, run_id, action_type, summary, arguments=None):
-        run = self.get(owner, run_id); args = dict(arguments or {})
-        action = {"id": str(uuid4()), "run_id": run.id, "action_type": action_type, "summary": summary, "arguments": args, "approval_payload_hash": self._action_hash(action_type, summary, args), "status": "PENDING_APPROVAL"}
-        self.actions[action["id"]] = action; self._set_state(run, RunState.WAITING); self._save("agent_actions", action["id"], action); self._persist_run(run); return action
+        run = self.get(owner, run_id); expected = run.run_version; args = dict(arguments or {})
+        action = {"id": str(uuid4()), "run_id": run.id, "action_type": action_type, "summary": summary, "arguments": args, "approval_payload_hash": self._action_hash(action_type, summary, args), "status": "PENDING_APPROVAL", "expires_at": self.clock() + timedelta(minutes=15)}
+        self.actions[action["id"]] = action; self._set_state(run, RunState.WAITING)
+        if self.store and hasattr(self.store, "put_agent_run_versioned"):
+            if not self.store.put_agent_run_versioned(run.id, {**asdict(run), "state": run.state.value}, owner=owner, expected_version=expected):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected + 1
+        else:
+            self._persist_run(run)
+        self._save("agent_actions", action["id"], action); return action
 
     def decide_action(self, owner, run_id, action_id, approved, presented_payload_hash=None):
-        run = self.get(owner, run_id); action = self.actions.get(action_id)
+        run = self.get(owner, run_id); expected_version = run.run_version; action = self.actions.get(action_id) or self._load_raw("agent_actions", action_id)
         if not action or action["run_id"] != run.id or action["status"] != "PENDING_APPROVAL": raise ValueError("AGENT_ACTION_NOT_FOUND")
+        expires_at = action.get("expires_at")
+        if isinstance(expires_at, str): expires_at = datetime.fromisoformat(expires_at)
+        if expires_at and expires_at <= self.clock():
+            action["status"] = "EXPIRED"
+            self._save("agent_actions", action_id, action)
+            raise ValueError("AGENT_ACTION_EXPIRED")
         expected = self._action_hash(action["action_type"], action["summary"], action.get("arguments", {}))
         if action.get("approval_payload_hash") != expected:
             raise ValueError("AGENT_ACTION_PAYLOAD_CHANGED")
         if presented_payload_hash is not None and presented_payload_hash != expected:
             raise ValueError("AGENT_ACTION_APPROVAL_HASH_MISMATCH")
-        action.update({"status": "APPROVED" if approved else "REJECTED", "approved_by": owner, "receipt_id": str(uuid4())})
+        action.update({"status": "APPROVED" if approved else "REJECTED", "approved_by": owner})
         if approved and self.action_executor:
             receipt = self.action_executor.execute(owner, run.pet_id, action, f"agent-action-{action['id']}")
             action["receipt"] = receipt
-        self._set_state(run, RunState.RUNNING); self._save("agent_actions", action_id, action); self._persist_run(run); return action
+            action["receipt_id"] = receipt.get("receipt_id")
+        elif not approved:
+            # A rejected decision has an audit identifier, but it is not an
+            # execution receipt and must never imply a Care mutation.
+            action["decision_id"] = str(uuid4())
+        approval_event = {
+            "id": str(uuid4()),
+            "action_id": action["id"],
+            "run_id": run.id,
+            "owner_user_id": owner,
+            "approved": bool(approved),
+            "payload_hash": expected,
+            "created_at": self.clock(),
+            "receipt": action.get("receipt"),
+        }
+        self._save("agent_action_approvals", approval_event["id"], approval_event)
+        self._set_state(run, RunState.RUNNING)
+        if self.store and hasattr(self.store, "put_agent_run_versioned"):
+            if not self.store.put_agent_run_versioned(run.id, {**asdict(run), "state": run.state.value}, owner=owner, expected_version=expected_version):
+                raise ValueError("STALE_AGENT_EXECUTION")
+            run.run_version = expected_version + 1
+        else:
+            self._persist_run(run)
+        self._save("agent_actions", action_id, action); return action
 
     def commit_step(self, owner, run_id, step: dict, evidence: list[EvidenceReference] | None = None, *, lease_epoch=None, expected_version=None):
         run = self.get(owner, run_id)
@@ -289,6 +418,20 @@ class AgentOrchestrator:
         step_id = step.get("step_id", str(uuid4()))
         if any(item.get("step_id") == step_id for item in run.steps):
             return run
+        if self.repository and hasattr(self.repository, "claim_step"):
+            worker_id = run.execution_lease_owner or owner
+            repository_steps = self.repository.list_steps(run.id)
+            if not any(item.get("id", item.get("step_id")) == step_id for item in repository_steps) and hasattr(self.repository, "ensure_steps"):
+                self.repository.ensure_steps(run.id, [{"id": step_id, "step_id": step_id}])
+                repository_steps = self.repository.list_steps(run.id)
+            if any(item.get("id", item.get("step_id")) == step_id for item in repository_steps):
+                now = self.clock()
+                claimed = self.repository.claim_step(run.id, step_id, worker_id, now)
+                if not claimed:
+                    raise ValueError("STALE_AGENT_EXECUTION")
+                leased = next(item for item in self.repository.list_steps(run.id) if item.get("id", item.get("step_id")) == step_id)
+                if not self.repository.commit_step_result(run.id, step_id, worker_id, int(leased.get("lease_epoch", 0)), {"output": step.get("output"), "safety_state": step.get("safety_state", "SAFE_TO_DISPLAY")}):
+                    raise ValueError("STALE_AGENT_EXECUTION")
         run.steps.append({"step_id": step_id, "output": step.get("output"), "schema_version": step.get("schema_version"), "safety_state": step.get("safety_state", "SAFE_TO_DISPLAY")})
         run.evidence.extend(evidence or []); self._set_state(run, RunState.RUNNING)
         if lease_epoch is not None and expected_version is not None and self.store and hasattr(self.store, "put_agent_run_fenced"):

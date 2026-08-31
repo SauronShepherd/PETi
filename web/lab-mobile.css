@@ -1,0 +1,5 @@
+@media(max-width:650px){.lab-nav{scrollbar-width:none}.lab-nav::-webkit-scrollbar,.lab-nav nav::-webkit-scrollbar{display:none}.lab-nav nav{scrollbar-width:none;overflow-x:auto;overscroll-behavior-x:contain}.lab-main{overflow-x:hidden}}
+
+@media(max-width:650px){.lab-brand{display:flex;padding:3px 8px 7px;border-bottom:1px solid #ffffff18}.lab-brand div{display:block}.lab-brand b{font-size:11px}.lab-brand small{display:none}.lab-brand>span{width:28px;height:28px;border-radius:9px;font-size:16px}.lab-nav nav{margin-top:6px}}
+
+@media(max-width:650px){.lab-topology{display:grid;grid-template-columns:1fr;overflow:visible}.lab-topology>span{transform:rotate(90deg);justify-self:center;line-height:12px}.lab-node{min-width:0;width:100%}}
