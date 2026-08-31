@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
   "status": "SOURCE_READY_EXTERNAL_CERTIFICATION_PENDING",
-  "git_revision": "78f3bff1af1074ff9af5dcb7b9e47ea7ff856bb6",
+  "git_revision": "cc492528d1708efe0dcd89a61b8b002c68926bb1",
   "tests_executed": false,
   "local_verification": "PASSED_LOCAL_ONLY",
   "artifact_hashes": {
@@ -16,8 +16,8 @@
     "backend/app/privacy/lifecycle.py": "eb666b1d9563e2f868853f6a6a3f0181e5865b3fde29105a87c08ce18756a201",
     "backend/app/operations/platform.py": "42767e5f7873250b625ce9eeb221f991acbab87d99126c151f05cdc54bbd6391",
     "backend/app/logging.py": "1bfdafe22493432201c979a2873917736649f2ee0550e3fa80172881bf4bd43f",
-    "backend/app/agent_runtime/execution.py": "6e716a7da18f01be84985509fc77fabf654f310e472f0a2617ad1a66ea8fe0bb",
-    "backend/app/ai/providers/gemini.py": "6f3651c2a802cc621e6cb19a2fc040b533c251d87f051b1c410eb669e7cccca3",
+    "backend/app/agent_runtime/execution.py": "fa8b89ca0204280b024a8ee0ecdeca09201d66051af14cd64d7062f7a01efde5",
+    "backend/app/ai/providers/gemini.py": "2cfddef289c53dabebaefa76e8c4cf29e16d135368e06b351f60452e569c69a0",
     "backend/app/api/agent_runs.py": "36157ae03b2f64cd7fd9fb95e40ff2fddd258cb4f882a696a8518cdf30d8171b",
     "eval/weekly_report/run_gemini.py": "25410fcf1404660ff6afdedb23e4dec4e6a753d93067a5dbdc2729567c475362",
     "release/PRODUCTION_CONFIG_SNAPSHOT.json": "aa5f557b2910ddc8351a49bbbbe8251c406f2710e749616a740c8ba70ed8dc8f",

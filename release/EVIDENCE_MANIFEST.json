@@ -1,7 +1,7 @@
 {
   "schema_version": "1.1.0",
-  "generated_at": "2026-08-31T15:54:10.012370+00:00",
-  "git_revision": "78f3bff1af1074ff9af5dcb7b9e47ea7ff856bb6",
+  "generated_at": "2026-08-31T19:39:22.636934+00:00",
+  "git_revision": "cc492528d1708efe0dcd89a61b8b002c68926bb1",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_CERTIFICATION_PENDING",
   "tests_executed": false,
   "local_verification": {
@@ -65,11 +65,11 @@
     },
     {
       "path": "backend/app/agent_runtime/execution.py",
-      "sha256": "6e716a7da18f01be84985509fc77fabf654f310e472f0a2617ad1a66ea8fe0bb"
+      "sha256": "fa8b89ca0204280b024a8ee0ecdeca09201d66051af14cd64d7062f7a01efde5"
     },
     {
       "path": "backend/app/ai/providers/gemini.py",
-      "sha256": "6f3651c2a802cc621e6cb19a2fc040b533c251d87f051b1c410eb669e7cccca3"
+      "sha256": "2cfddef289c53dabebaefa76e8c4cf29e16d135368e06b351f60452e569c69a0"
     },
     {
       "path": "backend/app/api/agent_runs.py",

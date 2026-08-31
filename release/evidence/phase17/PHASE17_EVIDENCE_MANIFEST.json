@@ -3,7 +3,7 @@
   "phase": "17",
   "status": "SOURCE_ARTIFACT_READY_EXTERNAL_EVIDENCE_PENDING",
   "production_credentials_included": false,
-  "git_revision": "78f3bff1af1074ff9af5dcb7b9e47ea7ff856bb6",
+  "git_revision": "cc492528d1708efe0dcd89a61b8b002c68926bb1",
   "web_artifacts": {
     "release/prod/web/privacy.html": "d213d08cd943f2472f2d06955b36cdbbc5bd3807e2fcc3afb37575a3cac99687",
     "release/prod/web/delete-account.html": "54dba77fee442dd8ab1ebe3d2f13b4f07d30416ebddaa14a2a474e945b2ab9bf"
