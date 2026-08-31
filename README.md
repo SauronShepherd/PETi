@@ -2,7 +2,7 @@
 
 PETi is a responsive, evidence-first pet-care application. It organizes pet profiles and observations, analyzes submitted media with a bounded multi-agent workflow, preserves provenance, and escalates uncertainty instead of presenting a diagnosis.
 
-La experiencia está diseñada como un producto gratuito, privado y centrado en el bienestar. Los resultados son orientativos y no sustituyen la valoración de un profesional veterinario.
+The experience is designed as a free, private product focused on wellbeing. Results are informational and do not replace evaluation by a veterinary professional.
 
 ## Quick start
 
@@ -15,7 +15,7 @@ pip install -e backend[dev]
 
 On Windows use `scripts\\bootstrap.cmd`, `scripts\\check.cmd` and `scripts\\run-backend.ps1`.
 
-El backend expone `GET /health/live` y `GET /health/ready`. La verificación local no requiere credenciales de producción ni servicios cloud de pago.
+The backend exposes `GET /health/live` and `GET /health/ready`. Local verification does not require production credentials or paid cloud services.
 
 ## Verification
 
