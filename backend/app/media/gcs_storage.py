@@ -19,9 +19,11 @@ class GcsObjectStorage:
 
     def create_upload_authorization(self, bucket, name, content_type, expires_seconds=900):
         blob = self.client.bucket(bucket or self.bucket_name).blob(name)
-        credentials = self.client._credentials
+        credentials = getattr(self.client, "_credentials", None)
         signing_kwargs = {"credentials": credentials}
-        if not isinstance(credentials, Signing):
+        if credentials is None:
+            signing_kwargs = {}
+        elif not isinstance(credentials, Signing):
             service_account_email = os.getenv("PETI_MEDIA_SIGNING_SERVICE_ACCOUNT")
             if not service_account_email:
                 raise ValueError("MEDIA_SIGNING_SERVICE_ACCOUNT_REQUIRED")
