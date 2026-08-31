@@ -216,7 +216,7 @@ class AgentOrchestrator:
             RunState.CREATED: {RunState.QUEUED, RunState.CANCELLED},
             RunState.QUEUED: {RunState.RUNNING, RunState.WAITING, RunState.COMPLETED, RunState.CANCELLED},
             RunState.RUNNING: {RunState.RUNNING, RunState.WAITING, RunState.COMPLETED, RunState.FAILED, RunState.CANCELLED},
-            RunState.WAITING: {RunState.RUNNING, RunState.CANCELLED},
+            RunState.WAITING: {RunState.RUNNING, RunState.COMPLETED, RunState.CANCELLED},
         }
         if target not in allowed.get(run.state, set()):
             raise ValueError("AGENT_INVALID_STATE_TRANSITION")
