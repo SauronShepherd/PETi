@@ -30,7 +30,9 @@ class CareActionExecutor:
         if due_at.tzinfo is None:
             due_at = due_at.replace(tzinfo=UTC)
         payload = {
-            "category": "FOLLOW_UP",
+            # Canonical Care only accepts the persisted category enum; the
+            # action type remains FOLLOW_UP_REMINDER at the agent boundary.
+            "category": "MEDICATION_OR_FOLLOWUP",
             "title": title,
             "due_at": due_at,
             "notification_enabled": bool(args.get("notification_enabled", True)),
