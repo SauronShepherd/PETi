@@ -18,15 +18,19 @@ def validate_longitudinal(payload: dict) -> dict:
     return payload
 
 
-def deterministic_feces_safety(payload: dict, owner_context: dict | None = None) -> str:
-    signals = {str(value).upper() for value in payload.get("red_flags", [])}
+def deterministic_feces_safety(payload: dict | list[dict], owner_context: dict | None = None) -> str:
+    # The legacy peti-check adapter returns a list of observations; the native
+    # feces specialist returns one object. Normalize both at the gate.
+    items = payload if isinstance(payload, list) else [payload]
+    items = [item for item in items if isinstance(item, dict)]
+    signals = {str(value).upper() for item in items for value in item.get("red_flags", [])}
     context = owner_context or {}
     signals.update(key.upper() for key, value in context.items() if value is True)
     if signals & URGENT_SIGNALS:
         return "URGENT_VETERINARY_CONTACT"
     if signals & PROMPT_SIGNALS:
         return "PROMPT_VETERINARY_CONTACT"
-    if payload.get("observations") or signals:
+    if any(item.get("observations") for item in items) or signals:
         return "PROFESSIONAL_REVIEW_RECOMMENDED"
     return "NORMAL_INFORMATION"
 
