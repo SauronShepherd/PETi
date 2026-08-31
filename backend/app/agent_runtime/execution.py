@@ -129,7 +129,7 @@ class AgentExecutionService:
             invocation = InvocationContext(owner, run.id, "peti-check", "PET_SPECIALIST",
                 run.correlation_id or run.id, run.deployment_id or "unknown")
             with invocation_scope(invocation):
-                if self.agent_model_provider and recipe_id == "FECES_COMPARE_V1":
+                if self.agent_model_provider and recipe_id in {"FECES_COMPARE_V1", "FECES_COMPARE_FOLLOW_UP_V1"}:
                     bundle = {"owner_user_id": owner, "run_id": run.id, "session_id": run.policy_snapshot.get("session_id") or run.id, "pet_id": run.pet_id, "items": [{"id": getattr(item, "id", None)} for item in media.items]}
                     current = {"pet_id": run.pet_id, "modality": "FECES", "taxonomy_version": "v1"}
                     candidates = [item for item in media.items if isinstance(item, dict)]
