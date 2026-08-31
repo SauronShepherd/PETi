@@ -1,0 +1,25 @@
+[00:00–00:12] Welcome to PETi, a safety-first AI assistant for pet care. This video follows a complete multi-agent workflow, from the owner's experience to the administrative view.
+
+[00:12–00:25] We begin in the user application. PETi helps owners understand visible evidence and organize follow-up care. It does not diagnose, prescribe treatment, or replace a veterinarian.
+
+[00:25–00:40] In the Agents workspace, the owner starts a review. The request enters a bounded workflow with explicit evidence and safety controls. The public preview is clearly labelled synthetic demo data.
+
+[00:40–00:55] We now open the administrative Agent Laboratory. This is the operational view of the multi-agent system. It shows the available agents, configured models, and execution history.
+
+[00:55–01:12] An orchestrator coordinates specialized stages. Evidence Intake checks that submitted evidence is usable and grounded. The Pet Specialist reviews permitted visible observations. Safety Review evaluates the result against deterministic PETi policy.
+
+[01:12–01:28] Agents may reason about evidence, but PETi remains authoritative. They cannot change ownership, access arbitrary data, choose unrestricted tools, or execute care actions independently.
+
+[01:28–01:42] Model Intelligence shows the configured model and safe execution metadata. Private prompts, tokens, hidden reasoning, and sensitive customer data are not exposed.
+
+[01:42–01:56] Live Runs gives every workflow a durable identifier and an explicit lifecycle. PETi records stages, status, evidence counts, claims, safety state, and operational metadata in the backend.
+
+[01:56–02:12] The run inspector shows how PETi reached its result without exposing chain of thought. Instead, reviewers see structured provenance: evidence used, claims produced, tools involved, and the safety decision.
+
+[02:12–02:27] Evidence and Claims separates observations from interpretations and keeps source references attached. Models and Tools shows bounded capabilities. Versions makes the runtime and policy configuration auditable.
+
+[02:27–02:42] A visible observation is not a diagnosis. A model suggestion is not an authoritative fact. And a proposed action is not an executed action.
+
+[02:42–02:55] On the user side, reminders require explicit approval. PETi binds approval to the exact proposed payload and persists an ActionReceipt only after the canonical care mutation succeeds.
+
+[02:55–03:00] This is PETi's bounded multi-agent approach: real orchestration, deterministic safety, least-privilege context, provenance, and human approval before action.
